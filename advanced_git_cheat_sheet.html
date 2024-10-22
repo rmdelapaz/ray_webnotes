@@ -13,7 +13,7 @@
 
     <p>This cheat sheet covers advanced Git commands, including branch management, changing/removing origins, and other less commonly used commands that are still useful to know.</p>
 
-    <h2>1. Managing Remotes</h2>
+    <h2>Managing Remotes</h2>
 
     <h3>View Current Remote (origin)</h3>
     <pre><code>git remote -v</code></pre>
@@ -31,7 +31,7 @@
     <pre><code>git remote remove remote_name</code></pre>
     <p>Removes a remote repository reference from your local repository.</p>
 
-    <h2>2. Branch Management</h2>
+    <h2>Branch Management</h2>
 
     <h3>List All Branches (Local and Remote)</h3>
     <pre><code>git branch -a</code></pre>
@@ -58,7 +58,7 @@
     <pre><code>git branch -m old_branch_name new_branch_name</code></pre>
     <p>Renames the branch <code>old_branch_name</code> to <code>new_branch_name</code>.</p>
 
-    <h2>3. Rebasing</h2>
+    <h2>Rebasing</h2>
 
     <h3>Rebase the Current Branch onto Another</h3>
     <pre><code>git rebase branch_name</code></pre>
@@ -68,7 +68,7 @@
     <pre><code>git rebase --abort</code></pre>
     <p>Aborts the current rebase process.</p>
 
-    <h2>4. Stashing Changes</h2>
+    <h2>Stashing Changes</h2>
 
     <h3>Stash Uncommitted Changes</h3>
     <pre><code>git stash</code></pre>
@@ -86,7 +86,7 @@
     <pre><code>git stash list</code></pre>
     <p>Displays a list of all stashes saved.</p>
 
-    <h2>5. Undoing Changes</h2>
+    <h2>Undoing Changes</h2>
 
     <h3>Discard Local Changes to a File</h3>
     <pre><code>git checkout -- file_name</code></pre>
@@ -96,13 +96,13 @@
     <pre><code>git reset --hard commit_hash</code></pre>
     <p>Resets the repository to the specified commit, discarding all changes after it. This is a destructive action.</p>
 
-    <h2>6. Cherry-picking Commits</h2>
+    <h2>Cherry-picking Commits</h2>
 
     <h3>Cherry-pick a Specific Commit</h3>
     <pre><code>git cherry-pick commit_hash</code></pre>
     <p>Applies the changes from the specified commit to your current branch.</p>
 
-    <h2>7. Tags</h2>
+    <h2>Tags</h2>
 
     <h3>Create a New Tag</h3>
     <pre><code>git tag tag_name</code></pre>
