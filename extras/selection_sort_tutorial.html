@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selection Sort Explained</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <h1>Understanding Selection Sort in JavaScript</h1>
+
+    <p>
+      In this tutorial, we'll dive into another fundamental sorting algorithm:
+      <strong>Selection Sort</strong>. Like Bubble Sort, it's often used to
+      teach the basics of sorting algorithms due to its simplicity. We will
+      break down the algorithm step by step to ensure clarity for new
+      developers.
+    </p>
+
+    <h2>What is Selection Sort?</h2>
+    <p>
+      Selection Sort works by repeatedly finding the smallest element from the
+      unsorted portion of the array and placing it in its correct position.
+      Think of it like sorting a stack of papers: you look through the pile,
+      find the smallest piece, and put it at the top. You repeat this process
+      until the entire pile is sorted.
+    </p>
+
+    <h2>When and Why to Use Selection Sort?</h2>
+    <p>
+      Selection Sort is often used for educational purposes because it is easy
+      to understand and implement. However, like Bubble Sort, its time
+      complexity is O(n^2), making it inefficient for large datasets. In
+      real-world applications, we tend to use faster algorithms such as Merge
+      Sort or Quick Sort, but for small datasets or where simplicity is key,
+      Selection Sort works just fine.
+    </p>
+
+    <h2>Selection Sort Code Example</h2>
+    <pre>
+        <code>
+let arr = [5, 2, 7, 1, 0];
+
+function selectionSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) minIndex = j;
+        }
+        let temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+}
+
+console.log("Before sorting: ", arr);
+console.log("After sorting: ", selectionSort(arr));        </code>
+    </pre>
+
+    <h2>Code Explanation</h2>
+
+    <p>Let's walk through the code line by line:</p>
+
+    <h3>1. Initial Array Setup</h3>
+    <p>The array we want to sort is defined as follows:</p>
+    <pre><code>let arr = [5, 2, 7, 1, 0];</code></pre>
+    <p>
+      Our goal is to sort this array in ascending order, from smallest to
+      largest.
+    </p>
+
+    <h3>2. The Outer Loop</h3>
+    <p>
+      The outer loop determines the position of the sorted portion of the array:
+    </p>
+    <pre><code>for (let i = 0; i < arr.length - 1; i++) {</code></pre>
+    <p>
+      Each time through this loop, we move the smallest unsorted element to its
+      correct position in the sorted portion of the array. The loop runs
+      <code>arr.length - 1</code> times because we don't need to compare the
+      last element.
+    </p>
+
+    <h3>3. Finding the Minimum Element</h3>
+    <p>
+      Within the outer loop, we use an inner loop to find the smallest element
+      in the unsorted portion of the array:
+    </p>
+    <pre><code>let minIndex = i;</code></pre>
+    <p>
+      This line initializes <code>minIndex</code> to the current index
+      <code>i</code>, assuming the first unsorted element is the smallest.
+    </p>
+    <pre><code>for (let j = i + 1; j < arr.length; j++) {
+    if (arr[j] < arr[minIndex]) minIndex = j;
+    }</code></pre>
+    <p>
+      Here, we compare each remaining unsorted element (<code>arr[j]</code>) to
+      the current minimum (<code>arr[minIndex]</code>). If a smaller element is
+      found, we update <code>minIndex</code>.
+    </p>
+
+    <h3>4. Swapping Elements</h3>
+    <p>
+      After finding the smallest element, we swap it with the first unsorted
+      element (<code>arr[i]</code>):
+    </p>
+    <pre><code>
+    let temp = arr[minIndex];
+    arr[minIndex] = arr[i];
+    arr[i] = temp;
+    </code></pre>
+    <p>
+      This ensures that the smallest element is placed in its correct sorted
+      position.
+    </p>
+
+    <h3>5. Returning the Sorted Array</h3>
+    <p>
+      After sorting the entire array, the function returns the sorted array:
+    </p>
+    <pre><code>return arr;</code></pre>
+    <p>
+      For our example, <code>arr</code> starts as
+      <code>[5, 2, 7, 1, 0]</code> and is sorted into
+      <code>[0, 1, 2, 5, 7]</code>.
+    </p>
+
+    <h2>Real-World Example and Applications</h2>
+    <p>
+      Imagine sorting books on a shelf by height. You start by looking for the
+      smallest book, take it out, and place it in the first position. Then, you
+      look for the next smallest book, and so on. This is similar to how
+      Selection Sort works.
+    </p>
+
+    <h2>Further Exploration</h2>
+    <p>
+      Once you're comfortable with Selection Sort, you can explore more
+      efficient sorting algorithms such as:
+    </p>
+    <ul>
+      <li>Insertion Sort</li>
+      <li>Merge Sort</li>
+      <li>Quick Sort</li>
+      <li>Heap Sort</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>
+      Selection Sort is a simple and intuitive algorithm that helps introduce
+      the concept of sorting. While it's not the most efficient for large
+      datasets, it's a good starting point for understanding how sorting
+      algorithms work.
+    </p>
+  </body>
+</html>

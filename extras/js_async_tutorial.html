@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript: Event Loop, Async Functions, and Single-Threaded Model</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>JavaScript Event Loop, Single-Threaded Model, and Asynchronous Functions</h1>
+
+    <h2>Understanding JavaScript's Event Loop Model</h2>
+    <p>JavaScript is unique because it uses an <strong>event loop</strong> model to manage asynchronous operations. But what does that mean? Think of the event loop as a chef in a kitchen who can handle only one task at a time, but can set other tasks (like baking or boiling) to run in the background. The chef keeps checking on these background tasks and picks them up when they’re done.</p>
+
+    <p>The event loop handles tasks from a queue, ensuring that JavaScript remains non-blocking. So, even though JavaScript can only handle one task at a time (because it’s single-threaded), the event loop lets it work efficiently by managing asynchronous operations in the background.</p>
+
+    <h3>Analogy:</h3>
+    <p>Imagine you are a barista taking orders (your <strong>main thread</strong>). You can’t make every coffee order immediately, so you send certain tasks (like brewing coffee) to a machine (background). While waiting, you continue taking other orders. Once the coffee is done, you deliver it to the customer. This is how JavaScript works with asynchronous tasks and the event loop.</p>
+
+    <h2>JavaScript is Single-Threaded</h2>
+    <p>JavaScript runs on a <strong>single thread</strong>, meaning it can only perform one operation at a time. Unlike multi-threaded languages that can execute multiple tasks simultaneously, JavaScript processes each operation in a sequence. However, with the help of the event loop and asynchronous functions, JavaScript can handle non-blocking operations, allowing the code to continue running while waiting for time-consuming tasks (e.g., data fetching or file reading) to complete.</p>
+
+    <h2>Synchronous vs Asynchronous Code</h2>
+    <p><strong>Synchronous code</strong> runs line by line, meaning that each task must complete before the next one can start. If a task takes a long time, it will block other tasks from running. For example:</p>
+
+    <pre><code>
+// Synchronous code example
+console.log("Start");
+for (let i = 0; i < 1000000000; i++) {}  // Long task
+console.log("End");
+    </code></pre>
+
+    <p>In this synchronous example, "End" will only be logged after the loop completes. During the loop, no other tasks can run.</p>
+
+    <p><strong>Asynchronous code</strong>, on the other hand, allows other tasks to run while waiting for a time-consuming operation to finish. For example, using <code>setTimeout</code> allows JavaScript to delay an action while continuing with other code:</p>
+
+    <pre><code>
+// Asynchronous code example
+console.log("Start");
+setTimeout(() => {
+    console.log("This runs after 2 seconds");
+}, 2000);
+console.log("End");
+    </code></pre>
+
+    <p>In the asynchronous example, "End" will be logged immediately after "Start", and then the delayed message will appear after 2 seconds. Asynchronous functions make JavaScript non-blocking and efficient.</p>
+
+    <h2>Using setTimeout with a Callback</h2>
+    <p><code>setTimeout</code> is an asynchronous function that executes a given callback after a specified delay. For example:</p>
+
+    <pre><code>
+function greet() {
+    console.log("Hello after 3 seconds!");
+}
+setTimeout(greet, 3000);
+    </code></pre>
+
+    <p>In this example, the <code>greet</code> function is passed as a callback to <code>setTimeout</code>. It will run after 3 seconds without blocking the rest of the code.</p>
+
+    <h3>Predicting Output with setTimeout</h3>
+    <p>Given the following code:</p>
+
+    <pre><code>
+function asyncy(cb) {
+    setTimeout(cb, 1000);
+    console.log("async");
+}
+
+function callback() {
+    console.log("callback");
+}
+
+asyncy(callback);
+    </code></pre>
+
+    <p>What will the output be? Here’s what happens:</p>
+    <ul>
+        <li><code>setTimeout(cb, 1000)</code> sets up the callback to run after 1 second, but doesn't block the code.</li>
+        <li><code>console.log("async")</code> runs immediately after <code>setTimeout</code>.</li>
+        <li>After 1 second, <code>callback()</code> runs.</li>
+    </ul>
+
+    <p><strong>Predicted output:</strong></p>
+    <pre><code>
+async
+callback
+    </code></pre>
+
+    <h2>Using setInterval to Repeat a Function</h2>
+    <p><code>setInterval</code> is another asynchronous function, but instead of running once after a delay, it runs a function repeatedly at fixed intervals. For example, this code runs every second:</p>
+
+    <pre><code>
+let counter = 0;
+let interval = setInterval(() => {
+    console.log("This runs every second");
+    counter++;
+    if (counter === 10) {
+        clearInterval(interval);  // Stop after 10 times
+    }
+}, 1000);
+    </code></pre>
+
+    <p>The above code runs a function every second and stops after 10 iterations using <code>clearInterval</code>.</p>
+
+    <h2>Writing a Program with User Input Using Node.js Readline</h2>
+    <p>In a Node.js environment, we can handle user input asynchronously using the <code>readline</code> module. This allows us to interact with users through the command line. Here’s an example program that asks the user for input:</p>
+
+    <pre><code>
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question('What is your name? ', (name) => {
+    console.log(\`Hello, \${name}!\`);
+    rl.close();
+});
+    </code></pre>
+
+    <p>In this example, we prompt the user for their name, capture their response asynchronously, and then print a greeting. Once done, we close the <code>readline</code> interface.</p>
+
+    <h2>What You've Learned</h2>
+    <ul>
+        <li>JavaScript uses an event loop model to handle asynchronous tasks efficiently.</li>
+        <li>JavaScript is single-threaded, meaning it can only perform one task at a time, but asynchronous functions allow it to run non-blocking operations.</li>
+        <li>The difference between synchronous (blocking) and asynchronous (non-blocking) code.</li>
+        <li>How to use <code>setTimeout</code> and <code>setInterval</code> to execute delayed or repeated functions.</li>
+        <li>How to capture user input using Node's <code>readline</code> module in an asynchronous way.</li>
+    </ul>
+
+    <h3>Further Practice:</h3>
+    <ul>
+        <li>Experiment with different <code>setTimeout</code> and <code>setInterval</code> delays to see how JavaScript handles asynchronous tasks.</li>
+        <li>Try writing a Node.js program that asks multiple questions using the <code>readline</code> module.</li>
+        <li>Explore the browser's event loop using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop" target="_blank">MDN's Event Loop documentation</a>.</li>
+    </ul>
+</body>
+</html>

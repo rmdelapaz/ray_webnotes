@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greedy Algorithm Explained</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <h1>Understanding Greedy Algorithms in JavaScript</h1>
+
+    <p>In this tutorial, we will explore a fundamental problem-solving approach: the <strong>Greedy Algorithm</strong>. Greedy algorithms are intuitive and can provide good solutions to many optimization problems. Let’s dive in and understand how they work and where they are useful.</p>
+
+    <h2>What is a Greedy Algorithm?</h2>
+    <p>A Greedy Algorithm is an algorithmic approach where at each step, the best possible choice is made. The idea is to make the locally optimal choice at each step with the hope that it will lead to a globally optimal solution.</p>
+
+    <h2>When and Why to Use Greedy Algorithms?</h2>
+    <p>Greedy algorithms are useful when a problem can be solved by making a series of locally optimal decisions. However, they don’t always provide the best solution for all types of problems. Greedy algorithms are most effective when the local choices lead to the best global outcome, such as in problems where the "greedy choice property" and "optimal substructure" hold.</p>
+
+    <h2>Greedy Algorithm Code Example: Coin Change Problem</h2>
+    <p>One classic example of a greedy algorithm is the <strong>coin change problem</strong>. The goal is to make change for a given amount using the fewest number of coins from a given set of denominations.</p>
+
+    <pre>
+        <code>
+            function coinChange(coins, amount) {
+                coins.sort((a, b) => b - a); // Sort coins in descending order
+                let totalCoins = 0;
+                for (let i = 0; i < coins.length; i++) {
+                    let coinCount = Math.floor(amount / coins[i]);
+                    totalCoins += coinCount;
+                    amount -= coinCount * coins[i];
+                    if (amount === 0) break;
+                }
+                return totalCoins;
+            }
+
+            let coins = [1, 5, 10, 25];
+            let amount = 67;
+
+            console.log("Minimum coins needed: ", coinChange(coins, amount));
+        </code>
+    </pre>
+
+    <h2>Code Explanation</h2>
+
+    <p>Let’s break down the code step by step:</p>
+
+    <h3>1. Sorting the Coins</h3>
+    <p>The first step in the greedy approach is to sort the coins in descending order:</p>
+    <pre><code>coins.sort((a, b) => b - a);</code></pre>
+    <p>By starting with the largest coin, we can reduce the amount faster, using fewer coins. For example, if we are trying to make change for 67 cents, we start by using the largest coins (25 cents).</p>
+
+    <h3>2. Counting the Coins</h3>
+    <p>For each coin denomination, we calculate how many times that coin can fit into the remaining amount:</p>
+    <pre><code>let coinCount = Math.floor(amount / coins[i]);</code></pre>
+    <p>For example, 25 cents fits into 67 cents two times. We then subtract the value of the used coins from the amount:</p>
+    <pre><code>amount -= coinCount * coins[i];</code></pre>
+
+    <h3>3. Returning the Result</h3>
+    <p>We keep adding up the coins used and stop once the amount becomes zero:</p>
+    <pre><code>if (amount === 0) break;</code></pre>
+    <p>Finally, we return the total number of coins used:</p>
+    <pre><code>return totalCoins;</code></pre>
+
+    <h2>Real-World Example and Applications</h2>
+    <p>Greedy algorithms are used in many real-world applications, including:</p>
+    <ul>
+        <li><strong>Huffman Coding:</strong> A greedy algorithm is used to compress data in an efficient way.</li>
+        <li><strong>Prim’s and Kruskal’s Algorithms:</strong> These are used to find the minimum spanning tree in a graph.</li>
+        <li><strong>Activity Selection Problem:</strong> This involves selecting the maximum number of activities that don’t overlap in time, often used in scheduling problems.</li>
+    </ul>
+
+    <h2>Limitations of Greedy Algorithms</h2>
+    <p>While greedy algorithms are fast and simple, they don’t always produce the optimal solution for every problem. For example, in the coin change problem, if you were using denominations like 1, 3, and 4, the greedy approach might not yield the fewest coins. This is because the greedy approach only works when the problem exhibits the greedy choice property.</p>
+
+    <h2>Further Exploration</h2>
+    <p>Once you’re comfortable with greedy algorithms, you might want to explore more advanced algorithms, such as:</p>
+    <ul>
+        <li>Dynamic Programming</li>
+        <li>Backtracking</li>
+        <li>Branch and Bound</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Greedy algorithms are a powerful tool for solving optimization problems quickly. They work well when making a series of locally optimal choices leads to a globally optimal solution. Understanding when and why to use greedy algorithms can help you tackle a wide range of real-world problems efficiently.</p>
+
+</body>
+</html>

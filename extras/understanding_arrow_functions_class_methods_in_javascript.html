@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Arrow Functions and Class Methods in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Arrow Functions and Class Methods in JavaScript</h1>
+        <p>A tutorial for new developers on the context of arrow functions and when to use them in class methods.</p>
+    </header>
+    <main>
+        <section>
+            <h2>1. What is the Context of an Arrow Function?</h2>
+            <p>
+                Arrow functions in JavaScript are unique in that they do not have their own <code>this</code>. Instead, they inherit <code>this</code> from their surrounding (lexical) context.
+                This is different from regular functions, which have their own <code>this</code> depending on how they are called.
+            </p>
+            <p>Let’s explore an example:</p>
+            <pre><code class="language-javascript">
+// Regular function
+function regularFunction() {
+    console.log(this);
+}
+
+// Arrow function
+const arrowFunction = () => {
+    console.log(this);
+};
+
+const obj = {
+    name: "Object",
+    regular: regularFunction,
+    arrow: arrowFunction
+};
+
+obj.regular(); // Output: obj (because 'this' is determined by how the function is called)
+obj.arrow(); // Output: window or undefined (because arrow functions inherit 'this' from the surrounding context)
+            </code></pre>
+            <p>
+                In the example above, the regular function’s <code>this</code> refers to the object that invoked it, while the arrow function’s <code>this</code> refers to the surrounding context (in this case, the global object).
+            </p>
+        </section>
+
+        <section>
+            <h2>2. How to Define a Class Method Using an Arrow Function</h2>
+            <p>
+                Defining a class method using an arrow function ensures that the method retains the <code>this</code> value of the class instance, even when passed as a callback or used in asynchronous code. 
+                Let’s see how it’s done:
+            </p>
+            <pre><code class="language-javascript">
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    // Regular method
+    introduce() {
+        console.log("Hi, I'm " + this.name);
+    }
+
+    // Arrow function method
+    introduceWithArrow = () => {
+        console.log("Hi, I'm " + this.name);
+    }
+}
+
+const person = new Person("John");
+
+person.introduce(); // Output: Hi, I'm John
+person.introduceWithArrow(); // Output: Hi, I'm John
+
+setTimeout(person.introduce, 1000); // Output: Hi, I'm undefined (because 'this' is lost in the callback)
+setTimeout(person.introduceWithArrow, 1000); // Output: Hi, I'm John (because 'this' is retained by the arrow function)
+            </code></pre>
+            <p>
+                In the example, <code>introduce()</code> is a regular method, and when passed to <code>setTimeout</code>, it loses the reference to <code>this</code>. 
+                However, <code>introduceWithArrow()</code> is an arrow function, so it keeps the reference to <code>this</code> (the instance of the class) even in asynchronous callbacks.
+            </p>
+        </section>
+
+        <section>
+            <h2>3. When to Use Arrow Functions to Define a Class Method</h2>
+            <p>
+                Arrow functions are useful when you need to ensure that the <code>this</code> context inside a method always refers to the class instance, especially in situations where the method might be passed around as a callback.
+                Here are some scenarios where you should consider using arrow functions for class methods:
+            </p>
+            <ul>
+                <li><strong>When passing a method as a callback:</strong> If a method will be passed to another function (such as event handlers or timers), using an arrow function ensures the <code>this</code> value remains tied to the class instance.</li>
+                <li><strong>In asynchronous operations:</strong> When dealing with promises or asynchronous operations, arrow functions help prevent the loss of the <code>this</code> context.</li>
+            </ul>
+            <p>Let’s look at an example with event handling:</p>
+            <pre><code class="language-javascript">
+class Button {
+    constructor(label) {
+        this.label = label;
+    }
+
+    // Regular function as a method
+    click() {
+        console.log("Button clicked: " + this.label);
+    }
+
+    // Arrow function as a method
+    clickWithArrow = () => {
+        console.log("Button clicked: " + this.label);
+    }
+}
+
+const myButton = new Button("Submit");
+
+const buttonElement = document.querySelector("button");
+
+// Without bind or arrow functions, this would be undefined in the callback
+buttonElement.addEventListener("click", myButton.click); // Output: Button clicked: undefined
+
+// Using an arrow function, 'this' stays bound to the class instance
+buttonElement.addEventListener("click", myButton.clickWithArrow); // Output: Button clicked: Submit
+            </code></pre>
+            <p>
+                In the above code, using an arrow function ensures that the event handler refers to the correct <code>this</code> (the instance of <code>Button</code>).
+            </p>
+        </section>
+
+        <section>
+            <h2>4. Conclusion and Further Exploration</h2>
+            <p>
+                Arrow functions are an excellent tool for ensuring the correct <code>this</code> context in certain situations. They are particularly helpful when you need to pass a method as a callback or when working with asynchronous code. 
+                However, it’s important to use them judiciously and understand their behavior, as they differ from regular functions.
+            </p>
+            <p>Further topics to explore:</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN Web Docs on Arrow Functions</a></li>
+                <li>Using <code>bind()</code> vs Arrow Functions</li>
+                <li>Understanding the nuances of <code>this</code> in JavaScript</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

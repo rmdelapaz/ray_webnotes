@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big O Notation for New JavaScript Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+
+    <h1>Big O Notation - Understanding Time and Space Complexity</h1>
+
+    <p>When we write code, we always want to know: How fast is this going to run? How much space will it take up? This is where <strong>Big O Notation</strong> comes in! It helps us understand how the performance of an algorithm changes as the input size increases.</p>
+
+    <h2>Big O - The Speedometer of Code</h2>
+    <p>Think of Big O (from the German Ordnung, order) as the speedometer of your car. If your car takes 5 seconds to accelerate from 0 to 60 mph with one passenger, how long will it take with two, or ten passengers? In coding terms, as we increase the "passengers" (input size), Big O tells us how much longer our "car" (code) will take.</p>
+
+    <h3>Common Big O Notations</h3>
+
+    <ul>
+        <li><strong>O(1) - Constant Time</strong>: No matter how many passengers, it always takes the same time to get to 60 mph. Example: Accessing an item in an array by index.</li>
+        <li><strong>O(log n) - Logarithmic Time</strong>: As the input grows, the time to run increases but at a slower rate. It's like cutting a piece of paper in half over and over again—each time the amount to cut decreases. Example: Binary Search.</li>
+        <li><strong>O(n) - Linear Time</strong>: If you add more passengers, it will take proportionally longer to get to 60 mph. Example: Looping through an array.</li>
+        <li><strong>O(n^2) - Quadratic Time</strong>: For each additional passenger, the time to get to 60 mph increases exponentially. Example: Nested loops.</li>
+        <li><strong>O(2^n) - Exponential Time</strong>: The time it takes to accelerate doubles with each additional passenger! Example: Recursive algorithms with multiple branches like the Fibonacci sequence.</li>
+    </ul>
+
+    <h3>Real-World Example - O(1) Constant Time</h3>
+    <p>Imagine you're at a restaurant and ordering from a menu. If you know the exact number of the dish you want, you can order immediately, regardless of how many dishes are on the menu. This is what happens in <code>O(1)</code> time:</p>
+    <pre><code>
+    function getFirstElement(arr) {
+        return arr[0]; // Always takes the same time, no matter how long the array is
+    }
+    </code></pre>
+
+    <h3>Real-World Example - O(n) Linear Time</h3>
+    <p>Now, if you're checking every dish on the menu before deciding what to order, the more dishes there are, the longer it will take. This is like <code>O(n)</code>:</p>
+    <pre><code>
+    function findNumber(arr, num) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === num) return i;
+        }
+        return -1; // Checking each element, time increases with input size
+    }
+    </code></pre>
+
+    <h3>Real-World Example - O(n^2) Quadratic Time</h3>
+    <p>Think about trying to pair every passenger in a car with every other passenger for a conversation. As the number of passengers grows, the number of conversations (or pairings) increases exponentially:</p>
+    <pre><code>
+    function printAllPairs(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+                console.log(arr[i], arr[j]);
+            }
+        } // Nested loop - as the input grows, the number of operations grows much faster
+    }
+    </code></pre>
+
+    <h2>When and Why Big O Matters</h2>
+    <p>Big O helps us determine if our code is efficient enough to handle large inputs. It's especially important in situations where performance matters, like searching through large databases, handling real-time data, or running complex algorithms on big datasets.</p>
+
+    <p>Understanding Big O can save us from writing inefficient code that may work fine with small inputs but becomes unbearably slow as the input size grows.</p>
+
+    <h3>Tips for Identifying Big O in Your Code</h3>
+    <ul>
+        <li>If your function contains no loops or recursion, it's likely O(1).</li>
+        <li>If your function iterates over an array (or other data structure) once, it's likely O(n).</li>
+        <li>If your function has nested loops (loop inside a loop), it could be O(n^2).</li>
+        <li>If your function splits the input in half on each iteration (like in binary search), it's O(log n).</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Big O notation may seem a bit intimidating at first, but think of it as your code's "speed rating." With practice, you'll be able to estimate how fast your code runs and improve its efficiency, making you a better developer!</p>
+
+</body>
+</html>

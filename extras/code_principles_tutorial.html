@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Concepts: Export/Import, DRY Principle, and SRP</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Key Concepts: Export/Import, DRY Principle, and SRP</h1>
+    </header>
+
+    <section>
+        <h2>Introduction</h2>
+        <p>As developers, we aim to write clean, maintainable code. Two principles that help achieve this are the DRY (Don't Repeat Yourself) Principle and the Single Responsibility Principle (SRP). In this tutorial, we will also explore how to export and import code from one file to another, improving reusability and organization, while adhering to these principles.</p>
+    </section>
+
+    <section>
+        <h2>Export and Import: Sharing Code Across Files</h2>
+        <p>Think of exporting and importing like packing items into a suitcase to take on a trip. The "export" is packing the items, and the "import" is unpacking them when you arrive. By exporting and importing functions, classes, and variables, we keep our code organized and modular, allowing us to reuse code across different files.</p>
+        
+        <h3>Example:</h3>
+        <pre><code>// file1.js
+export function greet() {
+    return "Hello, World!";
+}
+
+// file2.js
+import { greet } from './file1.js';
+
+console.log(greet()); // Output: Hello, World!
+        </code></pre>
+        <p>In this example, the function <code>greet</code> is exported from one file and imported into another. This keeps each file focused on its specific responsibility while allowing you to share code easily.</p>
+    </section>
+
+    <section>
+        <h2>The DRY Principle</h2>
+        <p>The DRY principle states: "Don't Repeat Yourself." Repetition in code can lead to bugs, maintenance challenges, and confusion. Imagine writing a book, and instead of referencing a character by name, you rewrite their entire backstory every time. DRY encourages developers to extract repeating logic into functions, methods, or classes.</p>
+        
+        <h3>Practical Example:</h3>
+        <pre><code>// Non-DRY Code
+function calculateAreaCircle(radius) {
+    return 3.14 * radius * radius;
+}
+
+function calculateAreaSquare(side) {
+    return side * side;
+}
+
+// DRY Code
+function calculateArea(shape, dimension) {
+    if (shape === 'circle') {
+        return 3.14 * dimension * dimension;
+    } else if (shape === 'square') {
+        return dimension * dimension;
+    }
+}
+        </code></pre>
+        <p>By adhering to the DRY principle, we reduce redundancy and make it easier to update the code in the future. If we need to change the way areas are calculated, we now have only one function to update.</p>
+    </section>
+
+    <section>
+        <h2>Single Responsibility Principle (SRP)</h2>
+        <p>The Single Responsibility Principle states that every module, class, or function should have one responsibility, or reason to change. Think of a restaurant: the chef cooks, the waiter serves, and the cashier handles payments. Each role has a specific task. In code, applying SRP makes the system easier to understand and maintain.</p>
+
+        <h3>Example of a Violation:</h3>
+        <pre><code>// Violating SRP
+class UserProfile {
+    constructor(name, email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    updateEmail(newEmail) {
+        this.email = newEmail;
+    }
+
+    sendWelcomeEmail() {
+        // logic to send an email
+        console.log('Welcome email sent to ' + this.email);
+    }
+}
+        </code></pre>
+
+        <p>The <code>UserProfile</code> class violates SRP because it not only manages user information but also handles sending emails. To fix this, we can refactor the code:</p>
+
+        <h3>SRP Applied:</h3>
+        <pre><code>// Refactored to follow SRP
+class UserProfile {
+    constructor(name, email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    updateEmail(newEmail) {
+        this.email = newEmail;
+    }
+}
+
+class EmailService {
+    sendWelcomeEmail(userEmail) {
+        console.log('Welcome email sent to ' + userEmail);
+    }
+}
+
+const user = new UserProfile('Jane Doe', 'jane@example.com');
+const emailService = new EmailService();
+emailService.sendWelcomeEmail(user.email);
+        </code></pre>
+
+        <p>Now, the <code>UserProfile</code> class focuses only on managing the user's information, while the <code>EmailService</code> class handles the responsibility of sending emails. Each class has a single responsibility.</p>
+    </section>
+
+    <section>
+        <h2>Using an API: Abstracting Complex Commands</h2>
+        <p>When working with APIs, it can be useful to create functions that simplify complex API commands. This abstraction allows other developers (or even yourself) to interact with the API in a straightforward way.</p>
+        
+        <h3>Example:</h3>
+        <pre><code>// Raw API Command
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
+// Abstracted into a Function
+function getData() {
+    return fetch('https://api.example.com/data')
+        .then(response => response.json())
+        .catch(error => console.error('Error:', error));
+}
+
+getData().then(data => console.log(data));
+        </code></pre>
+        <p>By abstracting the API call into a function, we make the code cleaner and easier to use. The function hides the complexity of error handling and API communication.</p>
+    </section>
+
+    <section>
+        <h2>Putting It All Together: Practical Usage</h2>
+        <p>Consider a scenario where you are building a website for an online store. You need to:</p>
+        <ul>
+            <li>Use the DRY principle to avoid duplicating code for different products.</li>
+            <li>Apply SRP to ensure that each part of your code handles only one aspect of the application, such as product data, user authentication, or payment processing.</li>
+            <li>Export and import code to organize different features into separate files for easier maintenance.</li>
+            <li>Utilize an API for fetching product data or processing payments, and abstract the API commands to keep the code simple and readable.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Further Exploration</h2>
+        <p>Explore these related topics to deepen your understanding:</p>
+        <ul>
+            <li><strong>Modular Programming:</strong> Organizing code into modules helps improve maintainability.</li>
+            <li><strong>Dependency Injection:</strong> Simplifies the use of external APIs or libraries by abstracting their implementation.</li>
+            <li><strong>Design Patterns:</strong> Patterns such as Factory and Singleton are useful when working with APIs and adhering to SRP.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>By mastering these principles and techniques, you're on your way to writing more efficient, organized, and maintainable code. Keep practicing, and apply these concepts to both your projects and existing codebases to improve structure and clarity.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - JavaScript Terminal Game</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Tic Tac Toe Game</h1>
+        <p>Play Tic Tac Toe in the browser's console! Open the console to play the game.</p>
+    </header>
+
+    <section>
+        <h2>Instructions:</h2>
+        <ul>
+            <li>Open the browser console (usually by pressing F12 or right-click and select "Inspect", then click on the Console tab).</li>
+            <li>Use <code>play(row, col)</code> to place your mark. For example, <code>play(0, 1)</code> will place your mark on the top middle position of the board.</li>
+            <li>Player 1 is 'X', and Player 2 is 'O'.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>JavaScript Code Breakdown</h2>
+        <p>This is a terminal-based Tic Tac Toe game implemented in JavaScript, where players interact using the browser console. The game uses a 2D array to represent the game board, and players take turns placing their marks ('X' or 'O'). The game checks for a winner after every move and announces when the game ends in a win or draw.</p>
+        <p>Key concepts covered include:</p>
+        <ul>
+            <li>Working with 2D arrays to represent the game board.</li>
+            <li>Using JavaScript functions and logic to check for a win or draw.</li>
+            <li>Working with basic user input in the form of console commands.</li>
+        </ul>
+    </section>
+
+    <script>
+        // Initialize game board as a 2D array
+        const board = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+
+        let currentPlayer = 'X'; // Player 'X' starts the game
+        let moves = 0; // Count moves to detect a draw
+
+        // Function to display the current state of the board in the console
+        function displayBoard() {
+            console.clear(); // Clear console for fresh display
+            console.log("Tic Tac Toe Board:");
+            board.forEach(row => console.log(row.join(" | ")));
+        }
+
+        // Function to check if there's a winner
+        function checkWinner() {
+            // Check rows, columns, and diagonals for a win
+            for (let i = 0; i < 3; i++) {
+                // Check rows
+                if (board[i][0] === currentPlayer && board[i][1] === currentPlayer && board[i][2] === currentPlayer) {
+                    return true;
+                }
+                // Check columns
+                if (board[0][i] === currentPlayer && board[1][i] === currentPlayer && board[2][i] === currentPlayer) {
+                    return true;
+                }
+            }
+            // Check diagonals
+            if (board[0][0] === currentPlayer && board[1][1] === currentPlayer && board[2][2] === currentPlayer) {
+                return true;
+            }
+            if (board[0][2] === currentPlayer && board[1][1] === currentPlayer && board[2][0] === currentPlayer) {
+                return true;
+            }
+            return false;
+        }
+
+        // Function to play a move
+        function play(row, col) {
+            // Check if the move is valid
+            if (row < 0 || row > 2 || col < 0 || col > 2 || board[row][col] !== "") {
+                console.log("Invalid move. Try again.");
+                return;
+            }
+
+            // Place the current player's mark on the board
+            board[row][col] = currentPlayer;
+            moves++; // Increment the move count
+
+            // Display the updated board
+            displayBoard();
+
+            // Check if there's a winner
+            if (checkWinner()) {
+                console.log(`Player ${currentPlayer} wins!`);
+                resetGame();
+                return;
+            }
+
+            // Check if the game is a draw
+            if (moves === 9) {
+                console.log("It's a draw!");
+                resetGame();
+                return;
+            }
+
+            // Switch to the other player
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            console.log(`Player ${currentPlayer}'s turn.`);
+        }
+
+        // Function to reset the game after a win or draw
+        function resetGame() {
+            console.log("Game over. Resetting the board...");
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    board[i][j] = ""; // Clear the board
+                }
+            }
+            currentPlayer = 'X'; // Player 'X' starts again
+            moves = 0; // Reset move count
+            displayBoard();
+        }
+
+        // Start the game by displaying the initial empty board
+        displayBoard();
+        console.log("Player X's turn. Use play(row, col) to make a move.");
+    </script>
+</body>
+</html>

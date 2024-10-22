@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Scope and Declarations</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Declarations, Scope, and Closures Overview</h1>
+    </header>
+    <main>
+        <section>
+            <h2>1. Identifying the Difference Between <code>const</code>, <code>let</code>, and <code>var</code> Declarations</h2>
+            <p><strong>Metaphor:</strong> Think of <code>var</code>, <code>let</code>, and <code>const</code> as different types of containers with varying restrictions on how they can be filled or altered.</p>
+            <ul>
+                <li><code>var</code>: A container that can be reused and redeclared anywhere in the same scope. It's a bit old-fashioned and can sometimes lead to confusion due to its function scope.</li>
+                <li><code>let</code>: A modern container that can be updated but not redeclared in the same scope. It has block scope, which makes it more predictable.</li>
+                <li><code>const</code>: A container that must be filled immediately and cannot be reassigned. The value inside can still be mutable (e.g., an object), but the reference cannot change.</li>
+            </ul>
+            <pre><code>var x = 10;
+let y = 20;
+const z = 30;
+
+x = 15; // Allowed
+y = 25; // Allowed
+z = 35; // Error: Assignment to constant variable</code></pre>
+        </section>
+
+        <section>
+            <h2>2. Explaining the Difference Between <code>const</code>, <code>let</code>, and <code>var</code> Declarations</h2>
+            <p><strong>Analogy:</strong> Imagine <code>var</code> as a very lenient rulebook from the past, <code>let</code> as a more modern rulebook with strict guidelines on where it applies, and <code>const</code> as a rulebook that says "This is permanent, no changes allowed!"</p>
+            <ul>
+                <li><code>var</code>: Function-scoped, meaning it ignores block scope (like loops). It is also hoisted, meaning it’s declared at the top of its scope regardless of where it’s initialized.</li>
+                <li><code>let</code>: Block-scoped, meaning it respects the boundaries of code blocks like loops or conditionals. It’s not hoisted in the same way as <code>var</code>, so it’s safer to use.</li>
+                <li><code>const</code>: Also block-scoped like <code>let</code>, but it must be initialized when declared, and it cannot be reassigned.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Predicting Code Evaluation: Function Scope, Block Scope, Lexical Scope, and Scope Chaining</h2>
+            <p><strong>Analogy:</strong> Think of scope like different rooms in a house. <code>function</code> scope is like the whole house, while <code>block</code> scope is like individual rooms. Lexical scope is the idea that each room knows about the rooms above it in the hierarchy.</p>
+            <ul>
+                <li><strong>Function scope:</strong> Variables declared with <code>var</code> inside a function are only accessible within that function.</li>
+                <li><strong>Block scope:</strong> Variables declared with <code>let</code> and <code>const</code> inside curly braces <code>{}</code> are only accessible within that block.</li>
+                <li><strong>Lexical scope:</strong> Functions can access variables in the scope where they were created, even if called from a different scope.</li>
+                <li><strong>Scope chaining:</strong> When a variable isn’t found in the current scope, JavaScript looks in the next outer scope until it reaches the global scope.</li>
+            </ul>
+            <pre><code>function outer() {
+    let x = 10;
+    function inner() {
+        console.log(x); // 10 - Lexical scope: inner() can access outer()'s variable.
+    }
+    inner();
+}
+
+outer();</code></pre>
+        </section>
+
+        <section>
+            <h2>4. Defining an Arrow Function</h2>
+            <p><strong>Metaphor:</strong> Think of an arrow function as a fast, modern shorthand for writing functions, which also has the added benefit of keeping the <code>this</code> value from its surrounding context.</p>
+            <p>An arrow function is a concise way to write a function. It does not have its own <code>this</code>, but instead, inherits <code>this</code> from its lexical context.</p>
+            <pre><code>// Regular function
+function add(a, b) {
+    return a + b;
+}
+
+// Arrow function
+const add = (a, b) => a + b;
+</code></pre>
+        </section>
+
+        <section>
+            <h2>5. Implementing a Closure and How It Affects Scope</h2>
+            <p><strong>Analogy:</strong> A closure is like a backpack that a function carries with it. When the function is created, it packs up all the variables it needs from its outer scope and carries them wherever it goes, even after that scope is gone.</p>
+            <p>A <strong>closure</strong> occurs when a function retains access to variables from its outer scope, even after the outer function has finished executing. This allows the inner function to "remember" its environment.</p>
+            <pre><code>function createCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2</code></pre>
+            <p>In this example, the inner function returned by <code>createCounter()</code> retains access to the <code>count</code> variable, creating a closure.</p>
+        </section>
+    </main>
+</body>
+</html>

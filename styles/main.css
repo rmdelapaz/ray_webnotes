@@ -1,0 +1,251 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table, td, tr,th {
+ border: 1px solid black;
+  border-spacing: 0;
+ padding: 5px;
+ text-align: center;
+}
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: medium;
+  line-height: 110%;
+  background-color: rgb(88, 86, 90);
+  margin-left: 30px;
+  margin-right: 40px;
+  margin-bottom: 30px;
+  color: lightgray;
+}
+h1,
+h2,
+h3, h4 {
+  font-weight: bolder;
+  background-color: rgb(85, 154, 205);
+  color: white;
+  margin: 5px;
+  padding: 5px;
+  line-height: 120%;
+}
+strong {font-weight: bold;color: rgb(255, 255, 255);}
+h1 {
+  font-size: xx-large;
+  text-align: center;
+  border-bottom-width: 50px black solid;
+  line-height: 150%;
+}
+
+h2 {
+  font-size: x-large;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+h3 {
+  font-size: large;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+h4 {margin-left: 35px;
+margin-right: 35px;}
+table {
+  margin-left: 45px;
+}
+p {
+  margin-top: 10px;
+  margin-left: 45px;
+  margin-bottom: 5px;
+  margin-right: 40px;
+}
+
+h1 code {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+p code {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+pre code {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+h4 code { margin-left: 0px; margin-right: 0px;}
+h2 code { margin-left: 0px; margin-right: 0px;}
+h3 code { margin-left: 0px; margin-right: 0px;}
+li code { margin-left: 0px; margin-right: 0px;}
+code, pre {
+  margin-top: 15px;
+  margin-left: 40px;
+  margin-right: 40px;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(48, 56, 48);
+  color: rgb(187, 180, 84);
+  padding-top: 5px;
+  padding-left: 2px;
+  line-height: 150%;
+
+}
+
+p code {
+ margin-right: 0;
+}
+
+footer {
+  text-align: left;
+}
+ol li {
+  padding-top: 10px;
+  list-style-type:decimal ;
+}
+
+a {color: rgb(85, 154, 205);}
+ul li {
+  list-style-type: disc;
+}
+dl, ol, ul, li {
+  margin-left: 45px;
+  padding-top: 5px;
+}
+
+ul li ul li {
+  margin-left: 0px;
+}
+
+dd
+{
+ margin-left: 25px;
+ padding-bottom: 10px;
+
+}
+img {background-color: white;
+width:100%}
+div {text-align: center;}
+div img {width:45%;
+text-align: center;}

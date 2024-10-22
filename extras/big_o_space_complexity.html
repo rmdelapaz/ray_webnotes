@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <title>Big O and Space Complexity</title>
+</head>
+<body>
+    <h1>Big O and Space Complexity</h1>
+    
+    <h2>Introduction to Big O</h2>
+    <p>Big O notation is a way of describing the efficiency of an algorithm. It helps us understand how the runtime or space requirements of an algorithm grow as the input size increases. It's a vital tool for optimizing code and making efficient choices when building applications. But Big O isn't just about time. There's another critical component we often overlook—<strong>space complexity</strong>.</p>
+
+    <h2>What Is Space Complexity?</h2>
+    <p>Space complexity refers to the amount of memory or space that an algorithm uses in relation to the size of the input. Just as with time complexity, space complexity is expressed using Big O notation. Understanding space complexity is crucial because even if an algorithm runs quickly, it might use too much memory, especially with large inputs.</p>
+
+    <h3>Real-World Analogy</h3>
+    <p>Imagine you're packing items into boxes. The number of boxes you need depends on the size of the items you're packing and how efficiently you organize them. In programming, space complexity is like the number of boxes (memory) an algorithm requires to handle its input.</p>
+
+    <h2>Types of Space Complexity</h2>
+    <p>Let's explore the three most common types of space complexity: constant, linear, and quadratic space complexity.</p>
+
+    <h3>1. Constant Space Complexity - O(1)</h3>
+    <p><strong>Constant space complexity</strong> means that no matter how large the input size grows, the space required by the algorithm remains the same. In other words, the algorithm uses a fixed amount of space, regardless of the input size.</p>
+
+    <h4>Example</h4>
+    <p>Consider this simple function that swaps two variables:</p>
+
+    <pre>
+function swap(a, b) {
+    let temp = a;
+    a = b;
+    b = temp;
+}
+    </pre>
+
+    <p>This function uses a fixed amount of space (just one temporary variable, <code>temp</code>), regardless of the values of <code>a</code> and <code>b</code> or how large they are. Therefore, the space complexity is <strong>O(1)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Imagine packing a small item like a single pencil into a box. Whether the pencil is short or long, you only need one box. In the same way, no matter the size of the variables, the space used stays the same.</p>
+
+    <h3>2. Linear Space Complexity - O(n)</h3>
+    <p><strong>Linear space complexity</strong> means that the amount of space an algorithm uses grows in direct proportion to the input size. As the input size increases, the space requirement increases linearly.</p>
+
+    <h4>Example</h4>
+    <p>Consider a function that creates a new array and stores every number from 1 to <code>n</code>:</p>
+
+    <pre>
+function createArray(n) {
+    let arr = [];
+    for (let i = 1; i <= n; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+    </pre>
+
+    <p>In this case, the space required by the array <code>arr</code> grows as <code>n</code> increases. For an input size of 100, the array will store 100 elements, and for 1,000, it will store 1,000 elements. Hence, the space complexity is <strong>O(n)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Think of a line of people waiting for tickets. If one person takes one seat, 10 people take 10 seats, and 100 people take 100 seats. The space used (seats) grows in proportion to the number of people (input size).</p>
+
+    <h3>3. Quadratic Space Complexity - O(n<sup>2</sup>)</h3>
+    <p><strong>Quadratic space complexity</strong> occurs when the space required by the algorithm grows proportionally to the square of the input size. This often happens when you're working with two-dimensional data structures, like matrices.</p>
+
+    <h4>Example</h4>
+    <p>Consider a function that creates an <code>n</code> x <code>n</code> matrix:</p>
+
+    <pre>
+function createMatrix(n) {
+    let matrix = [];
+    for (let i = 0; i < n; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < n; j++) {
+            matrix[i][j] = i * j;
+        }
+    }
+    return matrix;
+}
+    </pre>
+
+    <p>Here, the space required grows quadratically because for each row, we create <code>n</code> columns, resulting in an <code>n</code> x <code>n</code> matrix. Therefore, the space complexity is <strong>O(n<sup>2</sup>)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Imagine building a grid of flower beds in a garden. For 2 rows and 2 columns, you need 4 beds. For 5 rows and 5 columns, you need 25 beds. The space required grows as the square of the number of rows (or columns).</p>
+
+    <h2>Why Does Space Complexity Matter?</h2>
+    <p>Understanding space complexity is crucial because memory is a limited resource. Even if an algorithm runs quickly (i.e., it has good time complexity), it could still crash your program or system if it uses too much memory. This is particularly important when working with large datasets or when developing software for systems with limited memory, such as embedded systems or mobile devices.</p>
+
+    <h3>Real-World Example</h3>
+    <p>Imagine you're developing an app that processes images. Each image takes up a certain amount of memory, and the size of the images (input) could vary. If you’re not careful with space complexity, loading many large images at once could cause the app to crash because it runs out of memory.</p>
+
+    <h2>Practical Usage and Tips</h2>
+    <ul>
+        <li><strong>Optimize when necessary:</strong> If you’re dealing with large datasets or constrained environments, focus on algorithms with low space complexity. If possible, aim for <strong>O(1)</strong> or <strong>O(n)</strong>.</li>
+        <li><strong>Use space-efficient data structures:</strong> Consider using data structures that are optimized for space, such as linked lists or hash tables, when necessary.</li>
+        <li><strong>Watch out for recursion:</strong> Recursive functions can sometimes lead to high space complexity due to the call stack. In such cases, converting the recursion to iteration can reduce space usage.</li>
+    </ul>
+
+    <h3>Real-World Application</h3>
+    <p>Imagine you’re building a search engine. The space complexity of your search algorithm matters a lot because you’re likely dealing with massive amounts of data—billions of pages. If the algorithm uses too much memory, it won’t be scalable.</p>
+
+    <h2>Conclusion</h2>
+    <p>In summary, space complexity is a crucial aspect of algorithm design. It helps you understand how much memory an algorithm will use and whether it's suitable for the given task. Just as time complexity measures the "speed" of an algorithm, space complexity measures how efficiently it uses memory.</p>
+
+    <p>As you design algorithms, aim to strike a balance between time and space complexity, choosing solutions that are both fast and memory-efficient for the problem you're solving.</p>
+</body>
+</html>

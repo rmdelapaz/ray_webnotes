@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursive Problem Solving in JavaScript - Lecture</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>Recursive Problem Solving in JavaScript</h1>
+
+    <h2>1. Solving the Tower of Hanoi Problem Using Recursion</h2>
+    <p>The <strong>Tower of Hanoi</strong> is a classic problem where you must move a stack of disks from one rod to another, following these rules:</p>
+    <ul>
+        <li>You can only move one disk at a time.</li>
+        <li>You can never place a larger disk on top of a smaller disk.</li>
+        <li>You have three rods to work with: a source rod, a destination rod, and a temporary rod.</li>
+    </ul>
+
+    <p>The goal is to move all the disks from the source rod to the destination rod using the temporary rod as needed.</p>
+
+    <h3>Recursive Approach:</h3>
+    <p>The recursive solution to Tower of Hanoi breaks the problem down as follows:</p>
+    <ul>
+        <li>Move <code>n-1</code> disks from the source rod to the temporary rod.</li>
+        <li>Move the nth disk directly to the destination rod.</li>
+        <li>Move the <code>n-1</code> disks from the temporary rod to the destination rod.</li>
+    </ul>
+
+    <h3>Code Example:</h3>
+    <pre><code>
+    function towerOfHanoi(n, source, destination, temp) {
+        if (n === 1) {
+            console.log(`Move disk 1 from ${source} to ${destination}`);
+            return;
+        }
+
+        towerOfHanoi(n - 1, source, temp, destination);
+        console.log(`Move disk ${n} from ${source} to ${destination}`);
+        towerOfHanoi(n - 1, temp, destination, source);
+    }
+
+    // Solve Tower of Hanoi with 3 disks
+    towerOfHanoi(3, 'A', 'C', 'B');
+    </code></pre>
+
+    <h3>Explanation:</h3>
+    <p>The base case occurs when there is only one disk to move. In this case, the function simply prints out the move. For larger numbers of disks, the function recursively solves the problem for <code>n-1</code> disks before moving the nth disk and solving it again for <code>n-1</code> disks on the temporary rod.</p>
+
+    <h3>Sample Output:</h3>
+    <p>If we solve for 3 disks, the output will be:</p>
+    <pre><code>
+    Move disk 1 from A to C
+    Move disk 2 from A to B
+    Move disk 1 from C to B
+    Move disk 3 from A to C
+    Move disk 1 from B to A
+    Move disk 2 from B to C
+    Move disk 1 from A to C
+    </code></pre>
+
+    <h2>2. Writing a Recursive Function to Sum All the Numbers in an Array</h2>
+    <p>You can also use recursion to sum all numbers in an array by breaking the problem down into smaller pieces:</p>
+    <ul>
+        <li>If the array is empty, the sum is 0 (this is the base case).</li>
+        <li>Otherwise, the sum is the first element of the array plus the sum of the remaining elements.</li>
+    </ul>
+
+    <h3>Code Example:</h3>
+    <pre><code>
+    function sumArray(arr) {
+        if (arr.length === 0) {
+            return 0;
+        }
+        return arr[0] + sumArray(arr.slice(1));
+    }
+
+    let numbers = [1, 2, 3, 4, 5];
+    console.log(sumArray(numbers));  // Output: 15
+    </code></pre>
+
+    <h3>Explanation:</h3>
+    <p>The function works by adding the first element of the array to the sum of the rest of the elements, calculated recursively. The base case is when the array is empty, in which case the sum is 0.</p>
+
+    <h3>Sample Output:</h3>
+    <p>For the array <code>[1, 2, 3, 4, 5]</code>, the output will be <code>15</code>.</p>
+
+    <h2>3. Debugging Recursive Functions by Introducing Errors</h2>
+    <p>Recursion can be tricky to debug, so it’s helpful to introduce small intentional errors and analyze how they affect the behavior of the function. Let’s take the <code>sumArray</code> function and introduce a small error:</p>
+
+    <h3>Buggy Code Example:</h3>
+    <pre><code>
+    function buggySumArray(arr) {
+        if (arr.length === 0) {
+            return 0;
+        }
+        return arr[0] + buggySumArray(arr);  // Forgot to slice the array
+    }
+
+    console.log(buggySumArray([1, 2, 3, 4]));  // Output: Infinite recursion, stack overflow
+    </code></pre>
+
+    <h3>What Went Wrong?</h3>
+    <p>In this buggy version of the function, we forgot to slice the array in the recursive call. As a result, the function keeps passing the entire array back into itself without reducing its size, causing infinite recursion and eventually leading to a stack overflow.</p>
+
+    <h3>How to Fix It:</h3>
+    <p>We need to make sure we reduce the size of the array with each recursive call:</p>
+    <pre><code>
+    return arr[0] + buggySumArray(arr.slice(1));  // Corrected
+    </code></pre>
+
+    <h3>Additional Debugging Tips:</h3>
+    <ul>
+        <li><strong>Use console.log:</strong> Add <code>console.log</code> statements inside the recursive function to trace how parameters change over time.</li>
+        <li><strong>Test with small inputs:</strong> Start with simple test cases (like an array with 1 or 2 elements) to ensure the function behaves as expected.</li>
+        <li><strong>Check the base case:</strong> Ensure that the base case is properly defined and reachable. Infinite recursion often happens because the base case is either missing or incorrect.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Recursion is a powerful tool for solving problems that can be broken down into smaller, simpler problems. The Tower of Hanoi problem and summing an array are great examples of how recursion can be applied. Debugging recursive functions requires careful attention to base cases and how parameters change with each recursive call.</p>
+
+    <h3>Further Practice</h3>
+    <ul>
+        <li>Solve the Tower of Hanoi problem for 4 disks.</li>
+        <li>Write a recursive function to reverse a string.</li>
+        <li>Intentionally introduce errors into recursive functions and practice debugging them.</li>
+    </ul>
+    &nbsp;
+</body>
+</html>

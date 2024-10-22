@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSCode Debugging in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>VSCode Debugging for JavaScript Developers</h1>
+    
+    <h2>Introduction</h2>
+    <p>In this tutorial, we will learn how to set up and use the debugging feature in Visual Studio Code (VSCode) for JavaScript development. We’ll explore how debugging works, why it’s essential, and the step-by-step process to configure your VSCode environment for efficient debugging.</p>
+
+    <h2>Why Debugging Matters</h2>
+    <p>Debugging is a critical skill for developers. It helps you catch errors in your code, understand how it works under the hood, and improve code quality. Whether you are working on a small project or a large-scale application, being able to step through your code and inspect variables in real-time will save you a lot of time and headaches.</p>
+
+    <h2>Analogy: Debugging as Detective Work</h2>
+    <p>Think of debugging like being a detective. You’re given a case (an error in your code), and you need to inspect clues (variable values, execution flow) to figure out where the problem lies. Instead of guessing, you use tools that allow you to pause and examine the situation step by step.</p>
+
+    <h2>Setting Up VSCode Debugging</h2>
+    <p>Here’s how you can configure VSCode to enable debugging for your JavaScript projects.</p>
+
+    <h3>1. Open your settings.json</h3>
+    <p>You need to modify your <code>settings.json</code> file to add debug configurations. Follow these steps:</p>
+    <ol>
+        <li>Press <code>CMD + SHIFT + P</code> (or <code>CTRL + SHIFT + P</code> on Windows).</li>
+        <li>Type in "settings" and select <strong>Open Settings (JSON)</strong>.</li>
+    </ol>
+    
+    <p>Here is an example of what your <code>settings.json</code> might look like:</p>
+
+    <h3>2. Add Debug Configurations</h3>
+    <p>Now, add the following "launch" key to the <code>settings.json</code> object:</p>
+
+<pre><code>
+"launch": {
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch",
+            "console": "integratedTerminal",
+            "program": "${file}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mocha Tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-u",
+                "bdd",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/test"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}
+</code></pre>
+
+<p>This configuration creates two debug options in VSCode:</p>
+<ul>
+    <li><strong>Launch:</strong> Used for running and debugging individual Node.js files.</li>
+    <li><strong>Mocha Tests:</strong> Used for running unit tests with Mocha (a popular testing framework).</li>
+</ul>
+
+<p>Note that <code>JSON</code> (JavaScript Object Notation) is similar to a JavaScript object, but with one key difference: all keys must be wrapped in double quotations.</p>
+
+    <h3>3. Open the Debugging Tab</h3>
+    <p>Next, open a JavaScript file (for example, <code>test.js</code>) and navigate to the debugging tab in the VSCode sidebar (the play button with a bug icon).</p>
+
+    <p>If the sidebar isn’t visible, go to <strong>View &gt; Appearance &gt; Show Activity Bar</strong> to enable it.</p>
+
+    <h4>Make sure the dropdown next to the green play button is set to <strong>Launch</strong>, as this is the configuration you just added.</h4>
+
+    <h3>4. Running the Debugger</h3>
+    <p>Press the green play button, and your code will run in the debugger. If your code contains breakpoints, VSCode will stop execution at those points, allowing you to inspect variables, step through code, and explore the call stack.</p>
+
+    <p>If you’re testing a function, make sure to invoke that function in your code before running the debugger. You can press play again to continue execution or step through each line of code.</p>
+
+    <h2>Understanding the Debugging Process</h2>
+    <p>When you run your code through the VSCode debugger, a few important things happen:</p>
+    <ul>
+        <li>The debugger pauses code execution when it hits a breakpoint (or error).</li>
+        <li>It allows you to step through your code line by line (<em>Step Into</em>), skip over functions (<em>Step Over</em>), or exit out of a function call (<em>Step Out</em>).</li>
+        <li>You can inspect variable values in the <strong>Variables</strong> panel and see how they change as the program executes.</li>
+        <li>The <strong>Call Stack</strong> panel shows the list of function calls that led to the current line of execution.</li>
+    </ul>
+
+    <h3>Debugging and the Call Stack</h3>
+    <p>In debugging, the <strong>call stack</strong> is crucial because it allows you to trace back the sequence of function calls that led to a specific point in the code. This is especially helpful in finding the root cause of bugs, as you can inspect how different functions were called.</p>
+
+    <h2>Real-World Applications</h2>
+    <p>Debugging is used in real-world scenarios to:</p>
+    <ul>
+        <li><strong>Fix runtime errors:</strong> Catch and resolve unexpected behaviors in production code.</li>
+        <li><strong>Test functions:</strong> Check if functions work as expected by stepping through them.</li>
+        <li><strong>Improve performance:</strong> Identify performance bottlenecks by analyzing how different parts of the code execute.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Debugging in VSCode is a powerful feature for any JavaScript developer. It helps you catch and fix errors, understand the flow of your program, and improve your code quality. By setting up the debugger in VSCode, you can inspect variables, explore the call stack, and efficiently troubleshoot issues in your JavaScript projects.</p>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Browser Object Model - Enhanced</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <h1>The Browser Object Model (BOM)</h1>
+    <p><strong>Browsers: They’re The BOM Dot Com!</strong></p>
+    <p>
+        If the Internet exists, but there’s no way to browse it, does it even really exist? Unless you’ve been living under a rock for the past couple of decades, 
+        you should know what a browser is, and you probably use it multiple times a day. Browsers are something most people take for granted, 
+        but behind the scenes is a complex structure working to display information to users who browse the Web.
+    </p>
+    <p>
+        Web developers rely on browsers constantly. They can be your best friend or your worst enemy. (Yes, we’re looking at you, IE!) 
+        Spending some time learning about browsers will help you get a higher-level understanding of how the Web operates, how to debug, 
+        and how to write code that works across browsers. In this reading, we’ll learn about the BOM (Browser Object Model), how it’s structured, 
+        and how it differs from the DOM (Document Object Model).
+    </p>
+
+    <h2>The DOM vs. the BOM</h2>
+    <p>
+        By now, you’ve learned about the DOM, or Document Object Model, and that it contains a collection of nodes (HTML elements), that can be accessed and manipulated. 
+        In essence, the document object is a Web page, and the DOM represents the object hierarchy of that document.
+    </p>
+    <p>
+        How do we access a document on the Web? Through a browser, of course! If we took a bird’s-eye view of the browser, 
+        we would see that the document object is part of a hierarchy of browser objects. This hierarchy is known as the BOM, or Browser Object Model.
+    </p>
+    <p>
+        <strong>Analogy:</strong> Think of the BOM as a toolbox that the browser provides to help you interact with everything outside the HTML document. 
+        While the DOM is like the house you live in (the web page), the BOM is like the surrounding landscape—roads, mailboxes, and the utility systems (water, power, internet) 
+        that keep everything running smoothly.
+    </p>
+    
+    <h2>The Window Object: The Chief Browser Object</h2>
+    <p>
+        The chief browser object is the <code>window</code> object, which contains properties and methods we can use to access different objects within the window. 
+        These include:
+    </p>
+    <ul>
+        <li><code>window.navigator</code> - Returns a reference to the navigator object, which tells you information about the browser and the operating system.</li>
+        <li><code>window.screen</code> - Returns a reference to the screen object associated with the window, giving you details about the user’s display resolution.</li>
+        <li><code>window.history</code> - Returns a reference to the history object, allowing you to navigate back and forward through the browser’s history.</li>
+        <li><code>window.location</code> - Gets/sets the location, or current URL, of the window object. It’s like the address on the envelope—this tells you where you are.</li>
+        <li><code>window.document</code> - Returns a reference to the document that the window contains. You can also use <code>document</code> directly.</li>
+    </ul>
+    <p>
+        <strong>Metaphor:</strong> Think of the <code>window</code> object as the command center of the browser. 
+        Just like a pilot has a dashboard with controls to navigate a plane (altitude, speed, direction), the <code>window</code> object has controls 
+        to navigate and interact with the web environment (location, history, screen).
+    </p>
+    
+    <h3>Shortening the Window Object</h3>
+    <p>
+        Note how we can shorten <code>window.document</code> to <code>document</code>. For example, the <code>document</code> in <code>document.getElementById(‘id’)</code> 
+        actually refers to <code>window.document</code>. All of the methods above can be shortened in the same way.
+    </p>
+
+    <h2>The Browser Diagram</h2>
+    <p>
+        We started in the DOM, and we stepped outside it into the BOM. Now, let’s take an even higher view of the browser itself. 
+        Imagine a diagram depicting a high-level structure of the browser:
+    </p>
+    <ul>
+        <li><strong>User Interface (UI):</strong> This is the browser interface that users interact with, including the address bar, back and forward buttons, bookmarks menu, etc. 
+        It includes everything except for the requested page content. Think of it as the cockpit of a plane where you, as the pilot, control the flight (web experience).</li>
+        <li><strong>Browser Engine:</strong> Manages the interactions between the UI and the rendering engine. Like a translator, it ensures the right data gets to the right place.</li>
+        <li><strong>Rendering Engine:</strong> Displays, or renders, the requested page content. If the requested content is HTML, it will parse HTML and CSS and render the parsed content. 
+        This is where the magic of transforming code into a visual page happens—like baking a cake from a recipe.</li>
+        <li><strong>Networking:</strong> Handles network calls, such as HTTP requests. Every time you load a web page, it’s like placing an order online; the browser sends a request (order) and waits for a response (the package).</li>
+        <li><strong>JavaScript Interpreter:</strong> Parses and executes JavaScript code. This is what makes your web page dynamic, responsive, and interactive.</li>
+        <li><strong>UI Backend:</strong> Used for drawing basic widgets like combo boxes and windows; uses operating system user interface methods.</li>
+        <li><strong>Data Storage:</strong> The persistence of data stored in the browser, such as cookies, local storage, and session storage. This is like a fridge—storing data that can be reused later.</li>
+    </ul>
+    
+    <h2>What You've Learned</h2>
+    <ul>
+        <li>Review of the DOM, or Document Object Model, which handles the structure and content of web pages.</li>
+        <li>Understanding how the BOM differs from the DOM, focusing more on the browser environment.</li>
+        <li>The <code>window</code> object and related methods, acting as the central hub for browser-related actions.</li>
+        <li>A higher-level view of the browser's inner workings, including how it processes, renders, and manages interactions with web content.</li>
+    </ul>
+</body>
+</html>

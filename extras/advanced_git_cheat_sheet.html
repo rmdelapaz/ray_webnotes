@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" href="/favicon.png">
+    <title>Advanced Git Cheat Sheet</title>
+</head>
+<body>
+    <h1>Advanced Git Cheat Sheet</h1>
+
+    <p>This cheat sheet covers advanced Git commands, including branch management, changing/removing origins, and other less commonly used commands that are still useful to know.</p>
+
+    <h2>1. Managing Remotes</h2>
+
+    <h3>View Current Remote (origin)</h3>
+    <pre><code>git remote -v</code></pre>
+    <p>This command shows the current remote repositories linked to your local repository.</p>
+
+    <h3>Change Remote URL (Change origin)</h3>
+    <pre><code>git remote set-url origin new_url</code></pre>
+    <p>Replace <code>new_url</code> with the URL of the new remote repository. For example, if you want to switch to a different GitHub repository. If you have an origin, you can change the url in this manner.</p>
+
+    <h3>Add a New Remote (use 1st if you don't have any remotes, add an origin)</h3>
+    <pre><code>git remote add new_remote_name new_url</code></pre>
+    <p>Adds a new remote with the name <code>new_remote_name</code> and the URL <code>new_url</code>. This allows you to push to multiple remotes. If you don't have a remote add an origin with your url</p>
+
+    <h3>Remove a Remote</h3>
+    <pre><code>git remote remove remote_name</code></pre>
+    <p>Removes a remote repository reference from your local repository.</p>
+
+    <h2>2. Branch Management</h2>
+
+    <h3>List All Branches (Local and Remote)</h3>
+    <pre><code>git branch -a</code></pre>
+    <p>Shows all local and remote branches in your repository.</p>
+
+    <h3>Create a New Branch</h3>
+    <pre><code>git checkout -b new_branch_name</code></pre>
+    <p>This creates a new branch called <code>new_branch_name</code> and switches to it.</p>
+
+    <h3>Switch Between Branches</h3>
+    <pre><code>git checkout branch_name</code></pre>
+    <p>Switch to an existing branch <code>branch_name</code>.</p>
+
+    <h3>Delete a Local Branch</h3>
+    <pre><code>git branch -d branch_name</code></pre>
+    <p>Deletes the specified local branch. If the branch hasn't been merged, use:</p>
+    <pre><code>git branch -D branch_name</code></pre>
+
+    <h3>Push Branch to Remote</h3>
+    <pre><code>git push origin branch_name</code></pre>
+    <p>Pushes the branch to the remote repository.</p>
+
+    <h3>Rename a Branch</h3>
+    <pre><code>git branch -m old_branch_name new_branch_name</code></pre>
+    <p>Renames the branch <code>old_branch_name</code> to <code>new_branch_name</code>.</p>
+
+    <h2>3. Rebasing</h2>
+
+    <h3>Rebase the Current Branch onto Another</h3>
+    <pre><code>git rebase branch_name</code></pre>
+    <p>This applies changes from the current branch on top of <code>branch_name</code>. This is useful for maintaining a clean commit history.</p>
+
+    <h3>Abort a Rebase</h3>
+    <pre><code>git rebase --abort</code></pre>
+    <p>Aborts the current rebase process.</p>
+
+    <h2>4. Stashing Changes</h2>
+
+    <h3>Stash Uncommitted Changes</h3>
+    <pre><code>git stash</code></pre>
+    <p>Saves your local changes and clears the working directory without committing them. Useful if you need to switch branches but aren’t ready to commit.</p>
+
+    <h3>Apply the Latest Stash</h3>
+    <pre><code>git stash apply</code></pre>
+    <p>Re-applies the most recent stash without removing it from the stash list.</p>
+
+    <h3>Apply and Remove the Latest Stash</h3>
+    <pre><code>git stash pop</code></pre>
+    <p>Applies the latest stash and removes it from the stash list.</p>
+
+    <h3>List All Stashes</h3>
+    <pre><code>git stash list</code></pre>
+    <p>Displays a list of all stashes saved.</p>
+
+    <h2>5. Undoing Changes</h2>
+
+    <h3>Discard Local Changes to a File</h3>
+    <pre><code>git checkout -- file_name</code></pre>
+    <p>Discards changes made to <code>file_name</code> and restores it to the last committed state.</p>
+
+    <h3>Reset to a Specific Commit (Hard Reset)</h3>
+    <pre><code>git reset --hard commit_hash</code></pre>
+    <p>Resets the repository to the specified commit, discarding all changes after it. This is a destructive action.</p>
+
+    <h2>6. Cherry-picking Commits</h2>
+
+    <h3>Cherry-pick a Specific Commit</h3>
+    <pre><code>git cherry-pick commit_hash</code></pre>
+    <p>Applies the changes from the specified commit to your current branch.</p>
+
+    <h2>7. Tags</h2>
+
+    <h3>Create a New Tag</h3>
+    <pre><code>git tag tag_name</code></pre>
+    <p>Creates a new tag named <code>tag_name</code> on the current commit.</p>
+
+    <h3>Push Tags to Remote</h3>
+    <pre><code>git push origin tag_name</code></pre>
+    <p>Pushes a specific tag to the remote repository.</p>
+
+    <h3>Delete a Tag</h3>
+    <pre><code>git tag -d tag_name</code></pre>
+    <p>Deletes the specified tag from the local repository.</p>
+
+    <h3>Delete a Tag from the Remote</h3>
+    <pre><code>git push origin --delete tag tag_name</code></pre>
+
+    <h2>Conclusion</h2>
+    <p>This cheat sheet covers several advanced Git commands that are useful for managing remotes, branches, and history. These commands can help you work more efficiently in complex Git workflows.</p>
+  
+
+</body>
+</html>

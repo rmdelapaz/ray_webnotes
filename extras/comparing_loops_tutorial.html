@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparing for, while, for...in, and for...of Loops in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Comparing for, while, for...in, and for...of Loops in JavaScript</h1>
+
+    <p>JavaScript offers several looping structures, each with its own use case. In this tutorial, we will compare the <strong>for</strong>, <strong>while</strong>, <strong>for...in</strong>, and <strong>for...of</strong> loops, discussing when and why to use each.</p>
+
+    <h2>1. The <code>for</code> Loop</h2>
+    <p>The <code>for</code> loop is the most commonly used loop in JavaScript. It is ideal when you know how many iterations you need or when you want to loop through arrays using an index.</p>
+
+    <h3>Basic Syntax</h3>
+    <pre>
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+    </pre>
+    <p>This loop will print the numbers 0 through 4. It follows a specific pattern with three parts: initialization, condition, and increment.</p>
+
+    <h3>When to Use the <code>for</code> Loop</h3>
+    <p>Use the <code>for</code> loop when:</p>
+    <ul>
+        <li>You know exactly how many times you need to loop.</li>
+        <li>You need to loop through an array or list using an index.</li>
+        <li>There is a clear initialization, condition, and increment in your iteration.</li>
+    </ul>
+
+    <h2>2. The <code>while</code> Loop</h2>
+    <p>The <code>while</code> loop continues to execute as long as the condition remains true. It’s ideal when you don’t know the exact number of iterations but need to loop based on a condition.</p>
+
+    <h3>Basic Syntax</h3>
+    <pre>
+let counter = 0;
+while (counter < 5) {
+  console.log(counter);
+  counter++;
+}
+    </pre>
+    <p>Just like the <code>for</code> loop, this will print the numbers 0 through 4, but the <code>while</code> loop works by checking the condition before each iteration.</p>
+
+    <h3>When to Use the <code>while</code> Loop</h3>
+    <p>Use the <code>while</code> loop when:</p>
+    <ul>
+        <li>You don’t know in advance how many iterations you need.</li>
+        <li>You need to loop until a specific condition is met.</li>
+        <li>The condition could change dynamically during the execution of the loop.</li>
+    </ul>
+
+    <h2>3. The <code>for...in</code> Loop</h2>
+    <p>The <code>for...in</code> loop is used to iterate over the keys of an object. It’s useful when you want to loop through an object's properties.</p>
+
+    <h3>Basic Syntax</h3>
+    <pre>
+let car = {
+  make: "Toyota",
+  model: "Corolla",
+  year: 2020
+};
+
+for (let key in car) {
+  console.log(key + ": " + car[key]);
+}
+    </pre>
+    <p>In this case, the <code>for...in</code> loop will iterate over the keys of the <code>car</code> object and print each key along with its value.</p>
+
+    <h3>When to Use the <code>for...in</code> Loop</h3>
+    <p>Use the <code>for...in</code> loop when:</p>
+    <ul>
+        <li>You need to iterate over the properties of an object.</li>
+        <li>You want to access both the keys and values of an object.</li>
+    </ul>
+
+    <h2>4. The <code>for...of</code> Loop</h2>
+    <p>The <code>for...of</code> loop is used to iterate over iterable objects such as arrays, strings, or node lists. It’s useful when you need to loop over values directly.</p>
+
+    <h3>Basic Syntax</h3>
+    <pre>
+let colors = ["red", "green", "blue"];
+
+for (let color of colors) {
+  console.log(color);
+}
+    </pre>
+    <p>This loop will print each color in the <code>colors</code> array. The <code>for...of</code> loop is great when you want to iterate over values directly, without worrying about the index.</p>
+
+    <h3>When to Use the <code>for...of</code> Loop</h3>
+    <p>Use the <code>for...of</code> loop when:</p>
+    <ul>
+        <li>You need to iterate over the values of an array, string, or iterable object.</li>
+        <li>You don’t need the index or key, only the value.</li>
+    </ul>
+
+    <h2>Real-World Analogy</h2>
+    <p>Imagine you’re sorting items in a storage unit:</p>
+    <ul>
+        <li><strong><code>for</code>:</strong> You know exactly how many items you need to sort, so you work one item at a time using an organized system.</li>
+        <li><strong><code>while</code>:</strong> You don’t know how many items there are, so you keep sorting until you’ve checked all the boxes.</li>
+        <li><strong><code>for...in</code>:</strong> You’re opening labeled drawers in a cabinet to see what’s inside each compartment.</li>
+        <li><strong><code>for...of</code>:</strong> You’re taking items out of a box, one by one, without worrying about where they were placed inside the box.</li>
+    </ul>
+
+    <h2>Practical Usage</h2>
+    <p>Here’s when you might use each loop:</p>
+    <ul>
+        <li><strong><code>for</code>:</strong> Looping over an array when you need both the index and the value.</li>
+        <li><strong><code>while</code>:</strong> Continuously checking user input until they enter valid data.</li>
+        <li><strong><code>for...in</code>:</strong> Iterating over an object returned from an API to display data on the screen.</li>
+        <li><strong><code>for...of</code>:</strong> Looping over an array of user-selected options in a form.</li>
+    </ul>
+
+    <h2>What You’ve Learned</h2>
+    <ul>
+        <li>The <code>for</code> loop is useful for known iterations, especially for arrays.</li>
+        <li>The <code>while</code> loop is ideal for unknown iterations, based on a condition.</li>
+        <li>The <code>for...in</code> loop is designed for iterating over object properties.</li>
+        <li>The <code>for...of</code> loop is great for iterating over values in arrays, strings, or other iterable objects.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Each loop has its own strengths and use cases in JavaScript. Knowing when to use <code>for</code>, <code>while</code>, <code>for...in</code>, or <code>for...of</code> will help you write cleaner, more efficient code.</p>
+
+</body>
+</html>

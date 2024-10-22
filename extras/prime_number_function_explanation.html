@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Function Explanation</title>
+</head>
+<body>
+    <h1>Understanding the <code>isPrime</code> Function</h1>
+    <p>The function <code>isPrime(num)</code> checks whether a given number, <code>num</code>, is a prime number. A prime number is a number greater than 1 that can only be divided by 1 and itself, meaning it has no other divisors.</p>
+
+    <h2>Step-by-Step Breakdown</h2>
+
+    <h3>1. Function Definition</h3>
+    <p>The function is named <code>isPrime</code>, and it takes <strong>one parameter</strong>, <code>num</code>, which represents the number we want to check if it is prime.</p>
+
+    <h3>2. Initial Check: <code>if (num &lt;= 1)</code></h3>
+    <p>The first line checks if the number is <strong>less than or equal to 1</strong>:</p>
+    <pre><code>if (num &lt;= 1) return false;</code></pre>
+    <p>If the number is 1 or any negative number, it <strong>cannot</strong> be prime because prime numbers are always greater than 1. In this case, the function <strong>immediately returns <code>false</code></strong>, meaning "this is not a prime number."</p>
+
+    <h3>3. Loop for Divisibility Check: <code>for (let i = 2; i &lt;= Math.sqrt(num); i++)</code></h3>
+    <p>Now, we enter a <strong>loop</strong> that will check if the number <code>num</code> has any divisors besides 1 and itself:</p>
+    <pre><code>for (let i = 2; i &lt;= Math.sqrt(num); i++) {
+  if (num % i === 0) return false;
+}</code></pre>
+    <p>The loop starts with <code>i = 2</code>, because the smallest prime number is 2. It continues as long as <code>i</code> is less than or equal to the square root of <code>num</code>. Checking up to the square root is efficient because if <code>num</code> has a divisor larger than its square root, the corresponding smaller divisor would already have been found.</p>
+
+    <h3>4. Check for Divisibility: <code>if (num % i === 0)</code></h3>
+    <p>Inside the loop, we have a condition to check if <code>num</code> is divisible by <code>i</code>:</p>
+    <pre><code>if (num % i === 0) return false;</code></pre>
+    <p>If the remainder is <code>0</code>, it means <code>num</code> is <strong>divisible</strong> by <code>i</code>, which means <code>num</code> is <strong>not a prime number</strong>.</p>
+
+    <h3>5. Return <code>true</code> if No Divisors Found</h3>
+    <p>If the loop finishes without finding any divisors, the function reaches the final line:</p>
+    <pre><code>return true;</code></pre>
+    <p>This means the number <strong>is a prime number</strong>, so the function returns <code>true</code>.</p>
+
+    <h2>Metaphor</h2>
+    <p>Think of the function like a "prime detective" trying to find any "suspect" divisors that would disqualify the number from being prime. It checks only up to the square root because any divisors larger than that would have been paired with smaller ones already checked. If the detective finds no suspects, the number is declared prime.</p>
+</body>
+</html>

@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementing Polymorphism by Overriding Methods in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Polymorphism by Overriding Methods in JavaScript - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>What is Method Overriding in JavaScript?</h2>
+            <p>
+                Method overriding is a feature of Object-Oriented Programming (OOP) where a subclass provides its own specific implementation of a method that is already defined in its parent class. This allows the subclass to customize or completely change the behavior of the inherited method.
+            </p>
+            <p><strong>Analogy:</strong> Think of method overriding like customizing a standard feature of a car. While all cars might have a "start" function, an electric car may have a completely different way of starting compared to a gasoline-powered car, even though both are "cars."</p>
+        </section>
+
+        <section>
+            <h2>Why Use Method Overriding?</h2>
+            <p>
+                Method overriding is useful when a subclass needs to modify or extend the behavior of a method from its parent class. Instead of rewriting the entire class, you can simply override the necessary methods, keeping your code more modular and reusable.
+            </p>
+            <p><strong>Real-world example:</strong> Suppose you have a class <code>Animal</code> with a method <code>makeSound()</code>. You might want different animals (like dogs and cats) to make different sounds. Instead of creating separate classes from scratch, you can override the <code>makeSound()</code> method in the subclasses to define their specific behavior.</p>
+        </section>
+
+        <section>
+            <h2>How to Override Methods in JavaScript</h2>
+            <p>
+                In JavaScript, method overriding is achieved by defining a method in the subclass with the same name as a method in the parent class. When the method is called on an instance of the subclass, the subclass's method is executed instead of the parent's method.
+            </p>
+            <pre><code>
+class Animal {
+    makeSound() {
+        console.log('Some generic animal sound.');
+    }
+}
+
+class Dog extends Animal {
+    makeSound() {
+        console.log('Bark!');
+    }
+}
+
+class Cat extends Animal {
+    makeSound() {
+        console.log('Meow!');
+    }
+}
+
+const myDog = new Dog();
+const myCat = new Cat();
+
+myDog.makeSound(); // Output: Bark!
+myCat.makeSound(); // Output: Meow!
+            </code></pre>
+            <p>
+                In this example, the <code>makeSound()</code> method is overridden in the <code>Dog</code> and <code>Cat</code> classes. Even though the <code>Animal</code> class provides a default behavior, the subclasses define their own specific implementations.
+            </p>
+        </section>
+
+        <section>
+            <h2>Practical Use Case for Method Overriding</h2>
+            <p>
+                Method overriding is often used in scenarios where you have a base class that defines general behavior, and subclasses that need to fine-tune or completely change that behavior. It’s a key feature of polymorphism, where objects of different types can be treated in a uniform way.
+            </p>
+            <p><strong>Real-world example:</strong> Imagine a transportation system with a base class <code>Vehicle</code> that has a method <code>start()</code>. A <code>Car</code> and a <code>Bicycle</code> would both inherit from <code>Vehicle</code>, but their <code>start()</code> methods would function very differently, even though they share the same interface.</p>
+            <pre><code>
+class Vehicle {
+    start() {
+        console.log('Starting the vehicle.');
+    }
+}
+
+class Car extends Vehicle {
+    start() {
+        console.log('Starting the car with an ignition key.');
+    }
+}
+
+class Bicycle extends Vehicle {
+    start() {
+        console.log('Pedaling to start the bicycle.');
+    }
+}
+
+const myCar = new Car();
+const myBicycle = new Bicycle();
+
+myCar.start();      // Output: Starting the car with an ignition key.
+myBicycle.start();  // Output: Pedaling to start the bicycle.
+            </code></pre>
+            <p>
+                In this example, the <code>start()</code> method is overridden by both <code>Car</code> and <code>Bicycle</code>, each implementing its own version of how to start the vehicle.
+            </p>
+        </section>
+
+        <section>
+            <h2>Using <code>super()</code> to Extend Parent Class Behavior</h2>
+            <p>
+                Sometimes, when you override a method, you may still want to use the behavior from the parent class while adding or modifying certain aspects. This can be done using the <code>super</code> keyword, which allows you to call the parent class’s method from within the child class.
+            </p>
+            <pre><code>
+class Vehicle {
+    start() {
+        console.log('Starting the vehicle.');
+    }
+}
+
+class Car extends Vehicle {
+    start() {
+        super.start();  // Call the parent class method
+        console.log('Starting the car with an ignition key.');
+    }
+}
+
+const myCar = new Car();
+myCar.start();  
+// Output:
+// Starting the vehicle.
+// Starting the car with an ignition key.
+            </code></pre>
+            <p>
+                In this example, the <code>Car</code> class overrides the <code>start()</code> method, but also calls the parent class’s version of <code>start()</code> using <code>super.start()</code>, allowing us to build on the base class behavior instead of completely replacing it.
+            </p>
+        </section>
+
+        <section>
+            <h2>Polymorphism in Action with Method Overriding</h2>
+            <p>
+                Polymorphism, combined with method overriding, allows us to write code that can work with objects of different types, treating them uniformly based on their common parent class, while still allowing for custom behavior based on the specific object.
+            </p>
+            <pre><code>
+function startVehicle(vehicle) {
+    vehicle.start();
+}
+
+const myCar = new Car();
+const myBicycle = new Bicycle();
+
+startVehicle(myCar);       // Output: Starting the vehicle. Starting the car with an ignition key.
+startVehicle(myBicycle);   // Output: Pedaling to start the bicycle.
+            </code></pre>
+            <p>
+                Here, the <code>startVehicle()</code> function can work with any object that is a subclass of <code>Vehicle</code>, and the correct method implementation will be called based on the object type, demonstrating polymorphism.
+            </p>
+        </section>
+
+        <section>
+            <h2>Common Pitfalls When Overriding Methods</h2>
+            <p>Here are some common mistakes to watch out for when using method overriding in JavaScript:</p>
+            <ul>
+                <li><strong>Not using <code>super()</code> when required:</strong> If your subclass constructor overrides the parent constructor, be sure to call <code>super()</code> to properly initialize the parent class.</li>
+                <li><strong>Accidental method name mismatch:</strong> Ensure that the method names in the subclass exactly match those in the parent class. JavaScript is case-sensitive, so even small differences will prevent the method from overriding properly.</li>
+                <li><strong>Overriding without extending:</strong> Remember that overriding should enhance or modify the behavior of the parent class. If you don't need the parent's method at all, consider whether inheritance is the right approach for your design.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>

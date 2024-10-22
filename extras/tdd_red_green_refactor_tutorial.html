@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-Driven Development: Red, Green, Refactor</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Test-Driven Development: Red, Green, Refactor</h1>
+    </header>
+    <main>
+        <section>
+            <h2>What is Test-Driven Development (TDD)?</h2>
+            <p>
+                Test-Driven Development (TDD) is a software development process where developers write tests before writing the actual code. This helps ensure that the code behaves as expected from the start. TDD follows a simple and iterative cycle: Red, Green, Refactor.
+            </p>
+
+            <h2>1. Red: Write Tests and Watch Them Fail</h2>
+            <p>
+                The first step in TDD is writing tests for the behavior you expect from the code. These tests will fail because the feature or function has not been implemented yet. This failing state is represented by a red test result.
+                <br>
+                <strong>Why Red?</strong> Writing tests that fail first ensures that the tests are valid. It’s essential to confirm that the code hasn’t been written yet and there are no false positives.
+            </p>
+
+            <h3>Example:</h3>
+            <pre><code>function add(a, b) {
+    // Code not written yet
+}
+
+// Test (will fail)
+console.assert(add(2, 3) === 5, "Test failed: 2 + 3 should equal 5");</code></pre>
+            <p>
+                In this example, the test fails because the <code>add</code> function has not been implemented yet. This is the "Red" stage.
+            </p>
+
+            <h2>2. Green: Write the Minimum Code to Pass the Tests</h2>
+            <p>
+                Once the tests fail, the next step is to write just enough code to make the tests pass. This is where you aim for the simplest possible solution that satisfies the test conditions, turning the test result from red to green.
+            </p>
+
+            <h3>Example:</h3>
+            <pre><code>function add(a, b) {
+    return a + b;
+}
+
+// Test (will pass)
+console.assert(add(2, 3) === 5, "Test passed: 2 + 3 equals 5");</code></pre>
+            <p>
+                In this example, we implement the <code>add</code> function to ensure it passes the test. Now, the test turns green, meaning the code works as expected.
+            </p>
+
+            <h2>3. Refactor: Clean Up the Code</h2>
+            <p>
+                The final step is to refactor the code. Even though the tests have passed, the code might not be optimized or easy to maintain. In this stage, you improve the structure and readability of the code without changing its behavior, while ensuring the tests continue to pass.
+            </p>
+
+            <h3>Example:</h3>
+            <p>
+                You might refactor the <code>add</code> function to handle more cases or simplify its logic, ensuring it remains clean and maintainable.
+            </p>
+
+            <h3>Why Refactor?</h3>
+            <p>
+                The job isn’t done when the tests pass. One of the key responsibilities of a developer is to ensure that the code is easy to read and maintain. Refactoring allows you to enhance the quality of the code without breaking its functionality.
+            </p>
+
+            <h2>Conclusion</h2>
+            <p>
+                TDD is a powerful workflow that helps developers write better, more reliable code. By following the Red-Green-Refactor cycle, you ensure that your code is thoroughly tested, works as intended, and is easy to maintain. This approach leads to fewer bugs, faster debugging, and more confidence in your codebase.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

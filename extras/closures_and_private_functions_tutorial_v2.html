@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures and Private Functions in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Closures and Private Functions in JavaScript</h1>
+
+    <p>In this tutorial, we will explore the concepts of closures and private functions in JavaScript. These are fundamental concepts that allow developers to manage scope and encapsulate data, which can lead to more secure and organized code.</p>
+
+    <h2>Understanding Closures</h2>
+    <p>A closure is a function that "remembers" its environment, even after the outer function has finished executing. Closures are created when a function is defined within another function, and the inner function has access to the outer function's variables, even after the outer function has returned.</p>
+
+    <h3>Analogy</h3>
+    <p>Imagine a safe (the outer function) that contains valuable documents (variables). Even after the safe is closed (the outer function finishes), someone with the key (the inner function) can still access the documents inside.</p>
+
+    <h3>Basic Example of a Closure</h3>
+    <pre>
+function outerFunction() {
+  let secret = "I'm hidden from the outside!";
+
+  function innerFunction() {
+    console.log(secret); // innerFunction has access to the variable 'secret'
+  }
+
+  return innerFunction;
+}
+
+const myClosure = outerFunction();
+myClosure();  // "I'm hidden from the outside!"
+    </pre>
+    <p>In this example, <code>innerFunction</code> has access to the <code>secret</code> variable, even after <code>outerFunction</code> has finished executing. This is a closure in action.</p>
+
+    <h2>Practical Use Case of Closures</h2>
+    <p>Closures are often used to create private variables or functions that cannot be accessed from outside a given scope. This is useful for encapsulation and protecting certain logic or data from unwanted access or modification.</p>
+
+    <h3>Example: Counter with Private Variables</h3>
+    <pre>
+function createCounter() {
+  let count = 0;  // private variable
+
+  return function() {
+    count++;
+    return count;
+  };
+}
+
+const counter = createCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2
+console.log(counter());  // 3
+    </pre>
+    <p>Here, the variable <code>count</code> is private to the <code>createCounter</code> function. Each time the returned function is called, it increments the <code>count</code>, but the <code>count</code> variable is not directly accessible from the outside.</p>
+
+    <h2>Private Functions in JavaScript</h2>
+    <p>JavaScript doesn't have built-in support for "private" functions like some other programming languages, but closures can be used to simulate private functions. Private functions are functions that can only be called within a specific scope and are not accessible from outside that scope.</p>
+
+    <h3>Example of Private Functions</h3>
+    <pre>
+function outerFunction() {
+  function privateFunction() {
+    console.log("This is a private function");
+  }
+
+  return {
+    publicFunction: function() {
+      console.log("Calling the private function...");
+      privateFunction();  // Calling the private function from within the public function
+    }
+  };
+}
+
+const obj = outerFunction();
+obj.publicFunction();  // "Calling the private function..." then "This is a private function"
+obj.privateFunction();  // Error! privateFunction is not accessible outside
+    </pre>
+    <p>In this example, <code>privateFunction</code> is a private function and cannot be accessed directly from outside the <code>outerFunction</code>. It can only be called within the public method, <code>publicFunction</code>.</p>
+
+    <h2>When and Why to Use Closures and Private Functions</h2>
+    <ul>
+        <li><strong>Encapsulation:</strong> Closures allow you to encapsulate data and logic, preventing unwanted access to internal variables or functions.</li>
+        <li><strong>Maintaining State:</strong> Closures can be used to maintain state over time, such as in the counter example.</li>
+        <li><strong>Private Logic:</strong> Private functions are useful when you want to expose only certain functionalities while keeping other logic hidden from external code.</li>
+    </ul>
+
+    <h2>Real-World Examples</h2>
+    <h3>Example: Creating Private Methods in JavaScript Classes</h3>
+    <pre>
+class Car {
+  constructor(model) {
+    this.model = model;
+    let mileage = 0;  // private variable
+
+    this.drive = function(distance) {
+      mileage += distance;
+      console.log(`The ${this.model} has driven ${mileage} miles.`);
+    };
+
+    this.getMileage = function() {
+      return mileage;  // accessible only within the class
+    };
+  }
+}
+
+const myCar = new Car('Tesla Model 3');
+myCar.drive(100);  // "The Tesla Model 3 has driven 100 miles."
+myCar.drive(50);   // "The Tesla Model 3 has driven 150 miles."
+console.log(myCar.getMileage());  // 150
+    </pre>
+    <p>In this example, the variable <code>mileage</code> is a private variable that can only be modified and accessed by the methods within the class.</p>
+
+    <h2>Conclusion</h2>
+    <p>Closures and private functions are essential concepts in JavaScript that allow you to encapsulate functionality and protect internal variables or logic from being accessed externally. By mastering closures and private functions, you’ll be able to write more organized and secure code.</p>
+
+</body>
+</html>

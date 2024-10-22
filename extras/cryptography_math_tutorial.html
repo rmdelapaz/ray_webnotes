@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Computations in Cryptography</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Mathematical Computations in Cryptography</h1>
+        <p>A Guide for New Developers with Real-World Examples and Analogies</p>
+    </header>
+
+    <section>
+        <h2>Introduction to Cryptography</h2>
+        <p>Cryptography is the science of securing communication and data from unauthorized access. It uses mathematical principles to encrypt (hide) and decrypt (reveal) information. In this tutorial, we will explore how mathematical computations form the foundation of modern cryptographic algorithms, with a focus on the role of number theory and prime numbers.</p>
+    </section>
+
+    <section>
+        <h2>Why is Mathematics Important in Cryptography?</h2>
+        <p><strong>Analogy:</strong> Imagine a locked treasure chest that can only be opened with a specific key. Mathematics provides the "lock" and the "key" in cryptography. The computations used are so complex that without the proper "key," it's nearly impossible to unlock the chest (decrypt the message).</p>
+        <p>In cryptography, mathematical concepts such as prime numbers, modular arithmetic, and factorization are used to create these secure locks and keys. Let's dive into the fundamental mathematical principles that are widely used in cryptographic algorithms.</p>
+    </section>
+
+    <section>
+        <h2>Modular Arithmetic</h2>
+        <p>Modular arithmetic, also known as "clock arithmetic," is a mathematical system where numbers wrap around after reaching a certain value. This is a core concept in cryptography.</p>
+        <p><strong>Example:</strong> Think of a clock. Once the hour hand passes 12, it goes back to 1. So, in a clock system, 14 o'clock is equivalent to 2 o'clock. In modular arithmetic, we write this as: <code>14 ≡ 2 (mod 12)</code>.</p>
+        <p>In cryptography, modular arithmetic helps create one-way functions—calculations that are easy to perform but extremely difficult to reverse without additional information. This is crucial for encryption algorithms.</p>
+    </section>
+
+    <section>
+        <h2>Prime Numbers and Cryptography</h2>
+        <p>Prime numbers are integers greater than 1 that are only divisible by 1 and themselves. In cryptography, prime numbers are used to create secure encryption keys because they are difficult to factor.</p>
+        <p><strong>Analogy:</strong> Imagine trying to break down a number into its building blocks. For small numbers, it's easy (e.g., 12 = 3 x 4), but for large prime numbers, it's much harder. Cryptographic algorithms use this difficulty to create strong encryption systems.</p>
+
+        <p><strong>Practical Example:</strong> In RSA encryption (a widely used cryptographic algorithm), large prime numbers are multiplied together to create a public key. Decrypting the message without the private key requires factoring the large number, which is computationally difficult and time-consuming.</p>
+    </section>
+
+    <section>
+        <h2>Greatest Common Divisor (GCD)</h2>
+        <p>The Greatest Common Divisor (GCD) is the largest number that divides two integers without leaving a remainder. It plays a role in cryptographic algorithms like RSA, where finding two numbers with a GCD of 1 is critical for generating secure keys.</p>
+        <pre><code>
+// Example: Euclidean Algorithm to find the GCD of two numbers
+function gcd(a, b) {
+    if (b === 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+console.log(gcd(48, 18)); // Output: 6
+</code></pre>
+    </section>
+
+    <section>
+        <h2>RSA Encryption: A Case Study</h2>
+        <p>The RSA algorithm is one of the most well-known encryption methods. It uses the mathematical principles of prime numbers, modular arithmetic, and the GCD to encrypt and decrypt messages.</p>
+        <h3>Steps in RSA Encryption:</h3>
+        <ol>
+            <li>Select two large prime numbers, <code>p</code> and <code>q</code>.</li>
+            <li>Compute <code>n = p * q</code>.</li>
+            <li>Choose a number <code>e</code> such that <code>1 &lt; e &lt; (p - 1)(q - 1)</code> and the GCD of <code>e</code> and <code>(p - 1)(q - 1)</code> is 1.</li>
+            <li>The public key is <code>(n, e)</code>.</li>
+            <li>To encrypt a message <code>M</code>, compute <code>C ≡ M^e (mod n)</code>.</li>
+        </ol>
+        <p><strong>Decryption:</strong> The private key is used to decrypt the message using modular arithmetic.</p>
+    </section>
+
+    <section>
+        <h2>Real-World Application of Cryptography</h2>
+        <p>Cryptography is everywhere in the digital world. It is used to secure online transactions, protect sensitive information, and ensure the privacy of communications. Without the mathematical foundations of cryptography, modern digital security would not be possible.</p>
+        <ul>
+            <li><strong>Online Banking:</strong> Cryptographic algorithms ensure that your personal information and transactions remain secure during online banking.</li>
+            <li><strong>Secure Messaging:</strong> Apps like WhatsApp and Signal use end-to-end encryption to keep conversations private.</li>
+            <li><strong>Digital Signatures:</strong> Cryptography is used to verify the authenticity of digital documents and emails.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Advanced Topics to Explore</h2>
+        <ul>
+            <li><strong>Elliptic Curve Cryptography:</strong> A more advanced cryptographic system that uses the mathematics of elliptic curves to create secure keys.</li>
+            <li><strong>Quantum Cryptography:</strong> An emerging field that uses the principles of quantum mechanics to create theoretically unbreakable encryption systems.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Further Learning: Explore how cryptographic algorithms are applied in blockchain technology, cryptocurrencies like Bitcoin, and how future technologies may impact cryptographic security.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Self-Balancing Trees (Red-Black Trees) in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Self-Balancing Trees (Red-Black Trees) in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>A Red-Black Tree is a type of self-balancing binary search tree where each node has an extra bit that represents "red" or "black." The tree ensures that no two consecutive red nodes exist, and the longest path from the root to a leaf is at most twice as long as the shortest path, ensuring efficient operations. This structure provides <code>O(log n)</code> time complexity for insertion, deletion, and search, making it useful for maintaining ordered data efficiently.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: Red-Black Tree</h2>
+        <p>Here’s a basic implementation of a Red-Black Tree in JavaScript. This example includes the insertion operation and the rotation methods used to maintain the red-black properties:</p>
+        <pre><code>class Node {
+    constructor(value, color = 'red') {
+        this.value = value;
+        this.color = color;  // 'red' or 'black'
+        this.left = null;
+        this.right = null;
+        this.parent = null;
+    }
+}
+
+class RedBlackTree {
+    constructor() {
+        this.root = null;
+    }
+
+    insert(value) {
+        const newNode = new Node(value);
+        if (this.root === null) {
+            this.root = newNode;
+            this.root.color = 'black';  // Root must be black
+            return;
+        }
+        let current = this.root;
+        while (current) {
+            if (value < current.value) {
+                if (!current.left) {
+                    current.left = newNode;
+                    newNode.parent = current;
+                    break;
+                }
+                current = current.left;
+            } else {
+                if (!current.right) {
+                    current.right = newNode;
+                    newNode.parent = current;
+                    break;
+                }
+                current = current.right;
+            }
+        }
+        this.fixInsert(newNode);
+    }
+
+    // Rotate left around the given node
+    rotateLeft(node) {
+        const rightNode = node.right;
+        node.right = rightNode.left;
+        if (rightNode.left) rightNode.left.parent = node;
+        rightNode.parent = node.parent;
+        if (!node.parent) this.root = rightNode;
+        else if (node === node.parent.left) node.parent.left = rightNode;
+        else node.parent.right = rightNode;
+        rightNode.left = node;
+        node.parent = rightNode;
+    }
+
+    // Rotate right around the given node
+    rotateRight(node) {
+        const leftNode = node.left;
+        node.left = leftNode.right;
+        if (leftNode.right) leftNode.right.parent = node;
+        leftNode.parent = node.parent;
+        if (!node.parent) this.root = leftNode;
+        else if (node === node.parent.right) node.parent.right = leftNode;
+        else node.parent.left = leftNode;
+        leftNode.right = node;
+        node.parent = leftNode;
+    }
+
+    // Fix the tree after insertion to maintain red-black properties
+    fixInsert(node) {
+        while (node !== this.root && node.parent.color === 'red') {
+            if (node.parent === node.parent.parent.left) {
+                let uncle = node.parent.parent.right;
+                if (uncle && uncle.color === 'red') {
+                    node.parent.color = 'black';
+                    uncle.color = 'black';
+                    node.parent.parent.color = 'red';
+                    node = node.parent.parent;
+                } else {
+                    if (node === node.parent.right) {
+                        node = node.parent;
+                        this.rotateLeft(node);
+                    }
+                    node.parent.color = 'black';
+                    node.parent.parent.color = 'red';
+                    this.rotateRight(node.parent.parent);
+                }
+            } else {
+                let uncle = node.parent.parent.left;
+                if (uncle && uncle.color === 'red') {
+                    node.parent.color = 'black';
+                    uncle.color = 'black';
+                    node.parent.parent.color = 'red';
+                    node = node.parent.parent;
+                } else {
+                    if (node === node.parent.left) {
+                        node = node.parent;
+                        this.rotateRight(node);
+                    }
+                    node.parent.color = 'black';
+                    node.parent.parent.color = 'red';
+                    this.rotateLeft(node.parent.parent);
+                }
+            }
+        }
+        this.root.color = 'black';
+    }
+}</code></pre>
+        <p>This implementation includes rotation and color adjustments to maintain the balance of the tree. When inserting a node, the <code>fixInsert</code> method ensures that the red-black properties are preserved.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Balancing a Scale</h2>
+        <p>Imagine a scale with weights on each side. Every time you add a weight to one side, you need to rebalance the scale by adding or adjusting weights on the other side to keep it balanced. In a Red-Black Tree, the tree automatically balances itself after each insertion by adjusting colors and rotating nodes, just like adjusting weights on the scale.</p>
+    </section>
+    
+    <section>
+        <h2>Real-World Example: Maintaining Order in Event Scheduling</h2>
+        <p>Red-Black Trees are used in event schedulers to keep track of tasks. Whenever a new task is added, the tree rebalances itself, ensuring that the scheduler can quickly find the next task to execute. This dynamic balancing ensures that the order of events is maintained efficiently even as new events are added or old ones are removed.</p>
+    </section>
+
+    <section>
+        <h2>Why Use Red-Black Trees?</h2>
+        <p>Red-Black Trees provide a good balance between performance and complexity. They guarantee <code>O(log n)</code> time complexity for insertions, deletions, and lookups, even in the worst case. This makes them ideal for implementing associative arrays, symbol tables, and priority queues, where maintaining order and efficiency is crucial.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Red-Black Trees are used in many programming languages and libraries, such as Java’s TreeMap and C++’s map and set implementations. They are also used in databases, file systems, and network routers for maintaining dynamically balanced data structures that allow for fast search and update operations.</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="/styles/main.css">Binary Search Trees (BST)</a></li>
+            <li><a href="/styles/main.css">Balanced Binary Trees (AVL Trees)</a></li>
+            <li><a href="/styles/main.css">Tree Rotations</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Understanding Red-Black Trees is essential for mastering efficient data structures and building performant applications.</p>
+    </footer>
+</body>
+</html>

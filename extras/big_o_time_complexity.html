@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <title>Big O and Time Complexity</title>
+</head>
+<body>
+    <h1>Big O and Time Complexity</h1>
+
+    <h2>Introduction to Big O Notation</h2>
+    <p>Big O notation is a mathematical representation used to describe the performance of algorithms, specifically how the execution time or space requirements grow as the size of the input increases. It's like a scale that helps you predict how your algorithm will behave with larger inputs. Today, we'll focus on <strong>time complexity</strong>, which measures how the runtime of an algorithm increases as the input grows.</p>
+
+    <h2>What Is Time Complexity?</h2>
+    <p><strong>Time complexity</strong> refers to the amount of time an algorithm takes to complete as a function of the input size. We express time complexity using Big O notation because it allows us to abstract away specific details like processor speed or implementation, giving us a way to compare the general performance of different algorithms.</p>
+
+    <h3>Real-World Analogy</h3>
+    <p>Imagine you're cooking. The time it takes to prepare a meal depends on the recipe (algorithm) and the number of people you're cooking for (input size). A recipe for one person will likely take less time than cooking for 10 people, just like how an algorithm's runtime increases with more data.</p>
+
+    <h2>Common Types of Time Complexity</h2>
+    <p>Let's explore the most common types of time complexity, ranging from the most efficient to the least efficient: constant, logarithmic, linear, and quadratic time complexities.</p>
+
+    <h3>1. Constant Time Complexity - O(1)</h3>
+    <p><strong>Constant time complexity</strong> means that the algorithm’s runtime remains the same, no matter the size of the input. The execution time does not increase as the input grows.</p>
+
+    <h4>Example</h4>
+    <p>Consider accessing an element in an array by its index:</p>
+
+    <pre>
+function getFirstElement(arr) {
+    return arr[0];
+}
+    </pre>
+
+    <p>No matter how large the array is, retrieving the first element takes the same amount of time. Therefore, the time complexity is <strong>O(1)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Imagine you're flipping a switch to turn on a light. Whether the room has 1 light bulb or 100, flipping the switch takes the same amount of time. In the same way, constant time operations always take the same amount of time, regardless of input size.</p>
+
+    <h3>2. Logarithmic Time Complexity - O(log n)</h3>
+    <p><strong>Logarithmic time complexity</strong> means that the algorithm’s runtime grows slower as the input size increases. It usually happens when the problem size is divided in half during each step.</p>
+
+    <h4>Example</h4>
+    <p>A classic example is binary search, where we repeatedly divide a sorted array in half to find a target element:</p>
+
+    <pre>
+function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+    
+    while (left <= right) {
+        let middle = Math.floor((left + right) / 2);
+        if (arr[middle] === target) {
+            return middle;
+        } else if (arr[middle] < target) {
+            left = middle + 1;
+        } else {
+            right = middle - 1;
+        }
+    }
+    return -1;  // Target not found
+}
+    </pre>
+
+    <p>With each iteration, the problem size is cut in half, resulting in a logarithmic growth pattern. Therefore, the time complexity is <strong>O(log n)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Imagine looking for a word in a dictionary. You don't start at the beginning and flip through each page. Instead, you open the dictionary near the middle and decide whether the word you're looking for comes before or after that point, halving the search space each time. This is similar to how logarithmic algorithms work.</p>
+
+    <h3>3. Linear Time Complexity - O(n)</h3>
+    <p><strong>Linear time complexity</strong> means that the algorithm’s runtime increases directly in proportion to the input size. If you double the input, the runtime doubles.</p>
+
+    <h4>Example</h4>
+    <p>A simple example is looping through an array and printing each element:</p>
+
+    <pre>
+function printArray(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+    }
+}
+    </pre>
+
+    <p>In this case, the number of operations grows linearly with the size of the input array. Therefore, the time complexity is <strong>O(n)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Imagine you're distributing flyers in a neighborhood. If there are 10 houses, it will take you a certain amount of time to deliver the flyers. If there are 100 houses, it will take 10 times longer. This is analogous to how linear time complexity works: the time increases proportionally to the input size.</p>
+
+    <h3>4. Quadratic Time Complexity - O(n<sup>2</sup>)</h3>
+    <p><strong>Quadratic time complexity</strong> occurs when an algorithm’s runtime increases quadratically as the input size grows. This usually happens when you have nested loops.</p>
+
+    <h4>Example</h4>
+    <p>Consider this example where we compare every element of an array with every other element:</p>
+
+    <pre>
+function compareElements(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            console.log(arr[i], arr[j]);
+        }
+    }
+}
+    </pre>
+
+    <p>Here, for each element, we loop over the entire array again, leading to a quadratic growth pattern. Therefore, the time complexity is <strong>O(n<sup>2</sup>)</strong>.</p>
+
+    <h4>Real-World Analogy</h4>
+    <p>Imagine you’re hosting a party where every guest has to greet every other guest. If you have 10 guests, each one will greet the other 9 guests. With 100 guests, each one will greet 99 others. This results in a quadratic increase in the number of greetings.</p>
+
+    <h2>Why Time Complexity Matters</h2>
+    <p>Time complexity helps you predict how an algorithm will scale as the input size increases. Understanding time complexity is critical because it allows you to write efficient code that runs faster, especially with larger datasets.</p>
+
+    <h3>Real-World Application</h3>
+    <p>Imagine you're building a search engine that needs to search through billions of web pages. If you use an algorithm with poor time complexity, like quadratic or worse, the search could take minutes, hours, or even days! But with an efficient algorithm, like one with logarithmic time complexity, you can return search results in milliseconds, regardless of how large the dataset is.</p>
+
+    <h2>Practical Usage and Tips</h2>
+    <ul>
+        <li><strong>Start by identifying loops:</strong> If you see loops in your code, especially nested loops, there's a chance you're working with a linear or quadratic time complexity. Look for opportunities to reduce unnecessary iterations.</li>
+        <li><strong>Choose the right algorithm:</strong> For example, use binary search (O(log n)) instead of linear search (O(n)) when working with sorted data.</li>
+        <li><strong>Trade-offs:</strong> Sometimes, you might need to balance time complexity with space complexity. For example, using a hash table can give you O(1) lookups, but it may use more memory.</li>
+    </ul>
+
+    <h3>Real-World Analogy</h3>
+    <p>Imagine you're packing for a trip. You can take a few large items that are quick to pack, but they take up more space (similar to O(1) time complexity with higher space). Or, you can pack a lot of smaller items, which take longer to pack but leave more room in your suitcase (like O(n) time complexity with lower space).</p>
+
+    <h2>Conclusion</h2>
+    <p>In conclusion, understanding time complexity helps you write efficient algorithms that scale well with larger inputs. By identifying and optimizing the time complexity of your code, you can make your applications faster and more efficient. Always strive to find a balance between time and space complexity, depending on the needs of your project.</p>
+
+    <p>Whether you're dealing with constant, logarithmic, linear, or quadratic time complexity, understanding how your code behaves as input size grows is a crucial step in becoming a proficient developer.</p>
+</body>
+</html>

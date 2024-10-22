@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRY vs. WET: Clean Coding Principles in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>DRY vs. WET: Understanding Clean Coding Principles</h1>
+    </header>
+
+    <section>
+        <h2>Introduction to Clean Coding Principles</h2>
+        <p>As a JavaScript developer, writing clean and maintainable code is essential for long-term project success. Two key principles you’ll encounter in programming are <strong>DRY (Don't Repeat Yourself)</strong> and <strong>WET (Write Every Time)</strong>. Understanding these principles will help you create more efficient and reusable code.</p>
+        
+        <h3>Analogy: Building with LEGO</h3>
+        <p>Think of coding like building with LEGO blocks. When following the DRY principle, you create reusable blocks that can be assembled in multiple places. In contrast, the WET approach means that you build new, similar blocks for each new project or feature, which leads to more work and redundancy.</p>
+    </section>
+
+    <section>
+        <h2>What is DRY (Don’t Repeat Yourself)?</h2>
+        <p>The DRY principle encourages developers to avoid code duplication by ensuring that each piece of logic is written once and reused wherever necessary. The goal is to make the code easier to maintain, less error-prone, and more modular.</p>
+
+        <h3>Metaphor: Recipe Card</h3>
+        <p>Imagine writing a recipe card for your favorite dish. You wouldn’t rewrite the instructions every time you need to make the dish—you'd simply refer to the recipe card. Similarly, DRY encourages you to create reusable functions, classes, or modules that you can refer to without duplicating the logic.</p>
+
+        <h3>Example of DRY Code</h3>
+        <pre>
+// DRY approach: reusable function
+function calculateArea(width, height) {
+    return width * height;
+}
+
+console.log(calculateArea(5, 10));  // Output: 50
+console.log(calculateArea(3, 7));   // Output: 21
+        </pre>
+        <p>In the example above, the <code>calculateArea</code> function is written once and reused multiple times. This avoids duplicating the logic for calculating areas.</p>
+
+        <h3>Why Use DRY?</h3>
+        <ul>
+            <li><strong>Maintenance:</strong> With DRY code, if a piece of logic changes, you only need to update it in one place.</li>
+            <li><strong>Consistency:</strong> DRY code reduces the chance of making mistakes, since you are reusing tried and tested code blocks.</li>
+            <li><strong>Modularity:</strong> It encourages breaking down code into smaller, reusable components, improving code organization.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>What is WET (Write Every Time)?</h2>
+        <p>The WET principle is the opposite of DRY. It implies that code is rewritten each time similar logic is needed, resulting in duplication. While it may seem easier initially, WET code becomes harder to maintain as your project grows.</p>
+
+        <h3>Metaphor: Rewriting Instructions</h3>
+        <p>Imagine needing to write new instructions every time you need to assemble the same furniture. This wastes time and increases the chance of mistakes. Similarly, WET coding means rewriting similar code over and over again, leading to redundancy and inefficiency.</p>
+
+        <h3>Example of WET Code</h3>
+        <pre>
+// WET approach: repetitive logic
+let area1 = 5 * 10;
+console.log(area1);  // Output: 50
+
+let area2 = 3 * 7;
+console.log(area2);  // Output: 21
+        </pre>
+        <p>In this example, the area calculation logic is repeated for each different set of values. This duplication violates the DRY principle and can make the code more error-prone and harder to maintain.</p>
+
+        <h3>Why Avoid WET Code?</h3>
+        <ul>
+            <li><strong>Increased Risk of Bugs:</strong> If you need to update a piece of logic, you may forget to update all instances of the duplicated code.</li>
+            <li><strong>Time-Consuming:</strong> Writing and maintaining duplicate code takes more time and effort.</li>
+            <li><strong>Harder to Read:</strong> Duplicated code can make it harder to follow the logic, especially in larger projects.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>DRY in Action: Refactoring WET Code</h2>
+        <p>Let’s refactor the WET example above by applying the DRY principle. Instead of duplicating the logic for calculating areas, we’ll create a reusable function.</p>
+
+        <h3>Refactoring Example</h3>
+        <pre>
+// Refactored DRY approach
+function calculateArea(width, height) {
+    return width * height;
+}
+
+let area1 = calculateArea(5, 10);
+console.log(area1);  // Output: 50
+
+let area2 = calculateArea(3, 7);
+console.log(area2);  // Output: 21
+        </pre>
+        <p>Now, the logic for calculating the area is written once in the <code>calculateArea</code> function and reused whenever needed. This improves the maintainability and readability of the code.</p>
+    </section>
+
+    <section>
+        <h2>Real-World Applications of DRY</h2>
+        <p>The DRY principle is widely applied in software development. Here are some practical real-world examples:</p>
+
+        <ul>
+            <li><strong>UI Components:</strong> In web development, reusable UI components (like buttons or forms) help developers avoid duplicating HTML and CSS.</li>
+            <li><strong>Utility Functions:</strong> Commonly used utility functions (e.g., for formatting dates or performing API requests) can be written once and reused across multiple projects.</li>
+            <li><strong>API Integration:</strong> Instead of writing duplicate logic for interacting with an API, you can abstract the API calls into a reusable function.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>When to Avoid DRY</h2>
+        <p>While DRY is a valuable principle, it’s essential to strike a balance. Overusing DRY can sometimes lead to unnecessary abstraction, making code harder to understand. Here are some cases where it might be better to avoid DRY:</p>
+
+        <ul>
+            <li><strong>Over-Abstraction:</strong> If making code DRY leads to convoluted abstractions, it may be better to keep some parts repetitive for clarity.</li>
+            <li><strong>Premature Optimization:</strong> Avoid optimizing code before it's necessary. Some duplication might be acceptable early in development.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Practice Problems</h2>
+        <p>To practice applying the DRY principle, try solving the following problems:</p>
+        <ol>
+            <li>Refactor a piece of code that calculates the perimeter of a square in several places to use a single function instead.</li>
+            <li>Identify repetitive code in an existing project and refactor it using the DRY principle.</li>
+            <li>Create a utility function that can handle repetitive logic, such as validating multiple form inputs.</li>
+        </ol>
+    </section>
+
+    <footer>
+        <p>Understanding and applying the DRY principle is key to writing clean, maintainable code. While it's important to reduce redundancy, make sure not to over-abstract code, as simplicity can sometimes be more effective. Keep practicing these principles in your projects!</p>
+    </footer>
+</body>
+</html>
+

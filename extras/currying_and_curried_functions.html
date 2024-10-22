@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currying and Curried Functions in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Currying and Curried Functions in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction to Currying</h2>
+        <p>Currying is a technique in functional programming where a function, instead of taking all of its arguments at once, takes them one at a time, returning a new function with each argument. This allows us to partially apply functions and create more flexible code.</p>
+        <p>An analogy to understand currying is a bakery where instead of getting all ingredients for a cake at once, the baker asks for each ingredient individually. The process goes step by step, leading to the final cake (result) after all ingredients have been provided.</p>
+    </section>
+
+    <section>
+        <h2>Why Use Currying?</h2>
+        <p>Currying helps in creating reusable and modular code. It also provides us with partial application, which means we can fix some arguments of a function beforehand and create a new function. This is especially useful when we need to reuse a function with similar arguments multiple times.</p>
+        <p><strong>Real-world Example:</strong> In web development, you might have a logging function that prefixes logs with different log levels (e.g., "info", "warn", "error"). Instead of writing separate functions for each log level, you can curry a log function and partially apply the log level.</p>
+    </section>
+
+    <section>
+        <h2>Basic Example of Currying</h2>
+        <pre><code>
+function add(a) {
+    return function(b) {
+        return a + b;
+    }
+}
+
+const addFive = add(5);
+console.log(addFive(3)); // Output: 8
+        </code></pre>
+        <p>In this example, the function <code>add</code> takes one argument, returns a new function that takes another argument, and then computes the sum of both arguments. The first call <code>add(5)</code> "fixes" the value of <code>a</code>, and the resulting function adds <code>5</code> to any number passed in the second call.</p>
+    </section>
+
+    <section>
+        <h2>Advanced Example of Currying</h2>
+        <pre><code>
+function multiply(a) {
+    return function(b) {
+        return function(c) {
+            return a * b * c;
+        }
+    }
+}
+
+const multiplyTwo = multiply(2);
+const multiplyTwoAndThree = multiplyTwo(3);
+console.log(multiplyTwoAndThree(4)); // Output: 24
+        </code></pre>
+        <p>Here, we have a curried function <code>multiply</code> that takes three arguments one by one. We first fix <code>a</code> as <code>2</code>, then fix <code>b</code> as <code>3</code>, and finally multiply the result with <code>4</code>.</p>
+    </section>
+
+    <section>
+        <h2>Real-World Application of Currying</h2>
+        <p>Imagine you're working on an online store where you apply discount rates to items. Instead of writing separate functions for each discount rate, you can curry a function that calculates the final price after applying the discount.</p>
+        <pre><code>
+function applyDiscount(discount) {
+    return function(price) {
+        return price - (price * discount);
+    }
+}
+
+const applyTenPercent = applyDiscount(0.1);
+console.log(applyTenPercent(100)); // Output: 90
+console.log(applyTenPercent(200)); // Output: 180
+        </code></pre>
+        <p>This way, we create a specialized function <code>applyTenPercent</code> that applies a 10% discount to any given price. This reduces repetition and creates reusable, maintainable code.</p>
+    </section>
+
+    <section>
+        <h2>When to Use Currying</h2>
+        <ul>
+            <li>When you need to repeatedly call a function with similar arguments.</li>
+            <li>When you want to break a function into smaller, reusable pieces.</li>
+            <li>When you want to increase the flexibility of your code by enabling partial application.</li>
+        </ul>
+        <p>Currying is particularly powerful in functional programming paradigms and can be extremely useful in scenarios where data transformation and function composition are key.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 JavaScript Developer Guide</p>
+    </footer>
+</body>
+</html>

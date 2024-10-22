@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Dimensional Arrays in JavaScript</title>
+</head>
+<body>
+    <h1>Two-Dimensional Arrays (2D Arrays)</h1>
+
+    <p>Let’s broaden our understanding of arrays! You’ve already worked with one-dimensional arrays—think of them as <strong>rows</strong> in a <strong>warehouse</strong> where we can store any type of item (data). But now, imagine if each row in that warehouse was another <strong>shelf</strong> with multiple compartments. That’s what we call a <strong>two-dimensional array</strong>. It’s like nesting one array (a row) inside another array (a shelf), creating a structure where you can store multiple levels of data!</p>
+
+    <p>When you finish this article, you will be able to:</p>
+    <ul>
+        <li><strong>Index into the inner elements</strong> of a 2D array.</li>
+        <li><strong>Use nested loops</strong> to iterate through a 2D array.</li>
+    </ul>
+
+    <h2>Multidimensional Arrays</h2>
+    <p>When we store arrays inside other arrays, we call these <strong>multidimensional arrays</strong>. If we only go two layers deep (an outer array containing inner arrays), we refer to this as a <strong>two-dimensional array</strong>.</p>
+
+    <p>Think of it like this: you’re arranging books on shelves in a library. Each shelf represents an array, and the library itself is a collection of shelves (an array of arrays). You can access any specific book by finding the correct shelf (outer array) and then locating the book on that shelf (inner array).</p>
+
+    <pre><code>
+    let twoDimensional = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]];
+
+    console.log(twoDimensional[1]); // [ 'd', 'e' ]
+    console.log(twoDimensional[1][0]); // 'd'
+
+    let subArr = twoDimensional[1];
+    console.log(subArr[0]); // 'd'
+    </code></pre>
+
+    <p>Notice that <strong>indexing the outer array returns another array</strong>, just like pulling out an entire shelf. To access a specific item, you need to <strong>index again</strong>—this is like opening the shelf to grab the exact book!</p>
+
+    <pre><code>
+    let twoDimensional = [
+      ["a", "b", "c"],
+      ["d", "e"],
+      ["f", "g", "h"]
+    ];
+
+    // Get the element in the 0th row, 2nd column:
+    console.log(twoDimensional[0][2]); // 'c'
+    </code></pre>
+
+    <h2>Iterating Through 2D Arrays</h2>
+    <p>To navigate through a 2D array, we’ll need a <strong>loop within a loop</strong>. Imagine walking down each aisle of a supermarket (outer loop) and then looking at each item on the shelves (inner loop).</p>
+
+    <pre><code>
+    let array = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]];
+
+    for (let i = 0; i < array.length; i++) {
+      let subArray = array[i];
+      console.log(subArray);
+
+      for (let j = 0; j < subArray.length; j++) {
+        console.log(subArray[j]);
+      }
+    }
+    </code></pre>
+
+    <p>The output will be:</p>
+    <pre>
+    [ 'a', 'b', 'c' ]
+    a
+    b
+    c
+    [ 'd', 'e' ]
+    d
+    e
+    [ 'f', 'g', 'h' ]
+    f
+    g
+    h
+    </pre>
+
+    <h2>When is a 2D Array Practical?</h2>
+    <p>You might wonder, "When would I need to use a 2D array?" Imagine you’re working with a <strong>grid</strong>, where each element represents a position on a board or table. Here are a few real-world examples:</p>
+    <ul>
+        <li><strong>Tic-Tac-Toe</strong>: A 3x3 grid representing the game board.</li>
+        <li><strong>Chess</strong>: An 8x8 grid representing the positions of pieces.</li>
+        <li><strong>Sudoku</strong>: A 9x9 grid of numbers.</li>
+        <li><strong>Spreadsheets</strong>: Programs like Excel store data in rows and columns, forming a large grid (2D array).</li>
+    </ul>
+
+    <h2>What You’ve Learned:</h2>
+    <ul>
+        <li>A 2D array is an array that contains other arrays as its elements.</li>
+        <li>You can access individual elements in a 2D array using double indexing (e.g., <code>array[row][column]</code>).</li>
+        <li>To iterate through a 2D array, you use <strong>nested loops</strong>.</li>
+    </ul>
+</body>
+</html>

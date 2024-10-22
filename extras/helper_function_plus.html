@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Helper Functions and Decomposition</title>
+</head>
+<body>
+    <h1>Helper Functions: Breaking Down Complexity</h1>
+    
+    <p>Uncontrolled complexity is the <strong>arch-nemesis</strong> of a programmer. Imagine trying to solve a giant jigsaw puzzle without breaking it down into sections—frustrating, right? If we don't control complexity, it becomes a tangled web, leading to bugs and confusion. This is where the ideas of <strong>Decomposition</strong> and <strong>Abstraction</strong> come to the rescue.</p>
+
+    <p>As programmers, our job is not just to write code, but to <strong>solve problems</strong> efficiently. When faced with a large, overwhelming problem (like a difficult puzzle), the best way to handle it is by <em>breaking it down</em> into manageable chunks (helper functions).</p>
+
+    <h2>Decomposition</h2>
+    <p><strong>Decomposition</strong> is the process of splitting a larger problem into smaller sub-problems. Think of it like slicing a giant pizza or chocolate elephant into smaller, bite-sized pieces that are easier to eat!</p>
+
+    <h3>Example: yellStrings(strings)</h3>
+    <p>Let's say you have a problem where you need to yell (convert to uppercase and add exclamation marks) each string in an array. This might look challenging at first:</p>
+
+    <pre><code>
+    let yelled = yellStrings(['hello', 'how', 'are', 'you?']);
+    yelled; //=> ['HELLO!', 'HOW!', 'ARE!', 'YOU?!']
+    </code></pre>
+
+    <p>It feels like a lot, right? But what if we break it down into a smaller problem?</p>
+
+    <h3>Helper Function: yellStr(str)</h3>
+    <p>Instead of tackling the entire array at once, let's create a function that solves a smaller part of the problem—yelling a single string:</p>
+
+    <pre><code>
+    function yellStr(str) {
+      let upperString = str.toUpperCase();
+      return upperString + '!';
+    }
+
+    let yelled = yellStr('bootcamp');
+    yelled; //=> 'BOOTCAMP!'
+    </code></pre>
+
+    <p>This is much easier! Now, let's combine it into the full solution using <strong>decomposition</strong>:</p>
+
+    <pre><code>
+    function yelledStrings(strings) {
+      let yelled = [];
+      for (let i = 0; i < strings.length; i++) {
+        let newString = yellStr(strings[i]);
+        yelled.push(newString);
+      }
+      return yelled;
+    }
+    </code></pre>
+
+    <p>Notice how we reused the smaller helper function <code>yellStr</code> to solve the bigger problem. This is decomposition in action—breaking the large task into manageable parts!</p>
+
+    <h2>Another Example: laligatSum(n)</h2>
+    <p>Let’s decompose a more complex problem involving prime numbers:</p>
+
+    <pre><code>
+// Write a function laligatSum(n) that takes in a number and returns the 
+// laligat sum of that number. A number's laligat sum is the sum of 
+// all prime numbers less than or equal to that number.
+    </code></pre>
+
+    <p>Instead of writing a single large function, let’s decompose the problem into smaller, easier-to-handle functions:</p>
+
+    <h3>Helper Function: isPrime(n)</h3>
+    <p>We need a helper function to check whether a number is prime:</p>
+
+    <pre><code>
+    function isPrime(n) {
+      for (let i = 2; i < n; i++) {
+        if (n % i === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+    </code></pre>
+
+    <p>Once we have <code>isPrime</code>, we can build the larger function:</p>
+
+    <pre><code>
+    function laligatSum(n) {
+      let sum = 0;
+      for (let i = 2; i <= n; i++) {
+        if (isPrime(i)) {
+          sum += i;
+        }
+      }
+      return sum;
+    }
+    </code></pre>
+
+    <p>This makes the problem much easier to manage! If there's an issue with how prime numbers are handled, you only need to check the <code>isPrime</code> function. This approach simplifies debugging and maintenance.</p>
+
+    <h2>When to Decompose into Helper Functions</h2>
+    <p>There's no strict rule on when to decompose, but here are some guidelines:</p>
+    <ul>
+        <li>If your function is becoming too long or hard to read, break it down.</li>
+        <li>If a problem contains sub-problems that you can isolate (like <code>isPrime</code>), create helper functions.</li>
+        <li>Practice makes perfect: the more problems you solve, the better you'll become at knowing when to decompose!</li>
+    </ul>
+
+    <h2>Abstraction: Hiding Complexity</h2>
+    <p><strong>Abstraction</strong> is the process of hiding the details of a function. Think of it like driving a car. You don’t need to know the mechanics of the engine to drive—you just need the steering wheel and pedals. Similarly, when we use functions like <code>isPrime</code>, we don’t worry about how it works. As long as it does the job, it’s abstracted away.</p>
+
+    <blockquote>
+    "The computing scientist’s main challenge is not to get confused by the complexities of his own making." — E. W. Dijkstra
+    </blockquote>
+
+    <p>Abstraction lets us focus on the high-level problem without getting lost in the details.</p>
+
+    <h2>What You've Learned</h2>
+    <ul>
+        <li>Use decomposition to break down large problems into smaller, manageable chunks.</li>
+        <li>Create helper functions to isolate sub-problems and reduce complexity.</li>
+        <li>Use abstraction to hide details and keep your code simple and readable.</li>
+    </ul>
+</body>
+</html>

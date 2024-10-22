@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Hoisting in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Function Hoisting in JavaScript</h1>
+        <p>A Guide for New Developers with Real-World Examples and Analogies</p>
+    </header>
+
+    <section>
+        <h2>Introduction to Function Hoisting</h2>
+        <p>In JavaScript, the term "hoisting" refers to the behavior where variable and function declarations are moved to the top of their containing scope during the compilation phase, before the code is executed. This allows you to use functions before they are declared in your code. In this tutorial, we'll explore function hoisting, how it works, and why it's important to understand.</p>
+    </section>
+
+    <section>
+        <h2>What is Function Hoisting?</h2>
+        <p><strong>Analogy:</strong> Imagine you're at a party, and the host introduces everyone at the beginning, even before they've arrived. Now, whenever someone shows up, you already know their name, even if they haven't been physically introduced yet. In JavaScript, function declarations are "introduced" at the top, allowing you to call the function before it's declared in the code.</p>
+        <p>Function hoisting allows function declarations to be called before they are defined in the code. However, this only applies to function declarations, not function expressions.</p>
+    </section>
+
+    <section>
+        <h2>Function Declaration vs Function Expression</h2>
+        <p>It's important to understand the difference between a function declaration and a function expression because only function declarations are hoisted.</p>
+        <pre><code>// Function Declaration (hoisted)
+sayHello();
+function sayHello() {
+    console.log("Hello, world!");
+}
+// Output: "Hello, world!"
+
+// Function Expression (not hoisted)
+sayGoodbye();
+const sayGoodbye = function() {
+    console.log("Goodbye, world!");
+}
+// Output: ReferenceError: Cannot access 'sayGoodbye' before initialization
+</code></pre>
+        <p>As you can see in the example above, calling <code>sayHello()</code> works even though the function is defined after the call because it is hoisted. However, <code>sayGoodbye()</code> results in an error because function expressions are not hoisted.</p>
+    </section>
+
+    <section>
+        <h2>Why Does Function Hoisting Happen?</h2>
+        <p><strong>Metaphor:</strong> Think of hoisting as a script being prepared in advance. Before the actors (functions) perform, the director (JavaScript engine) already knows who the actors are and what roles they will play, even if the performance hasn't started yet.</p>
+        <p>Function hoisting happens because JavaScript reads through the entire code during the "compilation" phase before any code is executed. During this phase, function declarations are stored in memory, making them available for use anywhere in the code, even before the function is defined.</p>
+    </section>
+
+    <section>
+        <h2>Real-World Example of Function Hoisting</h2>
+        <p>Function hoisting is useful when you want to organize your code in a way that makes it more readable. For example, you can place helper functions or utility functions at the bottom of your file, and still call them at the top of your code. This can improve code readability.</p>
+        <pre><code>// Example: Calling helper function before it's declared
+greetUser("Alice");
+
+function greetUser(name) {
+    console.log("Welcome, " + name + "!");
+}
+
+console.log("This is the main part of the program.");
+// Output:
+// Welcome, Alice!
+// This is the main part of the program.
+</code></pre>
+    </section>
+
+    <section>
+        <h2>Limitations of Function Hoisting</h2>
+        <p>While function hoisting can be convenient, it can also lead to confusion if not understood properly. One common pitfall is assuming that function expressions are hoisted when they are not. Another issue arises when mixing <code>var</code> declarations with function expressions, as <code>var</code> is hoisted but the assignment is not:</p>
+        <pre><code>// Common Pitfall with var and function expressions
+console.log(square(5)); // TypeError: square is not a function
+
+var square = function(n) {
+    return n * n;
+}
+</code></pre>
+        <p>In this example, <code>var square</code> is hoisted to the top, but the function assignment happens later. Therefore, when <code>square(5)</code> is called, it results in an error because the function is not assigned yet.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Function hoisting can help in structuring code logically by allowing you to define the "main" flow of the program first and put the helper functions later. This makes your code more readable, as the higher-level logic is visible at the top while the implementation details are placed below.</p>
+        <p>However, it's essential to be cautious with function expressions and <code>const</code> or <code>let</code> declarations, as they are not hoisted in the same way. Keep your code consistent to avoid confusion.</p>
+    </section>
+
+    <section>
+        <h2>Advanced Topics to Explore</h2>
+        <ul>
+            <li><strong>Variable Hoisting:</strong> Learn how variable hoisting works in JavaScript and how it interacts with functions.</li>
+            <li><strong>Arrow Functions:</strong> Explore how arrow functions behave in relation to hoisting.</li>
+            <li><strong>Block Scope vs Function Scope:</strong> Understand the difference between how hoisting works in block-scoped and function-scoped variables.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Further Learning: Experiment with calling functions before they are declared and observe how hoisting affects the behavior of your code. Be mindful of the differences between function declarations and expressions!</p>
+    </footer>
+</body>
+</html>

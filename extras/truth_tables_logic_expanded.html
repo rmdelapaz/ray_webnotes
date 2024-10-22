@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Expressions and Truth Tables</title>
+</head>
+<body>
+    <header>
+        <h1>Logic Expressions and Truth Tables</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Analogy: Light Switches</h2>
+            <p>Imagine a room with two light switches, <strong>A</strong> and <strong>B</strong>. Each switch can be in one of two states:</p>
+            <ul>
+                <li><strong>ON (true, 1)</strong></li>
+                <li><strong>OFF (false, 0)</strong></li>
+            </ul>
+            <p>The truth table shows how different combinations of these switches (inputs) affect the final result (output), like whether the room's light is on or off.</p>
+        </section>
+
+        <section>
+            <h2>Truth Table for Logic Operations</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>A AND B</th>
+                        <th>A OR B</th>
+                        <th>NOT A</th>
+                        <th>A XOR B</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Logic Operations Explained</h2>
+            <h3>AND Operation (A AND B)</h3>
+            <p><strong>Analogy:</strong> Both switches must be ON for the room light to turn ON.</p>
+            <p>The result is <strong>1 (true)</strong> only when both <strong>A</strong> and <strong>B</strong> are ON. Otherwise, the result is <strong>0 (false)</strong>.</p>
+
+            <h3>OR Operation (A OR B)</h3>
+            <p><strong>Analogy:</strong> The room light turns ON if either switch A or switch B is ON, or if both are ON.</p>
+            <p>The result is <strong>1 (true)</strong> if at least one of the switches (A or B) is ON.</p>
+
+            <h3>NOT Operation (NOT A)</h3>
+            <p><strong>Analogy:</strong> A "flip" switch that inverts the state of switch A. If A is ON, it gets flipped OFF, and if A is OFF, it gets flipped ON.</p>
+            <p>The NOT operation reverses the state of <strong>A</strong>.</p>
+
+            <h3>XOR Operation (A XOR B)</h3>
+            <p><strong>Analogy:</strong> The room light turns ON if exactly one of the switches A or B is ON, but not both.</p>
+            <p>The XOR operation results in <strong>1 (true)</strong> if either A or B is ON, but <strong>not both</strong>.</p>
+        </section>
+
+        <section>
+            <h2>Expanded Truth Table</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>A AND B</th>
+                        <th>A OR B</th>
+                        <th>NOT A</th>
+                        <th>A XOR B</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Real-World Analogy for Logic Operations</h2>
+            <ul>
+                <li><strong>AND:</strong> Needing both a key and a code to unlock a safe.</li>
+                <li><strong>OR:</strong> Two light switches in a hallway, either of which can turn the light on.</li>
+                <li><strong>NOT:</strong> A toggle switch that flips a state.</li>
+                <li><strong>XOR:</strong> A toy that only works if exactly one child is playing with it.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

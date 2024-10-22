@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Balanced Binary Trees (AVL Trees) in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Balanced Binary Trees (AVL Trees) in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>A Balanced Binary Tree, such as an AVL Tree, is a self-balancing binary search tree where the height of the two child subtrees of any node differs by no more than one. Whenever this balance property is violated, AVL Trees perform rotations to restore balance. This makes AVL Trees efficient for operations like searching, inserting, and deleting, all with a guaranteed time complexity of <code>O(log n)</code>.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: AVL Tree</h2>
+        <p>Here’s a basic implementation of an AVL Tree in JavaScript:</p>
+        <pre><code>class Node {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+        this.height = 1;  // New nodes are initially added at height 1
+    }
+}
+
+class AVLTree {
+    constructor() {
+        this.root = null;
+    }
+
+    // Helper function to get the height of the node
+    getHeight(node) {
+        return node ? node.height : 0;
+    }
+
+    // Right rotate subtree rooted with y
+    rightRotate(y) {
+        const x = y.left;
+        const T2 = x.right;
+        x.right = y;
+        y.left = T2;
+        y.height = Math.max(this.getHeight(y.left), this.getHeight(y.right)) + 1;
+        x.height = Math.max(this.getHeight(x.left), this.getHeight(x.right)) + 1;
+        return x;
+    }
+
+    // Left rotate subtree rooted with x
+    leftRotate(x) {
+        const y = x.right;
+        const T2 = y.left;
+        y.left = x;
+        x.right = T2;
+        x.height = Math.max(this.getHeight(x.left), this.getHeight(x.right)) + 1;
+        y.height = Math.max(this.getHeight(y.left), this.getHeight(y.right)) + 1;
+        return y;
+    }
+
+    // Get balance factor of node
+    getBalance(node) {
+        return node ? this.getHeight(node.left) - this.getHeight(node.right) : 0;
+    }
+
+    // Insert node
+    insert(node, value) {
+        if (!node) return new Node(value);
+        if (value < node.value) node.left = this.insert(node.left, value);
+        else if (value > node.value) node.right = this.insert(node.right, value);
+        else return node;  // Duplicate values not allowed
+
+        node.height = 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
+        const balance = this.getBalance(node);
+
+        // Left Left Case
+        if (balance > 1 && value < node.left.value) return this.rightRotate(node);
+
+        // Right Right Case
+        if (balance < -1 && value > node.right.value) return this.leftRotate(node);
+
+        // Left Right Case
+        if (balance > 1 && value > node.left.value) {
+            node.left = this.leftRotate(node.left);
+            return this.rightRotate(node);
+        }
+
+        // Right Left Case
+        if (balance < -1 && value < node.right.value) {
+            node.right = this.rightRotate(node.right);
+            return this.leftRotate(node);
+        }
+
+        return node;
+    }
+
+    // Public method to start insertion from the root
+    insertValue(value) {
+        this.root = this.insert(this.root, value);
+    }
+}</code></pre>
+        <p>This implementation of an AVL tree automatically rebalances itself after each insertion by performing rotations when necessary. The balancing ensures that the tree’s height remains optimal for efficient searching, inserting, and deleting.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Balancing a Mobile</h2>
+        <p>Think of an AVL Tree like a mobile hanging from the ceiling. Each time you add an object to one side of the mobile, it becomes unbalanced. To fix this, you adjust the mobile by shifting or rotating the objects until the mobile is balanced again. Similarly, an AVL tree rotates nodes to maintain its balance whenever new values are inserted.</p>
+    </section>
+    
+    <section>
+        <h2>Real-World Example: Maintaining Database Indexes</h2>
+        <p>In databases, balanced binary trees like AVL trees are used to maintain indexes. When data is inserted or deleted, the AVL tree ensures that the index remains balanced, allowing for efficient querying. For example, if you have a database that stores user information, an AVL tree could be used to maintain a balanced index of user IDs for quick lookup, insertion, and deletion operations.</p>
+    </section>
+
+    <section>
+        <h2>Why Use AVL Trees?</h2>
+        <p>AVL Trees are ideal when you need efficient lookup, insertion, and deletion operations in dynamically changing datasets. While other binary search trees can degrade to linear time complexity in the worst case, AVL Trees maintain <code>O(log n)</code> time complexity even in the worst-case scenario by keeping the tree balanced through rotations.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>AVL Trees are used in various applications, such as in-memory data storage, database indexing, file systems, and in search engines to maintain balanced data structures for fast retrieval of information. Understanding AVL Trees is critical for optimizing operations where maintaining order and balance is essential.</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="binary_search_trees_tutorial.html">Binary Search Trees (BST)</a></li>
+            <li><a href="tree_rotations_tutorial.html">Tree Rotations</a></li>
+            <li><a href="red_black_trees_tutorial-a.html">Red-Black Trees</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Understanding AVL Trees is key to mastering efficient data structures and improving your problem-solving skills in dynamic systems.</p>
+    </footer>
+</body>
+</html>

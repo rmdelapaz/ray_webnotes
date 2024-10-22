@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with Modules in Node.js</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>Working with Modules in Node.js</h1>
+    
+    <h2>Introduction</h2>
+    <p>In Node.js, modules allow you to break your code into separate files, making it easier to organize and maintain. By using <code>module.exports</code> and <code>require()</code>, you can share functionality between different parts of your application. In this tutorial, we’ll explore how to add a local module to a Node.js application, export data or functions from a module, and import them using the <code>require()</code> function.</p>
+
+    <h2>Why Use Modules?</h2>
+    <p>Think of modules as separate pieces of a machine. Each piece has a specific function, and when you combine them, they form a larger, functional system. In Node.js, modules help you divide your code into smaller, reusable components. Instead of having one huge file with all your code, you can create multiple files, each handling a specific task, and then use those modules wherever you need them.</p>
+
+    <h2>Creating and Using Local Modules</h2>
+    <p>To create a local module, you simply write a JavaScript file that contains the functionality you want to share. Let’s say we want to create a module for basic math operations like addition and subtraction.</p>
+
+    <h3>Step 1: Define the Module (math.js)</h3>
+    <pre><code>
+// math.js - Define basic math operations
+function add(addenda, addendb) {{
+    return addenda + addendb;
+}}
+
+function subtract(minuend, subtrahend) {{
+    return minuend - subtrahend;
+}}
+
+// Export the functions
+module.exports = {{
+    add,
+    subtract
+}};
+    </code></pre>
+
+    <h3>Step 2: Import and Use the Module (app.js)</h3>
+    <p>Now that we have our math module, we can import it into another file and use the exported functions. In Node.js, you use the <code>require()</code> function to import a module.</p>
+
+    <pre><code>
+// app.js - Import the math module
+const math = require('./math');
+
+const sum = math.add(5, 3);  // 8
+const difference = math.subtract(9, 4);  // 5
+
+console.log('Sum:', sum);
+console.log('Difference:', difference);
+    </code></pre>
+
+    <h2>How Exports and Require Work</h2>
+    <p>In Node.js, every file is treated as a module. By default, everything inside a file is private, meaning that other files cannot access its variables or functions. However, by using <code>module.exports</code>, you can choose what to share with other files.</p>
+
+    <h3>Exporting Multiple Items</h3>
+    <p>In the example above, we exported multiple functions (add and subtract) by creating an object that holds these functions and assigning it to <code>module.exports</code>. This makes the functions available to any file that imports the module.</p>
+
+    <h3>Exporting a Single Item</h3>
+    <p>If you only want to export one item from a module, you can assign that item directly to <code>module.exports</code>. For example, if you only wanted to export the <code>add</code> function, you could write:</p>
+
+    <pre><code>
+// Exporting a single function (math.js)
+function add(a, b) {{
+    return a + b;
+}}
+
+module.exports = add;
+    </code></pre>
+
+    <p>Now, when you import this module, the <code>add</code> function will be the only available functionality:</p>
+
+    <pre><code>
+// Importing a single export (app.js)
+const add = require('./math');
+
+const sum = add(7, 3);
+console.log('Sum:', sum);  // 10
+    </code></pre>
+
+    <h2>Real-World Application: Using Modules for Separation of Concerns</h2>
+    <p>In a real-world Node.js application, you would typically have many modules, each responsible for a specific part of your system. For example, you might have separate modules for handling database connections, authentication, or routing. This approach follows the principle of "separation of concerns," ensuring that each part of your application has a focused responsibility.</p>
+
+    <h3>Example: A User Module</h3>
+    <p>Let’s say you’re building an application with user registration and login functionality. You could create a module specifically for managing users:</p>
+
+    <pre><code>
+// user.js - Define user-related operations
+function registerUser(username, password) {{
+    // Registration logic here
+    console.log(`User ${{username}} registered.`);
+}}
+
+function loginUser(username, password) {{
+    // Login logic here
+    console.log(`User ${{username}} logged in.`);
+}}
+
+module.exports = {{
+    registerUser,
+    loginUser
+}};
+    </code></pre>
+
+    <h3>Using the User Module</h3>
+    <pre><code>
+// app.js - Import and use the user module
+const user = require('./user');
+
+user.registerUser('johnDoe', 'password123');
+user.loginUser('johnDoe', 'password123');
+    </code></pre>
+
+    <h2>Conclusion</h2>
+    <p>Modules are an essential feature of Node.js that enable you to break your code into manageable, reusable parts. By using <code>module.exports</code>, you can share functionality between files, and by using <code>require()</code>, you can import that functionality wherever needed. Whether you're exporting a single function or multiple items, modules make your Node.js applications more modular and easier to maintain.</p>
+
+</body>
+</html>

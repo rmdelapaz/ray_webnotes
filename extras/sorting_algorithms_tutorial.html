@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Sorting Algorithms in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Sorting Algorithms in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>Sorting algorithms are fundamental in computer science, and they help organize data in a specific order (ascending or descending). There are many different sorting algorithms, each with its advantages and use cases. In this tutorial, we’ll explore a few common sorting algorithms, how they work, and when to use them.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: Bubble Sort</h2>
+        <p><strong>Bubble Sort</strong> is a simple sorting algorithm where adjacent elements are repeatedly compared and swapped if they are in the wrong order. Here’s the implementation in JavaScript:</p>
+        <pre><code>function bubbleSort(arr) {
+    let swapped;
+    do {
+        swapped = false;
+        for (let i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];  // Swap
+                swapped = true;
+            }
+        }
+    } while (swapped);
+    return arr;
+}</code></pre>
+        <p>Although simple, bubble sort has a time complexity of <code>O(n²)</code>, which makes it inefficient for large datasets. It’s best suited for small arrays or as a learning tool for understanding the concept of sorting.</p>
+    </section>
+
+    <section>
+        <h2>Code Example: Selection Sort</h2>
+        <p><strong>Selection Sort</strong> is another straightforward algorithm where the smallest element is repeatedly selected from the unsorted part of the array and moved to the sorted part:</p>
+        <pre><code>function selectionSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex !== i) {
+            [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];  // Swap
+        }
+    }
+    return arr;
+}</code></pre>
+        <p>Selection sort also has a time complexity of <code>O(n²)</code>, but it performs fewer swaps compared to bubble sort. It’s still not efficient for large datasets but is conceptually easy to understand and implement.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: Merge Sort</h2>
+        <p><strong>Merge Sort</strong> is an efficient, stable, and widely-used sorting algorithm based on the divide-and-conquer approach:</p>
+        <pre><code>function mergeSort(arr) {
+    if (arr.length <= 1) return arr;  // Base case
+    const mid = Math.floor(arr.length / 2);
+    const left = mergeSort(arr.slice(0, mid));
+    const right = mergeSort(arr.slice(mid));
+    return merge(left, right);
+}
+
+function merge(left, right) {
+    const result = [];
+    let i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) {
+            result.push(left[i]);
+            i++;
+        } else {
+            result.push(right[j]);
+            j++;
+        }
+    }
+    return result.concat(left.slice(i)).concat(right.slice(j));
+}</code></pre>
+        <p>Merge sort has a time complexity of <code>O(n log n)</code>, making it highly efficient for larger datasets. It’s particularly useful in cases where stability (preserving the order of equal elements) is important.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Sorting a Stack of Papers</h2>
+        <p>Think of sorting algorithms as different strategies for organizing a stack of papers. With bubble sort, you’re going through the stack multiple times, swapping papers until everything is in order. With selection sort, you keep selecting the paper that should go next. Merge sort is like dividing the stack into smaller stacks, sorting each one, and then combining them.</p>
+    </section>
+    
+    <section>
+        <h2>When to Use Each Sorting Algorithm</h2>
+        <ul>
+            <li><strong>Bubble Sort:</strong> Use when working with small arrays or as a simple sorting tool for learning purposes.</li>
+            <li><strong>Selection Sort:</strong> Best suited for small datasets where minimizing swaps is important.</li>
+            <li><strong>Merge Sort:</strong> Ideal for large datasets and when stability in sorting is required.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Sorting algorithms are used in a variety of applications, from sorting files and databases to organizing data for efficient searching. Understanding different sorting algorithms helps you choose the right one based on the size of your data and your performance needs.</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="divide_and_conquer_algorithms_tutorial.html">Divide-and-Conquer Algorithms</a></li>
+            <li><a href="binary_search_tutorial.html">Binary Search</a></li>
+            <li><a href="big_o_identify_time_and_space_complexity.html">Time and Space Complexity</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Mastering sorting algorithms is key to understanding efficient data processing and computer science fundamentals.</p>
+    </footer>
+</body>
+</html>

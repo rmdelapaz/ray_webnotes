@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depth-First Search (DFS) Explained</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <h1>Understanding Depth-First Search (DFS) in JavaScript</h1>
+
+    <p>In this tutorial, we’ll explore another fundamental graph traversal algorithm called <strong>Depth-First Search (DFS)</strong>. DFS is useful for traversing or searching tree or graph structures, and it explores nodes by going as deep as possible before backtracking. Let’s break it down and learn how it works.</p>
+
+    <h2>What is Depth-First Search?</h2>
+    <p>Depth-First Search (DFS) is an algorithm for traversing graphs or trees. It starts at a root node and explores as far along each branch as possible before backtracking. DFS is like diving deep into one branch of a tree or graph and then retracing your steps to explore other branches.</p>
+
+    <h2>When and Why to Use DFS?</h2>
+    <p>DFS is helpful when you need to explore all possible paths from a starting node or when solving problems like:</p>
+    <ul>
+        <li>Detecting cycles in a graph</li>
+        <li>Solving puzzles like mazes (by exploring all paths)</li>
+        <li>Pathfinding in tree structures</li>
+        <li>Topological sorting in Directed Acyclic Graphs (DAG)</li>
+    </ul>
+
+    <h2>DFS Code Example</h2>
+    <p>Here is an example of how to implement DFS in JavaScript using a graph represented as an adjacency list:</p>
+
+    <pre>
+        <code>
+            function dfs(graph, start, visited = new Set()) {
+                visited.add(start);
+                console.log(start); // Process the node (here, we print it)
+
+                // Recursively visit all the neighbors
+                for (let neighbor of graph[start]) {
+                    if (!visited.has(neighbor)) {
+                        dfs(graph, neighbor, visited);
+                    }
+                }
+            }
+
+            // Example graph represented as an adjacency list
+            let graph = {
+                A: ['B', 'C'],
+                B: ['A', 'D', 'E'],
+                C: ['A', 'F'],
+                D: ['B'],
+                E: ['B', 'F'],
+                F: ['C', 'E']
+            };
+
+            // Start DFS from node 'A'
+            dfs(graph, 'A');
+        </code>
+    </pre>
+
+    <h2>Code Explanation</h2>
+
+    <p>Let’s break down the code step by step:</p>
+
+    <h3>1. The Graph Representation</h3>
+    <p>The graph is represented as an adjacency list, where each node has a list of its neighboring nodes:</p>
+    <pre><code>let graph = { A: ['B', 'C'], B: ['A', 'D', 'E'], C: ['A', 'F'], D: ['B'], E: ['B', 'F'], F: ['C', 'E'] };</code></pre>
+    <p>This means node A is connected to nodes B and C, node B is connected to A, D, and E, and so on.</p>
+
+    <h3>2. Starting DFS</h3>
+    <p>The DFS function starts at the root node (A) and uses recursion to explore its neighbors:</p>
+    <pre><code>dfs(graph, 'A');</code></pre>
+
+    <h3>3. Marking Nodes as Visited</h3>
+    <p>We use a <strong>Set</strong> to keep track of visited nodes:</p>
+    <pre><code>visited.add(start);</code></pre>
+    <p>This ensures that each node is visited only once.</p>
+
+    <h3>4. Recursively Visiting Neighbors</h3>
+    <p>For each neighbor of the current node, we recursively call the <code>dfs</code> function to visit it:</p>
+    <pre><code>
+    for (let neighbor of graph[start]) {
+        if (!visited.has(neighbor)) {
+            dfs(graph, neighbor, visited);
+        }
+    }
+    </code></pre>
+    <p>This allows DFS to dive deep into each branch of the graph before backtracking to explore other branches.</p>
+
+    <h2>Real-World Example and Applications</h2>
+    <p>Imagine DFS as navigating through a maze. You start at the entrance and keep moving deeper into the maze until you hit a dead end. When that happens, you backtrack and explore the other paths. DFS is used in many real-world applications, such as:</p>
+    <ul>
+        <li><strong>Puzzle Solving:</strong> DFS is used to explore all possible solutions in puzzles like Sudoku or mazes.</li>
+        <li><strong>Network Routing:</strong> DFS can be used to explore network connections and detect cycles.</li>
+        <li><strong>Artificial Intelligence:</strong> DFS is used in AI for game solving and search-based decision-making.</li>
+    </ul>
+
+    <h2>Further Exploration</h2>
+    <p>Once you understand DFS, you can explore related algorithms like:</p>
+    <ul>
+        <li><strong>Breadth-First Search (BFS):</strong> A graph traversal algorithm that explores nodes level by level.</li>
+        <li><strong>Dijkstra's Algorithm:</strong> A pathfinding algorithm that works similarly to DFS but takes edge weights into account.</li>
+        <li><strong>Backtracking Algorithms:</strong> Techniques that use DFS to explore all possible configurations.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Depth-First Search is a fundamental algorithm used to explore graphs and trees. It dives deep into each branch before backtracking, making it ideal for problems that require exploring all possible paths or detecting cycles. By understanding DFS, you’ll be well-prepared to tackle more complex graph-related problems.</p>
+
+</body>
+</html>

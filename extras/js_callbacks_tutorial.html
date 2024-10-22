@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Callbacks: Lecture, Tutorial, Overview</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Callbacks: Lecture, Tutorial, Overview</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Introduction to Callbacks</h2>
+            <p>In JavaScript, functions are first-class objects, meaning you can pass them around like any other object. This is where <strong>callbacks</strong> come into play. A <em>callback</em> is a function passed as an argument to another function and executed after some operation is completed. They are an essential part of asynchronous programming in JavaScript.</p>
+            <p>Callbacks allow you to control the order of execution and ensure certain tasks are completed before moving on to the next step. A common analogy is making a phone call and leaving a message for someone to call you back after they have finished their task. Similarly, callbacks ensure that a function gets called once another function finishes its task.</p>
+        </section>
+
+        <section>
+            <h2>Basic Callback Example</h2>
+            <p>Let's start with a basic example. Imagine we have a function that performs a task, like logging a message, and then we want to execute another function after it's done:</p>
+            <pre><code>function greet(name, callback) {
+  console.log('Hello ' + name + '!');
+  callback();
+}
+
+function sayGoodbye() {
+  console.log('Goodbye!');
+}
+
+greet('Alice', sayGoodbye);
+// Output:
+// Hello Alice!
+// Goodbye!</code></pre>
+            <p><strong>Explanation:</strong> In this example, <code>greet</code> is a function that accepts a <code>callback</code> as an argument. After greeting the user, it executes the callback function, <code>sayGoodbye</code>, which logs a goodbye message. This simple pattern is used throughout JavaScript to handle asynchronous operations and control the flow of execution.</p>
+        </section>
+
+        <section>
+            <h2>Analogy for Callbacks</h2>
+            <p>Callbacks are like giving someone instructions to follow after they complete a task. For example, imagine you go to a restaurant and order food. You give the waiter instructions (callback) to bring the food to your table once it’s ready. While waiting, you can do other things, and the waiter will follow your instructions when the food is prepared.</p>
+            <p>In the same way, callbacks in JavaScript allow you to execute code after a specific task is completed, like fetching data from an API or waiting for a user to click a button.</p>
+        </section>
+
+        <section>
+            <h2>When and Why to Use Callbacks</h2>
+            <p>Callbacks are crucial for managing asynchronous code, which is very common in JavaScript. Here are some typical scenarios where callbacks are used:</p>
+            <ul>
+                <li><strong>Handling User Input:</strong> When waiting for a user to click a button or enter input in a form, callbacks are used to execute a function after the action.</li>
+                <li><strong>Fetching Data:</strong> Callbacks are used to handle the response after making an API request or fetching data from a server. The data may take time to arrive, so the callback ensures the program doesn't freeze while waiting.</li>
+                <li><strong>Timers:</strong> When using functions like <code>setTimeout</code> or <code>setInterval</code>, callbacks are passed to execute after a delay or at regular intervals.</li>
+            </ul>
+
+            <pre><code>setTimeout(function() {
+  console.log('This runs after 2 seconds!');
+}, 2000);</code></pre>
+            <p>Here, a callback function is executed after a 2-second delay using <code>setTimeout</code>.</p>
+        </section>
+
+        <section>
+            <h2>Practical Real-World Example</h2>
+            <p>A real-world example of callbacks is fetching data from a web server. Since fetching data is an asynchronous task, we use a callback function to handle the data once it arrives. Here’s a simple example:</p>
+            <pre><code>function fetchData(callback) {
+  console.log('Fetching data...');
+  setTimeout(function() {
+    const data = { name: 'Alice', age: 25 };
+    console.log('Data fetched!');
+    callback(data);
+  }, 3000);
+}
+
+function processData(data) {
+  console.log('Processing data:', data);
+}
+
+fetchData(processData);
+
+// Output:
+// Fetching data...
+// Data fetched!
+// Processing data: { name: 'Alice', age: 25 }</code></pre>
+            <p><strong>Explanation:</strong> In this example, <code>fetchData</code> simulates fetching data from a server. Once the data is fetched, the callback function <code>processData</code> is called, which processes the data.</p>
+        </section>
+
+        <section>
+            <h2>Common Issues with Callbacks</h2>
+            <p>While callbacks are powerful, they can sometimes lead to what is known as "callback hell." This happens when callbacks are nested within each other in complex operations, making the code difficult to read and maintain. To illustrate this:</p>
+            <pre><code>fetchData(function(data) {
+  processData(data, function(result) {
+    saveData(result, function(response) {
+      console.log('Data saved:', response);
+    });
+  });
+});</code></pre>
+            <p>This is where promises and async/await come in as alternatives, but understanding callbacks is essential before moving on to those concepts.</p>
+        </section>
+
+        <section>
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Callbacks are functions passed as arguments to other functions and executed after the completion of certain tasks.</li>
+                <li>They are commonly used in asynchronous operations, such as fetching data, waiting for user input, or handling timeouts.</li>
+                <li>While useful, callbacks can lead to complex code, known as "callback hell." Promises and async/await provide cleaner alternatives.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Exercises</h2>
+            <p>Here are a couple of exercises to help solidify your understanding of callbacks:</p>
+            <ol>
+                <li><strong>Exercise 1:</strong> Create a function <code>multiplyAndLog</code> that multiplies two numbers and logs the result. Pass a callback to handle logging.</li>
+                <li><strong>Exercise 2:</strong> Write a <code>delayedGreeting</code> function that accepts a name and logs "Hello, [name]!" after a 3-second delay using <code>setTimeout</code>.</li>
+            </ol>
+        </section>
+    </main>
+</body>
+</html>

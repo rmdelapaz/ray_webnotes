@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Intro to Debugging: Squashing Bugs Like a Pro</title>
+</head>
+<body>
+    <h1>Intro to Debugging: Squashing Bugs Like a Pro</h1>
+    <p>Bugs (or code errors) are unavoidable. Even great programmers don’t write perfect, bug-free code every time. In fact, the best coders have probably created (and fixed) thousands of bugs over the course of their careers. Just like how expert mechanics get better at fixing cars after working on them for years, expert programmers become great debuggers by learning from their mistakes.</p>
+
+    <p>Debugging can be frustrating, but here are three simple techniques to help you squash those pesky bugs like a pro:</p>
+    <ol>
+        <li>Read the error message (if there is one)</li>
+        <li>Use <code>console.log()</code> to debug malfunctioning code</li>
+        <li>Write tests that cover common and edge cases</li>
+    </ol>
+
+    <h2>1. Read the Error Message (Analogy: A Roadmap)</h2>
+    <p>Imagine you’re driving on a road trip and suddenly your GPS starts flashing “Error: Road Closed.” That message tells you where the problem is—now you just need to find an alternative route. In coding, an error message is like that flashing GPS message; it tells you where the bug is, and gives you hints on how to fix it.</p>
+
+    <p>Let’s say you're writing a function to check if a number is smaller than 10:</p>
+    <pre><code>
+function numberSmallerThanTen(number) {
+  if (num < 10) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+numberSmallerThanTen(5);
+    </code></pre>
+
+    <p>You run this to check if 5 is smaller than 10, but you get this error message:</p>
+    <pre><code>
+/tmp/file.js:2
+  if (num < 10) {
+      ^
+
+ReferenceError: num is not defined
+    </code></pre>
+
+    <p>That error message is your roadmap—it’s telling you that the variable <code>num</code> is not defined. When you look at the function, you realize you accidentally named the parameter <code>number</code> instead of <code>num</code>. Fixing this solves the bug:</p>
+    <pre><code>
+function numberSmallerThanTen(num) { // Fixed the variable name!
+  if (num < 10) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+numberSmallerThanTen(5);  // Now it works!
+    </code></pre>
+
+    <h2>2. Use <code>console.log()</code> to Debug (Analogy: A Detective's Flashlight)</h2>
+    <p>When a detective is searching a dark room for clues, they use a flashlight to highlight important details. Similarly, when debugging your code, <code>console.log()</code> is your flashlight, shining light on what’s happening inside your code. It lets you see how values change as your program runs.</p>
+
+    <p>Take this example:</p>
+    <pre><code>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] == "s") {
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+    }
+  }
+  return str;
+}
+    </code></pre>
+
+    <p>This function is supposed to remove all "s" characters from a string. Let’s test it:</p>
+    <pre><code>
+removeAllS("discussing");  // Expected output: "dicuing", but...
+    </code></pre>
+
+    <p>Actual output: <code>'dicusing'</code>—Oops, there’s still an "s" left! What’s going on? This is where <code>console.log()</code> can help us find out.</p>
+
+    <h3>Shining Light on the Problem</h3>
+    <p>Let’s add some <code>console.log()</code> statements to see what’s happening:</p>
+    <pre><code>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    console.log("index:", i, "element:", str[i]);
+    if (str[i] == "s") {
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+      console.log("str after removal:", str);
+    }
+  }
+  return str;
+}
+    </code></pre>
+
+    <p>By tracing the loop, we see the issue. When the loop removes an "s", the string shifts, but the loop continues to the next index without checking the shifted characters. Using <code>console.log()</code>, we can see exactly where the loop skips over a character.</p>
+
+    <h3>Solving the Bug</h3>
+    <p>One solution is to decrement the index whenever we remove an "s" so the loop re-checks the shifted characters:</p>
+    <pre><code>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] == "s") {
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+      i--;  // Decrement the index to check the next "s"
+    }
+  }
+  return str;
+}
+    </code></pre>
+
+    <p>Now the function works as expected! No more leftover "s" characters.</p>
+
+    <h2>3. Write Tests for Common and Edge Cases (Analogy: A Safety Net)</h2>
+    <p>Imagine you’re walking on a tightrope high above the ground. A safety net below gives you confidence because it will catch you if you fall. Tests in coding are like that safety net—they help you catch bugs before your code “falls” in production.</p>
+
+    <p>Let’s say you wrote the <code>removeAllS</code> function and tested it with one case: <code>removeAllS("sparse")</code>. It worked perfectly, so you move on. But then a bug pops up when you test <code>"discussing"</code>! If you had written a test for this edge case (two "s" characters next to each other), you would have caught the bug sooner.</p>
+
+    <h3>Example: countdown(num)</h3>
+    <p>Here’s a function that counts down from a number to zero:</p>
+    <pre><code>
+function countdown(num) {
+  while (num !== 0) {
+    console.log(num);
+    num--;
+  }
+}
+
+countdown(5);  // Works fine for positive integers
+    </code></pre>
+
+    <p>But what happens if you pass in a decimal or negative number? Try <code>countdown(3.5)</code> or <code>countdown(-10)</code>, and you’ll end up with an infinite loop!</p>
+
+    <p>By testing with a wider range of inputs, you catch this bug. You can fix it by adjusting the while loop condition:</p>
+    <pre><code>
+function countdown(num) {
+  while (num > 0) {
+    console.log(num);
+    num--;
+  }
+}
+    </code></pre>
+
+    <p>Now the function works for any positive number.</p>
+
+    <h2>What You've Learned</h2>
+    <p>No programmer writes perfect code the first time. That’s why debugging is such an important skill. If your code isn’t working, follow these steps to find and fix the bug:</p>
+    <ul>
+        <li><strong>Error messages</strong> are your roadmap. They tell you where to look for the problem.</li>
+        <li>Use <code>console.log()</code> like a detective’s flashlight to shine light on what’s happening inside your code.</li>
+        <li>Write tests to cover common and edge cases to catch bugs before they sneak into production code.</li>
+    </ul>
+
+    <p>By practicing these techniques, you'll become more confident in your debugging abilities and learn to tackle even the trickiest bugs like a pro!</p>
+
+</body>
+</html>

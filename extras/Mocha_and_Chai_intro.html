@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Mocha and Chai: Testing avgValue() Function</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Testing in JavaScript: Mocha and Chai Overview</h1>
+    </header>
+
+    <section>
+        <h2>Introduction to Testing</h2>
+        <p>In modern JavaScript development, writing tests is an essential practice to ensure that your code functions correctly. Two popular libraries used for testing in JavaScript are <strong>Mocha</strong> (a testing framework) and <strong>Chai</strong> (an assertion library). Mocha allows you to organize your tests, while Chai provides a clean way to write assertions (expressions that check if a value is correct).</p>
+
+        <h3>Analogy: A Car Inspection</h3>
+        <p>Think of testing your code like a car inspection. Before driving the car (running the program), you want to check whether key parts like the engine, brakes, and lights (functions) are working correctly. Each test is like a checklist item in that inspection.</p>
+    </section>
+
+    <section>
+        <h2>The avgValue() Function Test</h2>
+        <p>The following test is written using Mocha and Chai to verify the behavior of the <code>avgValue()</code> function, which calculates the average of numbers in an array. Let's break it down:</p>
+        
+        <h3>Test Code</h3>
+        <pre>
+describe("avgValue()", function() {
+  it("should return the average of an array of numbers", function() {
+    assert.equal(avgValue([10, 20]), 15);
+  });
+});
+        </pre>
+
+        <h3>Explanation</h3>
+        <p>This test is structured as follows:</p>
+        <ul>
+            <li><strong><code>describe()</code>:</strong> This function groups a set of tests related to the <code>avgValue()</code> function. It acts as a "container" for all the tests within this function. In this case, we are describing the behavior of <code>avgValue()</code>.</li>
+            <li><strong><code>it()</code>:</strong> This defines a single test case. The description ("should return the average of an array of numbers") explains what this specific test is checking. It’s like one item on the car inspection checklist.</li>
+            <li><strong><code>assert.equal()</code>:</strong> This is the assertion provided by Chai, where we check if the output of <code>avgValue([10, 20])</code> is equal to 15. If the assertion passes, the test passes; if not, the test fails.</li>
+        </ul>
+
+        <h3>Metaphor: A Math Exam</h3>
+        <p>Imagine you're grading a math test, and one of the questions asks the student to calculate the average of 10 and 20. The expected answer is 15. If the student provides the correct answer, they pass that question. Similarly, this test checks if the <code>avgValue()</code> function is returning the correct average. If it does, the function passes the test.</p>
+    </section>
+
+    <section>
+        <h2>Writing the avgValue() Function</h2>
+        <p>For this test to pass, you need to define the <code>avgValue()</code> function correctly. Here's how you might implement it:</p>
+        <pre>
+function avgValue(arr) {
+    let sum = arr.reduce((acc, num) => acc + num, 0);
+    return sum / arr.length;
+}
+        </pre>
+        <p><strong>Explanation:</strong> The function takes an array, calculates the sum of the array's elements using <code>reduce()</code>, and then divides the sum by the number of elements in the array to get the average.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage of Testing</h2>
+        <p>Testing is critical in software development because it ensures that your code behaves as expected. Automated tests like the one above are commonly used in real-world projects to verify changes and avoid introducing bugs. Mocha and Chai are powerful tools that allow you to write clear, maintainable tests for your JavaScript applications.</p>
+
+        <h3>When and Why?</h3>
+        <ul>
+            <li><strong>When:</strong> You should write tests whenever you build a new feature or fix a bug to make sure the code works as intended.</li>
+            <li><strong>Why:</strong> Tests help you catch errors early, improve code quality, and give you confidence when refactoring or adding new features.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Practice Problems</h2>
+        <p>Here are a few practice problems to improve your testing skills:</p>
+        <ol>
+            <li>Write a test to check if the <code>avgValue()</code> function works for an array of negative numbers, like <code>[-10, -20]</code>.</li>
+            <li>Implement a test for a function <code>maxValue()</code> that returns the largest number in an array.</li>
+            <li>Write a test for a function <code>reverseString()</code> that checks if a string is reversed correctly.</li>
+        </ol>
+    </section>
+
+    <footer>
+        <p>Testing is a crucial part of software development. The more tests you write, the more confident you'll be in the reliability of your code. Keep practicing and applying these concepts in your projects!</p>
+    </footer>
+</body>
+</html>
+

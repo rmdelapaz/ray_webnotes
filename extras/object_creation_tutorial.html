@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating and Accessing Objects in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Creating and Accessing Objects in JavaScript</h1>
+        <p>An overview of key concepts for new JavaScript developers.</p>
+    </header>
+
+    <section>
+        <h2>Creating Objects with a Variety of Values</h2>
+        <p>In JavaScript, objects are like real-world objects: they have properties (keys) and values. Here's how to create objects with different value types:</p>
+        <pre><code>
+// Creating an object with various types of values
+const person = {
+    name: 'Alice',              // String
+    age: 30,                    // Number
+    isTenFootTall: true,           // Boolean
+    hobbies: ['Reading', 'Hiking'],  // Array
+    address: { city: 'Wonderland' }  // Object
+};
+        </code></pre>
+        <p>Each property can hold any type of value, from strings and numbers to arrays and even other objects.</p>
+    </section>
+
+    <section>
+        <h2>Objects are Unordered Collections of Values</h2>
+        <p>An object in JavaScript is an unordered collection. It’s like a bag of marbles—you can pull out any marble by its name, but the order in which they are stored doesn’t matter.</p>
+        <pre><code>
+const myObject = { a: 1, b: 2, c: 3 };
+console.log(myObject); // Outputs: { a: 1, b: 2, c: 3 }, but the order isn't guaranteed
+        </code></pre>
+        <p>Even though the object <code>myObject</code> is displayed in a certain order, the order of keys may vary when retrieved. JavaScript objects do not maintain order of properties.</p>
+    </section>
+
+    <section>
+        <h2>Key into an Object Using Bracket and Dot Notation</h2>
+        <h3>Dot Notation</h3>
+        <p>Dot notation is like having labeled drawers. You can directly open a drawer by name:</p>
+        <pre><code>
+console.log(person.name);  // 'Alice'
+        </code></pre>
+        
+        <h3>Bracket Notation</h3>
+        <p>Bracket notation is like having keys to access drawers. It allows you to dynamically access properties or use keys with special characters:</p>
+        <pre><code>
+console.log(person['age']);  // 30
+
+// Dynamic key
+const key = 'hobbies';
+console.log(person[key]);  // ['Reading', 'Hiking']
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Use Bracket Notation to Set a Variable as a Key</h2>
+        <p>Bracket notation lets you use variables as keys. It's like assigning a key to a drawer in a storage system:</p>
+        <pre><code>
+const key = 'isTenFootTall';
+person[key] = false;  // Update using bracket notation
+console.log(person.isTenFootTall);  // false
+        </code></pre>
+        <p>Here, the variable <code>key</code> is used to dynamically update the <code>isEmployed</code> property in the object.</p>
+    </section>
+
+    <section>
+        <h2>Check if a Key Already Exists in an Object</h2>
+        <p>You can use the <code>in</code> operator or <code>hasOwnProperty()</code> method to check if a key exists in an object:</p>
+        <pre><code>
+// Using 'in' operator
+if ('name' in person) {
+    console.log('Key exists');
+}
+
+// Using hasOwnProperty
+if (person.hasOwnProperty('age')) {
+    console.log('Key exists');
+}
+        </code></pre>
+        <p>Both techniques are useful to ensure you're working with the correct keys.</p>
+    </section>
+
+    <section>
+        <h2>Understanding Object Precedence with Dot Notation</h2>
+        <p>JavaScript looks at objects in a hierarchical structure, where dot notation can access properties at different levels. Here's an example:</p>
+        <pre><code>
+const user = {
+    name: 'Bob',
+    profile: {
+        username: 'bob123',
+        location: 'Wonderland'
+    }
+};
+
+console.log(user.profile.username);  // 'bob123'
+        </code></pre>
+        <p>In this case, JavaScript first looks for the <code>profile</code> key, then checks inside the <code>profile</code> object for <code>username</code>.</p>
+        <p>This precedence means JavaScript goes level by level, using dot notation to access deeper properties.</p>
+    </section>
+
+    <section>
+        <h2>Key Takeaways</h2>
+        <ul>
+            <li>Objects can store various value types such as strings, numbers, arrays, and even other objects.</li>
+            <li>Objects are unordered collections of properties, and the order in which you define properties doesn't matter.</li>
+            <li>Use dot notation for simple access and bracket notation when you need dynamic or special character keys.</li>
+            <li>Bracket notation allows you to set a variable as a key in an object, giving you more flexibility.</li>
+            <li>You can check for key existence using the <code>in</code> operator or <code>hasOwnProperty()</code> method.</li>
+            <li>Dot notation follows object precedence, meaning it accesses properties level by level.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Explore more: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">JavaScript Objects - MDN</a></p>
+        <p>Mastering objects is key to understanding JavaScript—keep practicing!</p>
+    </footer>
+    &nbsp;
+</body>
+</html>

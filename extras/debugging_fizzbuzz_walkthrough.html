@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>FizzBuzz Debugging Walkthrough (Before and After)</title>
+</head>
+<body>
+    <h1>FizzBuzz Debugging Walkthrough</h1>
+
+    <p><strong>Problem:</strong> The <code>fizzBuzzArr</code> function takes in an array of numbers and mutates the array based on the Fizz-Buzz logic:</p>
+    <ul>
+        <li>If a number is divisible by 3 but not by 5, transform it to <code>'Fizz'</code>.</li>
+        <li>If a number is divisible by 5 but not by 3, transform it to <code>'Buzz'</code>.</li>
+        <li>If a number is divisible by both 3 and 5, transform it to <code>'Fizzbuzz'</code>.</li>
+        <li>Otherwise, leave the number as it is.</li>
+    </ul>
+
+    <h2>Step 1: Understand the Problem</h2>
+    <p>The function mutates the input array to apply Fizz-Buzz logic. However, the function contains bugs that prevent it from working correctly. We will debug the function step by step, highlighting the errors and fixing them.</p>
+
+    <h2>Step 2: Analyze the Broken Code</h2>
+    <pre><code>
+// Broken Code:
+function fizzBuzzArr(range) {
+    for (let i = 0; i <= range.length; i++) {  // Error 1: Incorrect loop condition (should be < instead of <=)
+        let num = range[i];
+        if (num % 3 === 0 && num % 5 === 0) {
+            arr[i] = "Fizzbuzz";  // Error 2: 'arr' is undefined (should be 'range')
+        } else if (num % 3 === 0) {
+            range[num] = "fizz";  // Error 3: Wrong index (should be 'range[i]' instead of 'range[num]')
+        } if (num % 5 === 0) {
+            range[i] = "Buzzer";  // Error 4: Incorrect output ('Buzzer' should be 'Buzz')
+        }
+        range[i] = i;  // Error 5: Overwrites the value with 'i', which is not needed
+    }
+    return arr;  // Error 6: 'arr' is undefined (should return 'range')
+}
+</code></pre>
+
+    <h3>Explanation of Errors:</h3>
+    <ul>
+        <li><strong>Error 1:</strong> The loop condition uses <code>i &lt;= range.length</code>, which causes an out-of-bounds error. It should be <code>i &lt; range.length</code>.</li>
+        <li><strong>Error 2:</strong> The function references <code>arr[i]</code>, but <code>arr</code> is not defined. The correct variable is <code>range</code>.</li>
+        <li><strong>Error 3:</strong> The code incorrectly uses <code>range[num]</code> instead of <code>range[i]</code> when assigning 'Fizz'.</li>
+        <li><strong>Error 4:</strong> The string 'Buzzer' should be corrected to 'Buzz' to match the Fizz-Buzz logic.</li>
+        <li><strong>Error 5:</strong> The line <code>range[i] = i;</code> unnecessarily overwrites the value at index <code>i</code> with <code>i</code>. This line is not needed.</li>
+        <li><strong>Error 6:</strong> The return value is <code>arr</code>, but <code>arr</code> is undefined. The function should return <code>range</code>.</li>
+    </ul>
+
+    <h2>Step 3: Fix the Errors</h2>
+    <pre><code>
+// Fixed Code:
+function fizzBuzzArr(range) {
+    for (let i = 0; i < range.length; i++) {  // Fix: Use correct loop condition
+        let num = range[i];
+        
+        if (num % 3 === 0 && num % 5 === 0) {
+            range[i] = "Fizzbuzz";  // Fix: Correct variable and condition
+        } else if (num % 3 === 0) {
+            range[i] = "Fizz";  // Fix: Correct index and string
+        } else if (num % 5 === 0) {  // Fix: Correct else if logic
+            range[i] = "Buzz";  // Fix: Correct string
+        }
+    }
+    return range;  // Fix: Return the correct array
+}
+</code></pre>
+
+    <h2>Step 4: Review the Fixed Code</h2>
+    <p>The fixed code resolves all the issues identified in the analysis. We corrected the loop condition, variable references, indexing, and return value. We also ensured that the correct Fizz-Buzz strings are used.</p>
+
+    <h2>Test Cases:</h2>
+    <ul>
+        <li><code>fizzBuzzArr([3, 4, 5])</code> returns <strong>['Fizz', 4, 'Buzz']</strong>.</li>
+        <li><code>fizzBuzzArr([15, 9, 10])</code> returns <strong>['Fizzbuzz', 'Fizz', 'Buzz']</strong>.</li>
+    </ul>
+
+    <h2>Conclusion:</h2>
+    <p>By following Polya's 4-step method, we identified the issues in the original code, reasoned through the logic, and implemented the necessary fixes. The final solution correctly applies the Fizz-Buzz logic to the input array and passes all test cases.</p>
+</body>
+</html>

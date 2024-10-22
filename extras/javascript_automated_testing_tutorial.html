@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Testing: The How, What, and Why</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Automated Testing: The How, What, and Why</h1>
+    </header>
+    <main>
+        <section>
+            <h2>The What: What Is Automated Testing?</h2>
+            <p>
+                Automated testing allows developers to write code that tests their application code. These tests ensure that a piece of code behaves as expected under specific conditions. Instead of manually checking if each part of your program works, you automate this process using testing frameworks.
+            </p>
+
+            <h3>Example:</h3>
+            <p>
+                Let’s say you’ve written a function that adds two numbers. An automated test would look like this:
+            </p>
+            <pre><code>function add(a, b) {
+    return a + b;
+}
+
+// Test
+console.assert(add(2, 3) === 5, "Test failed: 2 + 3 should equal 5");</code></pre>
+            <p>
+                This test verifies that <code>add(2, 3)</code> produces 5. If the result is different, the test fails and outputs the failure message.
+            </p>
+
+            <h2>The How: How Do We Test?</h2>
+            <p>
+                Testing typically follows three steps:
+                <ol>
+                    <li>Set up a specific condition.</li>
+                    <li>Execute the code.</li>
+                    <li>Verify the result matches the expected behavior.</li>
+                </ol>
+           </p>
+           <p>     Many testing frameworks follow this pattern, often called <strong>Arrange, Act, Assert</strong>.
+            </p>
+
+            <h3>Example:</h3>
+            <p>
+                Let’s revisit the earlier example using a testing framework syntax:
+            </p>
+            <pre><code>describe('add', function() {
+    it('should return 5 when adding 2 and 3', function() {
+        const result = add(2, 3);
+        assert.equal(result, 5);
+    });
+});</code></pre>
+            <p>
+                Here, the <code>describe</code> and <code>it</code> blocks arrange the test case, the <code>add(2, 3)</code> function call is the action, and <code>assert.equal(result, 5)</code> verifies the outcome.
+            </p>
+
+            <h2>The Why: Why Do We Test?</h2>
+            <p>
+                The main goal of testing is to give developers confidence that their code works as expected. Without automated tests, it’s easy for bugs to slip through, especially as applications grow more complex. Testing also allows you to make changes to your code (refactoring) with less fear of breaking existing functionality.
+            </p>
+
+            <h3>Benefits of Automated Testing:</h3>
+            <ul>
+                <li><strong>Early Bug Detection:</strong> Catch errors before they make it to production.</li>
+                <li><strong>Refactoring Safety:</strong> Make changes confidently, knowing tests will catch issues.</li>
+                <li><strong>Documentation:</strong> Tests serve as a form of documentation, showing how functions or modules are expected to behave.</li>
+                <li><strong>Faster Development:</strong> Running tests frequently helps you identify and fix issues faster, saving time in the long run.</li>
+            </ul>
+
+            <h2>Reading Automated Tests</h2>
+            <p>
+                You don't need to understand every detail of a testing framework’s syntax to understand what a test is doing. Focus on these three key points:
+            </p>
+            <ol>
+                <li><strong>What is being tested?</strong> Identify the function or module being tested.</li>
+                <li><strong>What are the inputs?</strong> What values are being passed into the function?</li>
+                <li><strong>What is the expected outcome?</strong> What result should the test expect?</li>
+            </ol>
+
+            <h3>Example Breakdown:</h3>
+            <pre><code>describe('multiply', function() {
+    it('should return 6 when multiplying 2 and 3', function() {
+        const result = multiply(2, 3);
+        assert.equal(result, 6);
+    });
+});</code></pre>
+            <p>
+                - <strong>What is being tested?</strong> The <code>multiply</code> function.<br>
+                - <strong>What are the inputs?</strong> 2 and 3.<br>
+                - <strong>What is the expected outcome?</strong> The result should be 6.
+            </p>
+
+            <h2>Conclusion</h2>
+            <p>
+                Automated testing is an essential practice in modern software development. By writing tests, you ensure that your code behaves as expected and reduces the risk of bugs making it into production. It’s also a great tool for improving code quality and maintaining confidence as your application evolves.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

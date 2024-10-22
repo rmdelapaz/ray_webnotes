@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VS Code Debug Visualizer Extension</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>VS Code Debug Visualizer Extension</h1>
+    </header>
+    <section>
+        <h2>Step 1: Understanding the Problem</h2>
+        <p>The VS Code Debug Visualizer is a powerful tool that helps developers visualize the current state of variables and data structures during debugging. It enhances the built-in debugger by providing graphical visualizations such as arrays, trees, graphs, and more.</p>
+        <p>Think of it like an X-ray machine for your code—while the regular debugger shows you what your code looks like step by step, the Debug Visualizer lets you see inside the data structures to fully understand their shape and state.</p>
+    </section>
+    <section>
+        <h2>Step 2: Devising a Plan</h2>
+        <p>We'll use a simple function to test the Debug Visualizer extension. The goal is to visualize an array of numbers being sorted using bubble sort. Here's the plan:</p>
+        <ol>
+            <li>Install the VS Code Debug Visualizer extension.</li>
+            <li>Set up a basic JavaScript project with a bubble sort algorithm.</li>
+            <li>Start debugging the bubble sort function in VS Code.</li>
+            <li>Use the Debug Visualizer to observe the array being sorted in real-time.</li>
+        </ol>
+    </section>
+    <section>
+        <h2>Step 3: Carrying Out the Plan (Pseudocode & Solution)</h2>
+        <p><strong>Pseudocode:</strong></p>
+        <pre><code>
+// 1. Create a bubbleSort function
+// 2. Iterate through the array comparing adjacent values
+// 3. Swap values if the first is greater than the second
+// 4. Repeat the process until the array is sorted
+</code></pre>
+        <p><strong>Basic Solution (Bubble Sort):</strong></p>
+        <pre><code>function bubbleSort(arr) {
+    let n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap the elements
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+// Expected input: [5, 3, 8, 4, 2]
+// Expected output: [2, 3, 4, 5, 8]
+console.log(bubbleSort([5, 3, 8, 4, 2]));
+</code></pre>
+        <p><strong>Explanation:</strong></p>
+        <p>The bubbleSort function iterates through the array multiple times. On each iteration, it compares adjacent elements and swaps them if they are in the wrong order. This continues until the entire array is sorted.</p>
+        <p>Think of this like sorting books on a shelf by height. You start by comparing two books next to each other, and if the one on the left is taller, you swap them. You keep doing this until all the books are in the right order.</p>
+        <p><strong>Advanced Solution (Optimized Bubble Sort):</strong></p>
+        <pre><code>function optimizedBubbleSort(arr) {
+    let n = arr.length;
+    let swapped;
+    for (let i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (let j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap the elements
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                swapped = true;
+            }
+        }
+        // If no elements were swapped, the array is already sorted
+        if (!swapped) break;
+    }
+    return arr;
+}
+
+// Expected input: [5, 3, 8, 4, 2]
+// Expected output: [2, 3, 4, 5, 8]
+console.log(optimizedBubbleSort([5, 3, 8, 4, 2]));
+</code></pre>
+        <p>This optimized version stops iterating if no swaps were made during a pass, meaning the array is already sorted.</p>
+    </section>
+    <section>
+        <h2>Step 4: Reviewing the Solution</h2>
+        <p>Now that we've implemented the bubble sort, let's run it in VS Code with the Debug Visualizer extension. Set breakpoints inside the nested loops and start the debugger. Once the debugger is running, use the Debug Visualizer to inspect the array during each iteration.</p>
+        <p>You'll be able to see the changes in the array in a visual format, which helps in understanding the sorting process step by step. This can be especially useful for beginner developers who are still grasping how loops and swaps work in algorithms.</p>
+    </section>
+    <section>
+        <h2>Relevant Topics to Explore</h2>
+        <ul>
+            <li><strong>Other Sorting Algorithms:</strong> Learn about quicksort and mergesort, which are more efficient than bubble sort for large datasets.</li>
+            <li><strong>Big O Notation:</strong> Understand the performance implications of algorithms in terms of time complexity.</li>
+            <li><strong>Debugging Best Practices:</strong> Explore other debugging tools and techniques available in VS Code, such as breakpoints, call stacks, and watches.</li>
+            <li><strong>Extension Configuration:</strong> Learn how to configure the Debug Visualizer for custom visualizations.</li>
+        </ul>
+    </section>
+    <footer>
+        <p>Practice using the Debug Visualizer and other debugging tools in VS Code to enhance your problem-solving skills!</p>
+    </footer>
+</body>
+</html>

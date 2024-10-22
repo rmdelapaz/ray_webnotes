@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Pathing in React Apps</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Understanding Pathing in React Apps</h1>
+    <p>As a new JavaScript web developer, understanding how to work with paths is crucial when building web applications, especially when using frameworks like React. In this tutorial, we’ll explore the concepts of relative and absolute paths, along with the standard folder structure found in most React apps. Think of paths as addresses that help you find files and assets, much like using a map to locate buildings in a city.</p>
+
+    <h2>1. Absolute Paths: A GPS for Your Files</h2>
+    <p>Imagine you're in a new city, and you want to visit a famous landmark. If you have the exact address, like "1600 Pennsylvania Ave NW, Washington, D.C.", you can get there from anywhere! In programming, an <strong>absolute path</strong> is like that full address—it tells your app exactly where a file is located on your computer or the internet. For example:</p>
+    <pre><code>/home/user/projects/my-react-app/src/components/Navbar.js</code></pre>
+    <p>Absolute paths are useful when you need to reference something that is always in the same place, no matter where you are in the project.</p>
+
+    <h2>2. Relative Paths: Directions from Where You Are</h2>
+    <p>Now, what if you’re standing in a park near the landmark? You wouldn't need the full address; instead, you could ask for directions like "it's two blocks north." That’s how <strong>relative paths</strong> work in programming. They tell your app how to find a file from the current location. For example, if you're in the "components" folder, you might use:</p>
+    <pre><code>./Navbar.js</code></pre>
+    <p>Relative paths are useful because they adapt based on where you are in the project, much like giving directions based on your current position. You can move files around, and the paths still make sense as long as the relative relationships stay the same.</p>
+
+    <h2>3. Standard React Folder Structure: A Well-Organized City</h2>
+    <p>When you start a new React project, you usually get a default folder structure that’s organized like a well-planned city. This helps keep your project clean and easy to navigate. Here’s a typical folder structure:</p>
+    <pre><code>.
+    ├── public
+    │   └── index.html
+    ├── src
+    │   ├── components
+    │   │   └── Navbar.js
+    │   ├── App.js
+    │   └── index.js
+    └── package.json
+    </code></pre>
+    <p>In this structure, the <strong>src</strong> folder holds your main code, and the <strong>components</strong> folder is where you’d place reusable parts like buttons or navigation bars. Keeping your files organized like this helps you—and others—quickly find what you need.</p>
+
+    <h2>4. When and Why to Use Relative vs. Absolute Paths</h2>
+    <p>Use <strong>relative paths</strong> when you’re working within your project’s folder structure. It keeps your project flexible. For example, if you move a folder to a new location, relative paths will still work as long as the folder structure stays consistent.</p>
+    <p>Use <strong>absolute paths</strong> when you need to reference files outside of your project or when working with assets that won’t move. In React, for instance, absolute paths are often used for assets in the <strong>public</strong> folder.</p>
+
+    <h2>5. Real-World Example</h2>
+    <p>Let’s say you have an image in the public folder and you want to use it in a component. You might use an absolute path like this:</p>
+    <pre><code>{`<img src="/logo.png" alt="Logo">`}</code></pre>
+    <p>But if you’re referencing a component inside the <strong>components</strong> folder, you’d use a relative path:</p>
+    <pre><code>{`import Navbar from './components/Navbar';`}</code></pre>
+
+    <h2>6. Conclusion</h2>
+    <p>Paths are like the map of your project. Absolute paths are like GPS coordinates, taking you to a precise location, while relative paths are like directions from where you currently are. Understanding the difference and knowing when to use each will help you build well-organized and maintainable React applications.</p>
+
+    <h2>7. Further Exploration</h2>
+    <p>To deepen your understanding, you can explore the following topics:</p>
+    <ul>
+        <li>Working with Webpack and Path Aliases</li>
+        <li>How React Handles File Imports and Static Assets</li>
+        <li>Managing Large Folder Structures in React</li>
+    </ul>
+</body>
+</html>

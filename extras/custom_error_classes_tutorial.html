@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <title>Creating Custom Error Classes in JavaScript</title>
+</head>
+<body>
+    <h1>Creating Custom Error Classes in JavaScript</h1>
+
+    <h2>Introduction</h2>
+    <p>In JavaScript, errors are objects that represent runtime errors, and they can be thrown using the <code>throw</code> statement. While JavaScript provides some built-in error types (like <code>Error</code>, <code>TypeError</code>, <code>SyntaxError</code>, etc.), there are times when you'll want to create your own error types for more specific error handling. One way to do this is by extending an existing error class.</p>
+
+    <p>Custom error classes make your error handling code clean, consistent, and easier to debug. It's like organizing different "problems" into categories, so when something goes wrong, you know exactly what type of issue it is and can respond accordingly.</p>
+
+    <h2>Why Create Custom Errors?</h2>
+    <p>Imagine you're building an application that interacts with a user database. You might encounter different types of errors: some are related to database connection issues, some to invalid user input, and others to permissions. While you could use a generic <code>Error</code> for everything, creating custom error classes lets you clearly distinguish between different error types.</p>
+
+    <h3>Real-World Analogy</h3>
+    <p>Think of custom errors like the labels you see in a store. Without labels, you'd have a hard time knowing what's on the shelves. But with clear labels, you can easily find what you're looking for: "Fruits", "Vegetables", "Dairy", etc. In programming, custom error classes serve the same purpose, clearly labeling the type of problem so you can address it properly.</p>
+
+    <h2>How to Create a Custom Error Class</h2>
+    <p>In JavaScript, you can create a new error class by extending the built-in <code>Error</code> class or other specific error types. This allows you to add your own custom behavior and messages to the error.</p>
+
+    <h3>Basic Example: Extending the Error Class</h3>
+    <p>Let's create a custom error class called <code>ValidationError</code> to handle validation errors:</p>
+
+    <pre>
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ValidationError';  // Set the error name
+  }
+}
+
+// Example usage
+function validateUserInput(input) {
+  if (input.trim() === '') {
+    throw new ValidationError('Input cannot be empty');
+  }
+}
+
+try {
+  validateUserInput('');  // This will throw a ValidationError
+} catch (error) {
+  console.error(error.name + ': ' + error.message);  // Output: ValidationError: Input cannot be empty
+}
+    </pre>
+
+    <h3>Code Breakdown</h3>
+    <ul>
+        <li><strong>Extending the <code>Error</code> class:</strong> We use the <code>extends</code> keyword to create a new class that inherits from the built-in <code>Error</code> class.</li>
+        <li><strong>Calling <code>super()</code>:</strong> In the constructor, we use <code>super(message)</code> to pass the error message to the parent class. This ensures that the <code>message</code> property is set correctly.</li>
+        <li><strong>Setting the <code>name</code> property:</strong> By setting the <code>this.name</code> property, we make sure that the error is identified as a <code>ValidationError</code>.</li>
+    </ul>
+
+    <h3>Real-World Application</h3>
+    <p>Imagine you're building a form where users must enter their email address. If the input is invalid or missing, you can throw a <code>ValidationError</code>. This keeps your code organized and clearly distinguishes validation issues from other types of errors, like network problems or server issues.</p>
+
+    <h2>Using Inheritance for More Specific Errors</h2>
+    <p>You can create a hierarchy of error classes to represent more specific types of errors. For example, let's extend the <code>ValidationError</code> class to create a <code>RequiredFieldError</code> that indicates when a required field is missing:</p>
+
+    <pre>
+class RequiredFieldError extends ValidationError {
+  constructor(field) {
+    super(`${field} is required`);
+    this.name = 'RequiredFieldError';
+    this.field = field;  // Add a custom property for the missing field
+  }
+}
+
+// Example usage
+function validateForm(formData) {
+  if (!formData.name) {
+    throw new RequiredFieldError('Name');
+  }
+}
+
+try {
+  validateForm({});  // Missing 'name' field
+} catch (error) {
+  console.error(`${error.name}: ${error.message}`);  // Output: RequiredFieldError: Name is required
+}
+    </pre>
+
+    <h3>Code Breakdown</h3>
+    <ul>
+        <li><strong>Inheriting from a custom error:</strong> We extend <code>ValidationError</code> to create a more specific <code>RequiredFieldError</code>.</li>
+        <li><strong>Custom properties:</strong> The <code>RequiredFieldError</code> class includes a <code>field</code> property, which makes it clear which field is missing.</li>
+    </ul>
+
+    <h3>Real-World Analogy</h3>
+    <p>Think of this as having different "levels" of problems. If you're driving a car and something goes wrong, you might see a "Check Engine" light (a generic error), or you might see a more specific warning like "Low Tire Pressure". The specific error gives you more information about what the problem is and how to fix it.</p>
+
+    <h2>Practical Usage of Custom Error Classes</h2>
+    <p>Custom error classes are useful in many situations:</p>
+    <ul>
+        <li><strong>Form Validation:</strong> As seen in the examples above, custom errors help you organize different validation rules (e.g., required fields, format validation).</li>
+        <li><strong>API Requests:</strong> You can throw custom errors for specific HTTP status codes (e.g., 404 Not Found, 500 Internal Server Error) to make error handling in your application more robust.</li>
+        <li><strong>Authentication:</strong> In a user authentication system, you could have custom errors like <code>InvalidCredentialsError</code> or <code>UnauthorizedError</code> to clearly handle different types of login failures.</li>
+    </ul>
+
+    <h3>Example: Custom API Error</h3>
+    <pre>
+class ApiError extends Error {
+  constructor(status, message) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
+// Example usage
+async function fetchData() {
+  const response = await fetch('https://api.example.com/data');
+  if (!response.ok) {
+    throw new ApiError(response.status, 'Failed to fetch data');
+  }
+}
+
+try {
+  fetchData();
+} catch (error) {
+  if (error instanceof ApiError) {
+    console.error(`API Error (${error.status}): ${error.message}`);
+  }
+}
+    </pre>
+
+    <h2>Extending Built-In Error Types</h2>
+    <p>You can also extend other built-in error types, such as <code>TypeError</code> or <code>RangeError</code>, to create more specific errors for your application:</p>
+
+    <pre>
+class InvalidTypeError extends TypeError {
+  constructor(expectedType, actualType) {
+    super(`Expected ${expectedType}, but got ${actualType}`);
+    this.name = 'InvalidTypeError';
+  }
+}
+
+// Example usage
+function checkType(value, expectedType) {
+  if (typeof value !== expectedType) {
+    throw new InvalidTypeError(expectedType, typeof value);
+  }
+}
+
+try {
+  checkType(123, 'string');  // Throws InvalidTypeError
+} catch (error) {
+  console.error(error.message);  // Expected string, but got number
+}
+    </pre>
+
+    <h3>Real-World Example</h3>
+    <p>In a large application, custom errors help make debugging easier by providing more context. For example, if you're working with APIs, database connections, or complex form validations, specific error types can quickly point you to the root of the problem, making your code more maintainable.</p>
+
+    <h2>Conclusion</h2>
+    <p>Creating custom error classes in JavaScript allows you to handle errors in a clean, organized, and specific way. By extending the built-in error types, you can create custom error hierarchies that make debugging easier, improve code clarity, and help ensure consistent error handling throughout your application.</p>
+
+    <p>In summary, custom errors act as labels, categorizing and explaining different types of issues your application might encounter, and allowing you to handle them more effectively.</p>
+</body>
+</html>

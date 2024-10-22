@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertion Sort Explained</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <h1>Understanding Insertion Sort in JavaScript</h1>
+
+    <p>In this tutorial, we’ll explore another fundamental sorting algorithm: <strong>Insertion Sort</strong>. Insertion Sort is efficient for small datasets and works similarly to how you might organize cards in your hand. Let’s break it down and explain each step to deepen your understanding of this useful sorting method.</p>
+
+    <h2>What is Insertion Sort?</h2>
+    <p>Insertion Sort is a simple algorithm that builds the sorted array one item at a time. It’s like organizing playing cards: you pick up one card at a time, compare it to the cards in your hand, and place it in the correct position. The array gets sorted as you go through each element.</p>
+
+    <h2>When and Why to Use Insertion Sort?</h2>
+    <p>Insertion Sort is useful for small arrays or nearly sorted arrays because it’s relatively efficient in these cases. Its time complexity is O(n^2), so for larger arrays, algorithms like Merge Sort or Quick Sort are faster. However, due to its simplicity, Insertion Sort is often used when you want to implement a basic sorting technique.</p>
+
+    <h2>Insertion Sort Code Example</h2>
+    <pre>
+        <code>
+let arr = [52, 12, 27, 13, 30];
+
+function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let key = arr[i];
+        let j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+
+        arr[j + 1] = key;
+    }
+    return arr;
+}
+
+console.log("Before sorting: ", arr);
+console.log("After sorting: ", insertionSort(arr));
+        </code>
+    </pre>
+
+    <h2>Code Explanation</h2>
+
+    <p>Let’s go through the code step by step:</p>
+
+    <h3>1. Initial Array Setup</h3>
+    <p>The array we want to sort is defined as:</p>
+    <pre><code>let arr = [52, 12, 27, 13, 30];</code></pre>
+    <p>Our goal is to sort this array in ascending order.</p>
+
+    <h3>2. The Outer Loop</h3>
+    <p>The outer loop starts at the second element (index 1) and moves forward through the array:</p>
+    <pre><code>for (let i = 1; i < arr.length; i++) {</code></pre>
+    <p>Why start at index 1? Because we assume that the first element (index 0) is already sorted by itself, and we’ll insert the rest of the elements one by one.</p>
+
+    <h3>3. The Key Element</h3>
+    <p>For each iteration of the outer loop, we set the current element as the "key" that we want to insert into its correct position within the sorted part of the array:</p>
+    <pre><code>let key = arr[i];</code></pre>
+
+    <h3>4. The Inner Loop and Shifting Elements</h3>
+    <p>The inner loop moves elements that are larger than the key one position to the right. Here's how it works:</p>
+    <pre><code>
+    while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j = j - 1;
+    }
+    </code></pre>
+    <p>This loop keeps shifting elements to the right until we find the correct position for the key. For example, if we’re sorting <code>arr = [52, 12, 27, 13, 30]</code> and <code>key = 12</code>, the inner loop shifts <code>52</code> to the right, making room for <code>12</code> to be inserted in the correct spot.</p>
+
+    <h3>5. Inserting the Key</h3>
+    <p>Once we’ve shifted the larger elements, we place the key in the correct position:</p>
+    <pre><code>arr[j + 1] = key;</code></pre>
+    <p>This ensures the key is inserted where it belongs, leaving the previous elements in order and placing the key in the right spot.</p>
+
+    <h3>6. Returning the Sorted Array</h3>
+    <p>Finally, once the array is fully sorted, the function returns the sorted array:</p>
+    <pre><code>return arr;</code></pre>
+    <p>For our example, <code>arr</code> starts as <code>[52, 12, 27, 13, 30]</code> and is sorted into <code>[12, 13, 27, 30, 52]</code>.</p>
+
+    <h2>Real-World Example and Applications</h2>
+    <p>Imagine you’re organizing books on a shelf. You pick up each new book and find its correct spot among the already organized books. This is similar to how Insertion Sort works: you go through the list, one item at a time, and place each item in its correct position within the sorted section.</p>
+
+    <h2>Further Exploration</h2>
+    <p>After understanding Insertion Sort, it’s useful to explore other more efficient sorting algorithms, especially for larger datasets. These include:</p>
+    <ul>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Heap Sort</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Insertion Sort is an excellent algorithm for understanding basic sorting principles. While it’s not the fastest for large arrays, it works well for small or nearly sorted arrays. It’s simple, intuitive, and lays the groundwork for learning more advanced algorithms.</p>
+
+</body>
+</html>

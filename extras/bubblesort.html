@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort Explained</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <h1>Understanding Bubble Sort in JavaScript</h1>
+
+    <p>In this tutorial, we'll be exploring the Bubble Sort algorithm, which is a simple sorting technique often used as an introduction to sorting algorithms. We'll go step by step and understand how the code works by breaking down the logic line by line. Think of this like a series of bubble movements—hence the name "Bubble Sort".</p>
+
+    <h2>What is Bubble Sort?</h2>
+    <p>Bubble Sort is a sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing adjacent items, and swapping them if they are in the wrong order. This process is repeated until the entire list is sorted.</p>
+    <p>Imagine you're blowing bubbles in a glass of water. The largest bubbles will naturally float to the top. In Bubble Sort, the largest value in an array 'floats' to the end of the array with each pass, just like the largest bubbles in water.</p>
+
+    <h2>When and Why to Use Bubble Sort?</h2>
+    <p>Bubble Sort is often used as a teaching tool because of its simplicity. However, in real-world applications, it's not the most efficient for large datasets since its time complexity is O(n^2), meaning it can be slow for long arrays. Despite that, it's helpful for small datasets or situations where simplicity and clarity are prioritized over efficiency.</p>
+
+    <h2>Bubble Sort Code Example</h2>
+    <pre>
+        <code>
+let arr = [13, 5, 9, 2, 27];
+
+function bubbleSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let swapped = false;
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+    }
+    return arr;
+}
+
+console.log("Before sorting: ", arr);
+console.log("After sorting: ", bubbleSort(arr));
+        </code>
+    </pre>
+
+    <h2>Code Explanation</h2>
+
+    <p>Let's break down the code step by step:</p>
+
+    <h3>1. Initial Array Setup</h3>
+    <p>We start with an array of numbers that we want to sort:</p>
+    <pre><code>let arr = [13, 5, 9, 2, 27];</code></pre>
+    <p>We want to sort this array in ascending order, from smallest to largest.</p>
+
+    <h3>2. The Outer Loop</h3>
+    <p>The outer loop in the <code>bubbleSort</code> function controls how many passes we make over the array. Here's the line of code that defines it:</p>
+    <pre><code>for (let i = 0; i < arr.length - 1; i++) {</code></pre>
+    <p>We loop through the array, reducing the number of elements to check each time since the largest element 'bubbles up' to its correct position after every full pass through the inner loop.</p>
+
+    <h3>3. The Inner Loop and Swapping</h3>
+    <p>The inner loop compares adjacent elements and swaps them if they're in the wrong order. Here’s the key part of the logic:</p>
+    <pre><code>
+for (let j = 0; j < arr.length - i - 1; j++) {
+    if (arr[j] > arr[j + 1]) {
+        let temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+        swapped = true;
+    }
+}
+    </code></pre>
+    <p>Here’s how it works:</p>
+    <ul>
+        <li><strong>Comparison:</strong> The algorithm checks if the current element (<code>arr[j]</code>) is greater than the next element (<code>arr[j + 1]</code>).</li>
+        <li><strong>Swapping:</strong> If the current element is greater, it swaps them. It uses a temporary variable (<code>temp</code>) to hold one value during the swap.</li>
+        <li><strong>Flagging Swaps:</strong> If a swap happens, the <code>swapped</code> flag is set to true.</li>
+    </ul>
+    <p>This process is repeated for every element in the array until the largest number 'bubbles up' to its correct position at the end of the array.</p>
+
+    <h3>4. Optimization with the Swapped Flag</h3>
+    <p>If no elements were swapped in a pass, the array is already sorted, and we can stop early. This is done with the following code:</p>
+    <pre><code>if (!swapped) break;</code></pre>
+    <p>This is an optimization that makes Bubble Sort more efficient if the array becomes sorted before all passes are complete.</p>
+
+    <h3>5. Returning the Sorted Array</h3>
+    <p>Once the array is sorted, the function returns the sorted array:</p>
+    <pre><code>return arr;</code></pre>
+    <p>In our example, <code>arr</code> starts as <code>[13, 5, 9, 2, 27]</code> and is sorted into <code>[2, 5, 9, 13, 27]</code>.</p>
+
+    <h2>Real-World Example and Applications</h2>
+    <p>Imagine you're sorting a deck of cards in your hand. You repeatedly compare each card to the next one, swapping them if needed, just like the Bubble Sort algorithm does with numbers in an array. However, in real-world programming, we typically use faster algorithms like Merge Sort or Quick Sort for larger datasets, but Bubble Sort is great for educational purposes and small-scale problems.</p>
+
+    <h2>Further Exploration</h2>
+    <p>Here are some other sorting algorithms that you might want to explore once you're comfortable with Bubble Sort:</p>
+    <ul>
+        <li>Selection Sort</li>
+        <li>Insertion Sort</li>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Bubble Sort is a simple and intuitive algorithm that provides a great way to understand the basics of sorting. While it may not be the most efficient, it's an excellent stepping stone to more advanced sorting techniques.</p>
+
+</body>
+</html>

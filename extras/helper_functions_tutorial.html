@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Helper Functions: Breaking Down Complexity</title>
+</head>
+<body>
+    <h1>Helper Functions: Breaking Down Complexity</h1>
+    <p>As programmers, we often face large and complex problems. Imagine you're trying to solve a puzzle with hundreds of pieces. Tackling the entire puzzle at once would be overwhelming. Instead, we break it down, starting with the edges, sorting the colors, and then putting smaller sections together. In coding, this process of breaking down complexity is achieved through helper functions.</p>
+
+    <p>Uncontrolled complexity is the enemy of a programmer. If we don't understand our own code, it will eventually lead to errors (or bugs). To control complexity, two important concepts come into play: <strong>Decomposition</strong> and <strong>Abstraction</strong>.</p>
+
+    <h2>Decomposition: Breaking the Problem into Manageable Pieces</h2>
+    <p><strong>Analogy: Building a House</strong> - Think of building a house. You don't start by trying to put everything together at once. First, you lay the foundation, then put up the walls, and finally add the roof. In programming, decomposition is like that. We break a large, complex problem into smaller, more manageable sub-problems. Each sub-problem, like building a wall or laying the foundation, becomes its own function.</p>
+
+    <p>Let's look at an example:</p>
+    <h3>Example: yellStrings(strings)</h3>
+    <p>Imagine you're asked to write a function that "yells" every string in an array. It sounds overwhelming at first:</p>
+    <pre><code>
+// yellStrings(strings)
+// Write a function that takes in an array of strings and returns an array where every string is "yelled":
+
+let yelled = yellStrings(['hello', 'how', 'are', 'you?']);
+console.log(yelled);  //=> ['HELLO!', 'HOW!', 'ARE!', 'YOU?!']
+    </code></pre>
+
+    <p>This seems like a lot to handle. How can we change all the strings in the array? Now, let's break it down. What if we had to "yell" only one string instead?</p>
+
+    <h3>Decomposing the Problem: yellStr(str)</h3>
+    <p>Let's start by writing a simpler function that takes in a single string and returns it in "yelled" form:</p>
+    <pre><code>
+function yellStr(str) {
+  let upperString = str.toUpperCase();
+  return upperString + '!';
+}
+    </code></pre>
+
+    <p>This is much easier to tackle. Now, we can use this <code>yellStr</code> function to solve the larger problem of "yelling" multiple strings:</p>
+
+    <h3>Combining the Pieces: yellStrings(strings)</h3>
+    <pre><code>
+function yelledStrings(strings) {
+  let yelled = [];
+
+  for (let i = 0; i < strings.length; i++) {
+    let string = strings[i];
+    let newString = yellStr(string);  // Call our helper function!
+    yelled.push(newString);
+  }
+
+  return yelled;
+}
+    </code></pre>
+
+    <p>By using <code>yellStr</code> as a helper function, we solved the bigger problem of <code>yellStrings</code>. This is decomposition in action. We broke down a seemingly large task into smaller, manageable parts. Now, we can build solutions step by step.</p>
+
+    <h2>Decomposing a More Complex Problem</h2>
+    <h3>Example: laligatSum(n)</h3>
+    <p>Let's tackle a more complicated problem. Imagine you're asked to write a function that returns the sum of all prime numbers less than or equal to a given number. This sum is called the <em>laligat sum</em>. For example:</p>
+    <ul>
+        <li><strong>laligatSum(10)</strong> should return 2 + 3 + 5 + 7 = 17</li>
+        <li><strong>laligatSum(11)</strong> should return 2 + 3 + 5 + 7 + 11 = 28</li>
+    </ul>
+
+    <p>This sounds complicated, right? Let's see how breaking it down makes it easier:</p>
+
+    <h3>Initial Complex Solution</h3>
+    <p>Here's a solution without decomposition. It's a bit overwhelming:</p>
+    <pre><code>
+function laligatSum(n) {
+  let sum = 0;
+  for (let i = 2; i <= n; i++) {
+    let prime = true;
+
+    for (let factor = 2; factor < i; factor++) {
+      if (i % factor === 0) {
+        prime = false;
+        break;
+      }
+    }
+
+    if (prime) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+    </code></pre>
+
+    <p>This is hard to read, and if there’s a bug, it’s difficult to figure out where it might be. A better approach is to decompose this into smaller helper functions.</p>
+
+    <h3>Decomposing with isPrime</h3>
+    <p>Instead of calculating whether a number is prime inside the same function, let's break that task into a separate helper function:</p>
+    <pre><code>
+function isPrime(n) {
+  for (let i = 2; i < n; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function laligatSum(n) {
+  let sum = 0;
+
+  for (let i = 2; i <= n; i++) {
+    if (isPrime(i)) {
+      sum += i;
+    }
+  }
+
+  return sum;
+}
+    </code></pre>
+
+    <p>Now, the logic of <code>laligatSum</code> is much easier to follow. We broke down the problem by using a helper function called <code>isPrime</code> to check if a number is prime, and then used it inside our main function. This approach is clearer and more maintainable.</p>
+
+    <h2>When to Use Helper Functions</h2>
+    <p><strong>Analogy: Organizing a Workshop</strong> - Imagine you're building a birdhouse in your workshop. You wouldn't keep all your tools in one big pile in the middle of the room. Instead, you'd organize them: hammers in one drawer, nails in another. Similarly, when writing code, if a function starts becoming too large and messy, it's time to organize the logic into smaller, more focused helper functions.</p>
+
+    <p>Helper functions help manage complexity by focusing on one specific task. If your code starts getting too complicated, that's a sign to break it down into manageable pieces. The more you practice, the better you'll get at recognizing when to use helper functions.</p>
+
+    <h2>Modular Functions: Keeping Code Simple and Focused</h2>
+    <p>As you tackle more complex problems, aim to keep your functions focused on a single task. A well-designed function should be modular, meaning each function is responsible for a specific part of the solution. When each piece works independently, the whole program becomes easier to maintain.</p>
+
+    <p><strong>Rule of Thumb:</strong> If a function feels too large or difficult to follow, it's time to consider breaking it down into smaller, modular helper functions.</p>
+
+    <h2>Abstraction: Hiding the Details</h2>
+    <p>Abstraction is like simplifying the instructions. When you build a house, you don't need to think about every nail being hammered in. You focus on the bigger picture. In programming, abstraction helps hide the unnecessary details, so you can focus on the problem at hand. By using helper functions, we abstract away the details and make our code easier to understand.</p>
+
+    <p><strong>Analogy: Driving a Car</strong> - When you drive a car, you don't think about how the engine works every time you press the gas pedal. You just know that pressing the pedal makes the car go faster. The details of the engine are abstracted away. Similarly, in your code, helper functions hide the details of how something works, allowing you to focus on what the function does.</p>
+
+    <h2>Conclusion: Helper Functions are Essential</h2>
+    <p>Helper functions are like the toolbox that keeps your code organized and manageable. They help break down complex problems into smaller, focused tasks, making your code easier to read, understand, and maintain. As you continue coding, you'll get better at recognizing when to create helper functions and how to decompose problems effectively. Keep practicing, and soon enough, you'll be writing modular, efficient, and clear code!</p>
+
+</body>
+</html>

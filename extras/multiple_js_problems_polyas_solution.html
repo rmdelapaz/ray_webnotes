@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>JavaScript Problems Solution (Polya's 4 Steps)</title>
+</head>
+<body>
+    <h1>JavaScript Problems Solution (Polya's 4-Step Approach)</h1>
+
+    <h2>Problem 1: Sum Array</h2>
+    <p><strong>Problem:</strong> Write a function that sums up elements of an array, given an array of numbers as an argument.</p>
+    <h3>Polya's 4-Step Approach:</h3>
+    <pre><code>
+// Step 1: Understand the problem
+// We need to sum all the numbers in an array and return the total sum.
+
+// Step 2: Plan
+// - Initialize a variable to store the total sum, starting at 0.
+// - Iterate through the array, adding each number to the total sum.
+// - Return the total sum.
+//Input: array of numbers we'll call arr
+//Output: sum of the array we'll call total
+
+// Step 3: Code
+function sumArray(arr) {
+    let total = 0;
+    //for (let num of arr) {
+    //    total += num;
+    for (let i = 0; i < arr.length; i ++) {   
+        total = total + arr[i];
+    }
+    return total;
+}
+
+// Step 4: Test
+console.log(sumArray([1, 2, 3, 4])); // Expected output: 10
+console.log(sumArray([10, -5, 15])); // Expected output: 20
+</code></pre>
+
+    <h2>Problem 2: Filter Primes</h2>
+    <p><strong>Problem:</strong> Define a function that takes in an array of numbers and returns a new array containing only the primes.</p>
+    <h3>Polya's 4-Step Approach:</h3>
+    <pre><code>
+// Step 1: Understand the problem
+// We need to return an array containing only the prime numbers from the input array.
+
+// Step 2: Plan
+// - Create a helper function to check if a number is prime.
+// - Use the filter method to return only prime numbers from the array.
+//Input: array of numbers we'll call arr
+//Output: array of resulting prime numbers using filter
+
+// Step 3: Code
+function isPrime(num) {
+    if (num <= 1) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+    }
+    return true;
+}
+
+function filterPrimes(arr) {
+    return arr.filter(isPrime);
+}
+
+// Step 4: Test
+console.log(filterPrimes([2, 3, 4, 5, 6])); // Expected output: [2, 3, 5]
+console.log(filterPrimes([10, 11, 13, 15])); // Expected output: [11, 13]
+</code></pre>
+
+    <h2>Problem 3: Sum 2D Array</h2>
+    <p><strong>Problem:</strong> Define a function that takes in a 2D array of numbers and returns the total sum of all elements in the array.</p>
+    <h3>Polya's 4-Step Approach:</h3>
+    <pre><code>
+// Step 1: Understand the problem
+// We need to sum all the elements of a 2D array and return the total.
+
+// Step 2: Plan
+// - Initialize a variable to store the total sum.
+// - Iterate through each row, and for each row, iterate through its elements, adding them to the total sum.
+// - Return the total sum.
+//Input: 2d array we'll call matrix
+//Output: return the sum of all arrays in matrix 
+
+// Step 3: Code
+function sum2DArray(matrix) {
+    let total = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+             total += matrix[i][j];
+        }
+    }
+     return total;
+}
+
+// Step 4: Test
+console.log(sum2DArray([[1, 2], [3, 4]])); // Expected output: 10
+console.log(sum2DArray([[5, 5], [5, 5]])); // Expected output: 20
+OR!
+for (let row of matrix) {
+    for (let num of row) {
+        total += num;
+    }
+}
+for of loops
+</code></pre>
+
+    <h2>Problem 4: Unique Pairs</h2>
+    <p><strong>Problem:</strong> Define a function that takes in an array of elements and returns a 2D array where the subarrays represent unique pairs of elements.</p>
+    <h3>Polya's 4-Step Approach:</h3>
+    <pre><code>
+// Step 1: Understand the problem
+// We need to create unique pairs from an array of elements.
+
+// Step 2: Plan
+// - Initialize an empty array to store the pairs.
+// - Use a nested loop to generate all unique pairs.
+// - Push each unique pair into the result array.
+// - Return the result array.
+//Input: an array we'll call arr
+//Ouput: after pushing unique paits, return resulting array we'll call pairs
+
+// Step 3: Code
+function uniquePairs(arr) {
+    let pairs = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            pairs.push([arr[i], arr[j]]);
+        }
+    }
+    return pairs;
+}
+
+// Step 4: Test
+console.log(uniquePairs([1, 2, 3])); // Expected output: [[1, 2], [1, 3], [2, 3]]
+console.log(uniquePairs(["a", "b", "c"])); // Expected output: [["a", "b"], ["a", "c"], ["b", "c"]]
+</code></pre>
+
+    <h2>Problem 5: Find Smallest Number</h2>
+    <p><strong>Problem:</strong> Define a function that takes in an array of numbers and returns the smallest value in the array. If the array is empty, return <code>null</code>.</p>
+    <h3>Polya's 4-Step Approach:</h3>
+    <pre><code>
+// Step 1: Understand the problem
+// We need to find the smallest number in an array. If the array is empty, return null.
+
+// Step 2: Plan
+// - Check if the array is empty. If so, return null.
+// - Initialize a variable to store the smallest number (set it to the first element of the array).
+// - Iterate through the array, updating the smallest number if a smaller number is found.
+// - Return the smallest number.
+//Input: a non empty arry we'll call arr
+//Outpu: return smallest value captured in a variable we'll call smallest
+
+// Step 3: Code
+function findSmallest(arr) {
+    if (arr.length === 0) return null;
+    let smallest = arr[0];
+    for (let num of arr) {
+        if (num < smallest) {
+            smallest = num;
+        }
+    }
+    return smallest;
+}
+
+// Step 4: Test
+console.log(findSmallest([10, 5, 3, 7])); // Expected output: 3
+console.log(findSmallest([])); // Expected output: null
+</code></pre>
+
+    <h2>Conclusion:</h2>
+    <p>By following Polya's 4-step method, we successfully solved multiple JavaScript problems involving array manipulation, prime filtering, unique pairs, and finding the smallest value. Each solution follows a structured approach for problem-solving and has been tested for various edge cases.</p>
+
+</body>
+</html>

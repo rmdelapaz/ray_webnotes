@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object-Oriented JavaScript Development</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Object-Oriented JavaScript Development: Encapsulation, Classes, and References</h1>
+    </header>
+    <section>
+        <h2>Planning Object-Oriented JavaScript Using Encapsulation</h2>
+        <p>Encapsulation is a core principle of object-oriented programming (OOP). It refers to the bundling of data (variables) and methods (functions) that operate on that data within a single entity, or class. In JavaScript, classes serve as blueprints for creating objects with predefined properties and behaviors.</p>
+        <p>Imagine you're designing a robot. Instead of revealing the inner workings of the robot to everyone, you provide buttons for the user to interact with. Encapsulation in JavaScript works similarly by keeping certain properties private and allowing external interactions through public methods.</p>
+    </section>
+    <section>
+        <h2>Constructing a JavaScript Class and Instantiating It</h2>
+        <p>In ES6, classes can be defined using the <code>class</code> keyword. Here's a simple example:</p>
+        <pre><code>class Car {
+    constructor(make, model) {
+        this.make = make;
+        this.model = model;
+        this.speed = 0;
+    }
+    
+    drive() {
+        this.speed += 10;
+        return `${this.make} ${this.model} is driving at ${this.speed} mph.`;
+    }
+}
+
+const myCar = new Car('Toyota', 'Corolla');
+console.log(myCar.drive());  // Output: Toyota Corolla is driving at 10 mph
+</code></pre>
+        <p>In this example, we create a <code>Car</code> class with a constructor to initialize the car's make and model, and a method <code>drive</code> to increase the speed. The class is then instantiated with <code>new Car()</code>, and the method is invoked on the instance.</p>
+        <p>Think of the class as a blueprint, like an architect's drawing for a house. Each time you create a new instance using <code>new</code>, you're building a new house (object) from that blueprint.</p>
+    </section>
+    <section>
+        <h2>References: Object vs. Primitive</h2>
+        <p>In JavaScript, there's a crucial difference between how objects and primitive types (such as numbers, strings, and booleans) are handled. When you assign a primitive value, JavaScript copies it. But when you assign an object, JavaScript copies the reference to that object.</p>
+        <h3>Example:</h3>
+        <pre><code>let num1 = 5;
+let num2 = num1;
+num2 = 10;
+console.log(num1);  // Output: 5
+
+let car1 = { make: 'Toyota' };
+let car2 = car1;
+car2.make = 'Honda';
+console.log(car1.make);  // Output: Honda
+</code></pre>
+        <p>Here, changing <code>num2</code> doesn't affect <code>num1</code> because they are primitives. But changing <code>car2</code> does affect <code>car1</code> because they reference the same object.</p>
+        <p>Think of object references like sharing the same map. If two people hold copies of the same map, changing one map changes the other since they point to the same underlying directions (object).</p>
+    </section>
+    <section>
+        <h2>Creating a Reference to a Class Instance</h2>
+        <p>When you create an instance of a class, you're creating a reference to that instance. Here's an example:</p>
+        <pre><code>const firstCar = new Car('Ford', 'Fiesta');
+const secondCar = firstCar;
+secondCar.model = 'Focus';
+
+console.log(firstCar.model);  // Output: Focus
+</code></pre>
+        <p>In this case, <code>firstCar</code> and <code>secondCar</code> reference the same object. Changing the model via <code>secondCar</code> also affects <code>firstCar</code>.</p>
+    </section>
+    <section>
+        <h2>Creating a Deep Copy of a Class Instance</h2>
+        <p>If you want to avoid this reference-sharing behavior and truly copy an object, you need to create a deep copy. One way to do this is by using <code>JSON.parse()</code> and <code>JSON.stringify()</code>:</p>
+        <pre><code>const originalCar = new Car('Tesla', 'Model S');
+const copiedCar = JSON.parse(JSON.stringify(originalCar));
+
+copiedCar.model = 'Model 3';
+console.log(originalCar.model);  // Output: Model S
+</code></pre>
+        <p>By using this technique, <code>copiedCar</code> is a deep copy of <code>originalCar</code>, meaning they no longer reference the same object.</p>
+        <p>Think of this as taking a photocopy of a document. Once you have a photocopy, you can write on it without changing the original.</p>
+    </section>
+    <section>
+        <h2>Debugging Reference Confusion</h2>
+        <p>One common error when working with objects and instances is accidentally modifying a reference when you intended to create a copy. If you see unexpected changes in your objects, it's likely because you're working with references instead of copies.</p>
+        <p>Example: You might encounter this when passing objects to functions that unintentionally modify them:</p>
+        <pre><code>function modifyCar(car) {
+    car.make = 'BMW';
+}
+
+const myCar = new Car('Audi', 'A4');
+modifyCar(myCar);
+
+console.log(myCar.make);  // Output: BMW
+</code></pre>
+        <p>Here, the <code>modifyCar</code> function changes the original object because objects are passed by reference, not by value.</p>
+    </section>
+    <section>
+        <h2>Creating and Using Class Instance Methods and Variables</h2>
+        <p>Instance methods and variables allow you to define the behavior and properties specific to each instance of a class. In the earlier <code>Car</code> example, <code>make</code>, <code>model</code>, and <code>speed</code> are instance variables, while <code>drive</code> is an instance method.</p>
+        <p>You can call these methods and access the variables through the instance:</p>
+        <pre><code>const car = new Car('Mazda', 'CX-5');
+console.log(car.make);  // Output: Mazda
+console.log(car.drive());  // Output: Mazda CX-5 is driving at 10 mph.
+</code></pre>
+    </section>
+    <footer>
+        <p>Keep practicing with JavaScript classes and object references to master object-oriented programming in JavaScript!</p>
+    </footer>
+</body>
+</html>

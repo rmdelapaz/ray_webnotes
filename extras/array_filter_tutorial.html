@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Array.filter in JavaScript - Lecture</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Understanding Array.filter in JavaScript</h1>
+
+    <h2>Introduction to Array.filter</h2>
+    <p><strong>Array.filter</strong> is a method available on JavaScript arrays that creates a new array containing only the elements that pass a specified test. The test is defined by a callback function that returns either <code>true</code> or <code>false</code> for each element.</p>
+
+    <h3>Real-World Analogy</h3>
+    <p>Imagine you have a basket of fruits, and you only want to keep the apples. You would go through the basket, look at each fruit, and keep the apples while discarding the others. This is how <code>filter</code> works—it looks at each item in the array, keeps the ones that pass the test, and discards the rest.</p>
+
+    <h2>How Array.filter Works</h2>
+    <p>The <code>filter</code> method takes a callback function that returns <code>true</code> for the elements you want to keep and <code>false</code> for the ones you want to remove. The result is a new array containing only the elements that pass the test.</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3, 4, 5];
+
+    let evenNumbers = numbers.filter(function(num) {
+        return num % 2 === 0;  // Keep only even numbers
+    });
+
+    console.log(evenNumbers);  // [2, 4]
+    </code></pre>
+
+    <h3>Example 1: Filtering an Array of Numbers</h3>
+    <p>In this example, we filter out the odd numbers and keep only the even ones:</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3, 4, 5];
+
+    let evenNumbers = numbers.filter(function(num) {
+        return num % 2 === 0;
+    });
+
+    console.log(evenNumbers);  // Output: [2, 4]
+    </code></pre>
+
+    <h3>Example 2: Filtering an Array of Strings</h3>
+    <p>You can also filter strings. In this case, we filter an array of words to keep only those with more than 3 characters:</p>
+
+    <pre><code>
+    let words = ['apple', 'banana', 'cat', 'dog', 'elephant'];
+
+    let longWords = words.filter(function(word) {
+        return word.length > 3;
+    });
+
+    console.log(longWords);  // Output: ['apple', 'banana', 'elephant']
+    </code></pre>
+
+    <h2>When and Why to Use Array.filter</h2>
+    <p>Use <code>filter</code> when you need to remove unwanted elements from an array based on a specific condition. It’s ideal for situations where you need to refine or reduce a dataset, like keeping only numbers above a certain threshold or filtering out inactive users from a list.</p>
+
+    <h3>Real-World Usage</h3>
+    <p>Suppose you have an array of people with their ages, and you want to filter out only those who are eligible to vote (ages 18 and older):</p>
+
+    <pre><code>
+    let people = [
+        { name: 'Alice', age: 17 },
+        { name: 'Bob', age: 20 },
+        { name: 'Charlie', age: 16 },
+        { name: 'David', age: 22 }
+    ];
+
+    let voters = people.filter(function(person) {
+        return person.age >= 18;
+    });
+
+    console.log(voters);  
+    // Output: [{ name: 'Bob', age: 20 }, { name: 'David', age: 22 }]
+    </code></pre>
+
+    <h2>Difference Between filter and map</h2>
+    <p>While both <code>filter</code> and <code>map</code> create a new array, they serve different purposes:</p>
+    <ul>
+        <li><code>filter</code> creates a new array with only the elements that pass a test.</li>
+        <li><code>map</code> creates a new array by transforming each element of the original array.</li>
+    </ul>
+    <p>If you want to reduce the number of elements in an array based on a condition, use <code>filter</code>. If you want to transform every element, use <code>map</code>.</p>
+
+    <h3>Example: Filtering and Then Mapping</h3>
+    <p>You can combine <code>filter</code> with <code>map</code> for more complex operations:</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3, 4, 5];
+
+    let doubledEvenNumbers = numbers
+        .filter(function(num) {
+            return num % 2 === 0;  // Filter only even numbers
+        })
+        .map(function(num) {
+            return num * 2;  // Then double them
+        });
+
+    console.log(doubledEvenNumbers);  // Output: [4, 8]
+    </code></pre>
+
+    <h2>Common Pitfalls of Array.filter</h2>
+    <p>Remember that <code>filter</code> returns a new array and does not modify the original array. If you need to modify the original array, you’ll need to assign the result of <code>filter</code> to a new variable or use another method.</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3, 4, 5];
+
+    let filteredNumbers = numbers.filter(function(num) {
+        return num > 3;
+    });
+
+    console.log(filteredNumbers);  // Output: [4, 5]
+    console.log(numbers);  // Original array remains unchanged: [1, 2, 3, 4, 5]
+    </code></pre>
+
+    <h2>Conclusion</h2>
+    <p>The <code>filter</code> method is an essential tool for refining arrays in JavaScript. It allows you to remove unwanted elements and return a new array with only the elements that pass the specified test. Use it when you need to reduce a dataset based on conditions.</p>
+
+    <h3>Further Practice</h3>
+    <ul>
+        <li>Use <code>filter</code> to create a list of even numbers from an array of integers.</li>
+        <li>Filter an array of objects to keep only those with a certain property or value.</li>
+        <li>Experiment with combining <code>filter</code> and <code>map</code> to both refine and transform data in a single chain of operations.</li>
+    </ul>
+</body>
+</html>

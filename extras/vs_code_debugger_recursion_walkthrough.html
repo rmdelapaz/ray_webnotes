@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>VS Code Debugger Walkthrough: Recursion Example</title>
+</head>
+<body>
+    <h1>VS Code Debugger Walkthrough: Debugging Recursion</h1>
+    <p>Recursion is like looking into a mirror that reflects itself endlessly. It can be confusing at first, but with the help of the VS Code debugger, you can easily follow the recursive calls and understand how they work.</p>
+    
+    <h2>Recursion Example: Factorial Function</h2>
+    <p>Let's walk through an example of debugging a simple recursive function that calculates the factorial of a number.</p>
+    
+    <pre><code>
+function factorial(n) {
+    if (n === 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+let result = factorial(5);
+console.log(result);
+    </code></pre>
+    
+    <h2>Setting Breakpoints</h2>
+    <p>To debug this recursive function, set a breakpoint on the line:</p>
+    <pre><code>return n * factorial(n - 1);</code></pre>
+    <p>Doing this will allow you to stop at each recursive call and see how the value of <code>n</code> changes at each step.</p>
+    
+    <h2>Starting the Debugger</h2>
+    <p>Once the breakpoint is set, press <code>F5</code> to start the debugger. The code will pause at the first recursive call, and you can inspect the value of <code>n</code>.</p>
+    
+    <h2>Stepping Through Recursive Calls</h2>
+    <p>Now that you've hit the breakpoint, you can use <code>Step Into</code> (F11) to follow each recursive call. This is like walking through a maze and marking every turn you take, so you can trace your steps.</p>
+    <p>Each time the function calls itself, you'll notice the value of <code>n</code> getting smaller, until it eventually reaches <code>1</code>. At that point, the function stops making recursive calls and begins to return the values back up the chain.</p>
+    
+    <h2>Watching the Stack</h2>
+    <p>As you step through the recursion, you can observe the call stack. The call stack is like a stack of plates; every time a function is called, a new "plate" is added to the stack. When a function finishes, the top "plate" is removed.</p>
+    <p>In this example, each recursive call to <code>factorial(n)</code> adds a new entry to the stack. Once the recursion bottoms out and begins to return values, the stack shrinks as each function completes.</p>
+
+    <h2>Inspecting Variables</h2>
+    <p>At each step, you can inspect the value of <code>n</code> by hovering over it or checking the Variables pane. You'll see <code>n</code> decrease with each call, and as the recursion unwinds, you'll observe the multiplication happen as the function returns values up the stack.</p>
+
+    <h2>Final Thoughts</h2>
+    <p>Debugging recursion might seem daunting, but using the VS Code debugger makes it much clearer. You can step into each call, inspect variables, and watch how the call stack grows and shrinks. This gives you a crystal-clear view of how recursion works, like watching a loop unravel in slow motion.</p>
+
+    <p>Using breakpoints, stepping through, and watching the call stack are key techniques that will make debugging recursive functions much easier and more intuitive.</p>
+</body>
+</html>

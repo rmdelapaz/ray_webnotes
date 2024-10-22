@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Function Expressions Enhanced</title>
+</head>
+<body>
+    <h1>Function Expressions</h1>
+    <p>Functions are like the <strong>tools</strong> in a developer's <strong>toolbox</strong>. You’ve already been using many functions throughout this course, and this will only continue because they are the <strong>building blocks</strong> of the applications we will eventually create. Just like how a carpenter relies on different tools for different tasks, we rely on functions to perform specific actions in our code.</p>
+    
+    <p>But here’s the twist—<em>what if</em> those tools could be stored in a <em>box</em> and used whenever you want, in a way that's interchangeable with other tools? That’s exactly how JavaScript treats functions! They can be stored just like numbers, strings, or even arrays. Let's dig into this idea a bit more.</p>
+
+    <p>When you're done reading this, you should be able to:</p>
+    <ul>
+        <li>Understand that functions are <strong>first-class objects</strong> in JavaScript.</li>
+        <li>Define a function using <strong>function expression syntax</strong>.</li>
+    </ul>
+
+    <h2>Functions as First-Class Objects</h2>
+    <p>Imagine JavaScript is a big <em>warehouse</em>. In this warehouse, you can place anything you create—numbers, strings, booleans, and even <strong>functions</strong>—into boxes (variables). JavaScript considers functions as "first-class objects," meaning we can pick them up, label them, move them around, and store them just like any other item. Think of functions as <em>multi-purpose tools</em> that can be carried in your toolbelt.</p>
+
+    <p>Here’s a simple example that shows this "first-class object" idea in action:</p>
+    <pre><code>
+    let calculateAverage = function(a, b) {{
+        return (a + b) / 2;
+    }};
+
+    console.log(calculateAverage(10, 20)); // 15
+    </code></pre>
+
+    <p>In the example above, we <strong>pack</strong> the <code>calculateAverage</code> tool (function) into a box (variable). We can <strong>open</strong> that box later to use the function by simply calling the variable name. Notice how we don’t give the function its own name inside the box—just like packing a tool in a generic box and labeling it outside.</p>
+
+    <p>This is called <strong>function expression syntax</strong>, where we define a function by storing it in a variable. On the other hand, if we directly give the function a name like so:</p>
+    <pre><code>
+    function myFunctionName(arg1, arg2) {{}}
+    </code></pre>
+
+    <p>This is called <strong>function declaration syntax</strong>. Both are valid, but they serve different purposes in different situations. Think of the difference like this: A <strong>declared function</strong> is like a special-purpose tool labeled on the outside and ready to be used, while an <strong>expressed function</strong> is like a multi-purpose tool stored for later use.</p>
+
+    <h2>A Peek Under the Hood</h2>
+    <p>Feeling like storing a function in a variable is a bit too abstract? It’s a bit like magic, right? Let’s demystify it with a simple analogy.</p>
+
+    <p>Imagine you have a box labeled “8”:</p>
+    <pre><code>
+    let myNum = 4 + 4;
+    console.log(myNum); // prints 8
+    </code></pre>
+
+    <p>Here, <code>4 + 4</code> is evaluated first to give the value “8,” which is stored in <code>myNum</code>. Simple, right?</p>
+
+    <p>Similarly, when you store a function in a variable:</p>
+    <pre><code>
+    let myFunc = function() {{
+        console.log("I'm a function");
+    }};
+    </code></pre>
+
+    <p>The function is evaluated and stored inside <code>myFunc</code>. When you later <strong>open</strong> the box (variable), you find a fully functional tool inside! It’s like pulling out a pre-packaged tool you can use whenever you need it:</p>
+    <pre><code>
+    console.log(myFunc); // prints [Function: myFunc]
+    myFunc(); // prints "I'm a function"
+    </code></pre>
+
+    <p>Notice that if you simply reference <code>myFunc</code>, JavaScript tells you that there’s a function inside the box ([Function: myFunc]). But if you <strong>use</strong> it by calling it with parentheses <code>myFunc()</code>, the function actually does its job and prints, “I’m a function.”</p>
+
+    <h2>Anonymous Functions</h2>
+    <p>Now, let’s talk about <strong>anonymous functions</strong>. An anonymous function is like a <em>nameless gadget</em>. Before you store it in a variable, it doesn’t have any label or identity—it’s just a tool without a name.</p>
+
+    <p>In the example:</p>
+    <pre><code>
+    let myFunc = function() {{
+        console.log("I'm a function");
+    }};
+    </code></pre>
+
+    <p>The part after the <code>myFunc = </code> (the <code>function() {}</code>) is anonymous. It only gets its identity when you store it inside the <code>myFunc</code> variable. Once it’s packed in the box and labeled, you wouldn’t call it “anonymous” anymore because now it’s got a label—<code>myFunc</code>!</p>
+
+    <p>So, anonymous functions are just temporary tools, ready to be assigned a label and used, like a gadget that hasn’t yet been put in a box.</p>
+<!-- 
+    <h2>Downloadable Example</h2>
+    <p>Here's a simple, no-CSS HTML example illustrating these concepts. You can download it and open it in your browser.</p>
+
+    <pre><code>
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;Function Expressions&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Function Expressions in JavaScript&lt;/h1&gt;
+        
+        &lt;h2&gt;First-Class Objects&lt;/h2&gt;
+        &lt;p&gt;In JavaScript, functions are considered "first-class objects." This means you can treat them like any other value by storing them in variables.&lt;/p&gt;
+        
+        &lt;h2&gt;Example: Storing a Function&lt;/h2&gt;
+        &lt;pre&gt;
+        &lt;code&gt;
+        let calculateAverage = function(a, b) {{
+            return (a + b) / 2;
+        }};
+
+        console.log(calculateAverage(10, 20)); // Outputs 15
+        &lt;/code&gt;
+        &lt;/pre&gt;
+        
+        &lt;h2&gt;Anonymous Functions&lt;/h2&gt;
+        &lt;p&gt;An anonymous function is a function without a name until it is stored in a variable.&lt;/p&gt;
+        
+        &lt;h2&gt;Example: Anonymous Function&lt;/h2&gt;
+        &lt;pre&gt;
+        &lt;code&gt;
+        let myFunc = function() {{
+            console.log("I'm a function");
+        }};
+
+        console.log(myFunc); // Outputs [Function: myFunc]
+        myFunc(); // Outputs "I'm a function"
+        &lt;/code&gt;
+        &lt;/pre&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    </code></pre> -->
+</body>
+</html>

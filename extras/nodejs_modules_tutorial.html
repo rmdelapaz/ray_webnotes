@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Modules in Node.js - A Beginner's Guide</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Using Modules in Node.js - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Add a Local Module to a Node.js Application</h2>
+            <p>
+                In Node.js, you can create your own local modules and add them to your application. A module is simply a JavaScript file that contains related code. To add a local module, you create a new file, write the necessary code inside it, and then import it into your main application.
+            </p>
+            <p><strong>Example:</strong> Let’s say you want to add a local module that performs basic math operations like addition and subtraction. First, create a file called <code>math.js</code> in your project’s directory:
+            </p>
+            <pre><code>
+// math.js (local module)
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Use the module.exports Property to Export from a Module</h2>
+            <p>
+                To make the functions or variables in a module accessible to other files in your application, you need to export them using the <code>module.exports</code> property. This allows other files to import and use the module’s content.
+            </p>
+            <p><strong>Example:</strong> In the <code>math.js</code> file, you can export the <code>add</code> and <code>subtract</code> functions so they can be used elsewhere in the application:
+            </p>
+            <pre><code>
+// Export functions from math.js
+module.exports = {
+    add,
+    subtract
+};
+            </code></pre>
+            <p>Now, both functions are exported as part of an object, making them available for use in other parts of your project.</p>
+        </section>
+
+        <section>
+            <h2>Use the require() Function to Import from a Module</h2>
+            <p>
+                To import functions or variables from a module into another file, you use the <code>require()</code> function. This function reads the exported content from a local module and makes it available for use in the current file.
+            </p>
+            <p><strong>Example:</strong> To use the <code>add</code> and <code>subtract</code> functions from the <code>math.js</code> module in your main application, import them using <code>require()</code>:
+            </p>
+            <pre><code>
+// app.js (main application)
+const math = require('./math');
+
+const sum = math.add(5, 3);
+const difference = math.subtract(5, 3);
+
+console.log(`Sum: ${sum}`);          // Output: Sum: 8
+console.log(`Difference: ${difference}`);  // Output: Difference: 2
+            </code></pre>
+            <p>
+                Here, the <code>require()</code> function imports the <code>add</code> and <code>subtract</code> functions from the <code>math</code> module, and you can now use them in <code>app.js</code>.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Node.js Modules Tutorial for Beginners</p>
+    </footer>
+</body>
+</html>

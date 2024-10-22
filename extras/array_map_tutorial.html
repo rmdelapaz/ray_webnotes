@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Array.map in JavaScript - Lecture</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Understanding Array.map in JavaScript</h1>
+
+    <h2>Introduction to Array.map</h2>
+    <p><strong>Array.map</strong> is a method available on JavaScript arrays that creates a new array by applying a given function to each element in the original array. It does not modify the original array but instead returns a new one with the transformed elements.</p>
+
+    <h3>Real-World Analogy</h3>
+    <p>Imagine you have a tray of cookies, and you want to add icing to each one. Instead of altering the cookies on the tray, you create a new tray where each cookie has icing. <code>map</code> works similarly—it takes each element in an array, applies a transformation, and returns a new array with the transformed elements.</p>
+
+    <h2>How Array.map Works</h2>
+    <p>The <code>map</code> method takes a callback function as its argument. This callback is executed for each element of the array, and the result is stored in a new array. The callback function can accept up to three parameters:</p>
+    <ul>
+        <li>The <strong>current element</strong> being processed.</li>
+        <li>The <strong>index</strong> of the current element (optional).</li>
+        <li>The <strong>array</strong> the method is being called on (optional).</li>
+    </ul>
+
+    <pre><code>
+    let numbers = [1, 2, 3, 4];
+
+    let doubled = numbers.map(function(element, index, array) {
+        return element * 2;
+    });
+
+    console.log(doubled);  // [2, 4, 6, 8]
+    </code></pre>
+
+    <h3>Example 1: Simple Transformation</h3>
+    <p>Here, we use <code>map</code> to multiply each number in the array by 2:</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3, 4];
+
+    let doubled = numbers.map(function(num) {
+        return num * 2;
+    });
+
+    console.log(doubled);  // Output: [2, 4, 6, 8]
+    </code></pre>
+
+    <h3>Example 2: Using Index</h3>
+    <p>The index can be used if you need to include information about the element's position in the array:</p>
+
+    <pre><code>
+    let fruits = ['apple', 'banana', 'cherry'];
+
+    let indexedFruits = fruits.map(function(fruit, index) {
+        return index + ': ' + fruit;
+    });
+
+    console.log(indexedFruits);  
+    // Output: ['0: apple', '1: banana', '2: cherry']
+    </code></pre>
+
+    <h2>When and Why to Use Array.map</h2>
+    <p>Use <code>map</code> when you need to transform every element in an array and return a new array of the same length with the transformed values. It’s ideal for operations like converting values, applying calculations, or changing the structure of data.</p>
+
+    <h3>Real-World Usage</h3>
+    <p>Suppose you have an array of prices in dollars and want to convert them into euros. You can use <code>map</code> to apply the conversion to every price:</p>
+
+    <pre><code>
+    let pricesInDollars = [10, 20, 30];
+
+    let pricesInEuros = pricesInDollars.map(function(price) {
+        return price * 0.85;  // Assuming 1 dollar = 0.85 euros
+    });
+
+    console.log(pricesInEuros);  
+    // Output: [8.5, 17, 25.5]
+    </code></pre>
+
+    <h2>Difference Between forEach and map</h2>
+    <p>While both <code>forEach</code> and <code>map</code> iterate over arrays, there is a key difference:</p>
+    <ul>
+        <li><code>forEach</code> executes a function for each element but doesn’t return anything.</li>
+        <li><code>map</code> executes a function for each element and returns a new array with the transformed elements.</li>
+    </ul>
+    <p>If you need to create a new array based on an existing one, always use <code>map</code> rather than <code>forEach</code>.</p>
+
+    <h3>Example: Using forEach Instead of map</h3>
+    <p>Here’s an example of using <code>forEach</code> where <code>map</code> would be better:</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3];
+    let doubled = [];
+
+    numbers.forEach(function(num) {
+        doubled.push(num * 2);
+    });
+
+    console.log(doubled);  // Output: [2, 4, 6]
+    </code></pre>
+
+    <p>With <code>map</code>, this task becomes cleaner:</p>
+
+    <pre><code>
+    let numbers = [1, 2, 3];
+    let doubled = numbers.map(function(num) {
+        return num * 2;
+    });
+
+    console.log(doubled);  // Output: [2, 4, 6]
+    </code></pre>
+
+    <h2>Common Pitfalls of Array.map</h2>
+    <p><code>map</code> should always return a new array with the same length as the original. Be careful not to mistakenly return <code>undefined</code> or alter the length of the array:</p>
+
+    <pre><code>
+    let arr = [1, 2, 3];
+
+    let result = arr.map(function(el) {
+        if (el > 2) {
+            return el * 2;
+        }
+        // No return statement for elements <= 2
+    });
+
+    console.log(result);  // Output: [undefined, undefined, 6]
+    </code></pre>
+
+    <p>In this example, only elements greater than 2 return a value, so the rest of the array becomes <code>undefined</code>. Ensure that your callback always returns something for each element.</p>
+
+    <h2>Conclusion</h2>
+    <p>The <code>map</code> method is a powerful tool for transforming arrays in JavaScript. Use it when you need to create a new array where each element has been modified based on the original array. Remember, <code>map</code> returns a new array, so if you just need to execute a side effect, consider using <code>forEach</code> instead.</p>
+
+    <h3>Further Practice</h3>
+    <ul>
+        <li>Use <code>map</code> to convert an array of numbers into their squared values.</li>
+        <li>Try using <code>map</code> to create an array of the lengths of strings from an array of words.</li>
+        <li>Experiment with transforming an array of objects by extracting and returning specific properties from each object.</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Recursion in JavaScript</h1>
+        <p>A Guide for New Developers with Real-World Examples and Analogies</p>
+    </header>
+
+    <section>
+        <h2>Learning Objectives</h2>
+        <ul>
+            <li>Identify the base and recursive cases in a recursive function</li>
+            <li>Use default parameters for functions</li>
+            <li>Define what a stack overflow means in JavaScript’s call stack</li>
+            <li>Identify the cause of the error - <code>RangeError: Maximum call stack</code></li>
+            <li>Map out the recursive call stack when running a test case through a recursion function</li>
+            <li>Solve problems using recursion</li>
+            <li>Debug a buggy recursive function</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>What is Recursion?</h2>
+        <p><strong>Analogy:</strong> Think of recursion like looking into two mirrors facing each other. The reflection goes on infinitely, just as a recursive function keeps calling itself until it reaches a stopping point. The key is to make sure there’s a base case (a stopping point), so the recursion doesn’t go on forever!</p>
+    </section>
+
+    <section>
+        <h2>Base Case vs. Recursive Case</h2>
+        <p>Every recursive function has two parts:</p>
+        <ul>
+            <li><strong>Base Case:</strong> The condition that stops the recursion. It prevents the function from calling itself infinitely.</li>
+            <li><strong>Recursive Case:</strong> The part where the function calls itself, solving a smaller or simpler problem.</li>
+        </ul>
+        <pre><code>function factorial(n) {
+    if (n === 1) {  // Base case
+        return 1;
+    }
+    return n * factorial(n - 1);  // Recursive case
+}
+
+console.log(factorial(5));  // Output: 120
+</code></pre>
+        <p>In this example, the base case is when <code>n === 1</code>, and the recursive case is <code>factorial(n - 1)</code>.</p>
+    </section>
+
+    <section>
+        <h2>Using Default Parameters in Functions</h2>
+        <p>Default parameters allow you to set a value for a function parameter if no argument is provided. Here's an example of using default parameters in a recursive function:</p>
+        <pre><code>function countdown(n = 10) {
+    if (n === 0) {
+        console.log("Blast off!");
+        return;
+    }
+    console.log(n);
+    countdown(n - 1);
+}
+
+countdown();  // Starts at 10 by default
+</code></pre>
+        <p>In this case, if no argument is passed to the <code>countdown</code> function, it defaults to starting at 10.</p>
+    </section>
+
+    <section>
+        <h2>What is a Stack Overflow?</h2>
+        <p><strong>Metaphor:</strong> Imagine you are stacking books. If you keep adding books without removing any, the stack will eventually collapse. In programming, a stack overflow occurs when the call stack (where function calls are managed) becomes too large due to excessive function calls without completing them.</p>
+        <p>In JavaScript, this error is called a <code>RangeError: Maximum call stack exceeded</code>, meaning that too many function calls are waiting to be resolved.</p>
+    </section>
+
+    <section>
+        <h2>Understanding RangeError: Maximum Call Stack Exceeded</h2>
+        <p>This error happens when there is no base case, or the recursion doesn’t terminate properly. Here's an example of what causes a stack overflow:</p>
+        <pre><code>function endlessRecursion() {
+    endlessRecursion();
+}
+
+endlessRecursion();  // This will cause a stack overflow
+</code></pre>
+        <p>Since the function <code>endlessRecursion</code> has no base case, it calls itself indefinitely, causing the call stack to overflow.</p>
+    </section>
+
+    <section>
+        <h2>Mapping Out the Recursive Call Stack</h2>
+        <p>Let’s break down how the call stack works during recursion with an example:</p>
+        <pre><code>function sum(n) {
+    if (n === 0) {
+        return 0;
+    }
+    return n + sum(n - 1);
+}
+
+sum(3);  // Output: 6
+</code></pre>
+        <p>Here’s how the call stack looks during the execution of <code>sum(3)</code>:</p>
+        <ul>
+            <li><code>sum(3)</code> calls <code>sum(2)</code></li>
+            <li><code>sum(2)</code> calls <code>sum(1)</code></li>
+            <li><code>sum(1)</code> calls <code>sum(0)</code></li>
+            <li><code>sum(0)</code> returns 0 (base case)</li>
+            <li><code>sum(1)</code> returns 1 + 0 = 1</li>
+            <li><code>sum(2)</code> returns 2 + 1 = 3</li>
+            <li><code>sum(3)</code> returns 3 + 3 = 6</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Solving Problems with Recursion</h2>
+        <p>Recursion is often used to solve problems that can be broken down into smaller sub-problems. Examples include calculating factorials, summing numbers, and solving complex algorithms like quicksort or binary search.</p>
+    </section>
+
+    <section>
+        <h2>Debugging a Buggy Recursive Function</h2>
+        <p>Let’s look at an example of a buggy recursive function and how to debug it:</p>
+        <pre><code>// Buggy function
+function reverseString(str) {
+    if (str.length === 0) {
+        return str;
+    }
+    return reverseString(str.substring(1)) + str[0];
+}
+
+console.log(reverseString("hello"));  // Output: "olleh"
+</code></pre>
+        <p>This function works, but if there were no base case, the recursion would go on forever. The key to debugging recursion is ensuring the base case is correctly defined and the recursive call moves toward the base case.</p>
+    </section>
+
+    <footer>
+        <p>Further Learning: Practice solving recursion problems and debugging functions with stack overflow errors. Explore more advanced recursion topics like tail-call optimization.</p>
+    </footer>
+</body>
+</html>

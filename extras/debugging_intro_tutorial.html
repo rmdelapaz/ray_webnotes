@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to Debugging in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Intro to Debugging</h1>
+    <p>Bugs, or code errors, are unavoidable. Great programmers don't write perfect, bug-free code every time. In fact, it's usually the opposite. Great coders have created, and fixed, thousands and thousands of bugs. This provides the experience and practice to make them expert debuggers.</p>
+    <p>Debugging can be frustrating but here are three simple techniques you can use to squash those pesky bugs!</p>
+
+    <ul>
+        <li>Read the error message (if there is one)</li>
+        <li>Use console.log() to debug malfunctioning code</li>
+        <li>Write tests that cover common use and edge cases</li>
+    </ul>
+
+    <h2>Read the error message</h2>
+    <p>Let's say you're writing a function to see if a number is smaller than ten.</p>
+
+    <pre>
+function numberSmallerThanTen(number) {
+ if (num < 10) {
+  return true;
+ } else {
+  return false;
+ }
+}
+
+numberSmallerThanTen(5);
+    </pre>
+
+    <p>You run this to see if 5 is smaller than 10 and get this:</p>
+
+    <pre>
+/tmp/file.js:2
+  if (num < 10) {
+  ^
+
+ReferenceError: num is not defined
+    at numberSmallerThanTen (/tmp/file.js:2:3)
+    ...
+    </pre>
+
+    <p>This error message tells us exactly what's wrong with the code! You are trying to call num without defining it. This number should be defined as a parameter in the function. Looking there, you can see that you accidentally named your parameter <strong>number</strong> instead of <strong>num</strong>. Changing that fixes our bug.</p>
+
+    <pre>
+function numberSmallerThanTen(num) { // fixed this line
+ if (num < 10) {
+  return true;
+ } else {
+  return false;
+ }
+}
+
+numberSmallerThanTen(5);
+    </pre>
+
+    <h2>Use console.log() to debug malfunctioning code</h2>
+    <p>You learned how to use console.log() to print things out in your code. console.log is primarily used to log your code for debugging. console.log is very useful for debugging so use it liberally! Take this example:</p>
+
+    <pre>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] == "s") {
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+    }
+  }
+  return str;
+}
+    </pre>
+
+    <p>Input: "discussing" <br> Expected Output: "dicuing"</p>
+    <p>Actual Output:</p>
+
+    <pre>
+> removeAllS("discussing");
+'dicusing'
+    </pre>
+
+    <p>You're still seeing an s leftover. What's going on here? Let's use console.log() to figure that out.</p>
+
+    <pre>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    console.log("index: ", i);
+    if (str[i] == "s") {
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+    }
+  }
+  return str;
+}
+> removeAllS("discussing");
+index:  0
+index:  1
+index:  2
+index:  3
+index:  4
+index:  5
+index:  6
+index:  7
+'dicusing'
+    </pre>
+
+    <p>The string of "discussing" has a length of 10, but the for loop only goes up to the 7th index. Let's trace the loop further:</p>
+
+    <pre>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    console.log("==== START NEXT FOR LOOP ITERATION ====");
+    console.log("index:", i);
+    console.log("element:", str[i]);
+    if (str[i] == "s") {
+      console.log("str before removal:", str);
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+      console.log("str after removal:", str);
+    }
+  }
+  return str;
+}
+> removeAllS("discussing");
+==== START NEXT FOR LOOP ITERATION ====
+index: 2
+element: s
+str before removal: discussing
+str after removal: dicussing
+    </pre>
+
+    <p>It seems like the for loop never checks the second s when there are two s's next to each other. We can fix this by decrementing the index after removal:</p>
+
+    <pre>
+function removeAllS(str) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] == "s") {
+      let firstSubStr = str.substring(0, i);
+      let secondSubStr = str.substring(i + 1, str.length);
+      str = firstSubStr + secondSubStr;
+      i--;
+    }
+  }
+  return str;
+}
+> removeAllS("discussing");
+'dicuing'
+    </pre>
+
+    <h2>Write tests that cover common use and edge cases</h2>
+    <p>Testing helps ensure that your code works in different scenarios, including edge cases like strings with consecutive characters or negative numbers. For example:</p>
+
+    <pre>
+function countdown(num) {
+  while (num > 0) {
+    console.log(num);
+    num--;
+  }
+}
+
+countdown(3.5); // no more infinite loop
+countdown(-10); // no more infinite loop
+    </pre>
+
+    <p>Testing with decimals or negative numbers helps you catch potential bugs early, ensuring your code works in all situations.</p>
+
+    <h2>What you've learned</h2>
+    <p>No programmer writes perfect code the first time through, which is why debugging is a crucial skill to practice. If your code isn't working and you're not sure why, follow these steps and you'll be able to squash even the most elusive bugs!</p>
+
+    <ul>
+        <li>Error messages are your friend! They will give you valuable hints where your bugs are located.</li>
+        <li>Use console.log() to identify where the actual behavior differs from the expected.</li>
+        <li>Create visuals to better understand the problem.</li>
+        <li>Good test cases will help you find sneaky bugs before they live in production code.</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Static Methods and Variables - Tutorial for New Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Static Methods and Variables in JavaScript - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>What are Static Methods and Variables?</h2>
+            <p>
+                Static methods and variables are those that belong to the class itself, rather than to instances of the class. In other words, static methods and variables can be accessed without creating an instance of the class.
+            </p>
+            <p><strong>Analogy:</strong> Imagine a factory that manufactures cars. The factory itself may have some rules and guidelines (static methods) that apply to all cars in general, but these rules are independent of any specific car (instance). In contrast, each car may have its own unique characteristics like color and model (instance variables).</p>
+        </section>
+
+        <section>
+            <h2>How Static Methods and Variables Differ from Instance Methods and Variables</h2>
+            <p>
+                The key difference between static and instance methods/variables lies in their scope and how they are accessed:
+            </p>
+            <ul>
+                <li><strong>Static methods/variables:</strong> Belong to the class itself and are shared by all instances of the class. You can access them directly on the class without needing to create an instance.</li>
+                <li><strong>Instance methods/variables:</strong> Belong to individual instances of the class. Every object (instance) created from the class has its own copy of these variables and methods.</li>
+            </ul>
+            <p><strong>Example:</strong> A class called <code>MathUtils</code> may have a static method <code>add()</code> to perform addition. This method doesn’t depend on any specific instance of <code>MathUtils</code>, so it can be called directly on the class.</p>
+        </section>
+
+        <section>
+            <h2>How to Declare Static Methods and Variables</h2>
+            <p>
+                In JavaScript, you can declare static methods and variables using the <code>static</code> keyword. Let’s see an example of both:
+            </p>
+            <pre><code>
+class MathUtils {
+    static pi = 3.14159; // Static variable
+
+    static add(a, b) {   // Static method
+        return a + b;
+    }
+}
+
+console.log(MathUtils.pi);         // Accessing static variable: 3.14159
+console.log(MathUtils.add(5, 3));  // Accessing static method: 8
+            </code></pre>
+            <p>
+                In this example, <code>pi</code> is a static variable, and <code>add()</code> is a static method. Both can be accessed directly from the class without creating an instance of <code>MathUtils</code>.
+            </p>
+        </section>
+
+        <section>
+            <h2>Practical Usage of Static Methods and Variables</h2>
+            <p>
+                Static methods and variables are useful when you need functionality or data that doesn’t depend on a specific object. For example, you might use static methods in utility classes, where the methods perform general operations that aren’t tied to an instance.
+            </p>
+            <p><strong>Real-world example:</strong> Think about a class that represents a bank account. You may have a static variable for the bank's interest rate, since it applies to all accounts. The interest rate is shared by all instances of the <code>BankAccount</code> class.</p>
+            <pre><code>
+class BankAccount {
+    static interestRate = 0.03;  // Static variable
+
+    constructor(balance) {
+        this.balance = balance;  // Instance variable
+    }
+
+    applyInterest() {
+        this.balance += this.balance * BankAccount.interestRate;  // Using static variable
+    }
+}
+
+const account1 = new BankAccount(1000);
+account1.applyInterest(); // Adds interest based on static interestRate
+console.log(account1.balance);  // Output: 1030
+            </code></pre>
+            <p>
+                Here, the static variable <code>interestRate</code> applies to all bank accounts. Each account has its own balance (instance variable), but they all use the same interest rate.
+            </p>
+        </section>
+
+        <section>
+            <h2>When to Use Static Methods and Variables</h2>
+            <p>
+                Static methods and variables are useful when the behavior or data doesn’t depend on the individual state of an object. If you need functionality that works across all instances or isn’t tied to any particular instance, consider using static methods.
+            </p>
+            <p><strong>Example:</strong> A class <code>Counter</code> could have a static variable to track how many times objects of that class have been created.</p>
+            <pre><code>
+class Counter {
+    static count = 0;  // Static variable to track object creation
+
+    constructor() {
+        Counter.count++;  // Increment static count on object creation
+    }
+
+    static getCount() {
+        return Counter.count;  // Static method to return the count
+    }
+}
+
+const counter1 = new Counter();
+const counter2 = new Counter();
+console.log(Counter.getCount());  // Output: 2 (2 objects created)
+            </code></pre>
+            <p>
+                In this example, every time a new <code>Counter</code> object is created, the static variable <code>count</code> is incremented. The static method <code>getCount()</code> can be called to check how many instances have been created.
+            </p>
+        </section>
+
+        <section>
+            <h2>Common Mistakes When Using Static Methods and Variables</h2>
+            <p>Here are some common mistakes to watch out for when working with static methods and variables:</p>
+            <ul>
+                <li><strong>Attempting to access static methods/variables from an instance:</strong> Static methods and variables belong to the class, not instances. You cannot access them through individual objects.</li>
+                <li><strong>Forgetting to use the <code>static</code> keyword:</strong> Without the <code>static</code> keyword, the method or variable becomes part of the instance, not the class.</li>
+                <li><strong>Confusing static and instance methods/variables:</strong> Remember, instance methods can access both instance and static variables, but static methods can only access static variables.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>

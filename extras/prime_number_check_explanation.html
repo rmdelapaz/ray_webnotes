@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Check Explanation</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Why Use the Square Root When Checking for Prime Numbers?</h1>
+
+    <p>When checking if a number is prime, using the square root of the number as an upper limit for our loop significantly improves the efficiency of the algorithm. Here's why:</p>
+
+    <h2>Key Insight: Divisors Come in Pairs</h2>
+    <p>For any number <code>N</code>, its divisors (the numbers that can divide it without leaving a remainder) come in pairs. For example, if <code>N = 36</code>, some of its divisors are:</p>
+    <ul>
+        <li>1 × 36</li>
+        <li>2 × 18</li>
+        <li>3 × 12</li>
+        <li>4 × 9</li>
+        <li>6 × 6</li>
+    </ul>
+    <p>Notice that once we pass 6 (the square root of 36), we start repeating divisors in reverse order. Therefore, if we check for divisors up to <code>√N</code> (in this case, √36 = 6), we are guaranteed to have checked all possible divisors without having to check larger numbers.</p>
+
+    <h2>Why It Works</h2>
+    <p>If a number <code>N</code> is divisible by any number greater than its square root, then it must also be divisible by some number smaller than its square root. For example, if 36 is divisible by 9, then it's also divisible by 4 (since 9 × 4 = 36).</p>
+    <p>Thus, if no number from 2 to <code>√N</code> divides <code>N</code>, then <code>N</code> has no divisors other than 1 and itself, meaning <code>N</code> is prime.</p>
+
+    <h2>Efficiency</h2>
+    <p>Checking all numbers up to <code>N</code> for divisibility would take <code>O(N)</code> time, but by stopping at <code>√N</code>, we reduce the complexity to <code>O(√N)</code>. This is much faster for large numbers.</p>
+
+    <h3>Example</h3>
+    <p>Suppose you want to check if <code>101</code> is a prime number:</p>
+    <ul>
+        <li>The square root of 101 is approximately <code>10.05</code>.</li>
+        <li>You only need to check for divisors up to 10 (i.e., 2, 3, 5, 7).</li>
+        <li>If none of these divide <code>101</code>, we conclude that 101 is prime.</li>
+    </ul>
+
+    <h2>Pseudocode</h2>
+    <p>Here’s how the prime-checking function might look in JavaScript:</p>
+    <pre>
+function isPrime(n) {
+    if (n <= 1) return false;  // Numbers less than or equal to 1 are not prime
+    if (n === 2) return true;  // 2 is prime
+    if (n % 2 === 0) return false;  // Even numbers greater than 2 are not prime
+
+    // Check for divisors up to sqrt(n)
+    for (let i = 3; i <= Math.sqrt(n); i += 2) {
+        if (n % i === 0) return false;  // If n is divisible by i, it's not prime
+    }
+    return true;  // If no divisors were found, n is prime
+}
+    </pre>
+
+    <h2>Conclusion</h2>
+    <p>By using the square root of <code>N</code>, this function efficiently checks for primality without testing unnecessary large divisors. This approach significantly improves performance, especially for large numbers.</p>
+</body>
+</html>

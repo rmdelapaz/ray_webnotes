@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Polymorphism - Tutorial for New Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Polymorphism in Object-Oriented Programming - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>What is Polymorphism?</h2>
+            <p>
+                Polymorphism is a core concept of Object-Oriented Programming (OOP) that allows objects of different classes to be treated as objects of a common superclass. It enables methods to work differently based on the object that invokes them, even if they share the same method name.
+            </p>
+            <p><strong>Analogy:</strong> Think of polymorphism like a universal remote control that can operate multiple devices (TV, DVD player, sound system). Even though each device is different, they can respond to the same input (e.g., pressing the "power" button turns on the TV or the sound system, but in different ways). Polymorphism in programming works similarly, allowing different objects to respond to the same method call in their own way.</p>
+        </section>
+
+        <section>
+            <h2>Why Use Polymorphism?</h2>
+            <p>
+                Polymorphism increases flexibility and reusability in your code. It allows you to define a general interface that can be implemented by different classes, each providing its own specific behavior.
+            </p>
+            <p><strong>Real-world example:</strong> Imagine you have a payment system with different types of payment methods such as credit cards, PayPal, and bank transfers. Each payment method can have its own implementation, but they all share a common interface to <code>processPayment()</code>. This allows you to easily swap out or add new payment methods without changing the rest of the system.</p>
+        </section>
+
+        <section>
+            <h2>Polymorphism in Action with Method Overriding</h2>
+            <p>
+                Polymorphism often comes into play with method overriding. When a subclass provides its own implementation of a method that is already defined in its superclass, the behavior of the method depends on the object that calls it.
+            </p>
+            <pre><code>
+class Animal {
+    makeSound() {
+        console.log('Some generic animal sound.');
+    }
+}
+
+class Dog extends Animal {
+    makeSound() {
+        console.log('Bark!');
+    }
+}
+
+class Cat extends Animal {
+    makeSound() {
+        console.log('Meow!');
+    }
+}
+
+const myDog = new Dog();
+const myCat = new Cat();
+
+myDog.makeSound(); // Output: Bark!
+myCat.makeSound(); // Output: Meow!
+            </code></pre>
+            <p>
+                Here, both the <code>Dog</code> and <code>Cat</code> classes override the <code>makeSound()</code> method of the <code>Animal</code> class, providing their own specific implementation. This is a classic example of polymorphism, where the same method name behaves differently based on the object calling it.
+            </p>
+        </section>
+
+        <section>
+            <h2>Practical Uses of Polymorphism</h2>
+            <p>
+                Polymorphism is widely used in real-world applications. It allows for more scalable and maintainable systems, where new functionality can be added without breaking existing code.
+            </p>
+            <p><strong>Real-world example:</strong> In a graphic design application, you might have different shapes like circles, rectangles, and triangles. Each shape can have a <code>draw()</code> method. With polymorphism, you can create a function that takes any shape and calls its <code>draw()</code> method, without needing to know what specific type of shape it is.</p>
+            <pre><code>
+class Shape {
+    draw() {
+        console.log('Drawing a shape.');
+    }
+}
+
+class Circle extends Shape {
+    draw() {
+        console.log('Drawing a circle.');
+    }
+}
+
+class Rectangle extends Shape {
+    draw() {
+        console.log('Drawing a rectangle.');
+    }
+}
+
+function renderShape(shape) {
+    shape.draw();
+}
+
+const myCircle = new Circle();
+const myRectangle = new Rectangle();
+
+renderShape(myCircle);    // Output: Drawing a circle.
+renderShape(myRectangle); // Output: Drawing a rectangle.
+            </code></pre>
+            <p>
+                Here, the <code>renderShape()</code> function can take any object that is a subclass of <code>Shape</code> and call its <code>draw()</code> method. This makes the code flexible and extendable.
+            </p>
+        </section>
+
+        <section>
+            <h2>Polymorphism Through Interfaces</h2>
+            <p>
+                Another way to achieve polymorphism is by using interfaces. Although JavaScript doesn’t have built-in interfaces like some other languages, we can still simulate this behavior by ensuring classes implement the same methods.
+            </p>
+            <p><strong>Example:</strong> Imagine we want to enforce that all classes implementing a payment method must have a <code>processPayment()</code> method. We can achieve this by defining a common method signature in the base class or by defining a protocol that all classes must follow.</p>
+        </section>
+
+        <section>
+            <h2>Polymorphism with Arrays of Objects</h2>
+            <p>
+                One of the most powerful uses of polymorphism is the ability to group different objects in an array and call the same method on each, with each object responding differently based on its class.
+            </p>
+            <pre><code>
+const animals = [new Dog(), new Cat()];
+
+animals.forEach(animal => animal.makeSound());
+// Output:
+// Bark!
+// Meow!
+            </code></pre>
+            <p>
+                In this example, we have an array of <code>Dog</code> and <code>Cat</code> objects, and we call the <code>makeSound()</code> method on each. Thanks to polymorphism, each object behaves according to its own class, even though we are calling the same method.
+            </p>
+        </section>
+
+        <section>
+            <h2>Common Mistakes When Using Polymorphism</h2>
+            <p>Here are some common mistakes to avoid when working with polymorphism:</p>
+            <ul>
+                <li><strong>Not overriding methods correctly:</strong> Ensure that your subclass overrides the methods from the parent class if you expect different behavior. Forgetting to override a method can lead to incorrect or generic behavior.</li>
+                <li><strong>Not using polymorphism effectively:</strong> Polymorphism is most useful when you want your code to be flexible and work with multiple types of objects. Don’t use polymorphism if your methods or behavior are tightly coupled to specific subclasses.</li>
+                <li><strong>Incorrect method signatures:</strong> Ensure that when you override a method, the parameters match the method signature of the parent class to avoid errors.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>

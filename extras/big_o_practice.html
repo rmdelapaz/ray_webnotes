@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big O Practice for JavaScript Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Big O Practice for New JavaScript Developers</h1>
+    </header>
+
+    <section>
+        <h2>Introduction to Big O Notation</h2>
+        <p>Big O notation is used to describe the performance or complexity of an algorithm. It measures the worst-case time or space requirements as the input size grows.</p>
+        <p>Here are some common complexities:</p>
+        <ul>
+            <li><strong>O(1)</strong> - Constant time</li>
+            <li><strong>O(log n)</strong> - Logarithmic time</li>
+            <li><strong>O(n)</strong> - Linear time</li>
+            <li><strong>O(n log n)</strong> - Linearithmic time</li>
+            <li><strong>O(n²)</strong> - Quadratic time</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Practice Problems</h2>
+        
+        <h3>Problem 1: Identify the Complexity</h3>
+        <p>Look at the following function and determine the time complexity:</p>
+        <pre>
+function findFirst(arr) {
+    return arr[0];
+}
+        </pre>
+        <p><strong>Question:</strong> What is the Big O complexity of this function?</p>
+        <p><strong>Answer:</strong> <span style="visibility: hidden;">O(1) - Constant time, as it only accesses the first element.</span></p>
+
+        <h3>Problem 2: Nested Loop</h3>
+        <p>Consider the following code:</p>
+        <pre>
+function printAllPairs(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            console.log(arr[i], arr[j]);
+        }
+    }
+}
+        </pre>
+        <p><strong>Question:</strong> What is the time complexity of this code?</p>
+        <p><strong>Answer:</strong> <span style="visibility: hidden;">O(n²) - Quadratic time, due to the nested loops iterating through the array.</span></p>
+
+        <h3>Problem 3: Logarithmic Example</h3>
+        <p>Analyze this function:</p>
+        <pre>
+function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        let middle = Math.floor((left + right) / 2);
+        
+        if (arr[middle] === target) {
+            return middle;
+        } else if (arr[middle] < target) {
+            left = middle + 1;
+        } else {
+            right = middle - 1;
+        }
+    }
+    
+    return -1;
+}
+        </pre>
+        <p><strong>Question:</strong> What is the time complexity of this function?</p>
+        <p><strong>Answer:</strong> <span style="visibility: hidden;">O(log n) - Logarithmic time, as the search space is halved each iteration.</span></p>
+
+        <h3>Problem 4: Linear Time</h3>
+        <p>Consider this simple function:</p>
+        <pre>
+function sumArray(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+        </pre>
+        <p><strong>Question:</strong> What is the time complexity of this function?</p>
+        <p><strong>Answer:</strong> <span style="visibility: hidden;">O(n) - Linear time, as it loops through each element in the array once.</span></p>
+    </section>
+
+    <section>
+        <h2>Practice Activity</h2>
+        <p>Now try to implement these algorithms and analyze their time complexities:</p>
+        <ol>
+            <li>Write a function that checks if a given array contains duplicates. What is the Big O complexity?</li>
+            <li>Write a function that prints all the elements in a two-dimensional array. What is the Big O complexity?</li>
+            <li>Write a function that merges two sorted arrays. What is the Big O complexity?</li>
+        </ol>
+    </section>
+
+    <footer>
+        <p>Happy coding and keep practicing! Understanding Big O is essential for writing efficient code.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture on Linked Lists, Arrays, Hash Tables, Stacks, Queues, Graphs, and Trees</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Data Structures: Linked Lists, Arrays, Hash Tables, Stacks, Queues, Graphs, and Trees</h1>
+    </header>
+
+    <section>
+        <h2>1. Linked Lists</h2>
+        <p>A linked list is like a chain of dominoes. Each domino (node) holds a value and a reference (or link) to the next domino in the chain. This structure allows us to efficiently insert and remove nodes without needing to reallocate or reindex the entire list.</p>
+        <h3>Analogy:</h3>
+        <p>Imagine a treasure hunt where each clue leads you to the next one. You don’t need to know all the clues at once—just follow the path.</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Simple Linked List Node class
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// Linked List class
+class LinkedList {
+    constructor() {
+        this.head = null;
+    }
+
+    add(value) {
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+        } else {
+            let current = this.head;
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    remove(value) {
+        if (!this.head) return;
+        if (this.head.value === value) {
+            this.head = this.head.next;
+        } else {
+            let current = this.head;
+            while (current.next && current.next.value !== value) {
+                current = current.next;
+            }
+            if (current.next) {
+                current.next = current.next.next;
+            }
+        }
+    }
+}
+        </code></pre>
+        <p>Real-world use cases include implementing undo functionality, playlist management, and more.</p>
+    </section>
+
+    <section>
+        <h2>2. Arrays</h2>
+        <p>Arrays are like a row of lockers. Each locker has a number (index) and stores a value. Unlike linked lists, arrays provide fast access to data by index but can be expensive to resize or insert in the middle.</p>
+        <h3>Analogy:</h3>
+        <p>Think of an array as a bookshelf. You can quickly grab a book from any shelf (random access), but adding or removing books requires shifting others around (resizing).</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Basic array manipulation
+let arr = [10, 20, 30];
+arr.push(40); // [10, 20, 30, 40]
+arr.pop();    // [10, 20, 30]
+arr.unshift(0); // [0, 10, 20, 30]
+arr.shift();  // [10, 20, 30]
+        </code></pre>
+        <p>Arrays are widely used for storing ordered collections of elements, such as to-do lists or customer orders.</p>
+    </section>
+
+    <section>
+        <h2>3. Hash Tables</h2>
+        <p>A hash table (or hash map) is like a dictionary. You look up values by key, just as you find the meaning of a word by looking up the word itself, not its position.</p>
+        <h3>Analogy:</h3>
+        <p>Think of a hash table as a filing cabinet where each file (value) is stored in a drawer (bucket) based on a label (key).</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Simple hash table example using an object
+let hashTable = {};
+hashTable['name'] = 'Alice';
+hashTable['age'] = 25;
+console.log(hashTable['name']); // Alice
+console.log(hashTable['age']);  // 25
+        </code></pre>
+        <p>Hash tables are ideal for quick lookups, such as storing user data, caching, or managing configuration settings.</p>
+    </section>
+
+    <section>
+        <h2>4. Stacks and Queues</h2>
+        <h3>Stacks:</h3>
+        <p>A stack is like a stack of plates. You add plates to the top (push) and take them from the top (pop), following Last In, First Out (LIFO) ordering.</p>
+        <h3>Analogy:</h3>
+        <p>Imagine a stack of trays in a cafeteria. You always take the top tray (pop) and return trays to the top (push).</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Stack implementation using an array
+let stack = [];
+stack.push(10);
+stack.push(20);
+console.log(stack.pop()); // 20
+        </code></pre>
+
+        <h3>Queues:</h3>
+        <p>A queue is like a line of people at a ticket counter. The first person in line (enqueue) is the first to be served (dequeue), following First In, First Out (FIFO) ordering.</p>
+        <h3>Analogy:</h3>
+        <p>Think of a queue as waiting in line at a theme park ride—first in line gets the next seat.</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Queue implementation using an array
+let queue = [];
+queue.push(10);
+queue.push(20);
+console.log(queue.shift()); // 10
+        </code></pre>
+        <p>Stacks are commonly used in algorithms like backtracking and recursion, while queues are useful for task scheduling, printer queues, or handling asynchronous requests.</p>
+    </section>
+
+    <section>
+        <h2>5. Graphs and Trees</h2>
+        <h3>Trees:</h3>
+        <p>A tree is like a family tree, with a single root (ancestor) and branches leading to descendants (nodes). Each node can have multiple children, but each child has only one parent.</p>
+        <h3>Analogy:</h3>
+        <p>Imagine a company’s organizational chart, where the CEO (root) has managers (branches) who oversee employees (leaf nodes).</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Simple tree node class
+class TreeNode {
+    constructor(value) {
+        this.value = value;
+        this.children = [];
+    }
+
+    addChild(node) {
+        this.children.push(node);
+    }
+}
+
+let root = new TreeNode('CEO');
+let manager1 = new TreeNode('Manager 1');
+let manager2 = new TreeNode('Manager 2');
+root.addChild(manager1);
+root.addChild(manager2);
+        </code></pre>
+
+        <h3>Graphs:</h3>
+        <p>A graph is a collection of nodes where any node can be connected to any other node, unlike a tree, which has a strict hierarchy. Graphs can be used to model networks like social connections or city maps.</p>
+        <h3>Analogy:</h3>
+        <p>Think of a graph as a transportation map where each station is a node, and the lines connecting them are edges.</p>
+        <h3>Examples:</h3>
+        <pre><code>
+// Simple graph structure using an adjacency list
+class Graph {
+    constructor() {
+        this.nodes = {};
+    }
+
+    addNode(node) {
+        this.nodes[node] = [];
+    }
+
+    addEdge(node1, node2) {
+        this.nodes[node1].push(node2);
+        this.nodes[node2].push(node1); // if undirected graph
+    }
+}
+
+let graph = new Graph();
+graph.addNode('A');
+graph.addNode('B');
+graph.addEdge('A', 'B');
+        </code></pre>
+        <p>Graphs are useful for representing relationships like social networks, route planning, and recommendation engines.</p>
+    </section>
+</body>
+</html>

@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Binary Search Trees (BST) in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Binary Search Trees (BST) in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>A Binary Search Tree (BST) is a tree data structure where each node has at most two children, and the left child is smaller than the parent node, while the right child is greater. BSTs are used to store and search data efficiently, with operations like insertion, deletion, and lookup typically being <code>O(log n)</code> in time complexity. In this tutorial, we’ll explore how binary search trees work and how to implement them in JavaScript.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: Binary Search Tree</h2>
+        <p>Here’s an example of how to implement a basic binary search tree in JavaScript:</p>
+        <pre><code>class Node {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinarySearchTree {
+    constructor() {
+        this.root = null;
+    }
+
+    insert(value) {
+        const newNode = new Node(value);
+        if (this.root === null) {
+            this.root = newNode;
+            return this;
+        }
+
+        let current = this.root;
+        while (true) {
+            if (value < current.value) {
+                if (current.left === null) {
+                    current.left = newNode;
+                    return this;
+                }
+                current = current.left;
+            } else {
+                if (current.right === null) {
+                    current.right = newNode;
+                    return this;
+                }
+                current = current.right;
+            }
+        }
+    }
+
+    find(value) {
+        let current = this.root;
+        while (current) {
+            if (value === current.value) return current;
+            if (value < current.value) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+        return null;
+    }
+}</code></pre>
+        <p>This implementation allows for inserting nodes into the tree and finding values. The <code>insert</code> method ensures the binary search tree property by placing smaller values to the left and larger values to the right.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Filing Cabinet</h2>
+        <p>Imagine a binary search tree like a well-organized filing cabinet. Each folder represents a node in the tree. You store smaller folders to the left and larger folders to the right. If you need to find a specific folder, you look at the root folder first, then go left or right depending on whether the folder is smaller or larger. This organization allows you to quickly navigate and find what you’re looking for, just like a binary search tree.</p>
+    </section>
+    
+    <section>
+        <h2>Real-World Example: Address Book</h2>
+        <p>Suppose you have a digital address book, and you want to search for a contact’s phone number quickly. By storing the contacts in a binary search tree, you can efficiently find the contact by navigating the tree based on the alphabetical order of names:</p>
+        <pre><code>const bst = new BinarySearchTree();
+bst.insert("Alice");
+bst.insert("Bob");
+bst.insert("Charlie");
+
+const result = bst.find("Charlie");  // Finds the contact node for "Charlie"</code></pre>
+        <p>This approach is scalable for large datasets, as the search time increases logarithmically rather than linearly.</p>
+    </section>
+    
+    <section>
+        <h2>Metaphor: Finding a Book in a Library</h2>
+        <p>Think of a binary search tree like a library with bookshelves sorted by book titles. If you're looking for a specific book, you don’t start from the first shelf and search every book. Instead, you navigate to the section based on alphabetical order, go to the appropriate shelf, and find the book faster. The same concept applies in a BST—searching is efficient because the structure is organized in a way that allows you to eliminate half of the tree at each step.</p>
+    </section>
+
+    <section>
+        <h2>Why Use Binary Search Trees?</h2>
+        <p>Binary Search Trees are useful because they allow efficient searching, insertion, and deletion operations with a time complexity of <code>O(log n)</code> in balanced cases. This makes them ideal for applications that require dynamic sets of data, such as maintaining an ordered list of records or implementing priority queues.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Binary search trees are widely used in databases, file systems, and network routers for organizing and retrieving data efficiently. They are also used in implementing associative arrays, set operations, and in-memory data structures that require fast lookup, insertion, and deletion.</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="/extras/tree_traversal_algorithms_tutorial.html">Tree Traversal Algorithms</a></li>
+            <li><a href="/extras/avl_trees_tutorial.html
+                ">Balanced Binary Trees (AVL Trees)</a></li>
+            <li><a href="/styles/main.css">Self-Balancing Trees (Red-Black Trees)</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Understanding binary search trees is key to mastering efficient data structures and algorithms in computer science.</p>
+    </footer>
+</body>
+</html>

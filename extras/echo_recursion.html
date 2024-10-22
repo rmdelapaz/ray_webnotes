@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion in JavaScript: Echo Function</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Understanding Recursion in JavaScript</h1>
+    </header>
+
+    <section>
+        <h2>Introduction to Recursion</h2>
+        <p>Recursion is a fundamental concept in programming where a function calls itself to solve a problem in smaller steps. It’s like looking into a mirror, which reflects another mirror inside it, creating an image that goes on indefinitely.</p>
+        <p>Recursion is often used when a problem can be broken down into smaller, similar sub-problems. The function continues to call itself, working on smaller pieces, until it reaches a base case where the recursion stops.</p>
+    </section>
+
+    <section>
+        <h2>1. Recursion Analogy: Peeling an Onion</h2>
+        <p>Think of recursion like peeling an onion. Each time you remove a layer (one function call), there’s another layer underneath (another recursive call) until you finally reach the core (the base case). Recursion works the same way: it keeps going deeper until it reaches the simplest version of the problem and then starts building back up.</p>
+    </section>
+
+    <section>
+        <h2>2. The Echo Function: An Example of Recursion</h2>
+        <p>Let's look at the provided `echo()` function. The goal is to gradually slice a word down to its final letter, printing each step in uppercase along the way. Once it reaches a word with a length of 1, it hits the base case and returns the result.</p>
+
+        <h4>Code Example:</h4>
+        <pre><code>
+function echo(word) {
+    if (word.length > 1) {
+        console.log(word.toUpperCase());
+
+        let response = echo(word.slice(1));
+
+        console.log(response);
+        return word;
+    } else {
+        console.log(word.toUpperCase());
+        return word;
+    }
+}
+        </code></pre>
+
+        <h3>3. Breaking Down the Code</h3>
+        <p>The `echo()` function works by checking the length of the input `word`. If the word has more than one character, it prints the word in uppercase and then calls itself with a smaller portion of the word (using `word.slice(1)`). This process repeats until the word is reduced to a single character, at which point the base case is reached, and the function returns the word.</p>
+
+        <h4>Steps:</h4>
+        <ol>
+            <li>The function prints the word in uppercase (first layer of the onion).</li>
+            <li>The function calls itself with a sliced version of the word (peeling off a layer).</li>
+            <li>This repeats until only one letter remains (the base case).</li>
+            <li>The function returns the word, and as it unwinds, the results are logged to the console.</li>
+        </ol>
+
+        <h4>Example:</h4>
+        <pre><code>
+echo("recursion");
+        </code></pre>
+        <p>This will output:</p>
+        <pre><code>
+RECURSION
+ECURSION
+CURSION
+URSION
+RSION
+SION
+ION
+ON
+N
+n
+on
+ion
+sion
+rsion
+ursion
+cursion
+ecursion
+
+        </code></pre>
+
+        <p>The function calls itself, peeling off the first letter each time, until it reaches "N", the base case. After reaching the base case, the function begins to return, and each step back logs the returned word.</p>
+    </section>
+    <h4>Breaking it down:</h4>
+
+    <ol>
+        <li><strong>Step 1:</strong> <code>echo("recursion")</code> is called, and the function checks if the word length is greater than 1. Since it is, it logs "RECURSION" and calls <code>echo("ecursion")</code>.
+            <ul>
+                <li><strong>Stack:</strong> <code>echo("recursion")</code></li>
+            </ul>
+        </li>
+        <li><strong>Step 2:</strong> Now, <code>echo("ecursion")</code> is called. It logs "ECURSION" and calls <code>echo("cursion")</code>.
+            <ul>
+                <li><strong>Stack:</strong> <code>echo("recursion")</code> → <code>echo("ecursion")</code></li>
+            </ul>
+        </li>
+        <li><strong>Step 3:</strong> <code>echo("cursion")</code> logs "CURSION" and calls <code>echo("ursion")</code>.
+            <ul>
+                <li><strong>Stack:</strong> <code>echo("recursion")</code> → <code>echo("ecursion")</code> → <code>echo("cursion")</code></li>
+            </ul>
+        </li>
+        <li><strong>Step 4:</strong> This process continues until <code>echo("n")</code> is called. At this point, the base case is reached because the word length is 1. It logs "N" and returns "n".
+            <ul>
+                <li><strong>Stack:</strong> <code>echo("recursion")</code> → ... → <code>echo("n")</code></li>
+            </ul>
+        </li>
+        <li><strong>Step 5:</strong> Now, the stack starts unwinding. The function that called <code>echo("n")</code> (which is <code>echo("on")</code>) logs the result "n" and then returns "on".
+            <ul>
+                <li><strong>Stack:</strong> <code>echo("recursion")</code> → ... → <code>echo("on")</code></li>
+            </ul>
+        </li>
+        <li><strong>Step 6:</strong> This continues, with each function logging the result and returning to its caller until <code>echo("recursion")</code> finally returns "recursion".
+            <ul>
+                <li><strong>Final Stack:</strong> All functions are popped off the stack.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <p>This step-by-step breakdown shows how the stack grows as the function calls itself and then unwinds once the base case is reached, which is typical for any recursive function.</p>
+</section>
+    <section>
+        <h2>4. Key Concepts: Base Case and Recursive Case</h2>
+        <p>Recursion always has two critical parts:</p>
+        <ul>
+            <li><strong>Base Case:</strong> This is the condition that stops the recursion. In our `echo()` function, the base case is when `word.length === 1`.</li>
+            <li><strong>Recursive Case:</strong> This is where the function keeps calling itself with a modified argument to move closer to the base case. In our case, this is `echo(word.slice(1))`.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Recursion in the Real World: Examples and Applications</h2>
+        <p>Recursion is not just a concept for academic problems—it’s used in real-world programming as well.</p>
+        <ul>
+            <li><strong>File System Traversal:</strong> When you search through files in nested folders, recursion can be used to explore each directory until all files are found.</li>
+            <li><strong>Tree Data Structures:</strong> Recursion is perfect for working with hierarchical data like family trees or organization charts, where each node might have children.</li>
+            <li><strong>Solving Puzzles:</strong> Problems like the Tower of Hanoi or maze-solving can be tackled with recursion by breaking them into smaller subproblems.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. When and Why to Use Recursion</h2>
+        <p>Recursion is particularly useful when:</p>
+        <ul>
+            <li>The problem can naturally be divided into similar subproblems (like our example where the word gets shorter).</li>
+            <li>When the depth of the problem is unknown, like exploring a tree structure.</li>
+        </ul>
+        <p>However, recursion can lead to performance issues if not handled correctly. It uses the call stack, and too many recursive calls can result in a "stack overflow." In such cases, iterative solutions may be preferred.</p>
+    </section>
+
+  
+        <p>Recursion is a powerful tool in a developer's toolkit. By breaking down problems into smaller, simpler parts, recursion can make complex tasks more manageable. Practice recognizing base cases and recursive steps to develop a strong understanding of this concept!<br />&nbsp;</p>
+  
+</body>
+</html>

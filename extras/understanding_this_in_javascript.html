@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding "this" in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Understanding <code>this</code> in JavaScript</h1>
+        <p>A tutorial for new developers on how to define methods and understand what <code>this</code> refers to.</p>
+    </header>
+    <main>
+        <section>
+            <h2>Introduction to <code>this</code> in JavaScript</h2>
+            <p>
+                In JavaScript, <code>this</code> is a keyword that often confuses developers. Think of <code>this</code> like a nametag that refers to the object currently in context. 
+                But, just like how a nametag might change depending on where you are (work, home, school), the value of <code>this</code> changes depending on how and where it is used. 
+                Let’s explore what <code>this</code> means in different scenarios.
+            </p>
+        </section>
+
+        <section>
+            <h2>Defining Methods that Reference <code>this</code> on an Object</h2>
+            <p>
+                When you define a method inside an object, <code>this</code> usually refers to that object. It's as if the object is saying, “I’m the <code>this</code> here!”
+            </p>
+            <p>Let's take an example:</p>
+            <pre><code class="language-javascript">
+const person = {
+    name: "Alice",
+    greet: function() {
+        console.log("Hello, my name is " + this.name);
+    }
+};
+person.greet(); // Output: Hello, my name is Alice
+            </code></pre>
+            <p>
+                In the code above, the <code>greet</code> function uses <code>this.name</code>. Here, <code>this</code> refers to the <code>person</code> object because the function is being called as a method of <code>person</code>.
+                It's like the object is introducing itself: "Hello, I’m Alice!"
+            </p>
+        </section>
+
+        <section>
+            <h2>Identifying What <code>this</code> Refers to</h2>
+            <p>
+                To understand <code>this</code>, you need to pay attention to how the function is called. There are several scenarios that can affect the value of <code>this</code>:
+            </p>
+            <ul>
+                <li><strong>Global Context:</strong> In the global context (outside of any object), <code>this</code> refers to the global object (<code>window</code> in browsers).</li>
+                <li><strong>Object Method:</strong> When a method is called on an object, <code>this</code> refers to the object.</li>
+                <li><strong>Constructor Function:</strong> In a constructor, <code>this</code> refers to the newly created object.</li>
+                <li><strong>Event Handlers:</strong> In DOM event handlers, <code>this</code> refers to the element that received the event.</li>
+            </ul>
+            <p>Let's look at these in action:</p>
+            <pre><code class="language-javascript">
+// Global context
+console.log(this); // Output: Window (or global object in Node.js)
+
+// Object method
+const car = {
+    brand: "Toyota",
+    getBrand: function() {
+        return this.brand;
+    }
+};
+console.log(car.getBrand()); // Output: Toyota
+
+// Constructor function
+function Animal(type) {
+    this.type = type;
+}
+const dog = new Animal("Dog");
+console.log(dog.type); // Output: Dog
+
+// Event handler
+document.querySelector("button").addEventListener("click", function() {
+    console.log(this); // Output: the button element
+});
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Real-World Analogy for <code>this</code></h2>
+            <p>
+                Imagine you're in a room with different people, and each person has a nametag. When someone refers to <code>this</code>, it's like they're pointing to their own nametag to say "me!"
+                But the person wearing the nametag changes depending on the context or who is speaking. Similarly, <code>this</code> changes based on how a function is invoked.
+            </p>
+        </section>
+
+        <section>
+            <h2>Common Pitfalls with <code>this</code> and How to Avoid Them</h2>
+            <p>
+                One common mistake is losing track of what <code>this</code> refers to, especially when using nested functions or callbacks. For example:
+            </p>
+            <pre><code class="language-javascript">
+const user = {
+    name: "Bob",
+    greet: function() {
+        setTimeout(function() {
+            console.log("Hello, " + this.name); // this will be undefined
+        }, 1000);
+    }
+};
+user.greet(); // Output: Hello, undefined
+            </code></pre>
+            <p>Why did this happen? The <code>this</code> inside <code>setTimeout</code> refers to the global object, not the <code>user</code> object.</p>
+            <p>To fix this, you can use an arrow function, which doesn't have its own <code>this</code> binding:</p>
+            <pre><code class="language-javascript">
+const user = {
+    name: "Bob",
+    greet: function() {
+        setTimeout(() => {
+            console.log("Hello, " + this.name); // this now correctly refers to user
+        }, 1000);
+    }
+};
+user.greet(); // Output: Hello, Bob
+            </code></pre>
+            <p>
+                Arrow functions inherit <code>this</code> from their surrounding context, which helps in scenarios like this.
+            </p>
+        </section>
+
+        <section>
+            <h2>Conclusion and Further Exploration</h2>
+            <p>
+                Understanding <code>this</code> is crucial when working with JavaScript, especially when dealing with objects, methods, and callbacks. The key is to pay attention to how a function is invoked, as that determines the value of <code>this</code>.
+            </p>
+            <p>Further topics to explore:</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">MDN Web Docs on <code>this</code></a></li>
+                <li>Binding <code>this</code> explicitly using <code>call</code>, <code>apply</code>, and <code>bind</code></li>
+                <li>Advanced usage of <code>this</code> in classes and ES6+ syntax</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures: Arrays, Linked Lists, and Hash Tables</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Comparing Arrays, Linked Lists, and Hash Tables</h1>
+    </header>
+
+    <section>
+        <h2>1. Compare and Contrast: Arrays, Linked Lists, and Hash Tables</h2>
+        <p>Arrays, linked lists, and hash tables are common data structures, each with unique properties and operations that suit different tasks.</p>
+
+        <h3>Arrays:</h3>
+        <ul>
+            <li>Fixed or dynamic size.</li>
+            <li>Fast access by index (O(1)).</li>
+            <li>Slow insertions/deletions at the middle (O(n)).</li>
+        </ul>
+
+        <h3>Linked Lists:</h3>
+        <ul>
+            <li>Elements (nodes) connected by pointers.</li>
+            <li>Efficient insertions/deletions (O(1) at head/tail).</li>
+            <li>Linear search (O(n)) and no direct access by index.</li>
+        </ul>
+
+        <h3>Hash Tables:</h3>
+        <ul>
+            <li>Key-value pairs stored using a hash function.</li>
+            <li>Efficient lookups, insertions, and deletions (O(1) on average).</li>
+            <li>Unordered, and relies on good hash functions to avoid collisions.</li>
+        </ul>
+
+        <h4>Real-World Analogy:</h4>
+        <p>Think of an array as a row of lockers where you know the exact position of each item. A linked list is like a chain of people passing a message one by one. A hash table is like a library’s index card system that helps you find a book quickly based on keywords.</p>
+    </section>
+
+    <section>
+        <h2>2. Adding and Removing Elements from a Linked List</h2>
+        <p>In a linked list, adding and removing elements involves manipulating pointers. Each node contains a reference to the next node (and sometimes the previous node in a doubly linked list).</p>
+
+        <h4>Adding an Element:</h4>
+        <p>To add an element at the head of a linked list, you simply point the new node to the current head. This is an O(1) operation.</p>
+
+        <h4>Removing an Element:</h4>
+        <p>Removing an element requires adjusting the pointer of the previous node to bypass the node being removed. In the worst case (removing from the middle), this is an O(n) operation, as you may need to traverse the list.</p>
+
+        <h4>Example:</h4>
+        <pre><code>
+// Adding a node at the head
+let newNode = { value: 10, next: head };
+head = newNode;
+
+// Removing a node
+if (prevNode) {
+    prevNode.next = targetNode.next;
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>3. Implementing a Linked List</h2>
+        <p>A linked list is typically implemented using objects for each node, with pointers to the next node.</p>
+
+        <h4>Example Implementation:</h4>
+        <pre><code>
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    constructor() {
+        this.head = null;
+    }
+
+    add(value) {
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+        } else {
+            let current = this.head;
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    remove(value) {
+        if (!this.head) return;
+        if (this.head.value === value) {
+            this.head = this.head.next;
+        } else {
+            let current = this.head;
+            while (current.next && current.next.value !== value) {
+                current = current.next;
+            }
+            if (current.next) {
+                current.next = current.next.next;
+            }
+        }
+    }
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>4. Traversing and Searching Linked Lists</h2>
+        <p>Traversing a linked list involves starting from the head and visiting each node until the desired value is found or the end is reached. This is an O(n) operation because you may need to check every node.</p>
+
+        <h4>Example:</h4>
+        <pre><code>
+function searchLinkedList(list, value) {
+    let current = list.head;
+    while (current) {
+        if (current.value === value) {
+            return current;
+        }
+        current = current.next;
+    }
+    return null;  // Not found
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>5. No Index in a Linked List</h2>
+        <p>Unlike arrays, linked lists do not have direct access by index. To access an element, you must traverse the list from the head, which makes random access slow. This is one of the tradeoffs of using linked lists versus arrays.</p>
+
+        <h3>Real-World Analogy:</h3>
+        <p>Imagine you’re looking for a book in a series of unnumbered boxes. You have to open each box one by one until you find the book. This is how searching works in a linked list, compared to an array where you know the exact position of an item.</p>
+    </section>
+
+    <section>
+        <h2>6. Doubly Linked Lists: Mechanics and Tradeoffs</h2>
+        <p>A <strong>doubly linked list</strong> contains references to both the next and previous nodes, allowing traversal in both directions. This makes operations like deletion or traversal backward easier, but it also increases memory usage because of the additional pointer.</p>
+
+        <h4>Tradeoffs:</h4>
+        <ul>
+            <li><strong>Advantages:</strong> Easier backward traversal, faster deletion of the last node.</li>
+            <li><strong>Disadvantages:</strong> Increased memory usage, more complex node structure.</li>
+        </ul>
+
+        <h4>Example of a Doubly Linked List:</h4>
+        <pre><code>
+class DoublyNode {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    add(value) {
+        const newNode = new DoublyNode(value);
+        if (!this.head) {
+            this.head = this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+        }
+    }
+
+    remove(value) {
+        let current = this.head;
+        while (current) {
+            if (current.value === value) {
+                if (current.prev) current.prev.next = current.next;
+                if (current.next) current.next.prev = current.prev;
+                if (current === this.head) this.head = current.next;
+                if (current === this.tail) this.tail = current.prev;
+                break;
+            }
+            current = current.next;
+        }
+    }
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>7. Implementing a Queue with Linked Lists</h2>
+        <p>A queue follows the First In, First Out (FIFO) principle, and can be implemented using a singly or doubly linked list. The head of the queue is the first element (front), and the tail is the last element (rear).</p>
+
+        <h4>Example Queue Implementation:</h4>
+        <pre><code>
+class Queue {
+    constructor() {
+        this.list = new LinkedList();
+    }
+
+    enqueue(value) {
+        this.list.add(value);  // Add to the tail
+    }
+
+    dequeue() {
+        if (!this.list.head) return null;
+        const value = this.list.head.value;
+        this.list.head = this.list.head.next;  // Remove from the head
+        return value;
+    }
+}
+        </code></pre>
+
+        <p>Queues are useful in scenarios where order matters, such as handling requests in a web server or managing tasks in a scheduling system.</p>
+    </section>
+
+    <section>
+        <h2>8. Selecting the Right Data Structure</h2>
+        <p>When should you choose a linked list, doubly linked list, or queue?</p>
+
+        <ul>
+            <li><strong>Linked List:</strong> Use when you need fast insertions and deletions at the head or tail, and don’t need fast random access.</li>
+            <li><strong>Doubly Linked List:</strong> Use when you need to traverse in both directions or need faster deletion at both ends.</li>
+            <li><

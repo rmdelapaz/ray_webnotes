@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding OOP Inheritance - Tutorial for New Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>OOP Inheritance in JavaScript - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>What is Inheritance in OOP?</h2>
+            <p>
+                Inheritance is a fundamental concept of Object-Oriented Programming (OOP). It allows one class (called a subclass or derived class) to inherit properties and methods from another class (called a superclass or base class).
+            </p>
+            <p><strong>Analogy:</strong> Imagine inheritance like passing down family traits. For example, a child may inherit physical traits like eye color or skills from their parents. In programming, a subclass inherits characteristics from its superclass, and it can also have its own unique traits.</p>
+            <p>
+                In JavaScript, we use the <code>extends</code> keyword to make one class inherit from another. Let’s dive into how this works.
+            </p>
+        </section>
+
+        <section>
+            <h2>Why Use Inheritance?</h2>
+            <p>
+                Inheritance is useful because it allows us to reuse code, reduce duplication, and create more structured, maintainable programs. Instead of rewriting similar code in multiple places, we can centralize common functionality in a base class and extend it when necessary.
+            </p>
+            <p><strong>Real-world example:</strong> Consider an application for managing vehicles. You may have different types of vehicles, like cars, trucks, and motorcycles. All vehicles share common characteristics (such as make, model, and year), so you can define those in a parent <code>Vehicle</code> class. Each specific type of vehicle can then extend the <code>Vehicle</code> class to inherit its properties and methods.</p>
+        </section>
+
+        <section>
+            <h2>Defining a Superclass and Subclass</h2>
+            <p>To demonstrate inheritance, let’s define a basic superclass, <code>Vehicle</code>, and then extend it to create a subclass, <code>Car</code>.</p>
+            <pre><code>
+class Vehicle {
+    constructor(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    start() {
+        console.log(`${this.make} ${this.model} is starting.`);
+    }
+}
+
+class Car extends Vehicle {
+    constructor(make, model, year, doors) {
+        super(make, model, year);
+        this.doors = doors; // unique property for Car
+    }
+
+    honk() {
+        console.log(`${this.make} ${this.model} is honking its horn!`);
+    }
+}
+
+const myCar = new Car('Toyota', 'Camry', 2021, 4);
+myCar.start(); // Inherited from Vehicle class
+myCar.honk();  // Defined in Car class
+            </code></pre>
+            <p>
+                Here, <code>Car</code> extends <code>Vehicle</code>, meaning it inherits the properties and methods from <code>Vehicle</code>. The <code>super()</code> function in the constructor is used to call the constructor of the superclass, allowing us to reuse the code from <code>Vehicle</code> without duplicating it.
+            </p>
+        </section>
+
+        <section>
+            <h2>Practical Uses of Inheritance</h2>
+            <p>
+                Inheritance is widely used in real-world applications to create more flexible and modular code. For example, in game development, you might have a superclass <code>Character</code> with common properties like <code>health</code> and <code>level</code>. You could then create subclasses like <code>Warrior</code> and <code>Mage</code> that extend <code>Character</code>, each with their own specialized abilities.
+            </p>
+            <p><strong>Real-world analogy:</strong> Consider a company hierarchy. At the top, you have a base "Employee" class that represents the general characteristics of an employee (like name and ID). From this base class, you can have specialized subclasses like "Manager" and "Developer", which inherit common characteristics but also have their own specific roles and responsibilities.</p>
+        </section>
+
+        <section>
+            <h2>Overriding Methods in the Subclass</h2>
+            <p>
+                Sometimes, a subclass might need to modify or replace a method from its superclass. This is called method overriding. You can define a method in the subclass with the same name as a method in the superclass, and it will override the original method.
+            </p>
+            <pre><code>
+class Car extends Vehicle {
+    constructor(make, model, year, doors) {
+        super(make, model, year);
+        this.doors = doors;
+    }
+
+    // Overriding the start method
+    start() {
+        console.log(`${this.make} ${this.model} is revving its engine.`);
+    }
+}
+
+const myCar = new Car('Ford', 'Mustang', 2020, 2);
+myCar.start(); // Ford Mustang is revving its engine.
+            </code></pre>
+            <p>
+                Here, we have overridden the <code>start()</code> method in the <code>Car</code> class to provide custom functionality specific to cars.
+            </p>
+        </section>
+
+        <section>
+            <h2>Polymorphism in Action</h2>
+            <p>
+                In OOP, polymorphism means "many forms." Inheritance allows objects to be treated as instances of their parent class, enabling more flexible and dynamic code.
+            </p>
+            <p><strong>Example:</strong> Imagine a function that works with any type of vehicle. Thanks to inheritance, we can pass in different vehicle types (like <code>Car</code> or <code>Motorcycle</code>), and the function can call the same method on them even though they are different types of objects.</p>
+            <pre><code>
+function testStart(vehicle) {
+    vehicle.start();
+}
+
+const myCar = new Car('Honda', 'Civic', 2018, 4);
+const myVehicle = new Vehicle('Generic', 'Model', 2015);
+
+testStart(myCar);       // Honda Civic is revving its engine. (from Car)
+testStart(myVehicle);   // Generic Model is starting. (from Vehicle)
+            </code></pre>
+            <p>This demonstrates polymorphism, where the <code>testStart()</code> function works with both <code>Car</code> and <code>Vehicle</code> instances.</p>
+        </section>
+
+        <section>
+            <h2>Common Bugs and How to Avoid Them</h2>
+            <p>When working with inheritance, here are some common issues to be aware of:</p>
+            <ul>
+                <li><strong>Not calling <code>super()</code> in the subclass constructor:</strong> Forgetting to call <code>super()</code> will result in an error because the base class constructor needs to be initialized before the subclass can add its own properties.</li>
+                <li><strong>Overriding methods without using the same method signature:</strong> Ensure that when you override methods, you keep the method signature (parameters) the same, or else you might break the behavior of the inherited method.</li>
+                <li><strong>Accidental method overrides:</strong> Be careful to use unique method names unless you specifically intend to override a method.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>

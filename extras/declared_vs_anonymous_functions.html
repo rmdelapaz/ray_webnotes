@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Declared vs Anonymous Functions in JavaScript</title>
+</head>
+<body>
+    <h1>When to Use Declared Functions vs Anonymous Functions in JavaScript</h1>
+
+    <h2>1. Declared Functions (Function Declaration)</h2>
+    <p>A <strong>declared function</strong> is defined with a specific name and is hoisted, meaning it is available for use anywhere in the current scope, even before its definition.</p>
+
+    <h3>When to use:</h3>
+    <ul>
+        <li><strong>Reusability:</strong> Declared functions are typically used when you need to reuse a function in multiple places throughout your code.</li>
+        <li><strong>Readability and maintainability:</strong> Since declared functions have names, they make the code more readable and easier to maintain.</li>
+        <li><strong>Hoisting requirement:</strong> If you need to call the function before its definition appears in the code, a function declaration is ideal since it’s hoisted to the top of the scope.</li>
+    </ul>
+
+    <h3>Example:</h3>
+    <pre><code>
+    function calculateSum(a, b) {
+        return a + b;
+    }
+
+    console.log(calculateSum(10, 20)); // 30
+    </code></pre>
+    
+    <p>Here, you can call <code>calculateSum</code> anywhere in the scope, even before its declaration.</p>
+
+    <h3>Good for:</h3>
+    <ul>
+        <li>Utility functions that need to be accessible globally within their scope.</li>
+        <li>Core functions used throughout the codebase multiple times.</li>
+    </ul>
+
+    <h2>2. Anonymous Functions (Function Expressions)</h2>
+    <p>An <strong>anonymous function</strong> is often used in <strong>function expressions</strong> and does not have a name unless assigned to a variable or passed directly as an argument.</p>
+
+    <h3>When to use:</h3>
+    <ul>
+        <li><strong>One-time use:</strong> Anonymous functions are typically used when the function is needed in just one place and doesn’t need to be reused.</li>
+        <li><strong>Inline or callback functions:</strong> They’re commonly used as callback functions for operations like event handling, array manipulations, or asynchronous actions such as <code>setTimeout</code>, <code>setInterval</code>, and Promises.</li>
+        <li><strong>Closure or immediacy:</strong> When you want to define a function immediately for a specific task without cluttering the global or local scope with its name.</li>
+    </ul>
+
+    <h3>Example:</h3>
+    <pre><code>
+    let calculateAverage = function(a, b) {
+        return (a + b) / 2;
+    };
+
+    console.log(calculateAverage(10, 20)); // 15
+    </code></pre>
+
+    <p>In this case, the function is stored in the variable <code>calculateAverage</code>, and you won’t need to access it by a name elsewhere in the code.</p>
+
+    <h3>Another Example with Anonymous Functions:</h3>
+    <pre><code>
+    let numbers = [1, 2, 3, 4];
+    let squares = numbers.map(function(num) {
+        return num * num;
+    });
+
+    console.log(squares); // [1, 4, 9, 16]
+    </code></pre>
+
+    <h3>Good for:</h3>
+    <ul>
+        <li>Callback functions, especially for event listeners, timers, or array methods.</li>
+        <li>Immediate, single-use functions that don’t need to be referenced elsewhere.</li>
+        <li>Keeping scope clean by not polluting it with unnecessary function names.</li>
+    </ul>
+
+    <h2>Summary of Usage Scenarios</h2>
+    <ul>
+        <li><strong>Use Declared Functions</strong> when:
+            <ul>
+                <li>You need a reusable, named function.</li>
+                <li>You want the benefits of function <strong>hoisting</strong> (call a function before it's defined in the code).</li>
+                <li>You want better <strong>debugging</strong> and clearer stack traces.</li>
+            </ul>
+        </li>
+        <li><strong>Use Anonymous Functions</strong> when:
+            <ul>
+                <li>You are defining a function inline, often as a <strong>callback</strong> (e.g., for event listeners, timers, or array methods).</li>
+                <li>The function is <strong>one-off</strong> and doesn’t need to be reused elsewhere.</li>
+                <li>You want to avoid creating unnecessary global or local variables.</li>
+            </ul>
+        </li>
+    </ul>
+
+</body>
+</html>

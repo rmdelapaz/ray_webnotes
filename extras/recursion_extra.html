@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion in JavaScript: A Comprehensive Guide</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Recursion in JavaScript</h1>
+    </header>
+
+    <section>
+        <h2>Introduction to Recursion</h2>
+        <p>Recursion is a powerful concept in computer science, and it is commonly used in programming to solve problems that can be broken down into smaller, similar subproblems. In JavaScript, recursion refers to a function calling itself to solve a smaller part of the same problem.</p>
+
+        <h3>Analogy: The Matryoshka Dolls</h3>
+        <p>Imagine a set of Russian nesting dolls (Matryoshka dolls). You open the first doll to find a smaller one inside, and you continue this process until you reach the smallest doll, which can’t be opened anymore. Each smaller doll represents a smaller part of the problem, and the smallest doll is the base case that stops the recursion.</p>
+    </section>
+
+    <section>
+        <h2>Recursion Learning Objectives</h2>
+        <p>By the end of this lesson, you should be able to perform the following:</p>
+        <ul>
+            <li>Given a recursive function, identify the base case and the recursive case.</li>
+            <li>Identify and use default parameters for functions.</li>
+            <li>Define what a "stack overflow" means in JavaScript's call stack.</li>
+            <li>Identify what causes the error <code>RangeError: Maximum call stack exceeded</code>.</li>
+            <li>Map out the recursive call stack when running a test case through a recursive function.</li>
+            <li>Solve problems using recursion.</li>
+            <li>Given a buggy recursive function, debug the function.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>1. Base Case and Recursive Case</h2>
+        <p>Every recursive function needs at least two parts: the <strong>base case</strong> and the <strong>recursive case</strong>.</p>
+
+        <h3>Base Case</h3>
+        <p>The base case is the simplest instance of the problem, where no further recursion is needed. It prevents the function from calling itself indefinitely.</p>
+
+        <h3>Recursive Case</h3>
+        <p>The recursive case is where the function calls itself with a smaller or simpler input to break down the problem.</p>
+
+        <h3>Example</h3>
+        <pre>
+function factorial(n) {
+    if (n === 1) {  // Base case
+        return 1;
+    }
+    return n * factorial(n - 1);  // Recursive case
+}
+
+console.log(factorial(5));  // Output: 120
+        </pre>
+        <p>In the example above, <code>n === 1</code> is the base case, and the recursive case calls <code>factorial()</code> with <code>n - 1</code> until the base case is reached.</p>
+    </section>
+
+    <section>
+        <h2>2. Using Default Parameters in Recursion</h2>
+        <p>Default parameters can make your recursive function more flexible by providing default values for the parameters when they are not passed.</p>
+
+        <h3>Example</h3>
+        <pre>
+function countDown(n = 10) {
+    if (n === 0) {
+        console.log('Done!');
+        return;
+    }
+    console.log(n);
+    countDown(n - 1);
+}
+
+countDown();  // Output: 10, 9, 8, ... 1, Done!
+        </pre>
+        <p>In this example, the function <code>countDown()</code> has a default parameter of <code>10</code>, which means that if no argument is passed, it starts counting down from 10.</p>
+    </section>
+
+    <section>
+        <h2>3. Stack Overflow in JavaScript's Call Stack</h2>
+        <p>The <strong>call stack</strong> is a mechanism JavaScript uses to manage function invocations. Each time a function is called, it is added to the top of the stack. When a function returns, it is removed from the stack.</p>
+
+        <h3>Analogy: The Stack of Plates</h3>
+        <p>Imagine a stack of plates at a buffet. Every time a customer gets a new plate, they add it to the top of the stack. If you stack too many plates, the stack becomes unstable and falls over—this is similar to a stack overflow.</p>
+
+        <h3>What is a Stack Overflow?</h3>
+        <p>A stack overflow occurs when there are too many function calls on the stack and it runs out of space. In JavaScript, this results in the <code>RangeError: Maximum call stack exceeded</code> error.</p>
+
+        <h3>Example of Stack Overflow</h3>
+        <pre>
+function infiniteRecursion() {
+    return infiniteRecursion();
+}
+
+infiniteRecursion();  // RangeError: Maximum call stack exceeded
+        </pre>
+    </section>
+
+    <section>
+        <h2>4. Mapping Out the Recursive Call Stack</h2>
+        <p>When a recursive function is called, JavaScript adds each invocation to the call stack. Let’s take an example of the factorial function and map out how the stack evolves:</p>
+
+        <h3>Factorial Example</h3>
+        <pre>
+factorial(3);
+// Call stack at each stage:
+factorial(3)   // Calls factorial(2)
+factorial(2)   // Calls factorial(1)
+factorial(1)   // Base case: returns 1
+factorial(2)   // Returns 2 * 1 = 2
+factorial(3)   // Returns 3 * 2 = 6
+        </pre>
+        <p>As each function call completes, it is removed from the call stack, and the value is passed back up to the previous function call.</p>
+    </section>
+
+    <section>
+        <h2>5. Solving Problems Using Recursion</h2>
+        <p>Recursion is an effective tool for solving problems where the solution involves breaking the problem down into smaller instances of itself. Common examples include:</p>
+
+        <ul>
+            <li>Calculating factorials.</li>
+            <li>Traversing tree-like structures (e.g., DOM trees).</li>
+            <li>Solving problems like the Fibonacci sequence, where each term is defined by the previous two terms.</li>
+        </ul>
+
+        <h3>Example: Fibonacci Sequence</h3>
+        <pre>
+function fibonacci(n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(5));  // Output: 5
+        </pre>
+    </section>
+
+    <section>
+        <h2>6. Debugging Recursive Functions</h2>
+        <p>Debugging recursive functions can be tricky, but here are some common tips to help you:</p>
+
+        <ul>
+            <li>Ensure that the base case is correctly defined. Without a base case, the function will cause a stack overflow.</li>
+            <li>Use logging to see how many times the function is called and to track the values of parameters at each step.</li>
+            <li>Use default parameters to avoid passing unnecessary arguments.</li>
+        </ul>
+
+        <h3>Example of Debugging a Recursive Function</h3>
+        <pre>
+// Buggy code
+function sumRange(n) {
+    if (n === 1) return 1;
+    return n + sumRange(n);
+}
+
+// Debugged version
+function sumRange(n) {
+    if (n === 1) return 1;
+    return n + sumRange(n - 1);
+}
+
+console.log(sumRange(5));  // Output: 15
+        </pre>
+    </section>
+
+    <section>
+        <h2>Practice Problems</h2>
+        <p>Try these practice problems to solidify your understanding of recursion:</p>
+        <ol>
+            <li>Write a recursive function that calculates the sum of all numbers from 1 to n.</li>
+            <li>Create a recursive function that prints all the elements of an array in reverse order.</li>
+            <li>Debug a recursive function that incorrectly computes the factorial of a number.</li>
+        </ol>
+    </section>
+
+    <footer>
+        <p>Recursion is a powerful technique that can simplify many problems, but it also requires careful attention to base cases and stack usage. Keep practicing and exploring its applications!</p>
+        &nbsp;
+    </footer>
+</body>
+</html>

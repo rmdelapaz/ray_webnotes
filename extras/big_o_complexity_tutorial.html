@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Time and Space Complexity (Big-O)</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Time and Space Complexity (Big-O)</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Algorithms are the building blocks of programming. However, it’s not just about writing code that works, but also about writing code that works <em>efficiently</em>. This is where the concept of <strong>Big-O Notation</strong> comes into play. 
+                In this tutorial, we'll explore how to identify time and space complexity, understand common Big-O complexities (like <code>O(1)</code>, <code>O(n)</code>, and <code>O(n²)</code>), and benchmark code performance using timing scripts.
+            </p>
+
+            <h2>Step 1: What is Time and Space Complexity?</h2>
+            <p>
+                Imagine you have a huge pile of laundry to fold. If you're the only one folding, how long will it take you? Now, imagine you have a friend helping—does it go faster? How does the amount of time or space needed grow as the task becomes bigger or more complex? 
+                Time complexity measures how the execution time of an algorithm scales as the size of the input grows. Space complexity, on the other hand, measures the amount of memory an algorithm uses.
+            </p>
+
+            <h2>Step 2: Big-O Notation</h2>
+            <p>
+                Big-O notation is a way of expressing how the runtime or memory requirements of an algorithm grow as the input size increases. Let's look at some common types of complexity:
+            </p>
+
+            <ul>
+                <li><strong>O(1): Constant Time Complexity</strong><br> No matter how large the input, the operation takes the same amount of time. Example: Accessing an element in an array by its index.</li>
+                <li><strong>O(n): Linear Time Complexity</strong><br> The runtime grows in direct proportion to the size of the input. Example: Finding an item in an unsorted list.</li>
+                <li><strong>O(n²): Quadratic Time Complexity</strong><br> The runtime grows exponentially with the size of the input. Example: Comparing every pair of elements in a list (like in bubble sort).</li>
+            </ul>
+
+            <h2>Step 3: Recognizing Big-O in Practice</h2>
+            <p>
+                Let’s explore a few code examples and identify their time complexities:
+            </p>
+
+            <pre><code>
+// Constant Time: O(1)
+function getFirstElement(arr) {
+    return arr[0];  // No matter the size of the array, this takes the same amount of time.
+}
+
+// Linear Time: O(n)
+function sumArray(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];  // The time it takes grows with the size of the array.
+    }
+    return sum;
+}
+
+// Quadratic Time: O(n²)
+function bubbleSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+        }
+    }
+    return arr;
+}
+            </code></pre>
+
+            <h2>Step 4: Benchmarking Code Performance</h2>
+            <p>
+                Now that we understand time complexity, let's see how to <em>measure</em> the performance of code. We can use <code>console.time()</code> and <code>console.timeEnd()</code> to benchmark how long a function takes to run:
+            </p>
+
+            <pre><code>
+console.time("Sum Array");
+sumArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+console.timeEnd("Sum Array");
+            </code></pre>
+            <p>
+                You can compare this timing with Big-O analysis to understand how performance changes as the input grows.
+            </p>
+
+            <h2>Step 5: Real-World Applications</h2>
+            <p>
+                Understanding Big-O complexity is crucial in many real-world applications, from optimizing search engines to improving response times in web servers. For example, when processing thousands of search queries per second, choosing an algorithm with <code>O(n²)</code> complexity could slow down the system significantly. On the other hand, a constant-time <code>O(1)</code> or linear-time <code>O(n)</code> algorithm would scale much better.
+            </p>
+
+            <h2>Conclusion</h2>
+            <p>
+                Big-O Notation provides a way to think about the efficiency of algorithms. By recognizing and benchmarking code complexity, you can ensure that your applications remain fast and efficient as they scale.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging for New JavaScript Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Debugging for New JavaScript Developers</h1>
+    <p>Welcome to the world of debugging! Debugging is the process of finding and fixing errors (also known as "bugs") in your code. Think of it like being a detective—your job is to track down the problem, understand why it happened, and solve it. Every developer, no matter how experienced, encounters bugs, so learning to debug efficiently is an essential skill.</p>
+
+    <h2>Why Do Bugs Happen?</h2>
+    <p>Bugs can occur for many reasons. Some examples include typos, incorrect logic, forgetting to update variables, or trying to access something that doesn’t exist. It’s a natural part of programming, and the key is learning how to fix them when they show up.</p>
+
+    <p><strong>Analogy:</strong> Imagine you’re cooking, and you accidentally use salt instead of sugar in your recipe. The dish doesn’t taste right, and now you need to figure out where you went wrong. In coding, debugging is like that: you realize something isn’t working, and now you need to look through your recipe (code) to find the mistake.</p>
+
+    <h2>Steps to Debugging</h2>
+    <p>Let’s break down the process of debugging into easy-to-follow steps:</p>
+
+    <h3>1. Reproduce the Bug</h3>
+    <p>First, you need to trigger the bug. If you can see the bug in action, you're halfway to fixing it! Find out what input or action causes the error.</p>
+    
+    <p><strong>Analogy:</strong> If you’re trying to figure out why your flashlight isn’t turning on, the first thing you’d do is try pressing the button. In the same way, you need to know exactly how to recreate the bug in your code before you can solve it.</p>
+
+    <h3>2. Read the Error Message (if there is one)</h3>
+    <p>JavaScript provides error messages that are like little notes from the interpreter telling you what went wrong and where. Here’s an example:</p>
+    
+    <pre>
+    function greet(name) {
+      console.log("Hello " + nmae);
+    }
+    
+    greet("Alice");
+    </pre>
+
+    <p>If you run the above code, you’ll get an error:</p>
+    
+    <pre>
+    ReferenceError: nmae is not defined
+    </pre>
+
+    <p>The error tells you that <code>nmae</code> is not defined, which hints that you may have a typo in your code.</p>
+    
+    <h3>3. Use <code>console.log()</code> to See What’s Happening</h3>
+    <p>When you’re not sure what’s going wrong in your code, you can use <code>console.log()</code> to print out information and help track down the problem. Think of it like a flashlight shining on your code—it shows you what’s happening under the hood.</p>
+
+    <pre>
+    function multiply(a, b) {
+      console.log("a:", a);
+      console.log("b:", b);
+      return a * b;
+    }
+    
+    multiply(5, 0);  // Check if the values are what you expect
+    </pre>
+
+    <p><strong>Real-World Example:</strong> Imagine you’re fixing a car. If the engine isn’t starting, you might check if the battery is working or if there’s fuel in the tank. Similarly, <code>console.log()</code> helps you check if the values in your code are what you expect them to be.</p>
+
+    <h3>4. Trace Through the Code</h3>
+    <p>Step through your code to see how it executes. This is where tools like debuggers come in handy. You can set <strong>breakpoints</strong> (places where your code will pause) and examine what’s happening at that moment in time.</p>
+    
+    <p><strong>Analogy:</strong> If you’re baking a cake and it doesn’t rise, you might trace back to the steps of your recipe to see if you forgot to add baking powder. Tracing through code helps you find where things went wrong, just like reviewing your recipe.</p>
+
+    <h2>Practical Debugging Tips</h2>
+    
+    <h3>1. Off-by-One Errors</h3>
+    <p>An off-by-one error happens when your code is off by just one iteration or value. For example:</p>
+
+    <pre>
+    for (let i = 0; i &lt;= 5; i++) {
+      console.log(i);
+    }
+    </pre>
+    
+    <p>This will print <code>0, 1, 2, 3, 4, 5</code>, but if you only wanted to count to 4, you should use <code>&lt;</code> instead of <code>&lt;=</code>.</p>
+    
+    <h3>2. Undefined vs Null</h3>
+    <p>In JavaScript, <code>undefined</code> means a variable has been declared but not yet assigned a value, whereas <code>null</code> is an assignment value that represents "no value."</p>
+
+    <pre>
+    let x;
+    console.log(x);  // undefined
+    
+    let y = null;
+    console.log(y);  // null
+    </pre>
+
+    <h2>Real-World Debugging Example</h2>
+    <p>Let’s debug a common issue—an array not updating as expected:</p>
+
+    <pre>
+    let numbers = [1, 2, 3, 4, 5];
+    
+    function removeNumber(arr, numToRemove) {
+      for (let i = 0; i &lt; arr.length; i++) {
+        if (arr[i] === numToRemove) {
+          arr.splice(i, 1);
+        }
+      }
+      return arr;
+    }
+    
+    removeNumber(numbers, 3);
+    console.log(numbers);  // Expected: [1, 2, 4, 5]
+    </pre>
+
+    <p>But, you may run into an issue where not all instances of the number 3 are removed. This is because when you use <code>splice</code>, the array shortens and the index changes, so the loop skips over some elements. To fix this, you can adjust the loop or use <code>i--</code> after the splice:</p>
+
+    <pre>
+    function removeNumber(arr, numToRemove) {
+      for (let i = 0; i &lt; arr.length; i++) {
+        if (arr[i] === numToRemove) {
+          arr.splice(i, 1);
+          i--;  // Adjust the index
+        }
+      }
+      return arr;
+    }
+    </pre>
+
+    <h2>Debugging Tools</h2>
+    <p>There are plenty of tools you can use to debug your code more effectively:</p>
+    
+    <ul>
+      <li><strong>Browser DevTools:</strong> Modern browsers like Chrome and Firefox have built-in developer tools that allow you to inspect your code, set breakpoints, and trace through the execution.</li>
+      <li><strong>Linting Tools:</strong> Linters like ESLint check your code for potential errors before it even runs.</li>
+      <li><strong>Unit Tests:</strong> Writing test cases for your functions helps catch bugs early and ensures your code works as expected.</li>
+    </ul>
+
+    <h2>What You've Learned</h2>
+    <ul>
+      <li>Bugs happen! They're a natural part of coding, and learning to debug is crucial.</li>
+      <li>Error messages and <code>console.log()</code> are your best friends in finding bugs.</li>
+      <li>Stepping through your code and using tools like debuggers help you trace the issue.</li>
+      <li>Testing your code for both normal and edge cases ensures reliability.</li>
+    </ul>
+
+    <h2>Final Thoughts</h2>
+    <p>Debugging is like solving a puzzle. It can be frustrating at times, but once you find and fix the bug, it’s incredibly satisfying. Remember, every bug you encounter is an opportunity to learn and become a better developer!</p>
+
+</body>
+</html>

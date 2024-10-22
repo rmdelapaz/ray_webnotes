@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Conversion: Decimal, Binary, Hexadecimal</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Base Conversion: Decimal, Binary, Hexadecimal</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Step 1: Decimal to Binary and Hexadecimal</h2>
+            <pre><code>// Decimal to Binary and Hex
+const decimal = 255;
+console.log(decimal.toString(2));  // Binary: '11111111'
+console.log(decimal.toString(16)); // Hex: 'ff'</code></pre>
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><strong>Decimal (255):</strong> The standard number system, using digits 0-9.</li>
+                <li><strong>Binary ('11111111'):</strong> Base-2 system, representing powers of 2.</li>
+                <li><strong>Hexadecimal ('ff'):</strong> Base-16 system, using digits 0-9 and letters A-F.</li>
+            </ul>
+            <p><strong>Example:</strong> 255 in binary is '11111111' and in hexadecimal is 'ff'.</p>
+        </section>
+
+        <section>
+            <h2>Step 2: Binary to Decimal and Hexadecimal</h2>
+            <pre><code>// Binary to Decimal and Hex
+const binary = '11111111';
+console.log(parseInt(binary, 2));  // Decimal: 255
+console.log(parseInt(binary, 2).toString(16)); // Hex: 'ff'</code></pre>
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><strong>Binary ('11111111'):</strong> Converted to decimal using <code>parseInt(binary, 2)</code>, which results in 255.</li>
+                <li><strong>Hexadecimal ('ff'):</strong> Convert the decimal (255) to hex using <code>toString(16)</code>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Step 3: Hexadecimal to Decimal and Binary</h2>
+            <pre><code>// Hex to Decimal and Binary
+const hex = 'ff';
+console.log(parseInt(hex, 16));  // Decimal: 255
+console.log(parseInt(hex, 16).toString(2)); // Binary: '11111111'</code></pre>
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><strong>Hexadecimal ('ff'):</strong> Converted to decimal using <code>parseInt(hex, 16)</code>, which results in 255.</li>
+                <li><strong>Binary ('11111111'):</strong> Convert the decimal (255) to binary using <code>toString(2)</code>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Summary</h2>
+            <ul>
+                <li><strong>Decimal to Binary and Hex:</strong> Use <code>.toString(2)</code> for binary and <code>.toString(16)</code> for hex.</li>
+                <li><strong>Binary to Decimal and Hex:</strong> Use <code>parseInt(binaryString, 2)</code> to get decimal, then <code>.toString(16)</code> for hex.</li>
+                <li><strong>Hex to Decimal and Binary:</strong> Use <code>parseInt(hexString, 16)</code> to get decimal, then <code>.toString(2)</code> for binary.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Real-World Use Case</h2>
+            <p>Binary and hexadecimal conversions are widely used in computing:</p>
+            <ul>
+                <li><strong>Computers:</strong> Binary is the language computers use, while hexadecimal is a more human-readable form used for memory addresses and color codes in web development.</li>
+                <li><strong>Data Encoding:</strong> ASCII and Unicode values are often represented in hexadecimal in data storage and transmission.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

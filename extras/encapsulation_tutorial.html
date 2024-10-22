@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encapsulation in Object-Oriented Programming</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>Encapsulation in Object-Oriented Programming</h1>
+
+    <h2>Introduction to Encapsulation</h2>
+    <p>Encapsulation is one of the fundamental principles of object-oriented programming (OOP). It refers to the bundling of data (variables) and methods (functions) that operate on the data into a single unit, or object. Encapsulation allows objects to hide their internal state and only expose what’s necessary, helping to maintain a clear interface between different parts of the program.</p>
+
+    <h3>Analogy: A Vending Machine</h3>
+    <p>Imagine a vending machine. You, as the user, can press buttons to choose your snack, insert money, and receive the snack. However, you don’t need to know how the vending machine works internally (how it processes the money, selects the snack, etc.). This is similar to encapsulation. The internal workings of the object (in this case, the vending machine) are hidden from you. You only interact with the external interface.</p>
+
+    <h2>Why is Encapsulation Important?</h2>
+    <p>Encapsulation provides several key benefits:</p>
+    <ul>
+        <li><strong>Control:</strong> Encapsulation allows an object to control who can access and modify its data. Only the methods of the object itself can directly access its data.</li>
+        <li><strong>Protection:</strong> By hiding internal details, encapsulation prevents the accidental misuse of data and methods by other parts of the program.</li>
+        <li><strong>Modularity:</strong> Code is easier to manage and maintain when it’s broken down into separate, encapsulated objects. Each object can function independently, which makes it easier to modify or replace parts of a program without affecting the rest.</li>
+        <li><strong>Flexibility:</strong> Internal implementations can be changed without affecting the code that interacts with the object, as long as the external interface remains the same.</li>
+    </ul>
+
+    <h3>Real-World Example: Car Encapsulation</h3>
+    <p>Think about driving a car. You control the car by turning the steering wheel, pressing the pedals, and using the gear shift. But you don’t need to understand how the engine works or how fuel is converted to motion. The car encapsulates its complex internal mechanics behind a simple interface that anyone can use. This is a powerful example of how encapsulation simplifies interaction and protects the user from needing to understand the internal complexity.</p>
+
+    <h2>Encapsulation in Code</h2>
+    <p>In programming, encapsulation is typically implemented using classes. In languages like JavaScript, Python, or Java, you define a class that contains private properties (data) and public methods (functions) to interact with that data.</p>
+
+    <h3>Example: Encapsulation in JavaScript</h3>
+    <pre><code>
+// Define a class in JavaScript
+class BankAccount {
+    constructor(owner, balance) {
+        this._owner = owner;   // The underscore indicates a "private" variable
+        this._balance = balance;
+    }
+
+    // Public method to access balance
+    getBalance() {
+        return this._balance;
+    }
+
+    // Public method to deposit money
+    deposit(amount) {
+        if (amount > 0) {
+            this._balance += amount;
+        } else {
+            console.log("Invalid deposit amount");
+        }
+    }
+
+    // Public method to withdraw money
+    withdraw(amount) {
+        if (amount > 0 && amount <= this._balance) {
+            this._balance -= amount;
+        } else {
+            console.log("Invalid withdrawal amount");
+        }
+    }
+}
+
+// Create a new BankAccount object
+const account = new BankAccount("Alice", 500);
+
+// Accessing and modifying the balance using public methods
+account.deposit(200);
+console.log(account.getBalance());  // Output: 700
+
+account.withdraw(100);
+console.log(account.getBalance());  // Output: 600
+
+// Direct access to _balance is discouraged (encapsulated)
+console.log(account._balance);  // While possible in JavaScript, this is not a good practice
+    </code></pre>
+
+    <p>In this example, the balance of the account is protected inside the class. The user interacts with the balance through the methods <code>deposit()</code>, <code>withdraw()</code>, and <code>getBalance()</code>. Directly modifying the <code>_balance</code> variable is not recommended, as the leading underscore indicates it’s intended to be private, though JavaScript does not enforce this privacy.</p>
+
+    <h2>Practical Usage of Encapsulation</h2>
+    <p>Encapsulation is widely used in real-world software applications:</p>
+    <ul>
+        <li><strong>Banking Systems:</strong> Account information is kept private, and users can only access their balance or make transactions via secure methods, protecting sensitive financial data.</li>
+        <li><strong>Game Development:</strong> Objects like characters or vehicles in games have private properties (like health, speed, or position), and game logic interacts with these through defined methods.</li>
+        <li><strong>API Development:</strong> APIs often encapsulate complex logic or data processing, providing a simple interface for developers to work with while hiding the underlying complexity.</li>
+    </ul>
+
+    <h3>Example: Online Shopping System</h3>
+    <p>Imagine an online shopping platform where customers add items to their cart. The cart is an object that encapsulates its contents (products, quantities, prices) and provides methods like <code>addItem()</code>, <code>removeItem()</code>, and <code>getTotalPrice()</code>. The internal details of how these items are stored or calculated are hidden from the user, who only interacts with the cart through its public interface.</p>
+
+    <h2>Encapsulation in Other OOP Languages</h2>
+    <p>In languages like Java or Python, encapsulation is more strictly enforced. You can mark variables as private (accessible only within the class) or public (accessible from outside the class). This offers even greater control over how data and methods are exposed.</p>
+
+    <h3>Example: Encapsulation in Python</h3>
+    <pre><code>
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.__owner = owner       # Private variable
+        self.__balance = balance   # Private variable
+
+    def get_balance(self):
+        return self.__balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+        else:
+            print("Invalid deposit amount")
+
+    def withdraw(self, amount):
+        if amount > 0 and amount <= self.__balance:
+            self.__balance -= amount
+        else:
+            print("Invalid withdrawal amount")
+
+# Create a new BankAccount object
+account = BankAccount("Alice", 500)
+
+# Using methods to interact with the balance
+account.deposit(200)
+print(account.get_balance())  # Output: 700
+
+account.withdraw(100)
+print(account.get_balance())  # Output: 600
+    </code></pre>
+
+    <p>In Python, private variables are indicated with double underscores <code>__</code>, making it much harder (though still not impossible) to access them directly outside the class.</p>
+
+    <h2>Conclusion</h2>
+    <p>Encapsulation is a powerful principle in object-oriented programming. It helps keep your code modular, secure, and easy to maintain by controlling access to an object’s internal state. By hiding internal details and providing a clean, public interface, encapsulation simplifies how objects are used and ensures that they function as intended without interference from external code.</p>
+    
+</body>
+</html>

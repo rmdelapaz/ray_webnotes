@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extending Classes in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Extending Classes and Using Inheritance in JavaScript</h1>
+        <p>A guide for new developers</p>
+    </header>
+
+    <section>
+        <h2>Introduction</h2>
+        <p>In this tutorial, we will explore how to extend an existing class in JavaScript, use methods inherited from a parent class, and utilize the <code>super</code> function in a constructor to call the parent class's constructor. These concepts are key to understanding object-oriented programming in JavaScript, which helps you write more organized and reusable code.</p>
+    </section>
+
+    <section>
+        <h2>Extending an Existing Class</h2>
+        <p>Imagine you're building a car. All cars share some common features: they have wheels, an engine, and can move. However, there are different types of cars: sports cars, trucks, electric cars. You wouldn't want to rewrite all the basic car features for each type of car, right? Instead, you'd create a "base" car class that contains all the common features, and then extend that class to create specialized car types.</p>
+
+        <p>This is what extending a class in JavaScript allows you to do. You can create a base class with common functionality, and then create a subclass that adds or modifies features while still inheriting the functionality of the base class.</p>
+
+        <h3>Example: Extending a Base Class</h3>
+        <pre><code>
+// Base class: Car
+class Car {
+    constructor(make, model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    start() {
+        return `${this.make} ${this.model} is starting.`;
+    }
+}
+
+// Subclass: ElectricCar extends the base Car class
+class ElectricCar extends Car {
+    constructor(make, model, batteryRange) {
+        super(make, model); // Call the parent constructor using super()
+        this.batteryRange = batteryRange; // New property for ElectricCar
+    }
+
+    charge() {
+        return `${this.make} ${this.model} is charging.`;
+    }
+}
+
+// Create an instance of ElectricCar
+const tesla = new ElectricCar('Tesla', 'Model S', 370);
+console.log(tesla.start()); // Inherited method from Car
+console.log(tesla.charge()); // Method specific to ElectricCar
+        </code></pre>
+
+        <p>In this example, the <code>ElectricCar</code> class extends the <code>Car</code> class. This means that <code>ElectricCar</code> inherits all the properties and methods of <code>Car</code>, while also adding its own specific features, like the <code>charge</code> method and the <code>batteryRange</code> property.</p>
+    </section>
+
+    <section>
+        <h2>Using Methods Inherited from a Parent Class</h2>
+        <p>When you extend a class, the child class automatically inherits all the methods from the parent class. This is like learning skills from a parent—if your parent is a chef, you might inherit their ability to cook, but you can also develop your own specialized skills.</p>
+
+        <p>In our example, the <code>ElectricCar</code> inherits the <code>start</code> method from the <code>Car</code> class. This means you can call <code>start()</code> on an instance of <code>ElectricCar</code> even though <code>start()</code> is defined in the parent class.</p>
+
+        <h3>Example: Calling Inherited Methods</h3>
+        <pre><code>
+const tesla = new ElectricCar('Tesla', 'Model 3', 350);
+
+console.log(tesla.start()); // Tesla Model 3 is starting. (inherited from Car)
+console.log(tesla.charge()); // Tesla Model 3 is charging. (method in ElectricCar)
+        </code></pre>
+
+        <p>Even though <code>start()</code> is not defined in the <code>ElectricCar</code> class, it's available because <code>ElectricCar</code> inherits it from <code>Car</code>.</p>
+    </section>
+
+    <section>
+        <h2>Using <code>super()</code> to Call the Parent Class Constructor</h2>
+        <p>The <code>super</code> function allows the child class to call the constructor of the parent class. Think of this like calling your parent for advice before making a decision. In JavaScript, if your subclass has its own constructor, you need to call <code>super()</code> to ensure the parent class's properties are initialized.</p>
+
+        <p>In our earlier example, we called <code>super(make, model)</code> inside the constructor of the <code>ElectricCar</code> class to make sure that the <code>make</code> and <code>model</code> properties are properly initialized using the parent class's constructor.</p>
+
+        <h3>Example: Using <code>super()</code> in a Constructor</h3>
+        <pre><code>
+// Subclass: ElectricCar
+class ElectricCar extends Car {
+    constructor(make, model, batteryRange) {
+        super(make, model); // Call parent class constructor
+        this.batteryRange = batteryRange; // Initialize new property
+    }
+
+    charge() {
+        return `${this.make} ${this.model} is charging.`;
+    }
+}
+
+const leaf = new ElectricCar('Nissan', 'Leaf', 226);
+console.log(leaf.start()); // Nissan Leaf is starting. (from Car)
+console.log(leaf.charge()); // Nissan Leaf is charging.
+        </code></pre>
+
+        <p>If we didn’t call <code>super()</code> in the <code>ElectricCar</code> constructor, the <code>make</code> and <code>model</code> properties wouldn’t be initialized, and we’d get an error.</p>
+    </section>
+
+    <section>
+        <h2>Real-World Application: Inheritance in Web Development</h2>
+        <p>Inheritance is often used in web development when building user interfaces. For example, you might have a base <code>Component</code> class for a UI framework, and then extend it to create specialized components like buttons, sliders, or input fields. Each component would share common behavior (like rendering) but also have unique properties and methods.</p>
+
+        <h3>Example: Base Component and Button Component</h3>
+        <pre><code>
+// Base class: Component
+class Component {
+    constructor(type) {
+        this.type = type;
+    }
+
+    render() {
+        return `Rendering a ${this.type}`;
+    }
+}
+
+// Subclass: Button extends Component
+class Button extends Component {
+    constructor(label) {
+        super('button'); // Call parent constructor
+        this.label = label;
+    }
+
+    click() {
+        return `${this.label} button clicked!`;
+    }
+}
+
+const submitButton = new Button('Submit');
+console.log(submitButton.render()); // Rendering a button
+console.log(submitButton.click()); // Submit button clicked!
+        </code></pre>
+
+        <p>In this example, the <code>Button</code> class extends the <code>Component</code> class, inheriting its <code>render</code> method while adding its own specific behavior with the <code>click</code> method.</p>
+    </section>
+
+    <section>
+        <h2>Conclusion</h2>
+        <p>In this tutorial, we learned how to:</p>
+        <ul>
+            <li>Extend an existing class in JavaScript</li>
+            <li>Use methods inherited from a parent class</li>
+            <li>Use the <code>super</code> function in a constructor to call the parent class's constructor</li>
+        </ul>
+
+        <p>Inheritance is a powerful feature in object-oriented programming that allows you to create more specialized classes while reusing common functionality. By extending classes and using <code>super()</code>, you can build more complex and modular applications with ease.</p>
+    </section>
+</body>
+</html>

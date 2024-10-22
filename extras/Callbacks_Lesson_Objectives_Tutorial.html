@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First-Class Objects and Higher-Order Functions Challenge</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>First-Class Objects and Higher-Order Functions Challenge</h1>
+
+    <h2>Why are Functions called "First Class Objects" in JavaScript?</h2>
+    <p>In JavaScript, functions are referred to as "First Class Objects" because they have all the characteristics of objects and can be:</p>
+    <ul>
+        <li>Assigned to variables</li>
+        <li>Passed as arguments to other functions</li>
+        <li>Returned from functions</li>
+        <li>Stored in arrays or objects</li>
+    </ul>
+    <p>This flexibility allows JavaScript to treat functions like any other value, making them powerful tools for writing concise, modular, and reusable code. Functions are used as "callbacks," "event handlers," and for "functional programming" techniques like <code>map</code>, <code>filter</code>, and <code>reduce</code>.</p>
+
+    <h2>Predicting Output from a Code Snippet with Callbacks</h2>
+    <p>Consider the following code snippet:</p>
+    <pre>
+    function namedCallback() {{
+      console.log("This is a named callback");
+    }}
+
+    setTimeout(function() {{
+      console.log("This is an anonymous callback");
+    }}, 1000);
+
+    namedCallback();
+    console.log("This is outside of the callback");
+    </pre>
+    <p><strong>Predicted Output:</strong></p>
+    <ul>
+        <li>"This is a named callback" (because the named callback is called immediately)</li>
+        <li>"This is outside of the callback" (because this <code>console.log</code> is executed synchronously)</li>
+        <li>"This is an anonymous callback" (because the <code>setTimeout</code> triggers this after 1 second)</li>
+    </ul>
+
+    <h2>Write a function that compares two callbacks and returns the result of the greater one</h2>
+    <pre>
+    function compareCallbacks(value, cb1, cb2) {{
+      const result1 = cb1(value);
+      const result2 = cb2(value);
+
+      return result1 > result2 ? result1 : result2;
+    }}
+
+    // Example usage:
+    function double(x) {{
+      return x * 2;
+    }}
+
+    function square(x) {{
+      return x * x;
+    }}
+
+    console.log(compareCallbacks(5, double, square)); // => 25
+    </pre>
+    <p>Explanation: The function <code>compareCallbacks</code> accepts a value and two callback functions. It returns the result of the callback that produces the greater value.</p>
+
+    <h2>Write a function, myMap, that mimics Array.map</h2>
+    <pre>
+    function myMap(arr, callback) {{
+      const result = [];
+      for (let i = 0; i < arr.length; i++) {{
+        result.push(callback(arr[i], i, arr));
+      }}
+      return result;
+    }}
+
+    // Example usage:
+    const numbers = [1, 2, 3];
+    console.log(myMap(numbers, x => x * 2)); // => [2, 4, 6]
+    </pre>
+    <p>Explanation: The <code>myMap</code> function takes an array and a callback. It creates a new array by applying the callback function to each element in the original array, mimicking the behavior of <code>Array.map</code>.</p>
+
+    <h2>Write a function, myFilter, that mimics Array.filter</h2>
+    <pre>
+    function myFilter(arr, callback) {{
+      const result = [];
+      for (let i = 0; i < arr.length; i++) {{
+        if (callback(arr[i], i, arr)) {{
+          result.push(arr[i]);
+        }}
+      }}
+      return result;
+    }}
+
+    // Example usage:
+    const numbers = [1, 2, 3, 4];
+    console.log(myFilter(numbers, x => x > 2)); // => [3, 4]
+    </pre>
+    <p>Explanation: The <code>myFilter</code> function takes an array and a callback. It creates a new array by including only the elements for which the callback function returns <code>true</code>, mimicking the behavior of <code>Array.filter</code>.</p>
+
+    <h2>Write a function, myEvery, that mimics Array.every</h2>
+    <pre>
+    function myEvery(arr, callback) {{
+      for (let i = 0; i < arr.length; i++) {{
+        if (!callback(arr[i], i, arr)) {{
+          return false;
+        }}
+      }}
+      return true;
+    }}
+
+    // Example usage:
+    const numbers = [2, 4, 6];
+    console.log(myEvery(numbers, x => x % 2 === 0)); // => true
+    console.log(myEvery(numbers, x => x > 5)); // => false
+    </pre>
+    <p>Explanation: The <code>myEvery</code> function takes an array and a callback. It returns <code>true</code> if all elements pass the test implemented by the callback, mimicking the behavior of <code>Array.every</code>.</p>
+    
+</body>
+</html>

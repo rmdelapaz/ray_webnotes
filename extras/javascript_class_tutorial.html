@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Classes - Tutorial for New Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Classes in JavaScript (ES6) - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>1. Defining a Class using ES6 Syntax with a Constructor Method</h2>
+            <p>
+                In ES6, defining a class is much simpler compared to the older constructor functions in JavaScript. The keyword <code>class</code> is used to declare a class, and the <code>constructor</code> method is used to initialize the instance variables when an object is created.
+            </p>
+            <p><strong>Analogy:</strong> Think of a class like a blueprint for a house. It defines what every house (object) built from the blueprint should have (instance variables like rooms, doors) and what the house can do (methods like open doors, ring the bell).</p>
+            <pre><code>
+class Car {
+    constructor(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+}
+            </code></pre>
+            <p>In this example, the <code>Car</code> class has a constructor that takes three parameters: <code>make</code>, <code>model</code>, and <code>year</code>. When a new instance of a Car is created, these values are assigned to the instance.</p>
+        </section>
+
+        <section>
+            <h2>2. Defining Instance Methods and Variables</h2>
+            <p>
+                Instance methods are functions that belong to the instances of a class. Variables that belong to these instances are called instance variables. Every time you create a new object, it gets its own set of these variables and methods.
+            </p>
+            <p><strong>Real-world analogy:</strong> Think of instance methods as the unique abilities of each object. For example, if each car (object) has the ability to start or stop, those are the instance methods that only the car object can perform.</p>
+            <pre><code>
+class Car {
+    constructor(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.isRunning = false; // An instance variable
+    }
+
+    start() {
+        this.isRunning = true;
+        console.log(`${this.make} ${this.model} is now running.`);
+    }
+
+    stop() {
+        this.isRunning = false;
+        console.log(`${this.make} ${this.model} has stopped.`);
+    }
+}
+            </code></pre>
+            <p>Here, we defined two instance methods: <code>start()</code> and <code>stop()</code>, which control whether the car is running.</p>
+        </section>
+
+        <section>
+            <h2>3. Creating an Instance using the <code>new</code> Keyword</h2>
+            <p>
+                To create an object from a class, we use the <code>new</code> keyword followed by the class name and any required arguments for the constructor.
+            </p>
+            <pre><code>
+const myCar = new Car('Toyota', 'Camry', 2021);
+myCar.start(); // Toyota Camry is now running.
+            </code></pre>
+            <p>This creates a new instance of the <code>Car</code> class called <code>myCar</code>, and it can now use the methods we defined in the class, like <code>start()</code> and <code>stop()</code>.</p>
+        </section>
+
+        <section>
+            <h2>4. What are Instance Methods?</h2>
+            <p>
+                Instance methods are functions defined inside a class that operate on the individual instance of the object. These methods can modify the instance's properties and interact with the object.
+            </p>
+            <p><strong>Analogy:</strong> Think of instance methods as unique actions a particular object can perform, like how a particular car can start or stop. While every car may have the capability to start and stop, each car’s specific behavior when starting is tied to its own state (e.g., whether the engine is already on).</p>
+        </section>
+
+        <section>
+            <h2>5. How to Call Instance Methods on an Instance</h2>
+            <p>
+                To call an instance method, simply use dot notation on the instance of the class.
+            </p>
+            <pre><code>
+myCar.stop(); // Toyota Camry has stopped.
+            </code></pre>
+            <p>This will call the <code>stop()</code> method on the <code>myCar</code> instance, which in turn will change the <code>isRunning</code> variable to <code>false</code>.</p>
+        </section>
+
+        <section>
+            <h2>6. Checking if an Object is an Instance of a Class Using the <code>instanceof</code> Operator</h2>
+            <p>
+                The <code>instanceof</code> operator checks whether a specific object was created using a particular class. This is useful for debugging or verifying the type of object you're working with.
+            </p>
+            <pre><code>
+console.log(myCar instanceof Car); // true
+            </code></pre>
+            <p>In this case, the expression returns <code>true</code> because <code>myCar</code> was created using the <code>Car</code> class.</p>
+        </section>
+
+        <section>
+            <h2>7. Debugging Common Bugs When Using Classes in JavaScript</h2>
+            <p>
+                Here are some common issues you may run into when working with classes and how to resolve them:
+            </p>
+            <ul>
+                <li><strong>Uncaught TypeError: Cannot read property '...' of undefined:</strong> This happens if you try to access a property that hasn’t been initialized yet. Double-check that your constructor is correctly assigning instance variables.</li>
+                <li><strong>Missing <code>new</code> when creating an instance:</strong> Forgetting to use the <code>new</code> keyword will cause JavaScript to treat the class like a regular function, leading to unexpected behavior.</li>
+                <li><strong>Using arrow functions for instance methods:</strong> Avoid using arrow functions for methods that need access to <code>this</code>, as arrow functions bind <code>this</code> lexically, which may not refer to the correct instance.</li>
+            </ul>
+        </section>
+    </main>
+  
+</body>
+</html>

@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Command Line Interface (CLI) Tutorial</title>
+</head>
+<body>
+    <h1>Command Line Interface (CLI) Tutorial for Beginners</h1>
+
+    <p>The Command Line Interface (CLI) is a powerful way to interact with your computer using text commands. If you’re new to the CLI, this tutorial will guide you through common tasks, using analogies, examples, and step-by-step instructions.</p>
+
+    <h2>1. What is the CLI?</h2>
+    <p>Think of the CLI as a "conversation" with your computer. Instead of clicking on things like in a graphical interface, you type out commands, and the computer responds with actions. It’s like giving instructions to someone in a very precise manner.</p>
+
+    <h2>2. Opening the Terminal</h2>
+    <p>On Mac, you can open the Terminal app. On Windows, you can use Command Prompt or PowerShell. If you are using WSL (Windows Subsystem for Linux), open Ubuntu or any other shell you’ve installed.</p>
+
+    <h2>3. Navigating the Folder Structure</h2>
+    <p>In the CLI, you navigate through folders (also called directories) using commands. It’s like moving between rooms in a house.</p>
+
+    <h3>Check where you are (Current directory):</h3>
+    <pre><code>pwd</code></pre>
+    <p>This command stands for "print working directory." It tells you the path of the folder you're currently in.</p>
+
+    <h3>List the contents of a directory:</h3>
+    <pre><code>ls</code></pre>
+    <p>On Windows, you use:</p>
+    <pre><code>dir</code></pre>
+    <p>This command lists the files and folders inside the current directory, like looking inside a drawer to see what’s there.</p>
+
+    <h3>Change directory:</h3>
+    <pre><code>cd folder_name</code></pre>
+    <p>To move into a different folder, use <code>cd</code> (change directory). For example:</p>
+    <pre><code>cd Documents</code></pre>
+    <p>If you want to move up one level (to the parent folder):</p>
+    <pre><code>cd ..</code></pre>
+
+    <h2>4. Creating Folders (Directories)</h2>
+    <p>Making a new folder is like adding a new room to your house.</p>
+    <pre><code>mkdir folder_name</code></pre>
+    <p>For example, to create a folder named "NewFolder":</p>
+    <pre><code>mkdir NewFolder</code></pre>
+
+    <h2>5. Removing Folders</h2>
+    <p>To remove an empty folder, use:</p>
+    <pre><code>rmdir folder_name</code></pre>
+    <p>For example, to remove "NewFolder":</p>
+    <pre><code>rmdir NewFolder</code></pre>
+    <p>Note: <code>rmdir</code> only works if the folder is empty. For removing folders with contents, see section 9.</p>
+
+    <h2>6. Creating Files</h2>
+    <p>Creating a file is like writing a new document.</p>
+    <pre><code>touch file_name.txt</code></pre>
+    <p>This command creates a new, empty file named <code>file_name.txt</code>.</p>
+
+    <h2>7. Deleting Files</h2>
+    <p>To delete a file:</p>
+    <pre><code>rm file_name.txt</code></pre>
+
+    <h2>8. Moving Files and Folders</h2>
+    <p>Moving a file or folder is like transferring something from one room to another.</p>
+    <pre><code>mv source destination</code></pre>
+    <p>For example, to move <code>file_name.txt</code> to the <code>Documents</code> folder:</p>
+    <pre><code>mv file_name.txt Documents/</code></pre>
+    <p>This also works for renaming files. If you want to rename <code>file_name.txt</code> to <code>new_name.txt</code>:</p>
+    <pre><code>mv file_name.txt new_name.txt</code></pre>
+
+    <h2>9. Copying Files and Folders</h2>
+    <p>Copying a file or folder is like making a photocopy of it.</p>
+    <pre><code>cp source destination</code></pre>
+    <p>For example, to copy <code>file_name.txt</code> to the <code>Documents</code> folder:</p>
+    <pre><code>cp file_name.txt Documents/</code></pre>
+
+    <h2>10. Removing Folders with Files Inside</h2>
+    <p>To remove a folder and all of its contents, use the recursive <code>rm</code> command:</p>
+    <pre><code>rm -r folder_name</code></pre>
+    <p>For example, to remove a folder named "OldFolder" and everything inside it:</p>
+    <pre><code>rm -r OldFolder</code></pre>
+
+    <h2>11. Searching for Files</h2>
+    <p>You can search for files in a folder using the <code>find</code> command:</p>
+    <pre><code>find . -name "file_name.txt"</code></pre>
+    <p>This command will search for <code>file_name.txt</code> in the current directory and all subdirectories.</p>
+
+    <h2>12. Getting Help with Commands</h2>
+    <p>If you’re unsure about a command, you can use the <code>--help</code> flag to get more information.</p>
+    <pre><code>command_name --help</code></pre>
+    <p>For example:</p>
+    <pre><code>cp --help</code></pre>
+
+    <h2>Conclusion</h2>
+    <p>Congratulations! You now have the basics of navigating the file system, creating, deleting, and managing files and folders from the command line. The more you practice, the more comfortable you’ll become with these tasks.</p>
+</body>
+</html>

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursive allFactorials Function in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>Understanding the Recursive allFactorials Function in JavaScript</h1>
+    
+    <h2>Introduction</h2>
+    <p>Welcome to a tutorial that breaks down the <code>allFactorials</code> function, explores how recursion works, and explains how this code relates to memory management concepts such as the stack and heap.</p>
+
+    <h2>Problem Overview</h2>
+    <p>The <code>allFactorials</code> function calculates the factorials of all numbers from 0 to <code>n</code>, and returns them in an array. The function uses recursion to build this array.</p>
+
+    <h2>The Code</h2>
+    <pre><code>
+function allFactorials(n, factorials = [1]) {
+  if (n > factorials.length) {
+    factorials = allFactorials(n - 1, factorials);
+  }
+  factorials.push(n * factorials[n - 1]);
+  return factorials;
+}
+
+allFactorials(5); // [1, 1, 2, 6, 24, 120]
+    </code></pre>
+
+    <h2>How the Function Works</h2>
+    <p>This function recursively builds an array of factorials. Here's a step-by-step breakdown:</p>
+    
+    <ol>
+        <li>The function checks if <code>n</code> is greater than the length of the <code>factorials</code> array. If true, it recursively calls itself with <code>n - 1</code>.</li>
+        <li>After the recursive call, the current factorial <code>n * factorials[n - 1]</code> is calculated and pushed into the array.</li>
+        <li>This process continues until <code>n</code> reaches 1, where the recursion stops, and the array is returned.</li>
+    </ol>
+
+    <h2>Example Execution</h2>
+    <p>Let’s walk through what happens when we call <code>allFactorials(5)</code>:</p>
+    <pre><code>
+    Step 1: allFactorials(5) => recursively calls allFactorials(4)
+    Step 2: allFactorials(4) => recursively calls allFactorials(3)
+    Step 3: allFactorials(3) => recursively calls allFactorials(2)
+    Step 4: allFactorials(2) => recursively calls allFactorials(1)
+    Step 5: allFactorials(1) => returns [1]
+    Step 6: Backtracking starts:
+              allFactorials(2) => [1, 1, 2]
+              allFactorials(3) => [1, 1, 2, 6]
+              allFactorials(4) => [1, 1, 2, 6, 24]
+              allFactorials(5) => [1, 1, 2, 6, 24, 120]
+    </code></pre>
+    <p>This shows how recursion builds the factorials array in a step-by-step manner.</p>
+
+    <h2>Understanding Recursion and the Call Stack</h2>
+    <p>Recursion is when a function calls itself to break down a problem into smaller pieces. Each recursive call adds a new instance of the function to the <strong>call stack</strong>, and once a base case is reached, the function returns and starts popping off the stack.</p>
+    
+    <h3>The Stack</h3>
+    <p>The <strong>call stack</strong> keeps track of function calls. Each time <code>allFactorials</code> calls itself, a new stack frame is added. When the recursion reaches the base case, the stack unwinds as each instance of the function returns its value.</p>
+
+    <h3>The Heap</h3>
+    <p>The <strong>heap</strong> stores objects and variables. In this function, the array <code>factorials</code> is stored in the heap, and its values are updated as the recursion progresses.</p>
+
+    <h2>Real-World Analogy</h2>
+    <p>Imagine you’re organizing a line of workers to build a staircase. Each worker can only add their step after the previous one is complete. You have a leader who calls each worker in reverse order, ensuring that all steps are built from the ground up. This is similar to how recursion builds the array of factorials, starting from the smallest problem and moving up.</p>
+
+    <h2>When to Use Recursion</h2>
+    <p>Recursion is ideal when:</p>
+    <ul>
+        <li>The problem can be divided into smaller subproblems.</li>
+        <li>A base case can be defined (in this case, when <code>n === 1</code>).</li>
+        <li>Problems involve nested structures, such as trees or graphs.</li>
+    </ul>
+
+    <h2>Practical Real-World Applications</h2>
+    <p>Recursion is often used in:</p>
+    <ul>
+        <li><strong>Mathematical Calculations:</strong> Factorials, Fibonacci sequences, and combinatorics.</li>
+        <li><strong>Data Structures:</strong> Traversing tree or graph structures.</li>
+        <li><strong>Algorithms:</strong> Solving complex problems like sorting (e.g., QuickSort).</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>The <code>allFactorials</code> function is a great example of recursion in action. It demonstrates how recursive calls can break down a complex problem, and how the call stack and heap play a role in memory management. Understanding these concepts is essential for writing efficient recursive functions and solving problems elegantly in JavaScript.</p>
+
+</body>
+</html>

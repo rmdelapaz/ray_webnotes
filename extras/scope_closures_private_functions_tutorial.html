@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope, Closures, and Private Functions in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Scope, Closures, and Private Functions in JavaScript</h1>
+        <p>An overview of key concepts for new JavaScript developers.</p>
+    </header>
+
+    <section>
+        <h2>Understanding Scope</h2>
+        <p>Scope in JavaScript is like visibility in a house. Different rooms (functions or blocks) have their own visibility, 
+        and what you can access depends on which room you're in.</p>
+        <p>There are three main types of scope: global, local (function), and block scope.</p>
+
+        <h3>Global Scope</h3>
+        <p>Global scope is like the living room in a house. Anyone inside the house can see what's in the living room. 
+        Variables declared outside of any function or block are in the global scope.</p>
+        <pre><code>
+let name = 'Alice'; // Global scope
+
+function greet() {
+    console.log('Hello ' + name); // Can access the global 'name'
+}
+greet(); // Outputs: 'Hello Alice'
+        </code></pre>
+
+        <h3>Function Scope</h3>
+        <p>Function scope is like a bedroom—only the people inside the room can see what's inside. Variables declared inside a function 
+        are only accessible within that function.</p>
+        <pre><code>
+function sayHello() {
+    let message = 'Hello World'; // Local to the function
+    console.log(message);
+}
+
+sayHello(); // Outputs: 'Hello World'
+console.log(message); // Error: message is not defined
+        </code></pre>
+
+        <h3>Block Scope</h3>
+        <p>Block scope is like a closet inside a room—what's inside is only accessible while you're in the closet. Variables declared with 
+        <code>let</code> and <code>const</code> inside a block (<code>{ }</code>) are block-scoped.</p>
+        <pre><code>
+if (true) {
+    let blockScoped = 'Only in this block';
+    console.log(blockScoped); // Outputs: 'Only in this block'
+}
+
+console.log(blockScoped); // Error: blockScoped is not defined
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Understanding Closures</h2>
+        <p>Closures are like saving a memory from a room after you leave it. If you take a photo (closure) inside a room (function), 
+        you can carry that photo with you and always remember what was inside, even after you’ve left the room (the function has finished).</p>
+
+        <h3>Closure Example</h3>
+        <pre><code>
+function outer() {
+    let outerVariable = 'I am outside!';
+
+    function inner() {
+        console.log(outerVariable); // Can access the outer function's variable
+    }
+
+    return inner;
+}
+
+const innerFunc = outer();
+innerFunc(); // Outputs: 'I am outside!'
+        </code></pre>
+        <p>Even though <code>outer()</code> has finished executing, the inner function <code>inner()</code> still has access to the <code>outerVariable</code> 
+        because of the closure.</p>
+    </section>
+
+    <section>
+        <h2>Private Functions with Closures</h2>
+        <p>Private functions are like secrets you keep in your room. Only you know them, and they can’t be accessed from outside.</p>
+        <p>Using closures, we can create private functions in JavaScript. These functions are only accessible within the scope where they were created.</p>
+
+        <h3>Private Function Example</h3>
+        <pre><code>
+function counter() {
+    let count = 0;
+
+    return {
+        increment: function() {
+            count++;
+            console.log(count);
+        },
+        decrement: function() {
+            count--;
+            console.log(count);
+        }
+    };
+}
+
+const myCounter = counter();
+myCounter.increment(); // 1
+myCounter.increment(); // 2
+myCounter.decrement(); // 1
+console.log(myCounter.count); // undefined (private variable)
+        </code></pre>
+        <p>Here, the variable <code>count</code> is private and can only be accessed or modified through the <code>increment</code> and <code>decrement</code> functions.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage and Real-World Examples</h2>
+        <h3>Closures in Event Listeners</h3>
+        <p>In real-world applications, closures are often used in event listeners to keep track of the state:</p>
+        <pre><code>
+function setupButton() {
+    let clicks = 0;
+
+    document.getElementById('myButton').addEventListener('click', function() {
+        clicks++;
+        console.log(`Button clicked ${clicks} times`);
+    });
+}
+
+setupButton();
+        </code></pre>
+        <p>Even though the <code>setupButton</code> function finishes, the event listener still remembers and updates the <code>clicks</code> variable because of the closure.</p>
+
+        <h3>Private Functions in Modules</h3>
+        <p>Private functions are commonly used in modules to hide internal logic and only expose necessary functionality:</p>
+        <pre><code>
+// Module pattern with private functions
+const bankAccount = (function() {
+    let balance = 1000;
+
+    function privateLogTransaction(amount) {
+        console.log(`Transaction: ${amount}`);
+    }
+
+    return {
+        deposit: function(amount) {
+            balance += amount;
+            privateLogTransaction(amount);
+            console.log(`New balance: ${balance}`);
+        },
+        withdraw: function(amount) {
+            balance -= amount;
+            privateLogTransaction(-amount);
+            console.log(`New balance: ${balance}`);
+        }
+    };
+})();
+
+bankAccount.deposit(500); // New balance: 1500
+bankAccount.withdraw(200); // New balance: 1300
+        </code></pre>
+        <p>In this example, the function <code>privateLogTransaction</code> is a private function that can’t be accessed directly from outside the module, 
+        keeping the transaction log hidden.</p>
+    </section>
+
+    <section>
+        <h2>Key Takeaways</h2>
+        <ul>
+            <li>Scope determines what variables and functions are accessible in different parts of your code.</li>
+            <li>Closures allow a function to "remember" variables from its surrounding scope even after the outer function has finished executing.</li>
+            <li>Private functions can be created using closures, enabling encapsulation and protecting internal logic.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Explore more: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">Closures - MDN</a></p>
+        <p>JavaScript is full of wonders—explore more by practicing!</p>
+    </footer>
+</body>
+</html>

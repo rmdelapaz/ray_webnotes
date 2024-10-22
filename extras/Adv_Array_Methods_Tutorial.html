@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Array Methods and POJO Lecture</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Array Methods and POJO Overview</h1>
+    </header>
+    <main>
+        <section>
+            <h2>1. Using <code>Array.forEach()</code> to Iterate Through an Object</h2>
+            <p><strong>Analogy:</strong> Think of <code>Array.forEach()</code> as a tour guide that walks you through a museum, stopping at each exhibit (element) to provide a brief explanation.</p>
+            <p><code>forEach()</code> is used to loop over each element in an array and apply a function to it. While it does not return anything, it is great for executing side effects like logging or modifying external variables.</p>
+            <pre><code>const fruits = ['apple', 'banana', 'cherry'];
+fruits.forEach((fruit) => console.log(fruit));</code></pre>
+            <p><strong>Example with an Object:</strong> If you want to iterate through an object’s properties (in key-value pairs), you need to use <code>Object.entries()</code> to convert the object into an array first:</p>
+            <pre><code>const person = { name: 'John', age: 30, job: 'Developer' };
+Object.entries(person).forEach(([key, value]) => {
+  console.log(\`\${key}: \${value}\`);
+});</code></pre>
+            <p>This loops over each key-value pair in the object.</p>
+        </section>
+
+        <section>
+            <h2>2. Using <code>Array.map()</code> to Transform Data</h2>
+            <p><strong>Metaphor:</strong> Imagine <code>Array.map()</code> as a conveyor belt in a factory. Each item on the belt is picked up, modified, and placed on a new belt, resulting in a transformed set of items.</p>
+            <p><code>map()</code> creates a new array by applying a transformation function to each element in the original array, returning a new array of the same length.</p>
+            <pre><code>const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8]</code></pre>
+        </section>
+
+        <section>
+            <h2>3. Using <code>Array.filter()</code> to Extract Subsets</h2>
+            <p><strong>Analogy:</strong> Picture a bouncer at a club deciding who gets in. The bouncer checks each person (element) and only lets in those who meet a certain condition.</p>
+            <p><code>filter()</code> returns a new array containing only the elements that satisfy the condition in the callback function.</p>
+            <pre><code>const numbers = [10, 20, 30, 40];
+const greaterThan20 = numbers.filter(num => num > 20);
+console.log(greaterThan20); // [30, 40]</code></pre>
+            <p>In this case, only the numbers greater than 20 pass the "bouncer's" condition.</p>
+        </section>
+
+        <section>
+            <h2>4. Using <code>Array.find()</code> to Locate the First Match</h2>
+            <p><strong>Metaphor:</strong> Think of <code>find()</code> like searching through a pile of books for the first one that fits your criteria. As soon as you find it, you stop looking.</p>
+            <p><code>find()</code> returns the first element that satisfies the condition. If no element meets the condition, it returns <code>undefined</code>.</p>
+            <pre><code>const users = [{ name: 'Alice' }, { name: 'Bob' }, { name: 'Charlie' }];
+const user = users.find(user => user.name === 'Bob');
+console.log(user); // { name: 'Bob' }</code></pre>
+        </section>
+
+        <section>
+            <h2>5. Using <code>Array.reduce()</code> to Accumulate Data</h2>
+            <p><strong>Analogy:</strong> Imagine building a snowball. As you roll it, it picks up more snow. <code>reduce()</code> is like that rolling process—combining everything into one result.</p>
+            <p><code>reduce()</code> applies a function to each element in the array to reduce it to a single value, such as a sum or product.</p>
+            <pre><code>const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+console.log(sum); // 10</code></pre>
+        </section>
+
+        <section>
+            <h2>6. Combining POJO and Advanced Array Methods to Manipulate Nested Data</h2>
+            <p><strong>Practical Example:</strong> In real-world applications, you'll often work with complex data sets involving nested objects and arrays. You can use a combination of <code>Array.forEach()</code>, <code>Array.map()</code>, <code>Array.filter()</code>, and <code>Array.reduce()</code> to access and manipulate this data.</p>
+            <pre><code>const data = {
+  users: [
+    { name: 'Alice', age: 25, pets: ['dog', 'cat'] },
+    { name: 'Bob', age: 30, pets: ['hamster'] },
+    { name: 'Charlie', age: 35, pets: [] }
+  ]
+};
+
+// Example: Find the first user with a pet and list their pets
+const userWithPets = data.users.find(user => user.pets.length > 0);
+console.log(userWithPets); // { name: 'Alice', age: 25, pets: ['dog',
+'cat'] }
+
+// Example: Get a list of all users' pets
+const allPets = data.users.flatMap(user => user.pets);
+console.log(allPets); // ['dog', 'cat', 'hamster']
+
+// Example: Calculate the average age of users
+const totalAge = data.users.reduce((sum, user) => sum + user.age, 0);
+const averageAge = totalAge / data.users.length;
+console.log(averageAge); // 30
+</code></pre>
+            <p>These methods help you navigate and manipulate large nested data sets efficiently.</p>
+        </section>
+    </main>
+</body>
+</html>

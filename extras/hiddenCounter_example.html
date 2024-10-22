@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>JavaScript Closure - Hidden Counter Example</title>
+  
+</head>
+<body>
+    <h1>JavaScript Closure - Hidden Counter Example</h1>
+    
+    <h2>The Question:</h2>
+    <p>Write a function named <code>hiddenCounter()</code>. The hiddenCounter function will start by declaring a variable that will keep track of a count and will be initially set to 0. Upon first invocation, hiddenCounter will return a function. Every subsequent invocation will increment the previously described count variable.</p>
+    
+    <p><strong>Examples:</strong></p>
+    <pre>
+let hidden1 = hiddenCounter(); // returns a function
+hidden1(); // returns 1
+hidden1(); // returns 2
+
+let hidden2 = hiddenCounter(); // returns a function
+hidden2(); // returns 1
+    </pre>
+
+    <h2>Explanation and Code:</h2>
+    <p>Here’s how to implement the <code>hiddenCounter</code> function:</p>
+    <pre>
+function hiddenCounter() {
+    let count = 0; // This is the variable that tracks the count.
+
+    return function() {
+        // This function increments the count and returns it.
+        count++;
+        return count;
+    };
+}
+    </pre>
+
+    <h3>Explanation:</h3>
+    <ul>
+        <li><strong>Closure in Action:</strong> When you call <code>hiddenCounter()</code>, it creates a local variable <code>count</code> and returns a function. This returned function forms a <strong>closure</strong> over the <code>count</code> variable.</li>
+        <li><strong>How the Closure Affects Scope:</strong> 
+            <ul>
+                <li><strong>Scope of <code>count</code>:</strong> The <code>count</code> variable is in the local scope of the <code>hiddenCounter</code> function, but due to the closure, the returned inner function can still access it.</li>
+                <li><strong>Scope of the returned function:</strong> Each time you call <code>hiddenCounter()</code>, you create a new instance of the function and a new <code>count</code> variable. Each instance keeps its own copy of <code>count</code> due to the closure.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Example Breakdown:</h3>
+    <pre>
+let hidden1 = hiddenCounter(); // Creates a new closure with count = 0.
+hidden1(); // Increments count to 1 and returns 1.
+hidden1(); // Increments count to 2 and returns 2.
+
+let hidden2 = hiddenCounter(); // Creates a new closure with a new count = 0.
+hidden2(); // Increments the new count to 1 and returns 1.
+    </pre>
+
+    <p>Each call to <code>hiddenCounter()</code> creates a separate closure with its own <code>count</code> variable, making <code>hidden1()</code> and <code>hidden2()</code> independent of each other.</p>
+
+    <h3>Conclusion:</h3>
+    <p>A <code>for loop</code> helps to automate repetitive tasks by following a set pattern or instructions, and closures help to encapsulate variables and their associated functions, allowing for more modular and secure code.</p>
+</body>
+</html>

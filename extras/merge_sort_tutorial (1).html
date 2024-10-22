@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge Sort Explained</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <h1>Understanding Merge Sort in JavaScript</h1>
+
+    <p>In this tutorial, we’ll explore a more advanced sorting algorithm: <strong>Merge Sort</strong>. Merge Sort is a highly efficient algorithm that uses a divide-and-conquer approach. Let’s break it down step by step to make it easier to understand.</p>
+
+    <h2>What is Merge Sort?</h2>
+    <p>Merge Sort is a recursive sorting algorithm that splits the array in half, recursively sorts each half, and then merges the sorted halves back together. It’s like dividing a large task into smaller, more manageable pieces and solving each piece one by one.</p>
+
+    <h2>When and Why to Use Merge Sort?</h2>
+    <p>Merge Sort is one of the most efficient sorting algorithms with a time complexity of O(n log n). It works well for large datasets and is stable, meaning it preserves the relative order of equal elements. It’s widely used in practice when working with large collections of data.</p>
+
+    <h2>Merge Sort Code Example</h2>
+    <pre>
+        <code>
+            function mergeSort(arr) {
+                if (arr.length <= 1) return arr; // Base case
+
+                // Splitting the array into two halves
+                const mid = Math.floor(arr.length / 2);
+                const left = arr.slice(0, mid);
+                const right = arr.slice(mid);
+
+                // Recursively sort both halves
+                return merge(mergeSort(left), mergeSort(right));
+            }
+
+            // Function to merge two sorted arrays
+            function merge(left, right) {
+                let result = [];
+                let leftIndex = 0;
+                let rightIndex = 0;
+
+                // Merging two sorted arrays
+                while (leftIndex < left.length && rightIndex < right.length) {
+                    if (left[leftIndex] < right[rightIndex]) {
+                        result.push(left[leftIndex]);
+                        leftIndex++;
+                    } else {
+                        result.push(right[rightIndex]);
+                        rightIndex++;
+                    }
+                }
+
+                // Concatenating remaining elements
+                return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+            }
+
+            // Sample array
+            let arr = [38, 27, 43, 3, 9, 82, 10];
+
+            console.log("Before sorting: ", arr);
+            console.log("After sorting: ", mergeSort(arr));
+        </code>
+    </pre>
+
+    <h2>Code Explanation</h2>
+
+    <p>Let’s break down the code step by step:</p>
+
+    <h3>1. The Base Case</h3>
+    <p>Merge Sort is a recursive algorithm, and every recursive function needs a base case. In this case, the base case is when the array has one or zero elements:</p>
+    <pre><code>if (arr.length <= 1) return arr;</code></pre>
+    <p>If the array has one or zero elements, it is already sorted, so we return the array as-is.</p>
+
+    <h3>2. Splitting the Array</h3>
+    <p>We split the array into two halves:</p>
+    <pre><code>
+    const mid = Math.floor(arr.length / 2);
+    const left = arr.slice(0, mid);
+    const right = arr.slice(mid);
+    </code></pre>
+    <p>The <code>slice</code> method creates two new arrays, one with the elements from the start to the middle and the other from the middle to the end.</p>
+
+    <h3>3. Recursively Sorting Each Half</h3>
+    <p>We then recursively call <code>mergeSort</code> on each half of the array:</p>
+    <pre><code>return merge(mergeSort(left), mergeSort(right));</code></pre>
+    <p>By splitting the array down to individual elements and then merging them back together, we achieve a fully sorted array.</p>
+
+    <h3>4. Merging Sorted Arrays</h3>
+    <p>The <code>merge</code> function combines two sorted arrays (<code>left</code> and <code>right</code>) into one sorted array:</p>
+    <pre><code>
+    while (leftIndex < left.length && rightIndex < right.length) {
+        if (left[leftIndex] < right[rightIndex]) {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        } else {
+            result.push(right[rightIndex]);
+            rightIndex++;
+        }
+    }
+    </code></pre>
+    <p>We compare the elements of the two arrays, pushing the smaller element into the result array. We keep doing this until we’ve gone through all the elements in both arrays.</p>
+
+    <h3>5. Returning the Sorted Array</h3>
+    <p>After the while loop, there may be remaining elements in one of the arrays. We concatenate them to the result array:</p>
+    <pre><code>return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));</code></pre>
+    <p>This ensures that all elements are included in the final sorted array.</p>
+
+    <h2>Real-World Example and Applications</h2>
+    <p>Imagine you have a stack of papers to sort, and instead of sorting them all at once, you divide the stack in half, sort each half individually, and then merge the two sorted halves back together. This is essentially what Merge Sort does, and it’s especially useful when you’re dealing with large amounts of data.</p>
+
+    <h2>Further Exploration</h2>
+    <p>Merge Sort is a powerful and efficient sorting algorithm, but there are other algorithms worth exploring, such as:</p>
+    <ul>
+        <li>Quick Sort</li>
+        <li>Heap Sort</li>
+        <li>Tim Sort (used in Python and JavaScript for built-in sorting functions)</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Merge Sort is an efficient and stable sorting algorithm that’s useful for large datasets. Understanding how it splits the array and merges sorted arrays is key to mastering this technique. Once you’ve got the hang of Merge Sort, you’re well on your way to understanding more advanced algorithms.</p>
+
+</body>
+</html>

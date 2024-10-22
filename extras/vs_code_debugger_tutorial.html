@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="icon" href="/favicon.png">
+    <title>VS Code Debugger Tutorial for JavaScript Developers</title>
+    
+  
+</head>
+<body>
+    <h1>VS Code Debugger Tutorial for New JavaScript Developers</h1>
+    <p>Welcome to this tutorial! Debugging can feel like finding a needle in a haystack, but using the right tools is like having a magnet that draws that needle right to you. In this tutorial, you'll learn how to use the VS Code Debugger to make finding and fixing issues in your JavaScript code easier.</p>
+    
+    <h2>What is Debugging?</h2>
+    <p>Think of debugging like being a detective solving a mystery. When something goes wrong in your code, you need to find clues (errors or unexpected behavior) and trace back the steps to figure out where things went wrong.</p>
+
+    <h2>Getting Started with the VS Code Debugger</h2>
+    <p>The VS Code debugger is like your magnifying glass—it helps you zoom in on the code to see what's really happening. Here's how to start:</p>
+    
+    <ol>
+        <li>Open VS Code and load your JavaScript project.</li>
+        <li>Make sure you have the <code>Debugger for Chrome</code> or <code>Node.js</code> debugger extensions installed (depending on whether you are running your app in the browser or Node.js).</li>
+        <li>Set a breakpoint: A <strong>breakpoint</strong> is like a red stop sign in your code. It tells VS Code to pause the program at that specific point. To set a breakpoint, click on the line number where you want the code to stop, and a red dot will appear.</li>
+    </ol>
+
+    <h2>Running the Debugger</h2>
+    <p>Once you have set your breakpoints, you can start the debugger:</p>
+    <ol>
+        <li>Click on the Debug icon on the left sidebar or press <code>F5</code> to start the debugger.</li>
+        <li>The code will run until it hits your first breakpoint. When it pauses, the detective work begins.</li>
+    </ol>
+
+    <h2>Stepping Through Code</h2>
+    <p>Now that you've stopped at a breakpoint, you can inspect the values of variables and see how the code is executing step by step. This is like following a recipe and checking each ingredient as you add it to the dish. To step through the code:</p>
+    <ul>
+        <li><strong>Step Over</strong> (<code>F10</code>): This moves to the next line of code but skips over any functions. It’s like walking down the street and ignoring the stores (functions) on either side.</li>
+        <li><strong>Step Into</strong> (<code>F11</code>): This steps into a function, allowing you to go inside and see what's happening. Think of it like opening the door of a store and seeing what's inside.</li>
+        <li><strong>Step Out</strong> (<code>Shift+F11</code>): If you're inside a function and want to step back out, this option will take you out of the function. It’s like leaving a store and returning to the main street.</li>
+    </ul>
+
+    <h2>Inspecting Variables</h2>
+    <p>As you pause the code, you can hover over variables to see their values. This is like checking the ingredients in a dish to see if they are correct. You can also check the <strong>Variables</strong> panel on the left to see all the current variables and their values.</p>
+
+    <h2>Example</h2>
+    <p>Let’s say you have the following JavaScript code:</p>
+    <pre><code>
+function calculateTotal(price, quantity) {
+    let total = price * quantity;
+    return total;
+}
+
+let result = calculateTotal(10, 5);
+console.log(result);
+    </code></pre>
+    <p>You can set a breakpoint on the line <code>let total = price * quantity;</code> and run the debugger. When the code pauses, you can hover over <code>price</code> and <code>quantity</code> to see their values. Step through the code to see how the <code>total</code> is calculated, and inspect the result.</p>
+
+    <h2>Final Thoughts</h2>
+    <p>Using the VS Code debugger is like having a superpower in your coding toolkit. It allows you to pause time, investigate the scene, and find the exact spot where things go wrong. The more you use it, the better you'll get at solving coding mysteries!</p>
+</body>
+</html>

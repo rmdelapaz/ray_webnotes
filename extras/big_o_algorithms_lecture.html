@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big O Notation and Algorithms for New Developers</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Big O Notation and Algorithms for New Developers</h1>
+
+    <h2>Introduction to Big O Notation</h2>
+    <p>
+        Big O notation is like a "measuring stick" that helps us understand how well an algorithm performs as the size of input grows. Imagine you’re at a restaurant and the time it takes to get your food depends on how many people are in front of you. Big O is like asking, "If the line gets longer, how much longer do I have to wait for my food?".
+    </p>
+    
+    <h3>Why Big O Matters</h3>
+    <p>
+        In real-world programming, Big O notation helps you write efficient code. As your input gets larger (more data, more users, etc.), you want to ensure that your algorithms still run quickly. Understanding Big O helps you choose between different approaches.
+    </p>
+    
+    <h3>Example Analogy: Buses vs. Sports Cars</h3>
+    <p>
+        Imagine two friends racing. One is in a sports car (fast but with limited seats), and the other is in a bus (slower but can hold many passengers). The sports car may get somewhere faster initially, but if you need to transport more people (bigger input), the bus becomes more efficient in the long run. Similarly, algorithms with better Big O performance can handle larger inputs better, even if they seem slower with smaller inputs.
+    </p>
+
+    <h2>Understanding Big O Complexity Classes</h2>
+    <ul>
+        <li><strong>O(1): Constant Time</strong> – Think of this as getting food instantly, no matter how many people are in line. Examples: Accessing an element in an array by its index.</li>
+        <li><strong>O(n): Linear Time</strong> – This is like standing in a line at a store; if there are 'n' people ahead of you, it takes n times longer to get served. Examples: A loop that runs 'n' times.</li>
+        <li><strong>O(n^2): Quadratic Time</strong> – Now imagine every person in line has to shake hands with every other person; the time grows really fast as more people arrive. Examples: Nested loops where each loop runs 'n' times.</li>
+        <li><strong>O(log n): Logarithmic Time</strong> – Imagine splitting a phone book in half repeatedly to find a name. Each time you split the book, you get closer to finding what you need. Examples: Binary search.</li>
+    </ul>
+    
+    <h3>Real-World Example: Searching for a Name in a List</h3>
+    <p>
+        Let’s say you have a list of names in no particular order. If you go through the list one by one (O(n)), the time it takes will depend on the size of the list. If you know the list is sorted, you can use a more efficient method called binary search (O(log n)), which drastically reduces the time to find the name.
+    </p>
+    
+    <h2>Algorithms</h2>
+    <p>
+        An algorithm is simply a step-by-step process to solve a problem. Imagine you’re baking a cake: the recipe is your algorithm. In programming, algorithms are the sets of instructions we give to the computer to perform tasks. But not all algorithms are created equal! Just like some cake recipes are faster and easier, some algorithms perform better based on the problem at hand.
+    </p>
+    
+    <h3>Why Algorithms Matter</h3>
+    <p>
+        Algorithms are the core of problem-solving in programming. Picking the right algorithm can mean the difference between a program that runs efficiently and one that slows down as it processes larger inputs.
+    </p>
+    
+    <h2>Common Algorithm Types</h2>
+    <ul>
+        <li><strong>Sorting Algorithms</strong> – These help arrange data in a particular order, like sorting cards. Examples: Bubble sort (O(n^2)), Quick sort (O(n log n)).</li>
+        <li><strong>Searching Algorithms</strong> – These help find specific elements within a data structure. Examples: Linear search (O(n)), Binary search (O(log n)).</li>
+        <li><strong>Recursive Algorithms</strong> – These call themselves to break problems down into smaller pieces. Example: Calculating factorials.</li>
+    </ul>
+    
+    <h3>Practical Example: Sorting a List of Numbers</h3>
+    <p>
+        Suppose you have a list of numbers you need to sort. If you choose Bubble Sort (O(n^2)), it might be simple to implement but will take much longer for large lists. If you choose Quick Sort (O(n log n)), it might be more complex but will be much faster as the list grows.
+    </p>
+    
+    <h2>When to Use Different Algorithms</h2>
+    <p>
+        In the real world, knowing when to use a particular algorithm depends on several factors, such as how much data you have and how quickly you need results. For example, if you need to search through a small list, Linear Search might be fine. But if you’re working with millions of entries, Binary Search will save you a lot of time.
+    </p>
+    
+    <h3>Summary of Key Points</h3>
+    <ul>
+        <li>Big O notation helps measure the efficiency of algorithms as input grows.</li>
+        <li>O(1) is the fastest, O(n) is linear, and O(n^2) is slow for large inputs.</li>
+        <li>Algorithms are the step-by-step methods we use to solve problems.</li>
+        <li>Different algorithms are useful in different scenarios: sorting, searching, recursion, etc.</li>
+    </ul>
+
+    <p>Understanding Big O notation and choosing the right algorithm will help you write efficient code that scales well as your program grows.</p>
+</body>
+</html>

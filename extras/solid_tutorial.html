@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLID Principles of Object-Oriented Design</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>The SOLID Principles of Object-Oriented Design</h1>
+    
+    <h2>Introduction</h2>
+    <p>The SOLID principles are a set of five design principles in object-oriented programming that guide developers to create more flexible, maintainable, and scalable software. These principles act as the foundation for writing clean code and are widely recognized across the software development industry. In this tutorial, we will explore each of the five SOLID principles with practical examples, analogies, and real-world applications.</p>
+
+    <h2>What Does SOLID Stand For?</h2>
+    <p>The SOLID acronym represents five key principles:</p>
+    <ul>
+        <li><strong>S</strong> - Single Responsibility Principle (SRP)</li>
+        <li><strong>O</strong> - Open/Closed Principle (OCP)</li>
+        <li><strong>L</strong> - Liskov Substitution Principle (LSP)</li>
+        <li><strong>I</strong> - Interface Segregation Principle (ISP)</li>
+        <li><strong>D</strong> - Dependency Inversion Principle (DIP)</li>
+    </ul>
+
+    <h2>1. Single Responsibility Principle (SRP)</h2>
+    <p>As discussed earlier, the Single Responsibility Principle (SRP) states that a class or function should have only one reason to change. This means it should focus on doing one specific task.</p>
+    
+    <h3>Analogy: The Jack of All Trades</h3>
+    <p>Imagine hiring a handyman to paint your house, but they also offer to fix your car, repair your plumbing, and build your furniture. They’re trying to do too much and may not do any of these tasks well. In programming, a function or class that handles multiple tasks becomes difficult to maintain and prone to errors. Following SRP ensures that each class or function has a focused responsibility, like a specialized worker.</p>
+
+    <h3>Real-World Example:</h3>
+    <p>Let’s take the example of user authentication. Instead of having a single class handle user registration, validation, password hashing, and database storage, SRP encourages separating these into individual classes or functions. Each class would have a clear responsibility: one for validation, another for password management, and so on.</p>
+
+    <h2>2. Open/Closed Principle (OCP)</h2>
+    <p>The Open/Closed Principle (OCP) states that software entities (classes, modules, functions) should be <strong>open for extension but closed for modification</strong>. This means that you should be able to extend a class's behavior without modifying its existing code.</p>
+
+    <h3>Analogy: Adding New Features to a Phone</h3>
+    <p>Imagine you buy a phone and want to add new features, like a better camera or extra storage. You wouldn’t want to take apart the entire phone just to add these features; instead, you would add components without breaking what already works. Similarly, OCP ensures that we can add new functionality without altering existing code, which reduces the risk of introducing bugs.</p>
+
+    <h3>Example:</h3>
+    <p>If we have a class that calculates bonuses for employees, and we want to introduce a new type of employee with a different bonus structure, we shouldn’t modify the original class. Instead, we could extend it by creating new subclasses or use interfaces, keeping the original class intact.</p>
+
+    <h2>3. Liskov Substitution Principle (LSP)</h2>
+    <p>The Liskov Substitution Principle (LSP) suggests that objects of a derived (child) class should be replaceable for objects of the base (parent) class without affecting the correctness of the program. In simpler terms, derived classes should extend the base class’s functionality without changing its behavior.</p>
+
+    <h3>Analogy: Replacing a Vehicle</h3>
+    <p>Imagine you have a vehicle rental service that rents out cars. If you decide to introduce a new type of vehicle, like electric cars, you should be able to swap the traditional cars with electric ones without changing how the rental process works. LSP ensures that child classes (like ElectricCar) can substitute for parent classes (like Car) without breaking the system.</p>
+
+    <h3>Example:</h3>
+    <p>Suppose we have a class <code>Bird</code> with a method <code>fly()</code>, and we create a subclass <code>Penguin</code>. Penguins cannot fly, so this would violate LSP because <code>Penguin</code> is substituting the behavior of <code>Bird</code> in a way that breaks the expected functionality. In this case, it would be better to rethink the class hierarchy.</p>
+
+    <h2>4. Interface Segregation Principle (ISP)</h2>
+    <p>The Interface Segregation Principle (ISP) states that a class should not be forced to implement interfaces it doesn’t use. This means instead of having large, monolithic interfaces, you should divide them into smaller, more specific ones that better fit the needs of the implementing classes.</p>
+
+    <h3>Analogy: Specialized Restaurant Menus</h3>
+    <p>Imagine going to a restaurant and being handed a massive menu with everything from Italian to Japanese to American cuisine. It’s overwhelming, and you don’t need most of it. Instead, if the restaurant gave you a specialized menu, such as only Italian options, you’d find it much easier to choose. In programming, large interfaces can overwhelm a class, forcing it to implement methods it doesn't need. ISP promotes creating small, focused interfaces.</p>
+
+    <h3>Example:</h3>
+    <p>Consider a large interface like <code>IMachine</code> that includes methods like <code>print()</code>, <code>scan()</code>, and <code>fax()</code>. Not every class needs to implement all these methods. For example, a printer doesn’t need to fax. By applying ISP, we can split this into smaller interfaces like <code>IPrinter</code>, <code>IScanner</code>, and <code>IFax</code>, so classes only implement what they need.</p>
+
+    <h2>5. Dependency Inversion Principle (DIP)</h2>
+    <p>The Dependency Inversion Principle (DIP) states that high-level modules should not depend on low-level modules. Both should depend on abstractions. Furthermore, abstractions should not depend on details; details should depend on abstractions. In other words, code should rely on interfaces or abstract classes rather than concrete implementations.</p>
+
+    <h3>Analogy: Using a Remote Control</h3>
+    <p>Think of a TV remote control. When you press the power button, you expect the TV to turn on, but you don’t care how it works internally. The remote interacts with an abstract idea of “powering on the device” rather than knowing the inner workings of every device. In programming, high-level components should depend on abstract interfaces rather than concrete classes, promoting flexibility.</p>
+
+    <h3>Example:</h3>
+    <p>Consider an application that sends notifications. Rather than hard-coding the class to send emails, you can define an interface <code>INotification</code> that has a method <code>send()</code>. This allows the high-level module to depend on the interface rather than specific implementations. Whether it sends an email, SMS, or push notification, the behavior is flexible and interchangeable.</p>
+
+    <h2>Conclusion</h2>
+    <p>The SOLID principles provide a roadmap for writing cleaner, more maintainable, and scalable code. By following SRP, OCP, LSP, ISP, and DIP, you can design systems that are easier to understand, extend, and maintain. As you continue developing your skills, these principles will serve as essential guidelines to ensure your codebase stays organized and flexible, even as your projects grow in size and complexity.</p>
+
+</body>
+</html>

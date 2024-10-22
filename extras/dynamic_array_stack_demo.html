@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Arrays and Stacks in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Dynamic Arrays and Stacks in JavaScript</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Understanding Dynamic Arrays</h2>
+            <p><strong>Analogy:</strong> Think of a dynamic array like an expandable suitcase. Initially, you pack it with a certain number of items. If you add more items than it can hold, you buy a bigger suitcase, transfer everything, and keep packing.</p>
+            <p>In programming, dynamic arrays automatically resize when their capacity is exceeded, which is crucial for handling varying amounts of data.</p>
+        </section>
+
+        <section>
+            <h2>Array Properties and Methods</h2>
+            <p>When implementing a dynamic array, you need to handle the following properties and methods manually:</p>
+            <ul>
+                <li><strong>length:</strong> The number of elements currently in the array.</li>
+                <li><strong>read(index):</strong> Return the element at a given index.</li>
+                <li><strong>push(element):</strong> Add an element to the end of the array.</li>
+                <li><strong>pop():</strong> Remove and return the last element from the array.</li>
+                <li><strong>shift():</strong> Remove the first element and shift the remaining elements down.</li>
+                <li><strong>unshift(element):</strong> Add an element to the front, shifting the existing elements.</li>
+                <li><strong>indexOf(element):</strong> Return the index of a given element, or -1 if not found.</li>
+                <li><strong>resize():</strong> Double the capacity of the array when the current size exceeds capacity.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Dynamic Array Example</h2>
+            <p>Here’s how to implement a basic dynamic array without using built-in JavaScript methods:</p>
+            <pre><code>class DynamicArray {
+    constructor(initialCapacity = 2) {
+        this.capacity = initialCapacity;
+        this.length = 0;
+        this.data = new Array(this.capacity);
+    }
+
+    read(index) {
+        if (index >= this.length || index < 0) {
+            throw new Error('Index out of bounds');
+        }
+        return this.data[index];
+    }
+
+    push(element) {
+        if (this.length === this.capacity) {
+            this.resize();
+        }
+        this.data[this.length] = element;
+        this.length++;
+    }
+
+    pop() {
+        if (this.length === 0) {
+            throw new Error('Array is empty');
+        }
+        const element = this.data[this.length - 1];
+        this.length--;
+        return element;
+    }
+
+    resize() {
+        this.capacity *= 2;
+        const newData = new Array(this.capacity);
+        for (let i = 0; i < this.length; i++) {
+            newData[i] = this.data[i];
+        }
+        this.data = newData;
+    }
+}</code></pre>
+            <p><strong>Explanation:</strong> In this example, we use <code>resize()</code> to double the capacity of the array when necessary. The array starts with an initial capacity of 2 and grows dynamically as new elements are added.</p>
+        </section>
+
+        <section>
+            <h2>Learning Goals</h2>
+            <ul>
+                <li>Identify the mechanics and complexity of adding and removing elements from an Array.</li>
+                <li>Solve the memory equation to retrieve data from an array.</li>
+                <li>Describe the resizing property of dynamic arrays and why it's needed.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Implementing a Stack Using a Dynamic Array</h2>
+            <p><strong>Metaphor:</strong> A stack is like a pile of plates. You can only add a plate to the top (push), and you can only remove the top plate (pop).</p>
+            <p>Here’s how to implement a stack using the dynamic array:</p>
+            <pre><code>class Stack {
+    constructor() {
+        this.array = new DynamicArray();
+    }
+
+    push(element) {
+        this.array.push(element);
+    }
+
+    pop() {
+        return this.array.pop();
+    }
+
+    peek() {
+        return this.array.read(this.array.length - 1);
+    }
+
+    isEmpty() {
+        return this.array.length === 0;
+    }
+}</code></pre>
+            <p><strong>Explanation:</strong> A stack follows the Last In, First Out (LIFO) principle. We use the dynamic array to implement the stack’s <code>push()</code> and <code>pop()</code> methods, while also adding <code>peek()</code> and <code>isEmpty()</code>.</p>
+        </section>
+
+        <section>
+            <h2>Real-World Applications</h2>
+            <ul>
+                <li><strong>Dynamic Arrays:</strong> Useful when the amount of data is unpredictable, like in dynamic data structures such as lists or queues.</li>
+                <li><strong>Stacks:</strong> Used in undo/redo systems, parsing expressions, and managing function calls (call stacks).</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

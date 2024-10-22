@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Readline Tutorial</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>Using the Readline Module in Node.js</h1>
+    
+    <h2>Introduction</h2>
+    <p>In this tutorial, we’ll explore the <code>readline</code> module in Node.js. This module allows your JavaScript program to interact with the command line by accepting user input and outputting results.</p>
+    
+    <h2>Why Readline Matters</h2>
+    <p>The <code>readline</code> module is essential when you need to interact with users through the command line. Whether you're building a basic quiz, CLI tool, or a script that processes input from users, understanding how to ask questions and read input is key to making your Node.js programs more interactive.</p>
+
+    <h2>Real-World Analogy</h2>
+    <p>Imagine you’re hosting a game show. You ask contestants questions, and they provide answers. You listen to their responses and react based on their input. The <code>readline</code> module is like that game show setup, where Node.js asks a question and then listens for the user's response.</p>
+
+    <h2>Setting Up Readline</h2>
+    <p>The <code>readline</code> module is built into Node.js, so you don’t need to install it. You can simply require it in your code:</p>
+
+<pre><code>const readline = require("readline");</code></pre>
+
+<p>Next, you create an interface that connects to the command line’s standard input (<code>stdin</code>) and standard output (<code>stdout</code>).</p>
+
+<pre><code>
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+</code></pre>
+
+<h2>Example Code</h2>
+<p>Here’s a basic example that asks the user a question, prints their response, and then closes the interface:</p>
+
+<pre><code>
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Ask the user a question
+rl.question("What's up, doc? ", answer => {
+  // Print their response
+  console.log("You responded: " + answer);
+  
+  // Close the interface
+  rl.close();
+});
+</code></pre>
+
+<h3>Step-by-Step Breakdown:</h3>
+<ul>
+    <li><strong>Step 1:</strong> The <code>readline.createInterface</code> method sets up the connection to <code>stdin</code> and <code>stdout</code>.</li>
+    <li><strong>Step 2:</strong> The <code>rl.question</code> method asks the user a question and waits for their input.</li>
+    <li><strong>Step 3:</strong> Once the user enters their response, it’s captured in the <code>answer</code> variable.</li>
+    <li><strong>Step 4:</strong> The program prints the user’s response with <code>console.log</code>.</li>
+    <li><strong>Step 5:</strong> Finally, the <code>rl.close()</code> method closes the interface to free up resources.</li>
+</ul>
+
+<h2>When to Use Readline</h2>
+<p>The <code>readline</code> module is perfect for any situation where you need to prompt the user for input in a Node.js environment. Some common use cases include:</p>
+<ul>
+    <li><strong>Command-line tools:</strong> Tools that ask the user questions and perform tasks based on their input.</li>
+    <li><strong>Simple quizzes:</strong> Games or quizzes where the user provides answers to questions.</li>
+    <li><strong>Scripts:</strong> Automation scripts that require user confirmation before proceeding.</li>
+</ul>
+
+<h2>Practical Real-World Example</h2>
+<p>Here’s how you might use <code>readline</code> to create a simple quiz:</p>
+
+<pre><code>
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question("What's your favorite programming language? ", answer => {
+  if (answer.toLowerCase() === "javascript") {
+    console.log("Great choice!");
+  } else {
+    console.log("That's nice too!");
+  }
+  rl.close();
+});
+</code></pre>
+
+<p>In this example, the user is asked about their favorite programming language. If they choose JavaScript, they get a special message; otherwise, they get a different response. This shows how easy it is to add conditional logic based on user input.</p>
+
+<h2>Understanding the Call Stack and Event Loop in Readline</h2>
+<p>When you use <code>readline</code>, you’re working with asynchronous code. When the <code>question</code> method is called, Node.js does not pause and wait for user input. Instead, it registers the callback function (the part of the code that handles the response) and continues running. Once the user enters their answer, the callback is placed on the <strong>event loop</strong> and executed when the stack is clear.</p>
+
+<p>To simplify, you can think of it like placing a note on a to-do list. Node.js continues working on other tasks and when the user provides an answer, it picks up the note and finishes the job.</p>
+
+<h2>Conclusion</h2>
+<p>The <code>readline</code> module is an essential tool for Node.js developers, allowing interaction with users directly through the command line. Whether you’re building tools, quizzes, or just gathering user input, <code>readline</code> makes the process simple and efficient.</p>
+
+</body>
+</html>

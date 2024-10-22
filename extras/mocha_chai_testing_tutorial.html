@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing with Mocha and Chai</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Testing with Mocha and Chai</h1>
+    </header>
+    <main>
+        <section>
+            <h2>1. File Structure of Testing with Mocha</h2>
+            <p>
+                When using Mocha for testing, it’s important to maintain a clear and consistent file structure. This makes it easier to locate and manage tests as your project grows. Here’s an example of a typical Mocha testing structure:
+            </p>
+
+            <pre><code>.
+├── test
+│   ├── example.test.js
+│   └── anotherTest.test.js
+└── src
+    └── app.js</code></pre>
+            <p>
+                - The <code>test</code> folder contains all of your test files.
+                - The <code>src</code> folder contains your application code.
+                <br>
+                Mocha will automatically look for a <code>test</code> folder when running tests, making it a best practice to organize your tests this way.
+            </p>
+
+            <h2>2. Testing with Mocha and Chai's <code>expect</code> Module</h2>
+            <p>
+                Mocha is a testing framework, and Chai is an assertion library that provides different styles of writing assertions. One of the most popular styles is the <code>expect</code> style, which makes your tests easy to read and understand.
+            </p>
+
+            <h3>Example Test with Mocha and Chai:</h3>
+            <pre><code>const { expect } = require('chai');
+const add = require('../src/app').add;
+
+describe('add function', function() {
+    it('should return 5 when adding 2 and 3', function() {
+        const result = add(2, 3);
+        expect(result).to.equal(5);
+    });
+});</code></pre>
+            <p>
+                In this example:
+                <ul>
+                    <li><code>describe</code> defines a group of related tests.</li>
+                    <li><code>it</code> defines an individual test case.</li>
+                    <li><code>expect(result).to.equal(5)</code> is an assertion that checks if the result matches the expected value.</li>
+                </ul>
+            </p>
+
+            <h2>3. Recognize and Utilize Mocha Hooks: <code>before</code>, <code>beforeEach</code>, <code>after</code>, and <code>afterEach</code></h2>
+            <p>
+                Mocha provides several hooks that allow you to run setup and teardown code before or after your tests. These hooks ensure that your test environment is prepared before tests are executed and cleaned up afterward.
+            </p>
+
+            <h3>The Mocha Hooks:</h3>
+            <ul>
+                <li><code>before</code>: Runs once before all tests in a <code>describe</code> block.</li>
+                <li><code>beforeEach</code>: Runs before each test in a <code>describe</code> block.</li>
+                <li><code>after</code>: Runs once after all tests in a <code>describe</code> block.</li>
+                <li><code>afterEach</code>: Runs after each test in a <code>describe</code> block.</li>
+            </ul>
+
+            <h3>Example Using Mocha Hooks:</h3>
+            <pre><code>const { expect } = require('chai');
+let counter = 0;
+
+describe('Counter Tests', function() {
+
+    before(function() {
+        // Runs once before all tests
+        console.log('Setting up tests');
+    });
+
+    beforeEach(function() {
+        // Runs before each test
+        counter = 0;
+    });
+
+    it('should increase counter to 1', function() {
+        counter++;
+        expect(counter).to.equal(1);
+    });
+
+    it('should decrease counter to -1', function() {
+        counter--;
+        expect(counter).to.equal(-1);
+    });
+
+    afterEach(function() {
+        // Runs after each test
+        console.log('Test finished');
+    });
+
+    after(function() {
+        // Runs once after all tests
+        console.log('All tests complete');
+    });
+});</code></pre>
+            <p>
+                In this example:
+                <ul>
+                    <li><code>before</code> is used to set up test resources before any tests run.</li>
+                    <li><code>beforeEach</code> resets the <code>counter</code> variable before each test.</li>
+                    <li><code>afterEach</code> performs any necessary cleanup after each test.</li>
+                    <li><code>after</code> performs final cleanup after all tests have run.</li>
+                </ul>
+            </p>
+
+            <h2>Conclusion</h2>
+            <p>
+                Mocha provides a flexible testing framework that works well with assertion libraries like Chai. By following a good file structure, using Chai’s <code>expect</code> syntax, and leveraging Mocha’s hooks, you can write clear and maintainable tests that help ensure the quality of your code.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

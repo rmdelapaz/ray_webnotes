@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Determining Types in JavaScript</title>
+</head>
+<body>
+    <h1>Determining Types in JavaScript</h1>
+
+    <p>Understanding the type of value stored in a variable is essential for writing clean, predictable code. It’s like knowing the tools you have in your toolbox before starting a project. You wouldn’t use a hammer to turn a screw, and similarly, you wouldn’t call a function on a number if your function expects an array.</p>
+
+    <p>In this article, you’ll learn how to determine if a value is a:</p>
+    <ul>
+        <li>String</li>
+        <li>Number</li>
+        <li>Function</li>
+        <li>Array</li>
+    </ul>
+
+    <h2>The typeof Operator</h2>
+    <p>The <code>typeof</code> operator is like a label on a box. It tells you what kind of item (value) is inside. However, not all operators in JavaScript require two values (or operands), like the <code>+</code> for addition or <code>=</code> for assignment. Some, like <code>typeof</code>, only need one value to inspect. This type of operator is called a <strong>unary operator</strong> (think of "uni-" meaning one).</p>
+
+    <p>Here are some examples of using the <code>typeof</code> operator to check the type of a value:</p>
+
+    <pre><code>
+    let s = 'This is a string';
+    console.log(typeof s);    // 'string'
+
+    let n = 6.28;
+    console.log(typeof n);    // 'number'
+
+    let sum = function (a, b) {
+      return a + b;
+    }
+    console.log(typeof sum);  // 'function'
+    </code></pre>
+
+    <p>Notice that the value returned by <code>typeof</code> is always a string representing the type. For example, if you want to check if a value is a number, you could write:</p>
+
+    <pre><code>
+    if (typeof n === 'number') {
+      // It is a number. Let's do some math!
+    } else {
+      console.log('I really wanted a number. :-(');
+    }
+    </code></pre>
+
+    <h2>Checking for Arrays</h2>
+    <p>JavaScript has a bit of a quirk when it comes to arrays. If you try to use <code>typeof</code> on an array, it tells you it's an "object." While arrays are technically objects, this isn't helpful when you're trying to differentiate between an array and other types of objects.</p>
+
+    <pre><code>
+    let a = [1, 2, 3];
+    console.log(typeof a);  // 'object'
+    </code></pre>
+
+    <p>To solve this, JavaScript introduced <code>Array.isArray</code>, a method specifically for checking if a value is an array:</p>
+
+    <pre><code>
+    let a = [1, 2, 3];
+    Array.isArray(a);  // true
+
+    let n = 6.28;
+    Array.isArray(n);  // false
+
+    let f = function () {}
+    Array.isArray(f);  // false
+    </code></pre>
+
+    <h2>Practical Use in "Real" Code</h2>
+    <p>Oddly enough, in many real-world applications, developers don’t often check the types of values explicitly. Most functions assume that they will receive the correct types, and parameter names often hint at what kind of value is expected. For example, a function with a parameter named <code>sentence</code> likely expects a string.</p>
+
+    <pre><code>
+    function reverseTheSentence(sentence) {
+      // ... code here ...
+    }
+    </code></pre>
+
+    <p>Most developers will just pass in a string, assuming that passing anything else would be improper usage. However, if you expect people who aren’t familiar with your code to use it, you might want to add some checks:</p>
+
+    <pre><code>
+    function reverseTheSentence(sentence) {
+      if (typeof sentence !== 'string') {
+        console.error('This function expects a string!');
+        return;
+      }
+      // ... proceed with reversing the sentence ...
+    }
+    </code></pre>
+
+    <p>This ensures that your function doesn’t break unexpectedly when someone uses it incorrectly.</p>
+
+    <h2>Why Knowing Types Matters</h2>
+    <p>Understanding and checking types can prevent bugs that are hard to track down. For example, if a function expects an array and you pass a string, the function might try to use array methods like <code>map</code> or <code>forEach</code> on the string. This will cause errors, as strings don't have these methods.</p>
+
+    <p>In programming, it’s like working in a kitchen. If your recipe calls for apples, and someone hands you oranges, you won’t get the result you want unless you check what you’re working with first!</p>
+
+    <h2>Additional Methods for Determining Types</h2>
+    <p>Besides <code>typeof</code> and <code>Array.isArray</code>, there are other ways to check types, especially for more complex objects:</p>
+    <ul>
+        <li><strong><code>instanceof</code>:</strong> This operator checks if an object is an instance of a specific class or constructor.</li>
+        <li><strong><code>constructor</code>:</strong> You can use this property to check the constructor of an object.</li>
+    </ul>
+
+    <pre><code>
+    let today = new Date();
+    console.log(today instanceof Date);  // true
+
+    let name = 'Alice';
+    console.log(name.constructor === String);  // true
+    </code></pre>
+
+    <h2>Summary</h2>
+    <p>In this article, we’ve covered a few ways to determine the type of a value in JavaScript:</p>
+    <ul>
+        <li>The <code>typeof</code> operator to check if a value is a number, string, or function.</li>
+        <li>The <code>Array.isArray</code> method to check if a value is an array.</li>
+        <li>Other methods like <code>instanceof</code> and <code>constructor</code> for more specific type-checking needs.</li>
+    </ul>
+
+    <p>Remember, determining types in your code is like knowing the ingredients in your recipe. When you know exactly what you’re working with, you can create reliable and bug-free programs. Happy coding!</p>
+
+</body>
+</html>

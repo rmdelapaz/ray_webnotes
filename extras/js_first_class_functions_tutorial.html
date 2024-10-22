@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Functions as First-Class Objects: Lecture, Tutorial, Overview</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Functions as First-Class Objects: Lecture, Tutorial, Overview</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Introduction to Functions as First-Class Objects</h2>
+            <p>In JavaScript, functions are treated as <strong>first-class objects</strong>, which means they can be stored in variables, passed as arguments to other functions, returned from functions, and assigned properties. This powerful concept is fundamental in JavaScript and allows functions to be used in many flexible ways.</p>
+            <p>An analogy: Think of functions as citizens in a society. Just like a person (citizen) can work a job, go places, and even be assigned to tasks, functions in JavaScript can also be "assigned" or "passed around" to perform tasks.</p>
+        </section>
+
+        <section>
+            <h2>Functions as Variables</h2>
+            <p>One of the most basic examples of treating functions as first-class objects is assigning a function to a variable. Just like any other data type (like strings or numbers), a function can be stored in a variable and later invoked.</p>
+            <pre><code>const greet = function(name) {
+  return 'Hello, ' + name + '!';
+};
+
+console.log(greet('Alice')); // 'Hello, Alice!'</code></pre>
+            <p><strong>Explanation:</strong> Here, we assign an anonymous function to the variable <code>greet</code>. This function can then be invoked by calling <code>greet('Alice')</code>, just like any other variable. Functions behave like any other data type, showing their flexibility.</p>
+        </section>
+
+        <section>
+            <h2>Functions as Arguments</h2>
+            <p>Another key aspect of functions being first-class objects is that they can be passed as arguments to other functions. This is fundamental to callbacks and higher-order functions, where functions are passed and invoked inside other functions.</p>
+            <pre><code>function performTask(task, action) {
+  console.log('Starting task: ' + task);
+  action();
+  console.log('Task complete!');
+}
+
+performTask('Learning JavaScript', function() {
+  console.log('Doing some coding...');
+});
+
+// Output:
+// Starting task: Learning JavaScript
+// Doing some coding...
+// Task complete!</code></pre>
+            <p><strong>Explanation:</strong> In this example, we pass an anonymous function as the <code>action</code> argument to <code>performTask</code>. The function is called within the <code>performTask</code> function, demonstrating how functions can be passed and executed at a later time.</p>
+        </section>
+
+        <section>
+            <h2>Functions as Return Values</h2>
+            <p>Functions can also be returned from other functions. This pattern is common in creating closures, where a function maintains access to its scope even after the outer function has returned. This is a powerful feature of JavaScript's functional programming abilities.</p>
+            <pre><code>function multiplier(factor) {
+  return function(number) {
+    return number * factor;
+  };
+}
+
+const double = multiplier(2);
+const triple = multiplier(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15</code></pre>
+            <p><strong>Explanation:</strong> The <code>multiplier</code> function returns another function that multiplies a number by the provided factor. This demonstrates that functions can return other functions, allowing for highly flexible and reusable code.</p>
+        </section>
+
+        <section>
+            <h2>Functions as Properties (Methods)</h2>
+            <p>Since functions are objects, they can also be assigned as properties to objects, making them methods of that object. This is a key concept in object-oriented programming, where methods are defined on objects to perform actions.</p>
+            <pre><code>const person = {
+  name: 'Alice',
+  greet: function() {
+    return 'Hello, ' + this.name;
+  }
+};
+
+console.log(person.greet()); // 'Hello, Alice'</code></pre>
+            <p><strong>Explanation:</strong> In this example, the <code>greet</code> function is a property (or method) of the <code>person</code> object. This shows how functions can be stored as properties on objects and invoked as methods.</p>
+        </section>
+
+        <section>
+            <h2>Analogy for Functions as First-Class Objects</h2>
+            <p>Think of functions as "multi-talented workers." Just like a worker can be assigned different tasks, moved between jobs, and even trained to do new things, functions can be assigned to variables, passed to other functions, and returned from them. They are versatile and flexible in how they can be used within a program.</p>
+        </section>
+
+        <section>
+            <h2>When and Why to Use First-Class Functions</h2>
+            <p>Using functions as first-class objects opens up a world of possibilities in JavaScript programming, including:</p>
+            <ul>
+                <li><strong>Callbacks:</strong> Functions passed as arguments to handle asynchronous tasks, like waiting for data to load or user actions.</li>
+                <li><strong>Higher-order functions:</strong> Functions that operate on other functions, such as <code>map()</code>, <code>filter()</code>, and <code>reduce()</code> in JavaScript arrays.</li>
+                <li><strong>Closures:</strong> Functions returned from other functions that maintain access to their outer scope, allowing for powerful encapsulation and data privacy.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Real-World Example</h2>
+            <p>One real-world example of using functions as first-class objects is when handling events in JavaScript. Event listeners are functions passed as arguments to respond to user actions like clicks, form submissions, and more.</p>
+            <pre><code>document.getElementById('myButton').addEventListener('click', function() {
+  console.log('Button was clicked!');
+});</code></pre>
+            <p><strong>Explanation:</strong> The anonymous function is passed as an argument to the <code>addEventListener</code> method. This function is called whenever the button with the ID <code>myButton</code> is clicked, demonstrating how first-class functions are used in real applications.</p>
+        </section>
+
+        <section>
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Functions in JavaScript are first-class objects, meaning they can be assigned to variables, passed as arguments, returned from other functions, and even assigned as properties on objects.</li>
+                <li>This flexibility is foundational to JavaScript's asynchronous programming, higher-order functions, and functional programming patterns.</li>
+                <li>Real-world applications of first-class functions include callbacks, closures, and event handling in JavaScript applications.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Exercises</h2>
+            <p>Here are a few exercises to help you understand functions as first-class objects:</p>
+            <ol>
+                <li><strong>Exercise 1:</strong> Create a function <code>adder</code> that returns another function. The returned function should accept a number and add it to the original number passed to <code>adder</code>.</li>
+                <li><strong>Exercise 2:</strong> Write a function <code>performTask</code> that accepts a task description and a callback function. The callback should be invoked after the task description is logged.</li>
+            </ol>
+        </section>
+    </main>
+</body>
+</html>

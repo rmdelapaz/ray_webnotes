@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Functions in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Arrow Functions</h1> 
+    <p>Arrow functions, a.k.a. Fat Arrows (=>), are a more concise way of declaring functions. Arrow functions were introduced in ES2015 as a way of solving many of the inconveniences of the normal callback function syntax.</p>
+    <p>Two major factors influenced the reason behind the desire for arrow functions: the desire for (1) shorter functions and (2) an easy way to bind the context at the place of the function definition to the function. Only the first factor will be discussed in this reading. You will explore the second factor at a later lesson when you learn about context.</p>
+
+    <h2>When you finish this reading you should be able to:</h2>
+    <ul>
+        <li>Define an arrow function</li>
+        <li>Use implicit return with an arrow function</li>
+    </ul>
+
+    <h2>Arrow functions solving problems</h2>
+    <p>Let's start by looking at the arrow function in action!</p>
+    <pre>
+// function declaration
+let average = function(num1, num2) {
+  let avg = (num1 + num2) / 2;
+  return avg;
+};
+
+// fat arrow function style!
+let averageArrow = (num1, num2) => {
+  let avg = (num1 + num2) / 2;
+  return avg;
+};
+    </pre>
+
+    <h2>Anatomy of an arrow function</h2>
+    <p>The syntax for a multiple statement arrow function is as follows:</p>
+    <pre>(parameters, go, here) => {
+  statement1;
+  statement2;
+  return a value;
+};
+    </pre>
+
+    <p>So let's look at a quick translation between a function declared with function expression syntax and a fat arrow function. Take notice of the removal of the function keyword, and the addition of the fat arrow (=>).</p>
+    <pre>
+function fullName(fname, lname) {
+  let str = "Hello " + fname + " " + lname;
+  return str;
+}
+
+// vs.
+
+let fullNameArrow = (fname, lname) => {
+  let str = "Hello " + fname + " " + lname;
+  return str;
+};
+    </pre>
+
+    <p>If there is only a single parameter you may omit the ( ) around the parameter declaration:</p>
+    <pre>param1 => {
+  statement1;
+  return value;
+};
+    </pre>
+
+    <p>If you have no parameters with an arrow function you must still use the ( ):</p>
+    <pre>() => {
+  statements;
+  return value;
+};
+    </pre>
+
+    <p>Let's see an example of an arrow function with a single parameter with no parenthesis:</p>
+    <pre>const sayName = name => {
+  return "Hello " + name;
+};
+
+sayName("Jared"); // => "Hello Jared"
+    </pre>
+
+    <h2>Single expression arrow functions</h2>
+    <p>One of the most fun things about single expression arrow functions is they allow for something previously unavailable in JavaScript: implicit returns. Meaning, in an arrow function with a single-expression block, the curly braces ({ }) and the return keyword are implied.</p>
+
+    <pre>argument => expression; // equal to (argument) => { return expression };
+    </pre>
+
+    <p>Look at the below example you can see how we use this snazzy implicit returns syntax:</p>
+    <pre>const multiply = function(num1, num2) {
+  return num1 * num2;
+};
+
+// do not need to explicitly state return!
+const arrowMultiply = (num1, num2) => num1 * num2;
+    </pre>
+
+    <h2>Syntactic ambiguity with arrow functions</h2>
+    <p>In JavaScript, {} can signify either an empty object or an empty block.</p>
+    <pre>const ambiguousFunction = () => {};
+    </pre>
+    <p>To make a single-expression fat arrow return an empty object, wrap that object within parentheses:</p>
+    <pre>// this will implicitly return an empty object
+const clearFunction = () => ({});
+clearFunction(); // returns an object: {}
+    </pre>
+
+    <h2>Arrow functions are anonymous</h2>
+    <p>Fat arrows are anonymous, like their lambda counterparts in other languages.</p>
+    <pre>sayHello(name) => console.log("Hi, " + name); // SyntaxError
+(name) => console.log("Hi, " + name); // this works!
+    </pre>
+
+    <p>If you want to name your function you must assign it to a variable:</p>
+    <pre>const sayHello = name => console.log("Hi, " + name);
+sayHello("Curtis"); // => Hi, Curtis
+    </pre>
+</body>
+</html>

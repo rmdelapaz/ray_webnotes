@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Logarithmic Time Complexity in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Logarithmic Time Complexity in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>Logarithmic time complexity, denoted as <code>O(log n)</code>, is a measure of an algorithm's efficiency. It describes algorithms where the time it takes to complete the task increases logarithmically with the input size, meaning the larger the input, the slower the growth in the time required. In this tutorial, we’ll explore how logarithmic time complexity works, when it appears, and some common examples.</p>
+    </section>
+    
+    <section>
+        <h2>Example: Binary Search</h2>
+        <p>Binary search is a classic example of an algorithm with logarithmic time complexity. It works by dividing the search space in half at each step, resulting in a time complexity of <code>O(log n)</code>. Here’s an implementation of binary search:</p>
+        <pre><code>function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        if (arr[mid] === target) return mid;  // Target found
+        if (arr[mid] < target) left = mid + 1;  // Search right half
+        else right = mid - 1;  // Search left half
+    }
+    return -1;  // Target not found
+}</code></pre>
+        <p>Each iteration of binary search cuts the array in half, reducing the problem size by half with each step. As a result, the number of comparisons grows logarithmically with the size of the input.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Folding a Paper</h2>
+        <p>Imagine you have a large sheet of paper and you want to fold it in half until it’s small enough to fit in your pocket. With each fold, the size of the paper is halved, and the number of folds you need grows logarithmically with the original size of the paper. This is similar to how algorithms with <code>O(log n)</code> time complexity work—they repeatedly reduce the problem size by half until it becomes manageable.</p>
+    </section>
+    
+    <section>
+        <h2>Real-World Example: Searching a Phone Book</h2>
+        <p>Let’s say you have a phone book sorted by name, and you want to find someone’s phone number. Instead of searching each name one by one (which would take linear time), you can use binary search. You flip the book to the middle, check if the name is alphabetically before or after, and repeat the process until you find the name. This approach cuts down the search time logarithmically.</p>
+    </section>
+    
+    <section>
+        <h2>Metaphor: Cutting a Log</h2>
+        <p>Imagine you’re cutting a log in half. With each cut, the log becomes smaller and easier to manage. The more you cut, the smaller the problem gets, and the less effort is required. This is how logarithmic time complexity works: each operation reduces the size of the problem significantly, so fewer operations are needed as the problem gets smaller.</p>
+    </section>
+
+    <section>
+        <h2>Why is Logarithmic Time Complexity Important?</h2>
+        <p>Algorithms with logarithmic time complexity are highly efficient, especially for large inputs. When compared to linear or quadratic time complexities, <code>O(log n)</code> algorithms scale well, making them suitable for operations on large datasets, such as searching in sorted arrays, binary search trees, and database indexing.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Logarithmic time complexity appears in many computer science applications, including binary search, balanced tree operations (like AVL trees or Red-Black trees), and logarithmic algorithms used in networking or cryptography. It is a crucial concept when optimizing algorithms for large data structures and ensuring scalability.</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="/extras/binary_search_tutorial.html">Binary Search</a></li>
+            <li><a href="/extras/binary_search_trees_tutorial.html">Binary Search Trees (BST)</a></li>
+            <li><a href="/extras/big_o_tutorial.html">Big O Notation</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Understanding logarithmic time complexity is key to optimizing algorithms and solving problems efficiently.</p>
+    </footer>
+</body>
+</html>

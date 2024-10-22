@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window API, Context and Scope, DOMContentLoaded, and window.onload in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Window API, Context and Scope, DOMContentLoaded, and window.onload</h1>
+        <p>A guide for new developers</p>
+    </header>
+
+    <section>
+        <h2>How to Use the Window API for Interacting with the Browser Environment</h2>
+        <p>The <strong>Window API</strong> provides a set of methods and properties for interacting with the browser environment. It allows you to control things like pop-up windows, alerts, and more.</p>
+
+        <p>Analogy: Think of the <strong>Window API</strong> as a set of remote controls for your web page. It lets you do things like open new tabs (like flipping channels on TV), show alerts (like receiving notifications), and navigate to different URLs (like switching apps).</p>
+
+        <h3>Common Window API Methods:</h3>
+        <ul>
+            <li><code>window.open()</code>: Opens a new browser window or tab. Example: <code>window.open('https://example.com');</code></li>
+            <li><code>window.alert()</code>: Displays an alert box. Example: <code>window.alert('Hello, world!');</code></li>
+            <li><code>window.confirm()</code>: Shows a confirmation dialog. Example: <code>if (window.confirm('Are you sure?')) { /* do something */ }</code></li>
+            <li><code>window.location</code>: Allows navigation and provides information about the current URL. Example: <code>window.location.href = 'https://example.com';</code></li>
+            <li><code>window.history</code>: Lets you navigate back and forward in the browser's history. Example: <code>window.history.back();</code></li>
+        </ul>
+
+        <p>These methods allow you to control and interact with the browser environment in useful ways, such as opening new tabs, showing alerts, and redirecting users to different pages.</p>
+    </section>
+
+    <section>
+        <h2>Understanding Context and Scope in JavaScript Functions</h2>
+        <p>In JavaScript, <strong>context</strong> refers to the value of <code>this</code> within a function, while <strong>scope</strong> refers to the accessibility of variables within different parts of the code.</p>
+
+        <p>Analogy: Think of <strong>context</strong> as the room you're currently in (it defines where you are). <strong>Scope</strong> is like which objects you can access from that room (the variables that are visible to you).</p>
+
+        <h3>Understanding Scope:</h3>
+        <p>JavaScript has function-level scope, meaning variables declared within a function are only accessible within that function. Variables declared outside of functions have global scope and can be accessed anywhere.</p>
+
+        <pre><code>
+// Global scope
+let name = "Alice";
+
+function greet() {
+    // Local scope
+    let greeting = "Hello";
+    console.log(greeting + " " + name); // Can access global variable 'name'
+}
+
+greet(); // "Hello Alice"
+console.log(greeting); // Error: 'greeting' is not defined
+        </code></pre>
+
+        <h3>Understanding Context (<code>this</code>):</h3>
+        <p>The value of <code>this</code> depends on how a function is called. In an object method, <code>this</code> refers to the object itself. In a regular function, <code>this</code> refers to the global <code>window</code> object in the browser.</p>
+
+        <pre><code>
+let person = {
+    name: "Bob",
+    greet: function() {
+        console.log("Hello, " + this.name);
+    }
+};
+
+person.greet(); // "Hello, Bob"
+
+function sayHello() {
+    console.log(this); // 'this' refers to window in a regular function
+}
+
+sayHello(); // Logs the window object
+        </code></pre>
+
+        <p>Understanding context and scope is important for managing how functions behave and how variables are accessed.</p>
+    </section>
+
+    <section>
+        <h2>Using DOMContentLoaded and window.onload</h2>
+        <p>In JavaScript, it’s important to ensure that your scripts run at the right time—after the web page has fully loaded. Two common events used for this are <strong>DOMContentLoaded</strong> and <strong>window.onload</strong>.</p>
+
+        <h3>DOMContentLoaded:</h3>
+        <p>The <strong>DOMContentLoaded</strong> event fires as soon as the HTML document has been completely loaded and parsed. This event doesn’t wait for images, stylesheets, or other resources to load.</p>
+
+        <p>Analogy: It’s like starting a conversation once the foundation of a building is done (HTML is parsed), even though the interior and exterior finishes (images and styles) are still being worked on.</p>
+
+        <pre><code>
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded and parsed");
+});
+        </code></pre>
+
+        <h3>window.onload:</h3>
+        <p>The <strong>window.onload</strong> event fires only after the entire page has fully loaded, including all resources like images, styles, and scripts.</p>
+
+        <p>Analogy: It’s like waiting until the entire building is finished—every wall, painting, and window is in place—before starting a meeting.</p>
+
+        <pre><code>
+window.onload = function() {
+    console.log("Entire page fully loaded");
+};
+        </code></pre>
+
+        <p>Use <code>DOMContentLoaded</code> when you need your scripts to run as soon as the basic structure of the document is available, and use <code>window.onload</code> if you want to ensure everything, including images and other external resources, is fully loaded before running your code.</p>
+    </section>
+
+    <section>
+        <h2>Preventing Scripts from Running Until the Page Has Fully Loaded</h2>
+        <p>To prevent scripts from running before the page is fully loaded, you can either place your script tags at the end of the <code>&lt;body&gt;</code> element or use the <code>DOMContentLoaded</code> or <code>window.onload</code> events.</p>
+
+        <h3>Example: Using <code>DOMContentLoaded</code> to Run Scripts After the DOM is Ready:</h3>
+        <pre><code>
+document.addEventListener("DOMContentLoaded", function() {
+    // Safe to manipulate DOM elements here
+    document.getElementById("myElement").innerText = "Page is ready!";
+});
+        </code></pre>
+
+        <h3>Example: Using <code>window.onload</code> to Wait for Full Page Load:</h3>
+        <pre><code>
+window.onload = function() {
+    // Safe to manipulate DOM and external resources here
+    console.log("Page fully loaded, including images and resources.");
+};
+        </code></pre>
+
+        <p>By ensuring your scripts run only when the DOM or entire page has loaded, you can avoid errors and ensure your page behaves as expected.</p>
+    </section>
+
+    <section>
+        <h2>Conclusion</h2>
+        <p>The <strong>Window API</strong> gives you powerful tools to interact with the browser environment, while understanding <strong>context and scope</strong> helps you control how functions and variables behave. Using <strong>DOMContentLoaded</strong> and <strong>window.onload</strong> ensures your scripts run at the right time, making your web pages function smoothly.</p>
+
+        <p>Next steps: Dive deeper into advanced topics like JavaScript closures and async/await for better control of context and timing in your code.</p>
+    </section>
+</body>
+</html>

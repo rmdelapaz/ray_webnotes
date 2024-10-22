@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrading Node.js Instructions</title>
+</head>
+<body>
+  <header>
+    <h1>Instructions to Upgrade Node.js</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. For macOS or Linux</h2>
+      <p>You can use <strong>Node Version Manager (NVM)</strong> to install and manage multiple versions of Node.js.</p>
+      <h3>Install NVM (if you don't have it installed)</h3>
+      <p>Open your terminal and run the following command to install NVM:</p>
+      <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</code></pre>
+      <p>After the installation, close and reopen your terminal or run the following command to load NVM:</p>
+      <pre><code>source ~/.bashrc  # or ~/.zshrc depending on your shell</code></pre>
+
+      <h3>Upgrade Node.js using NVM</h3>
+      <ol>
+        <li>To list all available Node.js versions:
+          <pre><code>nvm ls-remote</code></pre>
+        </li>
+        <li>To install the latest version of Node.js:
+          <pre><code>nvm install node</code></pre>
+        </li>
+        <li>To use a specific version (e.g., Node.js 18):
+          <pre><code>nvm install 18</code></pre>
+        </li>
+        <li>To set the newly installed version as the default:
+          <pre><code>nvm use 18
+nvm alias default 18</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>2. For Windows</h2>
+      <p>You can use <strong>nvm-windows</strong> to manage Node.js versions.</p>
+
+      <h3>Install nvm-windows</h3>
+      <ol>
+        <li>Download <strong>nvm-windows</strong> from the <a href="https://github.com/coreybutler/nvm-windows/releases">nvm-windows GitHub repository</a>.</li>
+        <li>Install it by following the installer’s instructions.</li>
+      </ol>
+
+      <h3>Upgrade Node.js using nvm-windows</h3>
+      <ol>
+        <li>Open a new terminal or Command Prompt as Administrator.</li>
+        <li>List available Node.js versions:
+          <pre><code>nvm list available</code></pre>
+        </li>
+        <li>Install the latest version of Node.js:
+          <pre><code>nvm install latest</code></pre>
+        </li>
+        <li>Use the newly installed version:
+          <pre><code>nvm use latest</code></pre>
+        </li>
+        <li>To check the installed version:
+          <pre><code>node -v</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>3. Using Homebrew (macOS only)</h2>
+      <p>If you have <strong>Homebrew</strong> installed, you can upgrade Node.js through it.</p>
+      <ol>
+        <li>Open the terminal and run the following command to update Homebrew:
+          <pre><code>brew update</code></pre>
+        </li>
+        <li>Upgrade Node.js to the latest version:
+          <pre><code>brew upgrade node</code></pre>
+        </li>
+        <li>Confirm the installation by checking the version:
+          <pre><code>node -v</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>After Upgrading</h2>
+      <p>After upgrading Node.js, confirm that the upgrade was successful by checking the version:</p>
+      <pre><code>node -v</code></pre>
+      <p>This will display the newly installed version of Node.js.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Created by ChatGPT</p>
+  </footer>
+</body>
+</html>

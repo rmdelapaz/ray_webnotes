@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding call() and apply() in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Understanding <code>call()</code> and <code>apply()</code> in JavaScript</h1>
+        <p>A tutorial for new developers on how to use <code>call()</code> and <code>apply()</code> to invoke functions with a specified context.</p>
+    </header>
+    <main>
+        <section>
+            <h2>1. Introduction to <code>call()</code> and <code>apply()</code></h2>
+            <p>
+                JavaScript provides two powerful methods, <code>call()</code> and <code>apply()</code>, which allow you to invoke a function and explicitly set the value of <code>this</code>.
+                Both methods achieve the same result, but they differ in how they handle function arguments. Think of <code>call()</code> and <code>apply()</code> as different ways to make a function borrow another object’s context.
+            </p>
+        </section>
+
+        <section>
+            <h2>2. What is <code>call()</code>?</h2>
+            <p>
+                The <code>call()</code> method allows you to invoke a function with a specific value for <code>this</code>. You pass the object you want <code>this</code> to refer to as the first argument, followed by any function arguments you want to pass individually.
+            </p>
+            <p>Let's see an example:</p>
+            <pre><code class="language-javascript">
+const person = {
+    name: "Emma",
+    introduce: function(age) {
+        console.log("Hi, my name is " + this.name + " and I am " + age + " years old.");
+    }
+};
+
+const anotherPerson = {
+    name: "Sophia"
+};
+
+// Using call() to invoke introduce() with anotherPerson's context
+person.introduce.call(anotherPerson, 25); // Output: Hi, my name is Sophia and I am 25 years old.
+            </code></pre>
+            <p>
+                In this example, we used <code>call()</code> to invoke <code>introduce()</code> with <code>anotherPerson</code> as the context for <code>this</code>. As a result, <code>this.name</code> refers to <code>anotherPerson.name</code> instead of <code>person.name</code>.
+            </p>
+        </section>
+
+        <section>
+            <h2>3. What is <code>apply()</code>?</h2>
+            <p>
+                The <code>apply()</code> method works just like <code>call()</code> in terms of invoking a function with a specific <code>this</code> value. The main difference is in how arguments are passed: instead of passing them individually, you pass them as an array.
+            </p>
+            <p>Here’s the same example using <code>apply()</code>:</p>
+            <pre><code class="language-javascript">
+const person = {
+    name: "Emma",
+    introduce: function(age) {
+        console.log("Hi, my name is " + this.name + " and I am " + age + " years old.");
+    }
+};
+
+const anotherPerson = {
+    name: "Sophia"
+};
+
+// Using apply() to invoke introduce() with anotherPerson's context
+person.introduce.apply(anotherPerson, [25]); // Output: Hi, my name is Sophia and I am 25 years old.
+            </code></pre>
+            <p>
+                The result is the same as <code>call()</code>, but instead of passing <code>25</code> directly, it is passed inside an array.
+            </p>
+        </section>
+
+        <section>
+            <h2>4. The Difference Between <code>call()</code> and <code>apply()</code></h2>
+            <p>
+                The primary difference between <code>call()</code> and <code>apply()</code> lies in how they handle additional arguments:
+            </p>
+            <ul>
+                <li><strong><code>call()</code>:</strong> Passes arguments individually, like <code>func.call(obj, arg1, arg2)</code>.</li>
+                <li><strong><code>apply()</code>:</strong> Passes arguments as an array, like <code>func.apply(obj, [arg1, arg2])</code>.</li>
+            </ul>
+            <p>
+                In most cases, <code>call()</code> is more commonly used, but if you already have an array of arguments, <code>apply()</code> can be more convenient.
+            </p>
+        </section>
+
+        <section>
+            <h2>5. Real-World Analogy for <code>call()</code> and <code>apply()</code></h2>
+            <p>
+                Imagine you’re an actor playing different roles in various movies. In each movie, you’re given a different script (context) to work with. 
+                Using <code>call()</code> is like being handed a script with each line delivered one by one, while <code>apply()</code> is like receiving the entire script in one bundle.
+                In both cases, you play the role according to the script you’re given.
+            </p>
+        </section>
+
+        <section>
+            <h2>6. Practical Use Cases for <code>call()</code> and <code>apply()</code></h2>
+            <p>
+                These methods are particularly useful when you want a function to work with a specific object, but you don’t want to redefine the function inside that object. 
+                For example, they’re handy when borrowing methods from one object to use with another.
+            </p>
+            <pre><code class="language-javascript">
+const car = {
+    brand: "Tesla",
+    displayInfo: function(speed) {
+        console.log(this.brand + " is going " + speed + " km/h");
+    }
+};
+
+const bike = {
+    brand: "Yamaha"
+};
+
+// Borrowing car's displayInfo method for bike
+car.displayInfo.call(bike, 120); // Output: Yamaha is going 120 km/h
+            </code></pre>
+            <p>
+                Here, we borrowed the <code>displayInfo</code> method from <code>car</code> and used it for <code>bike</code> by specifying <code>bike</code> as the context with <code>call()</code>.
+            </p>
+        </section>
+
+        <section>
+            <h2>7. Conclusion and Further Exploration</h2>
+            <p>
+                <code>call()</code> and <code>apply()</code> provide flexibility when invoking functions with different contexts. They allow you to borrow methods from one object and use them for another, making your code more reusable and modular.
+            </p>
+            <p>Further topics to explore:</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">MDN Web Docs on <code>call()</code></a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">MDN Web Docs on <code>apply()</code></a></li>
+                <li>Exploring <code>bind()</code> and how it compares to <code>call()</code> and <code>apply()</code></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

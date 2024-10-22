@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primitives, References, Spread, Rest, and Destructuring Challenge</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <h1>Primitives, References, Spread, Rest, and Destructuring Tutorial</h1>
+
+    <h2>Label Variables as Primitive vs. Reference</h2>
+    <p>In JavaScript, variables can hold either primitive values or reference values.</p>
+    <ul>
+        <li><strong>Primitive types</strong> include <code>string</code>, <code>number</code>, <code>boolean</code>, <code>null</code>, <code>undefined</code>, and <code>symbol</code>. These values are stored directly in the variable and are immutable.</li>
+        <li><strong>Reference types</strong> include <code>objects</code>, <code>arrays</code>, and <code>functions</code>. These values are stored by reference, meaning the variable holds a pointer to the memory location where the value is stored.</li>
+    </ul>
+
+    <h3>Examples:</h3>
+    <pre>
+    // Primitive types
+    let name = "Alice";       // string (primitive)
+    let age = 30;             // number (primitive)
+    let isActive = true;      // boolean (primitive)
+
+    // Reference types
+    let person = {{ name: "Alice", age: 30 }};  // object (reference)
+    let hobbies = ["reading", "gaming"];        // array (reference)
+    let greet = function() {{ console.log("Hello!") }};  // function 
+    (reference)
+    </pre>
+
+    <h2>Define a Function that Utilizes ...Rest Syntax</h2>
+    <p>The <code>...rest</code> syntax allows a function to accept an arbitrary number of arguments and group them into an array.</p>
+    <pre>
+    function sum(...numbers) {{
+      return numbers.reduce((acc, num) => acc + num, 0);
+    }}
+
+    // Example usage:
+    console.log(sum(1, 2, 3, 4)); // => 10
+    </pre>
+    <p>Explanation: The <code>...rest</code> syntax collects all the arguments passed to the function into an array called <code>numbers</code>. We then use <code>reduce()</code> to sum them.</p>
+
+    <h2>Use ...Spread Syntax for Object and Array Literals</h2>
+    <p>The <code>...spread</code> syntax allows us to spread the elements of an array or the properties of an object into another array or object.</p>
+
+    <h3>Spread Syntax with Arrays:</h3>
+    <pre>
+    const arr1 = [1, 2, 3];
+    const arr2 = [4, 5, 6];
+    
+    const combinedArr = [...arr1, ...arr2];
+    console.log(combinedArr); // => [1, 2, 3, 4, 5, 6]
+    </pre>
+
+    <h3>Spread Syntax with Objects:</h3>
+    <pre>
+    const obj1 = {{ name: "Alice", age: 30 }};
+    const obj2 = {{ occupation: "Engineer" }};
+    
+    const combinedObj = {{ ...obj1, ...obj2 }};
+    console.log(combinedObj); // => {{ name: "Alice", age: 30, 
+    occupation: "Engineer" }}
+    </pre>
+
+    <h2>Destructure an Array to Reference Specific Elements</h2>
+    <p>Array destructuring allows us to unpack values from arrays into distinct variables.</p>
+    <pre>
+    const fruits = ["apple", "banana", "cherry"];
+
+    const [first, second] = fruits;
+    console.log(first);  // => "apple"
+    console.log(second); // => "banana"
+    </pre>
+    <p>Explanation: Using array destructuring, we assign the first and second elements of the <code>fruits</code> array to the variables <code>first</code> and <code>second</code>, respectively.</p>
+
+    <h2>Destructure an Object to Reference Specific Values</h2>
+    <p>Object destructuring allows us to unpack values from objects into distinct variables.</p>
+    <pre>
+    const person = {{
+      name: "Alice",
+      age: 30,
+      occupation: "Engineer"
+    }};
+
+    const {{ name, occupation }} = person;
+    console.log(name);       // => "Alice"
+    console.log(occupation); // => "Engineer"
+    </pre>
+    <p>Explanation: Using object destructuring, we assign the <code>name</code> and <code>occupation</code> properties of the <code>person</code> object to variables with the same names.</p>
+
+</body>
+</html>

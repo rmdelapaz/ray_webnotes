@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Effective Test Cases</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Writing Effective Test Cases</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Determining Common Test Cases</h2>
+            <p>
+                Writing test cases can be a balancing act. Test too little and you might miss key bugs. Test too much and you risk slowing down development with unnecessary tests. The key is to determine what should be tested and why.
+            </p>
+            <h3>Approaching Common, Unintuitive, and Edge Cases</h3>
+            <p>
+                When writing test cases, think about different types of use cases:
+                <ul>
+                    <li><strong>Common Use Cases:</strong> These are the everyday situations your code is expected to handle. For example, if you’re writing a function to add numbers, a common use case might be adding two positive numbers.</li>
+                    <li><strong>Unintuitive Cases:</strong> These are situations where the behavior of the code might not be immediately obvious. For example, adding a number to <code>null</code> or <code>undefined</code>.</li>
+                    <li><strong>Edge Cases:</strong> These are extreme scenarios that occur at the boundaries of input values, like adding extremely large numbers or passing empty arrays.</li>
+                </ul>
+            </p>
+
+            <h3>Examples of Common and Edge Cases</h3>
+            <pre><code>// Common case: Adding two positive numbers
+console.assert(add(2, 3) === 5, "Test failed: 2 + 3 should equal 5");
+
+// Edge case: Adding a number to null
+console.assert(add(2, null) === 2, "Test failed: 2 + null should equal 2");
+
+// Unintuitive case: Adding undefined values
+console.assert(isNaN(add(2, undefined)), "Test failed: 2 + undefined should result in NaN");</code></pre>
+
+            <h2>Two Reasons for Writing Test Specs</h2>
+            <p>
+                There are two primary reasons to write test specs:
+            </p>
+
+            <h3>1. Specifying What Should Be Built</h3>
+            <p>
+                The first reason for writing test specs is to define what the code should do. These tests are written before the code itself and help guide the developer in writing the correct functionality.
+                <br>
+                <strong>Why is this important?</strong> When you define tests before writing the code, you have a clear direction of what you are building. This reduces the likelihood of implementing incorrect or unnecessary functionality.
+            </p>
+
+            <h3>Example:</h3>
+            <pre><code>// Specifying behavior before code is written
+describe('add', function() {
+    it('should return the sum of two numbers', function() {
+        // The developer will write code that passes this test
+        const result = add(2, 3);
+        expect(result).to.equal(5);
+    });
+});</code></pre>
+
+            <h3>2. Preventing Future Breakages</h3>
+            <p>
+                The second reason is to ensure that future changes to the code don’t break existing functionality. Test specs provide a safety net, automatically detecting issues when someone modifies the code.
+                <br>
+                <strong>Why is this important?</strong> When a developer makes changes to the code, whether adding new features or fixing bugs, it’s easy to accidentally introduce new issues. With good test specs in place, you can quickly detect these problems before they cause harm.
+            </p>
+
+            <h3>Example:</h3>
+            <pre><code>// Preventing regressions with test specs
+describe('add', function() {
+    it('should continue to add numbers correctly, even if the code changes', function() {
+        const result = add(10, 5);
+        expect(result).to.equal(15);
+    });
+});</code></pre>
+
+            <h2>Conclusion</h2>
+            <p>
+                Writing effective test cases means understanding the various scenarios your code will encounter. By testing common, unintuitive, and edge cases, you ensure that your code works under a variety of conditions. Test specs help define the code’s behavior and protect it from future breakages, making them a crucial part of software development.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

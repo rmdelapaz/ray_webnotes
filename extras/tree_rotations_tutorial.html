@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Tree Rotations in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Tree Rotations in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>Tree rotations are a key operation in maintaining balanced trees, such as AVL Trees and Red-Black Trees. Rotations are used to restructure the tree, restoring balance by rearranging the nodes without violating the binary search tree (BST) property. In this tutorial, we will explore two common types of rotations—left and right rotations—and their role in maintaining balanced binary search trees.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: Right Rotation</h2>
+        <p>A right rotation moves the left child of a node up to the position of the node, and the node itself becomes the right child of the left child. Here’s how to perform a right rotation in JavaScript:</p>
+        <pre><code>function rightRotate(y) {
+    const x = y.left;
+    y.left = x.right;
+    if (x.right) x.right.parent = y;
+    x.parent = y.parent;
+    if (!y.parent) root = x;
+    else if (y === y.parent.left) y.parent.left = x;
+    else y.parent.right = x;
+    x.right = y;
+    y.parent = x;
+}</code></pre>
+        <p>This rotation is typically performed when the left subtree of a node is taller than the right, and it helps to restore balance.</p>
+    </section>
+
+    <section>
+        <h2>Code Example: Left Rotation</h2>
+        <p>A left rotation is the opposite of a right rotation. It moves the right child of a node up, making the node itself the left child of the right child:</p>
+        <pre><code>function leftRotate(x) {
+    const y = x.right;
+    x.right = y.left;
+    if (y.left) y.left.parent = x;
+    y.parent = x.parent;
+    if (!x.parent) root = y;
+    else if (x === x.parent.left) x.parent.left = y;
+    else x.parent.right = y;
+    y.left = x;
+    x.parent = y;
+}</code></pre>
+        <p>Left rotations are performed when the right subtree of a node is taller than the left. Like right rotations, they help restore balance to the tree.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Balancing a Mobile</h2>
+        <p>Imagine you have a mobile hanging from the ceiling with objects on both sides. If one side becomes too heavy, the mobile tips. To restore balance, you move objects from the heavier side to the lighter side. Tree rotations work similarly: when one side of a tree becomes too "heavy" (taller), a rotation moves nodes to the opposite side, rebalancing the tree.</p>
+    </section>
+
+    <section>
+        <h2>Real-World Example: Rebalancing a Priority Queue</h2>
+        <p>In many applications, such as event scheduling, priority queues use balanced trees to maintain order. When new events are added, rotations are used to ensure the tree stays balanced, keeping operations like insertion, deletion, and lookup efficient.</p>
+    </section>
+
+    <section>
+        <h2>Why Use Tree Rotations?</h2>
+        <p>Tree rotations are essential in self-balancing trees like AVL Trees and Red-Black Trees. Without rotations, these trees could become unbalanced, degrading their time complexity for operations like search, insert, and delete from <code>O(log n)</code> to <code>O(n)</code>. Rotations ensure that the height of the tree remains balanced, guaranteeing efficient operations.</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Tree rotations are widely used in databases, file systems, and network routing to maintain balanced trees for fast access and updates. Understanding rotations helps you design and optimize algorithms that require maintaining balance in hierarchical data structures.</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="extras/avl_trees_tutorial.html">Balanced Binary Trees (AVL Trees)</a></li>
+            <li><a href="red_black_trees_tutorial-a.html">Red-Black Trees</a></li>
+            <li><a href="binary_search_tutorial.html">Binary Search Trees (BST)</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Mastering tree rotations is key to maintaining balanced binary trees and ensuring efficient data structures.</p>
+    </footer>
+</body>
+</html>

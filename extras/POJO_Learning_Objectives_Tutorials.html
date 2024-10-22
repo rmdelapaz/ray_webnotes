@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with Objects in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Working with Objects in JavaScript</h1>
+        <p>An overview of key concepts for new JavaScript developers.</p>
+    </header>
+
+    <section>
+        <h2>Declaring an Object and Setting Keys/Values</h2>
+        <p>An object in JavaScript is like a storage locker with multiple compartments. Each compartment (key) holds something valuable (value).</p>
+        <pre><code>
+// Declare an object
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'Wonderland'
+};
+
+// Access values
+console.log(person.name);  // 'Alice'
+console.log(person['age']); // 25
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Dot Notation vs. Bracket Notation</h2>
+        <p>Think of dot notation as having labeled drawers you can open directly by name. Bracket notation is like having a key to unlock a drawer, 
+        but you can use any key (including dynamic ones) as long as you have it.</p>
+        <h3>When to Use Dot Notation</h3>
+        <p>Use dot notation when you know the property name:</p>
+        <pre><code>
+console.log(person.name); // 'Alice'
+        </code></pre>
+        <h3>When to Use Bracket Notation</h3>
+        <p>Use bracket notation when the property name is dynamic or contains characters not allowed in dot notation:</p>
+        <pre><code>
+const key = 'age';
+console.log(person[key]);  // 25
+
+const specialPerson = {
+    'first-name': 'Bob'
+};
+console.log(specialPerson['first-name']); // 'Bob'
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Checking for Key Existence Using <code>obj[key] !== undefined</code></h2>
+        <p>To check if a key exists in an object, we can use this pattern. It’s like looking into a compartment to see if it's empty.</p>
+        <pre><code>
+if (person['name'] !== undefined) {
+    console.log('Name exists!');
+} else {
+    console.log('Name does not exist');
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Using <code>Object.keys()</code> and <code>Object.values()</code></h2>
+        <p><code>Object.keys()</code> gives you a list of all the keys in an object, like a map of all the locker compartments. 
+        <code>Object.values()</code> gives you all the stored items (values).</p>
+        <pre><code>
+console.log(Object.keys(person));  // ['name', 'age', 'city']
+console.log(Object.values(person));  // ['Alice', 25, 'Wonderland']
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Iterating Through an Object with <code>for (key in object)</code></h2>
+        <p>This is like opening each compartment one by one and checking its content. <code>for...in</code> loops allow you to iterate over all keys in an object.</p>
+        <pre><code>
+for (let key in person) {
+    console.log(key + ': ' + person[key]);
+}
+// Outputs:
+// name: Alice
+// age: 25
+// city: Wonderland
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Accessing Nested Structures (Arrays and Objects)</h2>
+        <p>Objects can hold other objects or arrays, like nested lockers or shelves. Accessing them requires opening each compartment layer by layer.</p>
+        <pre><code>
+const company = {
+    name: 'Tech Co',
+    employees: [
+        { name: 'Alice', role: 'Developer' },
+        { name: 'Bob', role: 'Designer' }
+    ]
+};
+
+console.log(company.employees[0].name);  // 'Alice'
+console.log(company['employees'][1]['role']);  // 'Designer'
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Using Objects as Frequency Counters</h2>
+        <p>Imagine you want to count how many times each item appears in a list. An object can be used like a tally board to track occurrences.</p>
+        <h3>Example: Word Frequency Counter</h3>
+        <pre><code>
+function countWords(words) {
+    const counter = {};
+
+    for (let word of words) {
+        if (counter[word] !== undefined) {
+            counter[word]++;
+        } else {
+            counter[word] = 1;
+        }
+    }
+
+    return counter;
+}
+
+const wordList = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+console.log(countWords(wordList)); 
+// Outputs: { apple: 3, banana: 2, orange: 1 }
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Key Takeaways</h2>
+        <ul>
+            <li>Dot notation is used for simple, static property names, while bracket notation is useful for dynamic or special character keys.</li>
+            <li>You can check if a key exists using <code>obj[key] !== undefined</code>.</li>
+            <li><code>Object.keys()</code> and <code>Object.values()</code> provide ways to list all keys and values in an object.</li>
+            <li>Using <code>for...in</code>, you can iterate over an object's keys.</li>
+            <li>Objects can be nested and combined with arrays for more complex data structures.</li>
+            <li>Objects are powerful tools for counting occurrences and managing dynamic data.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Explore more: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects">Working with Objects - MDN</a></p>
+        <p>JavaScript objects are versatile—practice helps you unlock their potential!</p>
+    </footer>
+</body>
+</html>

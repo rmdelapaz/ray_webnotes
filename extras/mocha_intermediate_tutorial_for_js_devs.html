@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate Mocha Testing with NPM</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Intermediate Mocha Testing with NPM</h1>
+    <p>Welcome to the intermediate tutorial on Mocha testing. In this guide, we'll dive deeper into Mocha's capabilities, explore more advanced testing concepts, and introduce some practical applications. By the end, you should feel comfortable using Mocha to test asynchronous code, handle errors, and integrate with additional libraries like Chai.</p>
+
+    <h2>Why Move to Intermediate Testing?</h2>
+    <p>Imagine building a more complex car. Now, you're not just testing if the engine starts but also checking how the car handles under different conditions, such as rain or mountainous terrain. Similarly, as your codebase grows and becomes more complex, basic tests won't be enough. You need to test asynchronous operations, edge cases, and how various components of your app work together.</p>
+
+    <h2>Practical Example: Testing Asynchronous Code</h2>
+    <p>In real-world applications, we often deal with asynchronous operations, like fetching data from an API. Mocha allows you to test these asynchronous behaviors, ensuring your code handles different scenarios correctly.</p>
+
+    <h3>Example: Fetching Data</h3>
+    <p>Let's say you're writing a function that fetches data from a server. Here’s a simplified version of the function:</p>
+    <pre><code>function fetchData(callback) {
+    setTimeout(() => {
+        callback(null, { name: 'John', age: 30 });
+    }, 1000);
+}</code></pre>
+    <p>This function uses a callback to return the data after 1 second, simulating an API call. Now, how do we test that this function behaves correctly?</p>
+
+    <h3>Step 1: Writing an Asynchronous Test</h3>
+    <p>In <code>test/fetchTest.js</code>, write the following test:</p>
+    <pre><code>const assert = require('assert');
+const fetchData = require('../fetchData');
+
+describe('Fetch Data', function() {
+  it('should fetch the correct data', function(done) {
+    fetchData(function(err, data) {
+      assert.strictEqual(data.name, 'John');
+      assert.strictEqual(data.age, 30);
+      done();
+    });
+  });
+});</code></pre>
+    <ul>
+        <li><strong>done:</strong> This callback is Mocha’s way of letting you signal when the test is complete. Think of it as pressing a button when the test driver finishes checking the brakes.</li>
+        <li><strong>assert.strictEqual:</strong> This is a stricter version of <code>assert.equal</code> that checks both value and type. It's like checking not only that the car’s speedometer reads "60," but also ensuring it's in miles per hour, not kilometers.</li>
+    </ul>
+
+    <h2>Error Handling in Mocha</h2>
+    <p>Another important aspect of testing is ensuring that your code gracefully handles errors. Let’s modify our previous function to include error handling:</p>
+    <pre><code>function fetchDataWithError(callback) {
+    setTimeout(() => {
+        const error = true; // Simulate an error
+        if (error) {
+            callback('Error fetching data', null);
+        } else {
+            callback(null, { name: 'John', age: 30 });
+        }
+    }, 1000);
+}</code></pre>
+
+    <h3>Step 2: Writing a Test for Errors</h3>
+    <p>In <code>test/fetchErrorTest.js</code>, write the following test:</p>
+    <pre><code>describe('Fetch Data with Error', function() {
+  it('should handle errors correctly', function(done) {
+    fetchDataWithError(function(err, data) {
+      assert.strictEqual(err, 'Error fetching data');
+      assert.strictEqual(data, null);
+      done();
+    });
+  });
+});</code></pre>
+    <p>Here, we simulate an error and check that our function returns the expected error message and a null result. This is like testing how your car responds when the brakes fail.</p>
+
+    <h2>Using Chai for Better Assertions</h2>
+    <p>Mocha works well with Chai, a popular assertion library that makes writing tests more expressive and readable. Chai allows you to use <code>expect</code> and <code>should</code> styles, which can make your tests easier to understand.</p>
+
+    <h3>Step 3: Writing a Test with Chai</h3>
+    <p>First, install Chai:</p>
+    <pre><code>npm install chai --save-dev</code></pre>
+    <p>Now, update the previous test to use Chai’s <code>expect</code>:</p>
+    <pre><code>const chai = require('chai');
+const expect = chai.expect;
+const fetchDataWithError = require('../fetchDataWithError');
+
+describe('Fetch Data with Error (Chai)', function() {
+  it('should handle errors correctly', function(done) {
+    fetchDataWithError(function(err, data) {
+      expect(err).to.equal('Error fetching data');
+      expect(data).to.be.null;
+      done();
+    });
+  });
+});</code></pre>
+
+    <p>Chai’s syntax is more intuitive and reads like natural language. For example, <code>expect(data).to.be.null</code> is like saying, "I expect the data to be null."</p>
+
+    <h2>Practical Application: Testing APIs</h2>
+    <p>One of the most common real-world uses for Mocha is testing APIs. Let’s say you have an API that returns a list of users. You want to ensure that it returns the correct data, even when the server is slow or returns an error.</p>
+
+    <h3>Step 4: Testing an API</h3>
+    <p>Here's an example of how to test an API endpoint using Mocha and Chai:</p>
+    <pre><code>const chai = require('chai');
+const chaiHttp = require('chai-http');
+const expect = chai.expect;
+chai.use(chaiHttp);
+
+describe('API Tests', function() {
+  it('should return a list of users', function(done) {
+    chai.request('https://jsonplaceholder.typicode.com')
+      .get('/users')
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        done();
+      });
+  });
+});</code></pre>
+    <p>In this example, we use <code>chai-http</code> to send an HTTP request to the API and test the response. We're checking that the server returns a status of 200 and that the body contains an array of users.</p>
+
+    <h2>When to Write Intermediate Tests</h2>
+    <ul>
+        <li><strong>Testing complex user flows:</strong> For example, when multiple actions happen in sequence, such as logging in and then retrieving user data.</li>
+        <li><strong>Ensuring performance:</strong> Use tests to measure response times and catch performance bottlenecks early.</li>
+        <li><strong>Handling edge cases:</strong> Test how your app behaves when things go wrong, such as timeouts or invalid data.</li>
+    </ul>
+
+    <h2>Advanced Topics to Explore</h2>
+    <ul>
+        <li><strong>Sinon:</strong> A library for creating spies, mocks, and stubs, allowing you to test complex asynchronous code.</li>
+        <li><strong>Continuous Integration:</strong> Automate your tests using CI tools like Travis CI or GitHub Actions.</li>
+        <li><strong>Test Coverage with NYC:</strong> Measure how much of your code is tested to ensure thorough coverage.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>In this tutorial, we expanded your Mocha testing knowledge with more advanced use cases. Asynchronous tests, error handling, and integration with Chai and APIs are all critical skills for testing real-world applications. Keep practicing and exploring more tools, and you'll be well-prepared to write robust, reliable tests for your JavaScript applications.</p>
+</body>
+</html>

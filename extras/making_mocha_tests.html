@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Mocha Testing with NPM - Tutorial for New JavaScript Developers</title>
+</head>
+<body>
+    <h1>Creating NPM Tests with Mocha</h1>
+    <p>Welcome to this tutorial on setting up and running tests in JavaScript using Mocha and NPM! In this guide, we'll walk through the process of creating simple tests, explain why testing is crucial, and explore how Mocha makes it easier. We'll also use plenty of analogies, metaphors, and real-world examples to help deepen your understanding.</p>
+    
+    <h2>Why Test?</h2>
+    <p>Imagine building a car. Would you sell it to a customer without first testing that the engine works, the brakes stop the car, and the airbags deploy in an emergency? Probably not! Similarly, testing in software development ensures that the "parts" of your program work as expected.</p>
+    <p>In JavaScript, testing helps us catch bugs early, verify that our functions return the right results, and protect against future code changes breaking existing features.</p>
+    
+    <h2>Why Mocha?</h2>
+    <p>Mocha is like a dedicated test driver for your JavaScript "vehicle." It gives you a structured way to write, run, and report on tests, making it easier to build confidence in your code.</p>
+
+    <h3>Real-World Example</h3>
+    <p>Let's say you're building a to-do list application. You write a function to add tasks, another to remove tasks, and a third to mark them as complete. How do you know that all these functions will behave correctly when the user interacts with the app? This is where tests come in. By using Mocha, we can create automated tests to verify that these functions do exactly what we expect.</p>
+
+    <h2>Setting Up Mocha</h2>
+    <h3>Step 1: Install Mocha</h3>
+    <pre><code>npm install mocha --save-dev</code></pre>
+    <p>This installs Mocha as a development dependency. Think of it as installing special tools for the "test mechanic" to work on your code without shipping the tools with the final product.</p>
+
+    <h3>Step 2: Create a Test Script</h3>
+    <p>In your <code>package.json</code> file, add a script to run Mocha:</p>
+    <pre><code>"scripts": {
+  "test": "mocha"
+}</code></pre>
+    <p>This script tells NPM to use Mocha whenever you run <code>npm test</code>. It's like creating a shortcut for running all your tests with one command.</p>
+
+    <h2>Writing Your First Test</h2>
+    <p>Let's start by writing a simple function and testing it. Here's a function that adds two numbers:</p>
+    <pre><code>function add(a, b) {
+  return a + b;
+}</code></pre>
+
+    <h3>Step 1: Create a Test File</h3>
+    <p>Create a folder called <code>test</code> and inside it, a file named <code>test.js</code>. This is where we'll write our tests.</p>
+
+    <h3>Step 2: Writing a Test</h3>
+    <p>In <code>test.js</code>, write the following test:</p>
+    <pre><code>const assert = require('assert');
+const add = require('../add');
+
+describe('Addition Function', function() {
+  it('should return the sum of two numbers', function() {
+    assert.equal(add(2, 3), 5);
+  });
+});</code></pre>
+
+    <h2>Breaking It Down</h2>
+    <ul>
+        <li><strong>describe:</strong> Think of this as the "section" of the car we're testing. In this case, it's the "Addition Function".</li>
+        <li><strong>it:</strong> This represents an individual test case. In this analogy, it's like saying, "It should return the correct sum of two numbers." If it passes, great! If not, we need to investigate why.</li>
+        <li><strong>assert.equal:</strong> This is the test itself. It's like checking whether turning the car's key starts the engine. Here, we're checking if <code>add(2, 3)</code> equals 5.</li>
+    </ul>
+
+    <h2>Running the Test</h2>
+    <p>To run the test, simply use the command:</p>
+    <pre><code>npm test</code></pre>
+    <p>If everything is working correctly, you should see something like this:</p>
+    <pre><code>  Addition Function
+    ✓ should return the sum of two numbers
+  1 passing</code></pre>
+
+    <h2>When to Test</h2>
+    <p>Testing can be done at various stages of development:</p>
+    <ul>
+        <li><strong>While coding:</strong> Write tests alongside your code to ensure you're on track.</li>
+        <li><strong>Before deployment:</strong> Run all tests to confirm the app works as expected.</li>
+        <li><strong>After bugs are fixed:</strong> Write tests for known bugs to ensure they don't come back.</li>
+    </ul>
+
+    <h2>Advanced Topics to Explore</h2>
+    <p>Once you've got the basics of Mocha down, here are some additional topics to explore:</p>
+    <ul>
+        <li><strong>Chai:</strong> A library that works with Mocha to make writing assertions easier and more expressive.</li>
+        <li><strong>Asynchronous Testing:</strong> Mocha allows you to test asynchronous code, which is essential when working with promises and callbacks.</li>
+        <li><strong>Test Coverage:</strong> Tools like <code>nyc</code> help you measure how much of your code is being tested.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Testing is a crucial part of the software development process, and Mocha is a powerful tool to help you get it right. By setting up automated tests, you're ensuring that your JavaScript code functions correctly and reliably, making your apps more robust and your development process smoother. Happy testing!</p>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Data Structures: Arrays, Linked Lists, and Hash Tables</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Data Structures: Arrays, Linked Lists, and Hash Tables</h1>
+    </header>
+
+    <section>
+        <h2>1. Comparing Arrays, Linked Lists, and Hash Tables</h2>
+        <p>Understanding different data structures is crucial for writing efficient and optimized code. Let's compare three fundamental data structures in JavaScript: arrays, linked lists, and hash tables.</p>
+
+        <h3>Arrays</h3>
+        <p><strong>Arrays</strong> are ordered collections of elements, accessible by their index. They are best used when you need quick access to elements via their positions.</p>
+        <ul>
+            <li><strong>Properties:</strong> Indexed, ordered, dynamic size (in JavaScript).</li>
+            <li><strong>Operations:</strong> Access by index (O(1)), push/pop (O(1)), shift/unshift (O(n)), splice (O(n)).</li>
+        </ul>
+        <h4>Analogy:</h4>
+        <p>Think of an array as a bookshelf where each book has a specific slot. You can quickly grab any book if you know its slot number.</p>
+        <h4>Example:</h4>
+        <pre><code>
+// Creating an array
+let fruits = ["apple", "banana", "cherry"];
+
+// Accessing elements
+console.log(fruits[0]); // "apple"
+
+// Adding an element
+fruits.push("date");
+
+// Removing an element
+fruits.pop(); // Removes "date"
+        </code></pre>
+
+        <h3>Linked Lists</h3>
+        <p><strong>Linked Lists</strong> are collections of elements called nodes, where each node points to the next node in the sequence. They are ideal for scenarios where frequent insertions and deletions are required.</p>
+        <ul>
+            <li><strong>Properties:</strong> Nodes with pointers, dynamic size.</li>
+            <li><strong>Operations:</strong> Insertion/deletion at head/tail (O(1)), searching (O(n)).</li>
+        </ul>
+        <h4>Analogy:</h4>
+        <p>A linked list is like a treasure hunt where each clue leads you to the next clue until you find the treasure.</p>
+        <h4>Example:</h4>
+        <pre><code>
+// Simple Node class
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// Creating a linked list
+let head = new Node("apple");
+head.next = new Node("banana");
+head.next.next = new Node("cherry");
+        </code></pre>
+
+        <h3>Hash Tables</h3>
+        <p><strong>Hash Tables</strong> (or objects in JavaScript) store key-value pairs, allowing for fast data retrieval based on unique keys.</p>
+        <ul>
+            <li><strong>Properties:</strong> Key-value pairs, unordered.</li>
+            <li><strong>Operations:</strong> Insertion, deletion, and access by key (average O(1)).</li>
+        </ul>
+        <h4>Analogy:</h4>
+        <p>A hash table is like a library's catalog system where you can quickly find a book's location using its unique identifier (ISBN).</p>
+        <h4>Example:</h4>
+        <pre><code>
+// Creating a hash table using an object
+let phoneBook = {
+    "John Doe": "555-1234",
+    "Jane Smith": "555-5678"
+};
+
+// Accessing a value by key
+console.log(phoneBook["John Doe"]); // "555-1234"
+
+// Adding a new key-value pair
+phoneBook["Alice Johnson"] = "555-8765";
+
+// Deleting a key-value pair
+delete phoneBook["Jane Smith"];
+        </code></pre>
+
+        <h3>Comparison Table</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Array</th>
+                    <th>Linked List</th>
+                    <th>Hash Table</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Access by Index</td>
+                    <td>O(1)</td>
+                    <td>Not directly accessible</td>
+                    <td>O(1) by key</td>
+                </tr>
+                <tr>
+                    <td>Insertion/Deletion</td>
+                    <td>O(n) for middle elements</td>
+                    <td>O(1) at head/tail</td>
+                    <td>O(1) on average</td>
+                </tr>
+                <tr>
+                    <td>Memory Usage</td>
+                    <td>Contiguous memory</td>
+                    <td>Pointer storage</td>
+                    <td>Depends on implementation</td>
+                </tr>
+                <tr>
+                    <td>Order</td>
+                    <td>Ordered</td>
+                    <td>Ordered</td>
+                    <td>Unordered</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>When to Use Each:</h4>
+        <ul>
+            <li><strong>Array:</strong> When you need quick access by index and the size of the data set is relatively stable.</li>
+            <li><strong>Linked List:</strong> When you have frequent insertions and deletions, especially at the beginning or middle of the list.</li>
+            <li><strong>Hash Table:</strong> When you need fast access to elements based on unique keys.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. Mechanics and Complexity of Adding and Removing Elements from a Linked List</h2>
+        <p>Understanding how to add and remove elements from a linked list is crucial for leveraging its benefits. Let's explore the mechanics and time complexity of these operations.</p>
+
+        <h3>Adding Elements</h3>
+        <p>Adding an element to a linked list can be done at the beginning (head) or the end (tail), or even in the middle if you have a reference to the node before the insertion point.</p>
+        <ul>
+            <li><strong>Adding at the Head:</strong> O(1) time complexity because it involves updating the head pointer.</li>
+            <li><strong>Adding at the Tail:</strong> O(1) time complexity if you maintain a tail pointer; otherwise, O(n) to traverse to the end.</li>
+            <li><strong>Adding in the Middle:</strong> O(n) time complexity because you need to find the insertion point.</li>
+        </ul>
+
+        <h4>Example: Adding at the Head</h4>
+        <pre><code>
+// Adding a node at the head
+function addAtHead(head, value) {
+    let newNode = new Node(value);
+    newNode.next = head;
+    return newNode; // New head
+}
+
+head = addAtHead(head, "date");
+        </code></pre>
+
+        <h3>Removing Elements</h3>
+        <p>Removing an element from a linked list also depends on where the removal occurs.</p>
+        <ul>
+            <li><strong>Removing from the Head:</strong> O(1) time complexity by updating the head pointer.</li>
+            <li><strong>Removing from the Tail:</strong> O(n) time complexity because you need to traverse to the node before the tail.</li>
+            <li><strong>Removing from the Middle:</strong> O(n) time complexity since you have to find the node to remove.</li>
+        </ul>
+
+        <h4>Example: Removing from the Head</h4>
+        <pre><code>
+// Removing the head node
+function removeHead(head) {
+    if (!head) return null;
+    return head.next; // New head
+}
+
+head = removeHead(head);
+        </code></pre>
+
+        <h3>Time Complexity Summary</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Operation</th>
+                    <th>Time Complexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Add at Head</td>
+                    <td>O(1)</td>
+                </tr>
+                <tr>
+                    <td>Add at Tail</td>
+                    <td>O(1) with tail pointer</td>
+                </tr>
+                <tr>
+                    <td>Add in Middle</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td>Remove from Head</td>
+                    <td>O(1)</td>
+                </tr>
+                <tr>
+                    <td>Remove from Tail</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td>Remove from Middle</td>
+                    <td>O(n)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>3. Implementing a Linked List</h2>
+        <p>Implementing a linked list involves creating nodes and linking them together. Here's a simple implementation of a singly linked list in JavaScript.</p>
+
+        <h3>Step-by-Step Implementation</h3>
+        <ol>
+            <li>Create a <code>Node</code> class to represent each element in the list.</li>
+            <li>Create a <code>LinkedList</code> class to manage the nodes.</li>
+            <li>Add methods for common operations like adding, removing, and searching for nodes.</li>
+        </ol>
+
+        <h4>Code Example:</h4>
+        <pre><code>
+// Node class
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// LinkedList class
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    // Add a node at the end
+    append(value) {
+        let newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+        this.tail.next = newNode;
+        this.tail = newNode;
+    }
+
+    // Add a node at the beginning
+    prepend(value) {
+        let newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+
+    // Print the list
+    printList() {
+        let current = this.head;
+        let list = [];
+        while (current) {
+            list.push(current.value);
+            current = current.next;
+        }
+        console.log(list.join(" -> "));
+    }
+}
+
+// Usage
+let list = new LinkedList();
+list.append("apple");
+list.append("banana");
+list.prepend("cherry");
+list.printList(); // cherry -> apple -> banana
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>4. Traversing and Searching Through Linked Lists</h2>
+        <p>Traversing a linked list means visiting each node in the sequence. Searching involves looking for a specific value within the list.</p>
+
+        <h3>Traversing the List</h3>
+        <pre><code>
+// Traversing the list
+function traverse(list) {
+    let current = list.head;
+    while (current) {
+        console.log(current.value);
+        current = current.next;
+    }
+}
+
+traverse(list);
+        </code></pre>
+
+        <h3>Searching for an Element</h3>
+        <pre><code>
+// Searching for a value
+function search(list, value) {
+    let current = list.head;
+    while (current) {
+        if (current.value === value) {
+            return true;
+        }
+        current = current.next;
+    }
+    return false;
+}
+
+console.log(search(list, "banana")); // true
+console.log(search(list, "date"));   // false
+        </code></pre>
+
+        <h4>Time Complexity:</h4>
+        <ul>
+            <li><strong>Traversal:</strong> O(n)</li>
+            <li><strong>Search:</strong> O(n)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Linked Lists and the Absence of Indexes</h2>
+        <p>Unlike arrays, linked lists do not have indexes. This means you cannot directly access an element by its position. Instead, you must traverse the list from the head to reach a specific element.</p>
+
+        <h3>Implications:</h3>
+        <ul>
+            <li><strong>No Random Access:</strong> Accessing an element at a specific position requires traversing the list from the beginning, leading to O(n) time complexity.</li>
+            <li><strong>Sequential Access:</strong> Operations rely on sequential traversal, making them less efficient for scenarios requiring frequent index-based access.</li>
+        </ul>
+
+        <h4>Example:</h4>
+        <pre><code>
+// Attempting to access by index (inefficient)
+function getElementAt(list, index) {
+    let current = list.head;
+    let count = 0;
+    while (current) {
+        if (count === index) {
+            return current.value;
+        }
+        count++;
+        current = current.next;
+    }
+    return null;
+}
+
+console.log(getElementAt(list, 1)); // "apple"
+        </code></pre>
+
+        <p>This function requires traversing the list up to the desired index, resulting in O(n) time complexity.</p>
+    </section>
+
+    <section>
+        <h2>6. Doubly Linked Lists vs. Singly Linked Lists</h2>
+        <p>While a singly linked list has nodes that point only to the next node, a <strong>doubly linked list</strong> has nodes that point both to the next and the previous nodes. This provides more flexibility but at the cost of additional memory.</p>
+
+        <h3>Singly Linked List</h3>
+        <ul>
+            <li>Each node points only to the next node.</li>
+            <li>Lower memory usage.</li>
+            <li>Simple implementation.</li>
+            <li>Operations like reverse traversal are not possible without additional steps.</li>
+        </ul>
+
+        <h3>Doubly Linked List</h3>
+        <ul>
+            <li>Each node points to both the next and previous nodes.</li>
+            <li>Higher memory usage due to additional pointers.</li>
+            <li>Allows bidirectional traversal.</li>
+            <li>More complex implementation.</li>
+        </ul>
+
+        <h4>Tradeoffs:</h4>
+        <ul>
+            <li><strong>Memory:</strong> Doubly linked lists use more memory because of the extra pointers.</li>
+            <li><strong>Performance:</strong> Operations can be faster for certain tasks (like reverse traversal) with doubly linked lists.</li>
+            <li><strong>Complexity:</strong> Implementing doubly linked lists is more complex due to the need to manage two pointers per node.</li>
+        </ul>
+
+        <h4>Example: Doubly Linked List Node</h4>
+        <pre><code>
+// Node class for Doubly Linked List
+class DoublyNode {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+// Creating a doubly linked list
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    append(value) {
+        let newNode = new DoublyNode(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+        this.tail.next = newNode;
+        newNode.prev = this.tail;
+        this.tail = newNode;
+    }
+
+    prepend(value) {
+        let newNode = new DoublyNode(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+        newNode.next = this.head;
+        this.head.prev = newNode;
+        this.head = newNode;
+    }
+
+    // Example traversal from tail to head
+    traverseBackward() {
+        let current = this.tail;
+        let list = [];
+        while (current) {
+            list.push(current.value);
+            current = current.prev;
+        }
+        console.log(list.join(" <- "));
+    }
+}
+
+// Usage
+let dblList = new DoublyLinkedList();
+dblList.append("apple");
+dblList.append("banana");
+dblList.prepend("cherry");
+dblList.traverseBackward(); // banana <- apple <- cherry
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>7. Implementing a Queue Using Linked Lists</h2>
+        <p>A <strong>queue</strong> is a First-In-First-Out (FIFO) data structure. Implementing a queue using a linked list allows efficient enqueue and dequeue operations.</p>
+
+        <h3>Queue Operations:</h3>
+        <ul>
+            <li><strong>Enqueue:</strong> Add an element to the end of the queue.</li>
+            <li><strong>Dequeue:</strong> Remove an element from the front of the queue.</li>
+        </ul>
+
+        <h4>Implementation Example:</h4>
+        <pre><code>
+// Node class
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// Queue class using Linked List
+class Queue {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    // Enqueue operation (add to tail)
+    enqueue(value) {
+        let newNode = new Node(value);
+        if (!this.tail) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+        this.tail.next = newNode;
+        this.tail = newNode;
+    }
+
+    // Dequeue operation (remove from head)
+    dequeue() {
+        if (!this.head) return null;
+        let value = this.head.value;
+        this.head = this.head.next;
+        if (!this.head) this.tail = null;
+        return value;
+    }
+
+    // Print the queue
+    printQueue() {
+        let current = this.head;
+        let list = [];
+        while (current) {
+            list.push(current.value);
+            current = current.next;
+        }
+        console.log(list.join(" -> "));
+    }
+}
+
+// Usage
+let queue = new Queue();
+queue.enqueue("first");
+queue.enqueue("second");
+queue.enqueue("third");
+queue.printQueue(); // first -> second -> third
+
+console.log(queue.dequeue()); // "first"
+queue.printQueue(); // second -> third
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>8. Selecting the Appropriate Data Structure</h2>
+        <p>Choosing the right data structure is essential for optimizing performance and memory usage in your applications. Here's how to decide between a linked list, doubly linked list, or queue based on the problem at hand.</p>
+
+        <h3>When to Use Each:</h3>
+        <ul>
+            <li><strong>Linked List:</strong> Use when you need efficient insertions and deletions from the list, especially when the size of the data set changes frequently.</li>
+            <li><strong>Doubly Linked List:</strong> Use when you need to traverse the list both forward and backward, such as in browser history navigation.</li>
+            <li><strong>Queue:</strong> Use when you need to process elements in the order they were added, such as in task scheduling or handling asynchronous operations.</li>
+        </ul>
+
+        <h4>Real-World Scenarios:</h4>
+        <ul>
+            <li><strong>Linked List:</strong> Implementing a playlist where songs can be added or removed dynamically.</li>
+            <li><strong>Doubly Linked List:</strong> Building a navigation system where users can move forward and backward through their browsing history.</li>
+            <li><strong>Queue:</strong> Managing print jobs in a printer where jobs are processed in the order they are received.</li>
+        </ul>
+
+        <h3>Decision Guide:</h3>
+        <ul>
+            <li>Need quick access by index? Prefer an array.</li>
+            <li>Need frequent insertions/deletions without worrying about index-based access? Choose a linked list.</li>
+            <li>Need to traverse in both directions? Use a doubly linked list.</li>
+            <li>Need FIFO (First-In-First-Out) processing? Implement a queue.</li>
+            <li>Need key-based access with fast lookups? Opt for a hash table.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Choosing the right data structure can significantly impact the performance and efficiency of your JavaScript applications. Understanding the properties, operations, and complexities of arrays, linked lists, and hash tables equips you with the knowledge to make informed decisions and optimize your code effectively.</p>
+    </footer>
+</body>
+</html>

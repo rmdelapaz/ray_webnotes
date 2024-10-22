@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Quick Sort in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>Understanding Quick Sort in JavaScript</h1>
+    </header>
+    <section>
+        <h2>Introduction</h2>
+        <p>Quick Sort is one of the most efficient sorting algorithms, based on the divide-and-conquer strategy. It works by selecting a pivot element from the array, partitioning the other elements into two subarrays based on whether they are smaller or larger than the pivot, and then recursively sorting the subarrays. In this tutorial, we’ll explore how Quick Sort works, when to use it, and how to implement it in JavaScript.</p>
+    </section>
+    
+    <section>
+        <h2>Code Example: Quick Sort</h2>
+        <p>Here’s an example of the Quick Sort algorithm implemented in JavaScript:</p>
+        <pre><code>function quickSort(arr) {
+    if (arr.length <= 1) return arr;  // Base case
+    const pivot = arr[arr.length - 1];  // Choose the pivot
+    const left = [];
+    const right = [];
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < pivot) left.push(arr[i]);  // Smaller elements to the left
+        else right.push(arr[i]);  // Larger elements to the right
+    }
+
+    return [...quickSort(left), pivot, ...quickSort(right)];  // Recursively sort
+}</code></pre>
+        <p>In this implementation, the pivot is chosen as the last element in the array. The array is then partitioned into two subarrays: one with elements smaller than the pivot and one with elements larger than the pivot. The algorithm then recursively sorts each subarray.</p>
+    </section>
+
+    <section>
+        <h2>Analogy: Sorting Books on a Shelf</h2>
+        <p>Imagine you have a shelf full of books, and you want to sort them by title. Quick Sort is like choosing a random book as your pivot, then placing all books with titles that come before the pivot to the left, and all books with titles that come after to the right. Once that’s done, you repeat the process with the left and right sections until the entire shelf is sorted.</p>
+    </section>
+    
+    <section>
+        <h2>Real-World Example: Sorting Student Test Scores</h2>
+        <p>Suppose you have an array of student test scores, and you want to sort them in ascending order. Quick Sort allows you to efficiently organize the scores by selecting a pivot, splitting the scores into lower and higher groups, and recursively sorting each group:</p>
+        <pre><code>const scores = [85, 72, 90, 60, 75, 88];
+const sortedScores = quickSort(scores);  // Output: [60, 72, 75, 85, 88, 90]</code></pre>
+        <p>Quick Sort is particularly useful when performance matters, as it generally performs better than simpler algorithms like Bubble Sort or Selection Sort.</p>
+    </section>
+    
+    <section>
+        <h2>Metaphor: Organizing a Party</h2>
+        <p>Quick Sort is like organizing guests at a party. You pick a person (the pivot) and ask everyone to stand either to the left or right of that person based on whether they arrived earlier or later. Once you have the groups, you repeat the process within each group until everyone is standing in order of arrival time. This is how Quick Sort efficiently organizes an array by dividing it into smaller, sortable pieces.</p>
+    </section>
+
+    <section>
+        <h2>Why Use Quick Sort?</h2>
+        <p>Quick Sort is one of the most widely used sorting algorithms due to its average-case time complexity of <code>O(n log n)</code> and its efficiency in practice. It’s often faster than other algorithms like Merge Sort because it has a smaller constant factor and sorts in place (without using extra memory). However, its worst-case time complexity is <code>O(n²)</code> if the pivot selection is poor, but this can be mitigated by choosing a good pivot strategy (e.g., using the median).</p>
+    </section>
+
+    <section>
+        <h2>Practical Usage</h2>
+        <p>Quick Sort is used in many real-world applications, including sorting large datasets, file systems, and databases. It’s a highly efficient algorithm that’s often the default choice for general-purpose sorting in programming libraries (like JavaScript’s <code>Array.sort()</code> method).</p>
+    </section>
+
+    <section>
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="/styles/main.css">Divide-and-Conquer Algorithms</a></li>
+            <li><a href="/styles/main.css">Merge Sort</a></li>
+            <li><a href="/styles/main.css">Time Complexity of Sorting Algorithms</a></li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>Happy Coding! Understanding Quick Sort is key to mastering sorting algorithms and efficient data processing.</p>
+    </footer>
+</body>
+</html>

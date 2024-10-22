@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Splice Method in JavaScript</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <h1>Array Splice Method</h1>
+    <p>The <strong>Array.splice()</strong> method is a versatile tool in JavaScript that allows you to modify arrays by adding or removing elements. It can perform opposite actions—both removing and inserting elements in the same call. In this tutorial, you'll learn how to use the splice method to manipulate arrays effectively.</p>
+
+    <h2>What is <code>Array.prototype.splice</code>?</h2>
+    <p>The first thing to be aware of is that <code>splice</code> will mutate (modify) the array that it is called on. That means it directly changes the original array instead of creating a new one. This is important to keep in mind when using the method.</p>
+
+    <h2>Learning Goals</h2>
+    <p>After reading this tutorial, you should be able to:</p>
+    <ul>
+        <li>List all possible arguments that can be used with the <code>Array.prototype.splice</code> method</li>
+        <li>Use <code>splice</code> to remove and insert elements in arrays</li>
+    </ul>
+
+    <h2>Using <code>splice</code> to Remove Elements</h2>
+    <p>Let's start with using <code>splice</code> to remove elements from an array. The first two arguments to the <code>splice</code> method are:</p>
+    <ul>
+        <li><strong>Target index:</strong> The position in the array where you want to start removing elements</li>
+        <li><strong>Number of elements to remove:</strong> The number of elements to be removed, starting from the target index</li>
+    </ul>
+
+    <p>Here’s an example:</p>
+
+    <pre>
+let colors = ["red", "yellow", "blue", "green", "orange", "brown", "gray"];
+let returnVal = colors.splice(2, 3);
+console.log(colors); // [ 'red', 'yellow', 'brown', 'gray' ]
+console.log(returnVal); // [ 'blue', 'green', 'orange' ]
+    </pre>
+
+    <p><strong>Explanation:</strong> The call <code>colors.splice(2, 3)</code> removes three elements starting at index 2, which are 'blue', 'green', and 'orange'. The <code>splice</code> method also returns an array of the removed elements.</p>
+
+    <h2>Using <code>splice</code> to Insert Elements</h2>
+    <p>You can also use <code>splice</code> to insert new elements into an array. To do this, you pass additional arguments representing the elements to insert:</p>
+
+    <pre>
+let colors = ["red", "yellow", "blue"];
+let returnVal = colors.splice(1, 0, "RebeccaPurple", "CornflowerBlue");
+console.log(colors); // [ 'red', 'RebeccaPurple', 'CornflowerBlue', 'yellow', 'blue' ]
+console.log(returnVal); // []
+    </pre>
+
+    <p><strong>Explanation:</strong> In this example, <code>colors.splice(1, 0, "RebeccaPurple", "CornflowerBlue")</code> means "start at index 1, remove 0 elements, and then insert 'RebeccaPurple' and 'CornflowerBlue' at index 1."</p>
+
+    <h2>Combining Removal and Insertion</h2>
+    <p>The true power of <code>splice</code> comes from its ability to both remove and insert elements at the same time. Here's an example that shows how to remove elements and insert new ones:</p>
+
+    <pre>
+let colors = ["red", "yellow", "blue", "green", "black", "beige"];
+let removed = colors.splice(2, 3, "Gainsboro", "Ivory", "Khaki");
+console.log(colors); // [ 'red', 'yellow', 'Gainsboro', 'Ivory', 'Khaki', 'beige' ]
+console.log(removed); // [ 'blue', 'green', 'black' ]
+    </pre>
+
+    <p><strong>Explanation:</strong> The <code>splice</code> method here removes three elements starting at index 2 ('blue', 'green', and 'black') and inserts 'Gainsboro', 'Ivory', and 'Khaki' at the same position. The array is both updated and returned.</p>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+        <li><strong>Mutates the original array:</strong> Remember that <code>splice</code> modifies the array in place.</li>
+        <li><strong>Two required arguments:</strong> The first two arguments of <code>splice</code> are the target index and the number of elements to remove.</li>
+        <li><strong>Flexible for inserting:</strong> After the first two arguments, any number of elements can be passed to be inserted into the array at the target index.</li>
+    </ul>
+
+    <h2>What You've Learned</h2>
+    <p>At the end of this tutorial, you’ve learned:</p>
+    <ul>
+        <li><code>Array.splice</code> can remove or insert elements from an array.</li>
+        <li>The method requires two arguments: the target index and the number of elements to remove.</li>
+        <li>It can also take additional arguments to insert new elements at the target index.</li>
+    </ul>
+
+</body>
+</html>

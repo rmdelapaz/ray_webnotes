@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced NPM Usage - A Beginner's Guide</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Advanced NPM Usage - A Beginner's Guide</h1>
+    </header>
+    <main>
+        <section>
+            <h2>1. Installing an Existing Project's Dependencies</h2>
+            <p>
+                When you clone or download a project that has a <code>package.json</code> file, you will need to install the project’s dependencies to get it running. This is done using the following command:
+            </p>
+            <pre><code>npm install</code></pre>
+            <p>This command reads the <code>package.json</code> file and installs all the listed dependencies into the <code>node_modules</code> directory. It ensures that the project has all the necessary packages to work as expected.</p>
+        </section>
+
+        <section>
+            <h2>2. Uninstalling a Package with NPM</h2>
+            <p>
+                If you no longer need a package in your project, you can uninstall it using the following command:
+            </p>
+            <pre><code>npm uninstall <package-name></code></pre>
+            <p>This removes the package from your project’s <code>node_modules</code> folder and updates the <code>package.json</code> file to reflect the change. For example, to uninstall <code>lodash</code>, you would run:</p>
+            <pre><code>npm uninstall lodash</code></pre>
+        </section>
+
+        <section>
+            <h2>3. Updating a Package with NPM</h2>
+            <p>
+                Packages can have newer versions released over time, and you may want to update them in your project to get new features or security patches. To update a specific package to its latest version, you can run:
+            </p>
+            <pre><code>npm update <package-name></code></pre>
+            <p>For example, to update the <code>express</code> package, you would run:</p>
+            <pre><code>npm update express</code></pre>
+            <p>If you want to update all the packages in your project to their latest compatible versions, simply run:</p>
+            <pre><code>npm update</code></pre>
+        </section>
+
+        <section>
+            <h2>4. Finding and Fixing NPM Package Security Vulnerabilities</h2>
+            <p>
+                Security vulnerabilities can arise in the packages your project depends on. NPM provides a built-in security audit tool to help you identify and fix these vulnerabilities. To run a security audit, use the following command:
+            </p>
+            <pre><code>npm audit</code></pre>
+            <p>This command will scan your project’s dependencies and list any security vulnerabilities it finds. To automatically fix the vulnerabilities, you can run:</p>
+            <pre><code>npm audit fix</code></pre>
+            <p>This will attempt to resolve security issues by upgrading vulnerable packages to safer versions.</p>
+        </section>
+
+        <section>
+            <h2>5. Writing and Running NPM Scripts</h2>
+            <p>
+                NPM allows you to define custom scripts that can be executed from the command line. These scripts are defined in the <code>scripts</code> section of the <code>package.json</code> file. For example, you can add a script to start your application or run tests.
+            </p>
+            <pre><code>
+{
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  }
+}
+            </code></pre>
+            <p>Once the scripts are defined, you can run them using the following command:</p>
+            <pre><code>npm run <script-name></code></pre>
+            <p>For example, to run the <code>start</code> script, you would use:</p>
+            <pre><code>npm run start</code></pre>
+            <p>If the script name is one of npm's default script names like <code>start</code> or <code>test</code>, you can omit the <code>run</code> keyword and simply use:</p>
+            <pre><code>npm start</code></pre>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Advanced NPM Usage Tutorial for Beginners</p>
+    </footer>
+</body>
+</html>
